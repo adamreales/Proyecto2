@@ -71,8 +71,11 @@
                             @endforelse
                         </div>
 
-                        <div class="d-flex ">
-                            {{ $p->doJuego->doJuegoPegi }}
+                        <div class="d-flex" style="background-color: {{$p->doJuego->doJuegoPegi->first()->doEdad->color}} ;">
+                            {{-- @foreach ($p->doJuego->doJuegoPegi as $juegopegi)
+                                <p>{{ $juegopegi->doEdad->edad }}</p>
+                            @endforeach --}}
+                            <p>{{ $p->doJuego->doJuegoPegi->first()->doEdad->edad }}</p>
                         </div>
 
                         <div class="d-flex justify-content-between mt-3">
