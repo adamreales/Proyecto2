@@ -71,12 +71,28 @@
                             @endforelse
                         </div>
 
-                        <div class="d-flex" style="background-color: {{$p->doJuego->doJuegoPegi->first()->doEdad->color}} ;">
-                            {{-- @foreach ($p->doJuego->doJuegoPegi as $juegopegi)
-                                <p>{{ $juegopegi->doEdad->edad }}</p>
-                            @endforeach --}}
-                            <p>{{ $p->doJuego->doJuegoPegi->first()->doEdad->edad }}</p>
+                        <div class="d-flex flex-column gap-2 p-3 rounded shadow-sm"
+                        style="background-color: {{ $p->doJuego->doJuegoPegi->first()->doEdad->color }};">
+                   
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-light text-dark fw-bold px-3 py-2">
+                                    PEGI {{ $p->doJuego->doJuegoPegi->first()->doEdad->edad }}
+                                </span>
+                            </div>
+                   
+                            @foreach ($p->doJuego->doJuegoPegi as $juego_pegi)
+                                <div class="bg-white rounded p-2">
+                                    <p class="fw-semibold mb-1">
+                                        {{ $juego_pegi->doDescripcion->titulo }}
+                                    </p>
+                                    <p class="mb-0 text-muted small">
+                                        {{ $juego_pegi->doDescripcion->descripcion }}
+                                    </p>
+                                </div>
+                            @endforeach
+                   
                         </div>
+
 
                         <div class="d-flex justify-content-between mt-3">
                             <a href="#" class="btn btn-outline-primary btn-sm">
