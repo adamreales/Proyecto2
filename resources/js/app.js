@@ -1,5 +1,5 @@
 import './bootstrap';
-import '../css/app.less';
+import '../less/app.less';
 
 document.addEventListener("DOMContentLoaded", () => {
     const video = document.getElementById("video-portada");
