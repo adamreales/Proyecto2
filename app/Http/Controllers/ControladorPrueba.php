@@ -16,4 +16,9 @@ class ControladorPrueba extends Controller
             'usuarios' => $usuarios
         ]);
     }
+
+    public function visualizacion_portada()
+    {
+        return view('/portada');
+    }
 }
