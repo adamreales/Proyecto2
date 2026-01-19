@@ -22,12 +22,12 @@ class JuegoPegi extends Model
 
     public function doEdad()
     {
-        return $this->hasOne(EdadPegi::class,'id_edad_pegi');
+        return $this->belongsTo(EdadPegi::class,'id_edad_pegi','id');
     }
 
     public function doDescripcion()
     {
-        return $this->hasOne(DescripcionPegi::class,'id_desc_pegi');
+        return $this->belongsTo(DescripcionPegi::class,'id_desc_pegi','id');
     }
     
 }
