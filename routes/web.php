@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/',[ControladorPrueba::class,'index'])->name('index');
 Route::get('/portada',[ControladorPrueba::class,'visualizacion_portada'])->name('index');
 

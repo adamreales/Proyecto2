@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use App\Mail\VerificacionMail;
 
 class ControllerRegistro extends Controller
 {
@@ -24,11 +25,39 @@ class ControllerRegistro extends Controller
                 'registro' => 'Las contraseñas no coinciden'
             ]);
         }
-        if(strlen($r->nombre) <= 2 || strlen($r->apellido1) <= 2 || strlen($r->apellido2) <= 2){
+        if(strlen($r->nombre) <= 2){
             return back()->withErrors([
-                'registro' => 'El nombre, apellido1 y apellido2 alguno de los 3 no tiene mas de 2 caracteres'
+                'registro' => 'El nombre no tiene mas de 2 caracteres'
             ]);
         }
-        dd($r);
+        if(strlen($r->apellido1) <= 2){
+            return back()->withErrors([
+                'registro' => 'El apellido 1 no tiene mas de 2 caracteres'
+            ]);
+        }
+        if(strlen($r->apellido2) <= 2){
+            return back()->withErrors([
+                'registro' => 'El apellido 2 no tiene mas de 2 caracteres'
+            ]);
+        }
+        
+        $usu = [
+            'nombre' => $r->nombre,
+            'apellido1' => $r->apellido1,
+            'apellido2' => $r->apellido2,
+            'correo' => $r->email,
+            'fecha_nacimiento' => $r->fecha_nacimiento,
+            'contrasena' => $r->contra,
+            'validado' => 0
+        ];
+
+        Usuario::insert($usu);
+
+        Mail::to($email)->send(new VerificacionMail($r->nombre));
+
+        return back()->withErrors([
+            'registro' => 'Registro enviado correctamente. Revisa tu correo'
+        ]);
+
     }
 }

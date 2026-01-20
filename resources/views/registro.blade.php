@@ -8,6 +8,15 @@
 <body>
     <img src="{{ asset("/images/productos/imagesideas/Logo.png") }}" width='100px'>
     <h1>Registro</h1>
+
+    @if($errors->any())
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
     <form name="form_registro" action="{{ route('doRegistro') }}" method="POST">
         @csrf
         <label>Nombre:</label>
@@ -18,6 +27,9 @@
         <br>
         <label>Apellido 2:</label>
         <input type="text" name="apellido2" placeholder="Introduce tu segundo apellido" required />
+        <br>
+        <label>Fecha de nacimiento:</label>
+        <input type="date" name="fecha_nacimiento" required />
         <br>
         <label>Email:</label>
         <input type="email" name="email" placeholder="Introduce tu email" required />
