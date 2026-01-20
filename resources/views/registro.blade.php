@@ -8,7 +8,8 @@
 <body>
     <img src="{{ asset("/images/productos/imagesideas/Logo.png") }}" width='100px'>
     <h1>Registro</h1>
-    <form name="form_registro" action="#" method="POST">
+    <form name="form_registro" action="{{ route('doRegistro') }}" method="POST">
+        @csrf
         <label>Nombre:</label>
         <input type="text" name="nombre" placeholder="Introduce tu nombre" required/>
         <br>
