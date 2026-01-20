@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ControladorPrueba;
-use App\Http\Controllers\ControllerRegister;
+use App\Http\Controllers\ControllerRegistro;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,4 +22,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[ControladorPrueba::class,'index'])->name('index');
 Route::get('/portada',[ControladorPrueba::class,'visualizacion_portada'])->name('index');
 
-Route::get('/registro',[ControllerRegister::class,'registro'])->name('registro');
+Route::get('/registro',[ControllerRegistro::class,'registro'])->name('registro');
