@@ -13,7 +13,7 @@
 <header>
     <div class="Logo">
         <button id="btn-logo">
-            <img src="{{ asset('imagesideas/Logo.png') }}" alt="Logo">
+            <img src="{{ asset('images/productos/imagesideas/Logo.png') }}" alt="Logo">
         </button>
     </div>
 
@@ -34,13 +34,13 @@
 <article class="portada">
     <div class="box1">
         <video id="video-portada" autoplay muted playsinline preload="auto">
-            <source src="{{ asset('imagesideas/Tienda.mp4') }}" type="video/mp4">
+            <source src="{{ asset('images/productos/imagesideas/Tienda.mp4') }}" type="video/mp4">
             Tu navegador no soporta vídeo.
         </video>
     </div>
 
     <div class="box2">
-        <img src="{{ asset('imagesideas/Logo.png') }}" alt="Logo grande">
+        <img src="{{ asset('images/productos/imagesideas/Logo.png') }}" alt="Logo grande">
     </div>
 </article>
 
@@ -95,9 +95,9 @@
 
     <div class="footer-bottom">
         <div class="social-icons">
-            <img src="{{ asset('imagesideas/Instagram.png') }}" alt="Instagram">
-            <img src="{{ asset('imagesideas/Twiter.png') }}" alt="Twitter">
-            <img src="{{ asset('imagesideas/facebook.png') }}" alt="Facebook">
+            <img src="{{ asset('images/productos/imagesideas/Instagram.png') }}" alt="Instagram">
+            <img src="{{ asset('images/productos/imagesideas/Twiter.png') }}" alt="Twitter">
+            <img src="{{ asset('images/productos/imagesideas/facebook.png') }}" alt="Facebook">
         </div>
 
         <p>Copyright © 2017 sendesingnz. All Rights Reserved</p>
