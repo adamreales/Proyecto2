@@ -15,6 +15,8 @@
     <h1 class="mb-4">Pruebas del Proyecto 2</h1>
     <h2 class="mb-4">Todos los Productos</h2>
 
+    <a href="{{ route('registro') }}">Registro</a>
+
     <div class="row g-4">
         @foreach ($productos as $p)
             <div class="col-md-6 col-lg-4">

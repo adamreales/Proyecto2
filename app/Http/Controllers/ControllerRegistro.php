@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 use App\Mail\VerificacionMail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class ControllerRegistro extends Controller
 {
@@ -47,17 +49,28 @@ class ControllerRegistro extends Controller
             'apellido2' => $r->apellido2,
             'correo' => $r->email,
             'fecha_nacimiento' => $r->fecha_nacimiento,
-            'contrasena' => $r->contra,
+            'contrasena' => Hash::make($r->contra),
             'validado' => 0
         ];
 
         Usuario::insert($usu);
+        $usu_bd = Usuario::where('correo',$r->email)->first();
 
-        Mail::to($email)->send(new VerificacionMail($r->nombre));
+        Mail::to($r->email)->send(new VerificacionMail($r->nombre,$usu_bd->id));
 
         return back()->withErrors([
             'registro' => 'Registro enviado correctamente. Revisa tu correo'
         ]);
 
     }
+
+    public function validar_usuario($id_usuario){
+        $usu = Usuario::find($id_usuario);
+        $usu->validado = 1;
+        $usu->save();
+        return redirect('/registro')->withErrors([
+            'registro' => 'Usuario validado correctamente'
+        ]);
+    }
+
 }

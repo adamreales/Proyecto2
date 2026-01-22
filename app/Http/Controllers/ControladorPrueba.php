@@ -17,8 +17,8 @@ class ControladorPrueba extends Controller
         ]);
     }
 
-    public function visualizacion_portada()
-    {
-        return view('/portada');
-    }
+    // public function visualizacion_portada()
+    // {
+    //     return view('/portada');
+    // }
 }

@@ -42,6 +42,6 @@
         <br>
         <input type="submit" name="form_reg" value="Registrar" required />
     </form>
-    <a href="#">Volver</a>
+    <a href="{{ route('index') }}">Volver</a>
 </body>
 </html>
