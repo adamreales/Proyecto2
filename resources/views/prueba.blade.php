@@ -16,6 +16,7 @@
     <h2 class="mb-4">Todos los Productos</h2>
 
     <a href="{{ route('registro') }}">Registro</a>
+    <a href="{{ route('login') }}">Login</a>
 
     <div class="row g-4">
         @foreach ($productos as $p)
