@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;    
 
 class ControllerLogin extends Controller
 {
@@ -21,10 +22,11 @@ class ControllerLogin extends Controller
             return response()->json(['error' => 'Credenciales incorrectas'], 401);
         }
 
-        $token = $user->createToken($user->id+'token')->plainTextToken;
+        $token = $user->createToken('token_session')->plainTextToken;
 
         return response()->json([
-            'token' => $token
+            'token' => $token,
+            'usuario' => $user
         ]);
     }
 }
