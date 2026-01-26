@@ -23,7 +23,7 @@
         <input type="email" name="email" required />
         <br>
         <label>Contraseña:</label>
-        <input type="password" name="contra" required />
+        <input type="password" name="password" required />
         <br>
         <input type="submit" name="login" />
     </form>
