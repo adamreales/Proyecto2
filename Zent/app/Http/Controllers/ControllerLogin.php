@@ -9,7 +9,7 @@ use App\Models\User;
 class ControllerLogin extends Controller
 {
     function login(Request $request){
-
+        
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -21,7 +21,7 @@ class ControllerLogin extends Controller
             return response()->json(['error' => 'Credenciales incorrectas'], 401);
         }
 
-        $token = $user->createToken('token_prueba')->plainTextToken;
+        $token = $user->createToken($user->id+'token')->plainTextToken;
 
         return response()->json([
             'token' => $token
