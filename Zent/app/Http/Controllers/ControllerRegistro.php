@@ -40,7 +40,7 @@ class ControllerRegistro extends Controller
         $user = User::create($usu);
         $token = $user->createToken('usuario_registro');
 
-        // Mail::to($r->email)->send(new VerificacionMail($user->name,$user->id));
+        Mail::to($r->email)->send(new VerificacionMail($user->name,$user->id));
 
         return response()->json([
             'registro' => 'Registro enviado correctamente. Revisa tu correo',
