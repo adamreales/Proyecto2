@@ -20,10 +20,10 @@ class ControllerProductos extends Controller
     public function producto($id){
         $producto = Producto::find($id);
 
-        if($producto.exists() == false){
+        if($producto === null){
             return response()->json([
                 'error' => 'Producto no encontrado' 
-            ]);
+            ],404);
         }
 
         return response()->json([
