@@ -20,14 +20,14 @@ class ControllerRegistro extends Controller
                 'error' => 'Ya existe este email'
             ],402);
         }
-        if($r->contra != $r->conf_contra){
+        if($r->password != $r->conf_password){
             return response()->json([
                 'error' => 'Las contraseñas no coinciden'
             ],402);
         }
         if(strlen($r->name) <= 2){
             return response()->json([
-                'error' => 'El nombre no tiene mas de 2 caracteres'
+                'error' => 'El nombre no tiene mas de 2 caracteres'  
             ],402);
         }
         

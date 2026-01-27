@@ -11,7 +11,7 @@ api/login
                     {
                         "token": "2|QZc5ERF77eSUxnrMRFU3hfWJV3gm7ilOzAExrwzf818fe385"
                     }
-            Si no funciona 
+            Si da error
                 Te devolvera un json:
                     {
                         "error": "Credenciales incorrectas"
@@ -20,7 +20,35 @@ api/login
 api/registro
     post
         Parametros / Request:
-            name -> un string de tipe text
+            name -> un string de tipo text
+            email -> un string de tipo email
+            password -> un string de tipo password
+            conf_password -> un string de tipo password
+        Retorno:
+            Si funciona bien
+                Te devolvera un json:
+                    {
+                        "registro": "Registro enviado correctamente. Revisa tu correo",
+                        "token": {
+                            "accessToken": {
+                                "name": "usuario_registro",
+                                "abilities": [
+                                    "*"
+                                ],
+                                "expires_at": null,
+                                "tokenable_id": 3,
+                                "tokenable_type": "App\\Models\\User",
+                                "updated_at": "2026-01-27T11:55:56.000000Z",
+                                "created_at": "2026-01-27T11:55:56.000000Z",
+                                "id": 5
+                            },
+                            "plainTextToken": "5|j2U7YCS3aupCWIAgdPQQ1Fgek7uIGlBt7HGqFYXj49f2dfbe"
+                        }
+                    }
+            Si da error
+                {
+                    "error": "Las contraseñas no coinciden"
+                }
             
 api/perfil
     get
