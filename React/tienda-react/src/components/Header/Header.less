@@ -1,0 +1,96 @@
+/*VARIABLES */
+
+/*COLORES */
+@neon-azul: #00eaff;
+@neon-magenta: #ff2fd0;
+
+
+/*MIDAS DE LETRA*/
+@mida-letra-botones : 15px;
+@mida-letra-p:15px;
+
+/*TIPOS DE LETRAS*/
+@tipo-letra-btn:'Inter', sans-serif;
+@tipo-letra-gaming:'Orbitron', sans-serif;
+@tipo-letra-p:'Inter',sans-serif;
+
+/*padding*/
+@padding-pantalla:20px;
+header
+    {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        justify-items: center;
+        width: 100%;
+        height: 100px;
+
+        .Logo
+        {
+            button{
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                outline: none;
+            }
+            margin-left: 50px;
+            width: 100px;
+            img{
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .Barra-menu
+        {
+            display: flex;
+            align-items: center;
+            gap:25px;
+            
+            .menu-btn
+            {
+                background-color: transparent;
+                border: none;
+                outline: none;
+                color:black;
+                font-family: @tipo-letra-gaming;
+                font-weight: 600px;
+                font-size: 15px;
+
+                &::after{
+                    background: @neon-azul;
+                    transition: width 0.3s ease;
+                }
+
+                &:hover{
+                    color:@neon-azul;
+                }
+                
+            }
+        }
+
+        .Login{
+
+            margin-right: 40px;
+             button{
+                cursor: pointer;
+                background-color: transparent;
+                outline: none;
+                margin:10px;
+                padding: 15px 40px;
+                
+                font-size: @mida-letra-botones;
+                color:black;  
+            }
+
+            .Log
+            {
+                            
+                border-color: @neon-azul;
+            }
+            .Reg{
+                border-color:@neon-magenta ;
+            }
+
+        }         
+    }

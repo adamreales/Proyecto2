@@ -1,0 +1,36 @@
+/*VARIABLES */
+/*COLORES */
+/*MIDAS DE LETRA*/
+/*TIPOS DE LETRAS*/
+body .Titulo {
+  display: flex;
+  justify-content: left;
+  padding: 20px 20px 10px 20px;
+  font-size: 15px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+body .Titulo span {
+  color: #00eaff;
+}
+body main .Fundacion {
+  display: grid;
+  grid-template-columns: 0.9fr 1fr;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  gap: 20px;
+}
+body main .Fundacion img {
+  width: 100%;
+  border-radius: 5px;
+}
+body main .Fundacion .texto-fundacion {
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  line-height: 2;
+  color: #333;
+  max-width: 600px;
+}

@@ -1,0 +1,116 @@
+/* COLORES */
+@neon-azul: #00eaff;
+@neon-magenta: #ff2fd0;
+
+/* TIPOGRAFÍA */
+@tipo-letra-btn: 'Inter', sans-serif;
+@tipo-letra-gaming: 'Orbitron', sans-serif;
+@tipo-letra-p: 'Inter', sans-serif;
+
+/* PANTALLA */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+
+/* TARJETA LOGIN */
+.login-container {
+  width: 360px;
+  padding: 40px;
+  background: white;
+  border-radius: 15px;
+
+  border:1px solid @neon-azul;
+  box-shadow:
+    0px 10px 25px rgba(0, 0, 0, 0.2);
+
+    .btn-volver
+    {
+      display: flex;
+      justify-content: center;
+      background-color: transparent;
+      border:none;
+      cursor:pointer;
+      width: 100%;
+      
+      img{
+        width:100px;
+        height:auto;
+      }
+    }
+}
+
+/* TÍTULO */
+.titulo-login {
+  font-family: @tipo-letra-gaming;
+  color: black;
+  text-align: center;
+  margin: 0;
+}
+
+
+
+/* FORMULARIO */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
+
+  label {
+    font-family: @tipo-letra-p;
+    font-size: 14px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: @tipo-letra-p;
+
+    &:focus {
+      outline: none;
+      border-color: @neon-azul;
+      box-shadow: 0 0 5px fade(@neon-azul, 60%);
+    }
+  }
+
+    .Botones
+    {
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+        gap:25px;
+        .btn-login, .btn-registro {
+            margin-top: 20px;
+            align-self: center;
+            padding: 10px 25px;
+            border-radius: 8px;
+            background: transparent;
+            color: black;
+            font-family: @tipo-letra-btn;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-login{
+            border: 1px solid @neon-azul;
+            &:hover {
+            background: @neon-azul;
+            color: white;
+            box-shadow: 0 0 10px fade(@neon-azul, 70%);
+            }
+        }
+        .btn-registro{
+            border: 1px solid @neon-magenta;
+            &:hover {
+            background: @neon-magenta;
+            color: white;
+            box-shadow: 0 0 10px fade(@neon-magenta, 70%);
+            }
+        }
+    }
+}

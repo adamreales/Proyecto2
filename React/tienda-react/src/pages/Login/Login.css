@@ -1,0 +1,95 @@
+/* COLORES */
+/* TIPOGRAFÍA */
+/* PANTALLA */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+/* TARJETA LOGIN */
+.login-container {
+  width: 360px;
+  padding: 40px;
+  background: white;
+  border-radius: 15px;
+  border: 1px solid #00eaff;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+}
+.login-container .btn-volver {
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+.login-container .btn-volver img {
+  width: 100px;
+  height: auto;
+}
+/* TÍTULO */
+.titulo-login {
+  font-family: 'Orbitron', sans-serif;
+  color: black;
+  text-align: center;
+  margin: 0;
+}
+/* FORMULARIO */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
+}
+.formulario label {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+.formulario input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: 'Inter', sans-serif;
+}
+.formulario input:focus {
+  outline: none;
+  border-color: #00eaff;
+  box-shadow: 0 0 5px rgba(0, 234, 255, 0.6);
+}
+.formulario .Botones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+}
+.formulario .Botones .btn-login,
+.formulario .Botones .btn-registro {
+  margin-top: 20px;
+  align-self: center;
+  padding: 10px 25px;
+  border-radius: 8px;
+  background: transparent;
+  color: black;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.formulario .Botones .btn-login {
+  border: 1px solid #00eaff;
+}
+.formulario .Botones .btn-login:hover {
+  background: #00eaff;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 234, 255, 0.7);
+}
+.formulario .Botones .btn-registro {
+  border: 1px solid #ff2fd0;
+}
+.formulario .Botones .btn-registro:hover {
+  background: #ff2fd0;
+  color: white;
+  box-shadow: 0 0 10px rgba(255, 47, 208, 0.7);
+}
