@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\ControllerLogin;
-
+use App\Http\Controllers\ControllerRegistro;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +17,11 @@ use App\Http\Controllers\ControllerLogin;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/perfil', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('/login', [ControllerLogin::class,'login'])->name('login');
+Route::post('/registro',[ControllerRegistro::class,'registro'])->name('registro');
+
+Route::middleware('auth:sanctum')->group(function(){
+
+    Route::get('/perfil', [ControllerLogin::class,'perfil'])->name('perfil');
+
+});

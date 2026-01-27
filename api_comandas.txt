@@ -1,0 +1,39 @@
+Comandas API Backend
+
+api/login
+    post
+        Parametros / Request:
+            email -> un string de tipo email
+            password -> un string de tipo input
+        Retorno:
+            Si funciona bien
+                Te devolvera un json:
+                    {
+                        "token": "2|QZc5ERF77eSUxnrMRFU3hfWJV3gm7ilOzAExrwzf818fe385"
+                    }
+            Si no funciona 
+                Te devolvera un json:
+                    {
+                        "error": "Credenciales incorrectas"
+                    }
+                    'status' => 401
+api/registro
+    post
+        Parametros / Request:
+            name -> un string de tipe text
+            
+api/perfil
+    get
+        Parametro:
+            token -> el token del usuario
+        Retorno
+            Si funciona bien:
+                Te devolvera un json
+                    {
+                        "id": 1,
+                        "name": "Adrian",
+                        "email": "adrian@test.com",
+                        "email_verified_at": "2026-01-27T10:13:55.000000Z",
+                        "created_at": "2026-01-27T10:13:55.000000Z",
+                        "updated_at": "2026-01-27T10:13:55.000000Z"
+                    }

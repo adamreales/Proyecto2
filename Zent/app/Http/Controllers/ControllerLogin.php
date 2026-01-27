@@ -26,7 +26,12 @@ class ControllerLogin extends Controller
 
         return response()->json([
             'token' => $token,
-            'usuario' => $user
         ]);
+
     }
+
+    function perfil(Request $r){
+        return $r->user();
+    }
+
 }
