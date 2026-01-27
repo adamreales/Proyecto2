@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("comentario",255)->nullable();
             
             $table->foreignId("id_usuario")
-                ->constrained('usuario')
+                ->constrained('users')
                 ->cascadeOnDelete();
 
             $table->foreignId("id_producto")

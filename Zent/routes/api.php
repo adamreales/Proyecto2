@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\ControllerLogin;
 use App\Http\Controllers\ControllerRegistro;
+use App\Http\Controllers\ControllerProductos;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +24,8 @@ Route::post('/registro',[ControllerRegistro::class,'registro'])->name('registro'
 Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('/perfil', [ControllerLogin::class,'perfil'])->name('perfil');
+    
+    Route::get('/productos', [ControllerProductos::class,'productos'])->name('productos');
+    Route::get('/producto/{id}', [ControllerProductos::class,'producto'])->name('producto');
 
 });

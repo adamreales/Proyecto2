@@ -29,19 +29,19 @@ class ValoracionSeeder extends Seeder
                 'comentario' => 'Muy desafiante, pero extremadamente bueno',
             ],
             [
-                'id_usuario' => 2, // Laura
+                'id_usuario' => 1, // Laura
                 'id_producto' => 2, // Zelda BOTW
                 'estrellas' => 5,
                 'comentario' => 'Libertad total y mundo espectacular',
             ],
             [
-                'id_usuario' => 2,
+                'id_usuario' => 1,
                 'id_producto' => 5, // Mario Kart 8
                 'estrellas' => 4,
                 'comentario' => 'Muy divertido para jugar en grupo',
             ],
             [
-                'id_usuario' => 3, // Carlos (no validado)
+                'id_usuario' => 1, // Carlos (no validado)
                 'id_producto' => 4, // FIFA 25
                 'estrellas' => 3,
                 'comentario' => 'Está bien, pero podría mejorar',
