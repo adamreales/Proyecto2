@@ -60,7 +60,7 @@ api/perfil
     Descripcion
         Devuelve la informacion del usuario loginado
     get
-        Parametro:
+        Parametros / Request:
             token -> el token del usuario
         Retorno
             Si funciona bien:
@@ -83,7 +83,7 @@ api/productos
     Descripcion
         Devuelve todos los productos de la base de datos
     get
-        Parametro:
+        Parametros / Request:
             token -> el token del usuario
         Retorno
             Si funciona bien
@@ -111,7 +111,7 @@ api/producto/{id}
     Descripcion
         Devuelve un producto especifico pasandole el id
     get
-        Parametro:
+        Parametros / Request:
             token -> el token del usuario
             'id' -> el id del producto
         Retorno
