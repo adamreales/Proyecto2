@@ -26,6 +26,7 @@ class ControllerLogin extends Controller
 
         return response()->json([
             'token' => $token,
+            'user' => $user
         ]);
 
     }

@@ -15,7 +15,7 @@ function Login() {
       localStorage.setItem("token", data.token);
       console.log("Usuario:", data.user);
     } catch (error) {
-      alert("Login incorrecto");
+      alert("Login incorrecto: " + error);
     }
   };
 

@@ -29,3 +29,10 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/producto/{id}', [ControllerProductos::class,'producto'])->name('producto');
 
 });
+
+Route::get('/test', function () {
+    return response()->json([
+        'ok' => true,
+        'message' => 'Conectado con Laravel'
+    ]);
+});
