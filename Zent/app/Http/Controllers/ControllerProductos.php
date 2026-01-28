@@ -12,6 +12,12 @@ class ControllerProductos extends Controller
     {
         $productos = Producto::all();
 
+        if($productos === null){
+            return response()->json([
+                'error' => 'Error al cargar productos o no hay ninguno'
+            ],404);
+        }
+
         return response()->json([
             'productos' => $productos
         ]);

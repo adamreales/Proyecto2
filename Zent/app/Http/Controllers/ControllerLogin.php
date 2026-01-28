@@ -32,7 +32,17 @@ class ControllerLogin extends Controller
     }
 
     function perfil(Request $r){
-        return $r->user();
+
+        if(!$r->user()){
+            return response()->json([
+                'error' => 'Error al devolver el usuario'
+            ],401);
+        }
+
+        return response()->json([
+            'user' => $r->user()
+        ]);
+
     }
 
 }
