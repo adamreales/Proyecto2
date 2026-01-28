@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Usuario;
 use App\Mail\VerificacionMail;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -18,27 +17,27 @@ class ControllerRegistro extends Controller
         if($existe){
             return response()->json([
                 'error' => 'Ya existe este email'
-            ],402);
+            ],409);
         }
         if($r->password != $r->conf_password){
             return response()->json([
                 'error' => 'Las contraseñas no coinciden'
-            ],402);
+            ],400);
         }
         if(strlen($r->name) <= 2){
             return response()->json([
                 'error' => 'El nombre no tiene mas de 2 caracteres'  
-            ],402);
+            ],400);
         }
         
         $usu = [
             'name' => $r->name,
             'email' => $r->email,
-            'password' => Hash::make($r->contra),
+            'password' => Hash::make($r->password),
         ];
 
         $user = User::create($usu);
-        $token = $user->createToken('usuario_registro');
+        $token = $user->createToken('usuario_registro')->plainTextToken;
 
         Mail::to($r->email)->send(new VerificacionMail($user->name,$user->id));
 

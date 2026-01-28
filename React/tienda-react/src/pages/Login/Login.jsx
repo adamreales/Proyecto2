@@ -43,7 +43,7 @@ function Login() {
             <button type="submit" className="btn-login">
                 Iniciar sesión
             </button>
-            <button type="submit" className="btn-registro">Registrate</button>
+             <Link to="/register"> <button type="submit" className="btn-registro">Registrate</button></Link>
           </div>
         </form>
       </div>

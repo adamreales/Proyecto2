@@ -13,7 +13,7 @@ function Register() {
     e.preventDefault();
 
     try {
-      await register(name,email, password);
+      await register(name,email, password,passwordConfirm);
       alert("Usuario registrado correctamente");
     } catch (error) {
       alert("Error al registrarse");
@@ -26,7 +26,7 @@ function Register() {
 
         <h1 className="titulo-login">Regístrate</h1>
 
-        <Link to="/home"><button className="btn-volver"><img src="imagesideas/logo.png" alt="Logo" /></button></Link>
+        <Link to="/home"><button className="btn-volver"><img src="public/imagesideas/logo.png" alt="Logo" /></button></Link>
 
         <form className="formulario" onSubmit={handleSubmit}>
           <label>Nombre:</label>
