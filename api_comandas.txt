@@ -1,6 +1,8 @@
 Comandas API Backend
 
 api/login
+    Descripcion
+        Funcion que te permitira desbloquear la funcionalidad a la pagina y dar login al usuario
     post
         Parametros / Request:
             email -> un string de tipo email
@@ -20,6 +22,8 @@ api/login
                     }
                     'status' => 401
 api/registro
+    Descripcion
+        Funcion que permite dar registro a una usuario nuevo
     post
         Parametros / Request:
             name -> un string de tipo text
@@ -53,6 +57,8 @@ api/registro
                 }
             
 api/perfil
+    Descripcion
+        Devuelve la informacion del usuario loginado
     get
         Parametro:
             token -> el token del usuario
@@ -74,6 +80,8 @@ api/perfil
                     'status' => 401
 
 api/productos
+    Descripcion
+        Devuelve todos los productos de la base de datos
     get
         Parametro:
             token -> el token del usuario
@@ -100,6 +108,8 @@ api/productos
                     "error" => 'Error al cargar productos o no hay ninguno'
                     'status' => 404
 api/producto/{id}
+    Descripcion
+        Devuelve un producto especifico pasandole el id
     get
         Parametro:
             token -> el token del usuario
