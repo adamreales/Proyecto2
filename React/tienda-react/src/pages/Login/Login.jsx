@@ -1,12 +1,13 @@
 import "./Login.css";
 import { useState } from "react";
 import { login } from "../../services/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -14,6 +15,7 @@ function Login() {
       const data = await login(email, password);
       localStorage.setItem("token", data.token);
       console.log("Usuario:", data.user);
+      navigate("/home");
     } catch (error) {
       alert("Login incorrecto: " + error);
     }

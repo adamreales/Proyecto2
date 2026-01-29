@@ -3,21 +3,33 @@ import {Link} from "react-router-dom";
 
 function Header()
 {
+	const token = localStorage.getItem("token");
     return(
     <header>	
 			<div className="Logo">
-				<Link to ="/home"><button id="btn-logo"><img src="imagesideas/Logo.png"></img></button></Link>
+				<Link to ="/"><button id="btn-logo"><img src="imagesideas/Logo.png"></img></button></Link>
 			</div>	
-			<div class="Barra-menu">
-					<button class="menu-btn">VIDEOJUEGOS</button>
-					<button class="menu-btn">CONSOLAS</button>
-					<button class="menu-btn">MERCHANDISING</button>
-					<Link to="/conocenos"><button class="menu-btn" id="btn-conocenos" >CONOCENOS</button>	</Link>
-					<button class="menu-btn">OUTLET</button>
+			<div className="Barra-menu">
+					<button className="menu-btn">VIDEOJUEGOS</button>
+					<button className="menu-btn">CONSOLAS</button>
+					<button className="menu-btn">MERCHANDISING</button>
+					<Link to="/conocenos"><button className="menu-btn" id="btn-conocenos" >CONOCENOS</button>	</Link>
+					<button className="menu-btn">OUTLET</button>
 			</div>	
-			<div class="Login">
-				<Link to="/login"><button class="Log">Login</button></Link>
-				<Link to="/Register"><button class="Reg">Registrate</button></Link>
+			<div className="Login">
+				{!token && (
+				<>
+				<Link to="/login"><button className="Log">Login</button></Link>
+				<Link to="/register"><button className="Reg">Registrate</button></Link>
+				</>
+				)}
+				{token && (
+					<>
+					<Link to="/carrito"><button className="btn-carrito"><img src="public/imagesideas/carrito.png"></img></button></Link>
+					<Link to="/profile"><button className="btn-perfil"><img src="public/imagesideas/perfil.png"></img></button></Link>
+					</>
+				)}
+
 			</div>
 	</header>
     );

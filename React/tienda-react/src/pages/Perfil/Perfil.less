@@ -1,0 +1,45 @@
+/* COLORES */
+@neon-azul: #00eaff;
+@neon-magenta: #ff2fd0;
+
+/* TIPOGRAFÍA */
+@tipo-letra-btn: 'Inter', sans-serif;
+@tipo-letra-gaming: 'Orbitron', sans-serif;
+@tipo-letra-p: 'Inter', sans-serif;
+
+
+.Perfil
+{
+    margin:0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .Perfil-card{
+        border-radius: 10px;
+        border: 2px solid @neon-azul;
+        padding: 20px;
+        width: 400px;
+    }
+
+    button
+    {
+        margin-top: 20px;
+        font-family: @tipo-letra-btn;
+        font-size: 16px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        border: 1px solid @neon-azul;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background: @neon-azul;
+            color: black;
+            box-shadow: 0 0 10px fade(@neon-azul, 70%);
+            }
+    }
+}

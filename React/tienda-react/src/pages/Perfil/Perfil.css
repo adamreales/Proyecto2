@@ -1,0 +1,32 @@
+/* COLORES */
+/* TIPOGRAFÍA */
+.Perfil {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.Perfil .Perfil-card {
+  border-radius: 10px;
+  border: 2px solid #00eaff;
+  padding: 20px;
+  width: 400px;
+}
+.Perfil button {
+  margin-top: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  border: 1px solid #00eaff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.Perfil button:hover {
+  background: #00eaff;
+  color: black;
+  box-shadow: 0 0 10px rgba(0, 234, 255, 0.7);
+}

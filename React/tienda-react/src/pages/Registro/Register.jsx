@@ -58,7 +58,7 @@ function Register() {
           />
 
           <div className="Botones">
-            <button type="submit" className="btn-registro">
+            <button type="button" className="btn-registro">
               Registrarse
             </button>
           </div>

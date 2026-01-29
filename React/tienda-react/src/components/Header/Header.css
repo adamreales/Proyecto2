@@ -64,3 +64,14 @@ header .Login .Log {
 header .Login .Reg {
   border-color: #ff2fd0;
 }
+header .btn-carrito,
+header .btn-perfil {
+  width: 50px;
+  height: auto;
+  border: none;
+}
+header .btn-carrito img,
+header .btn-perfil img {
+  width: 30px;
+  height: auto;
+}
