@@ -33,4 +33,9 @@ class Producto extends Model
         return $this->hasMany(CategoriaProducto::class,'id_producto');
     }
 
+    public function doCategorias()
+    {
+        return $this->belongsToMany(Categoria::class);
+    }
+
 }

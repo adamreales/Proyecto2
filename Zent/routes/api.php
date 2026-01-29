@@ -26,13 +26,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/perfil', [ControllerLogin::class,'perfil'])->name('perfil');
     
     Route::get('/productos', [ControllerProductos::class,'productos'])->name('productos');
+    Route::put('/producto/add', [ControllerProductos::class,'producto/add'])->name('producto/add');
+
     Route::get('/producto/{id}', [ControllerProductos::class,'producto'])->name('producto');
 
-});
-
-Route::get('/test', function () {
-    return response()->json([
-        'ok' => true,
-        'message' => 'Conectado con Laravel'
-    ]);
 });
