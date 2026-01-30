@@ -81,7 +81,7 @@ api/perfil
 
 api/productos
     Descripcion
-        Devuelve todos los productos de la base de datos
+        Devuelve toda la informacion de los productos
     get
         Parametros / Request:
             token -> el token del usuario
@@ -98,9 +98,46 @@ api/productos
                             "valoracion": 0,
                             "stock": 20,
                             "created_at": null,
-                            "updated_at": null
+                            "updated_at": null,
+                            "do_valoraciones": [
+                                {
+                                    "id": 1,
+                                    "estrellas": 5,
+                                    "comentario": "Obra maestra, ambientación y jugabilidad increíbles",
+                                    "id_usuario": 1,
+                                    "id_producto": 1,
+                                    "created_at": null,
+                                    "updated_at": null
+                                }
+                            ],
+                            "do_imagenes": [
+                                {
+                                    "id": 1,
+                                    "id_producto": 1,
+                                    "url": "images/productos/hk1.jpg",
+                                    "created_at": null,
+                                    "updated_at": null
+                                },
+                                {
+                                    "id": 2,
+                                    "id_producto": 1,
+                                    "url": "images/productos/hk2.jpg",
+                                    "created_at": null,
+                                    "updated_at": null
+                                }
+                            ],
+                            "do_categorias_producto": [
+                                {
+                                    "id_producto": 1,
+                                    "id_categoria": 1
+                                },
+                                {
+                                    "id_producto": 1,
+                                    "id_categoria": 2
+                                }
+                            ]
                         },
-                        ....
+                        ...
                     ]
                     'status' => 200
             Si da error
@@ -109,7 +146,7 @@ api/productos
                     'status' => 404
 api/producto/{id}
     Descripcion
-        Devuelve un producto especifico pasandole el id
+        Devuelve toda la informacion de un producto especifico pasandole el id
     get
         Parametros / Request:
             token -> el token del usuario

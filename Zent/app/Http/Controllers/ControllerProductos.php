@@ -15,7 +15,11 @@ use PhpParser\Error;
 class ControllerProductos extends Controller
 {
     public function productos(){
-        $productos = Producto::all();
+        $productos = Producto::with([
+            'doValoraciones',
+            'doImagenes',
+            'doCategoriasProducto'
+        ])->get();
 
         if($productos === null){
             return response()->json([
@@ -29,7 +33,11 @@ class ControllerProductos extends Controller
     }
 
     public function producto($id){
-        $producto = Producto::find($id);
+        $producto = Producto::with([
+            'doValoraciones',
+            'doImagenes',
+            'doCategoriasProducto'
+        ])->find($id);
 
         if($producto === null){
             return response()->json([
@@ -38,7 +46,7 @@ class ControllerProductos extends Controller
         }
 
         return response()->json([
-            'producto' => $producto
+            'producto' => $producto,
         ]);
 
     }
