@@ -26,8 +26,9 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/perfil', [ControllerLogin::class,'perfil'])->name('perfil');
     
     Route::get('/productos', [ControllerProductos::class,'productos'])->name('productos');
-    Route::put('/producto/add', [ControllerProductos::class,'producto/add'])->name('producto/add');
+    Route::post('/anadir_producto', [ControllerProductos::class,'anadir_producto'])->name('anadir_producto');
 
     Route::get('/producto/{id}', [ControllerProductos::class,'producto'])->name('producto');
+    
 
 });

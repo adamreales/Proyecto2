@@ -9,6 +9,7 @@ use App\Models\Categoria;
 use App\Models\CategoriaProducto;
 use App\Models\Juego;
 use App\Models\JuegoPegi;
+use App\Models\ImagenProducto;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Error;
 
@@ -123,23 +124,33 @@ class ControllerProductos extends Controller
             }
 
             CategoriaProducto::insert($cat_productos);
+            
+
+            //Imagenes
+            foreach($r->imagenes as $img){
+                ImagenProducto::create([
+                    'id_producto' => $p->id,
+                    'url' => $img
+                ]);
+            }
+            
 
             // Parte de Juego JuegoPegi
             if($r->esJuego){
 
                 $juego = [
-                    'id_juego' => $p->id
+                    'id_producto' => $p->id
                 ];
 
                 $j = Juego::create($juego);
 
                 $juegos_pegi = $r->juegos_pegi;
 
-                $pegis = JuegoPegi::whereIn('id',$juegos_pegi)->get();
+                // $pegis = JuegoPegi::whereIn('id',$juegos_pegi)->get();
 
-                if($pegis->count() != count($juegos_pegi)){
-                    throw new \Exception('Hay juegos que no coinciden');
-                }
+                // if($pegis->count() != count($juegos_pegi)){
+                //     throw new \Exception('Hay juegos que no coinciden');
+                // }
 
                 $a_pegis = [];
                 foreach($juegos_pegi as $jp){
@@ -152,6 +163,8 @@ class ControllerProductos extends Controller
                 
                 $jp = JuegoPegi::insert($a_pegis);
 
+                //Plataformas
+                $j->doPlataformas()->sync($r->plataformas);
             }
 
             DB::commit();
