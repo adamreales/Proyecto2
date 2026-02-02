@@ -146,12 +146,6 @@ class ControllerProductos extends Controller
 
                 $juegos_pegi = $r->juegos_pegi;
 
-                // $pegis = JuegoPegi::whereIn('id',$juegos_pegi)->get();
-
-                // if($pegis->count() != count($juegos_pegi)){
-                //     throw new \Exception('Hay juegos que no coinciden');
-                // }
-
                 $a_pegis = [];
                 foreach($juegos_pegi as $jp){
                     $a_pegis[] = [
@@ -179,6 +173,47 @@ class ControllerProductos extends Controller
             ]);
         }
 
+    }
+
+    public function eliminar_producto(Request $r){
+        DB::beginTransaction();
+
+        // return response()->json([
+        //     'error' => $r
+        // ],404);
+
+        try{
+            $producto = Producto::find($r->id_producto);
+
+            if($producto === null){
+                return response()->json([
+                    'error' => 'Producto no encontrado'
+                ],404);
+            }
+            $producto->doValoraciones()->delete();
+            $producto->doImagenes()->delete();
+            $producto->doCategoriasProducto()->delete();
+
+            if($producto->doJuego){
+                $producto->doJuego->doJuegoPegi()->delete();
+                $producto->doJuego->doPlataformas()->detach();
+                $producto->doJuego()->delete();
+            }
+
+            $producto->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'producto' => 'Producto eliminado correctamente'
+            ]);
+        }catch(\Exception $e){
+            DB::rollBack();
+            return response()->json([
+                'error' => $e->getMessage()
+            ],500);
+        }
+        
     }
 
 }
