@@ -18,7 +18,10 @@ class ControllerProductos extends Controller
         $productos = Producto::with([
             'doValoraciones',
             'doImagenes',
-            'doCategoriasProducto'
+            'doCategoriasProducto.doCategoria',
+            'doJuego.doJuegoPegi.doEdad',
+            'doJuego.doJuegoPegi.doDescripcion',
+            'doJuego.doPlataformas'
         ])->get();
 
         if($productos === null){
@@ -36,7 +39,10 @@ class ControllerProductos extends Controller
         $producto = Producto::with([
             'doValoraciones',
             'doImagenes',
-            'doCategoriasProducto'
+            'doCategoriasProducto.doCategoria',
+            'doJuego.doJuegoPegi.doEdad',
+            'doJuego.doJuegoPegi.doDescripcion',
+            'doJuego.doPlataformas'
         ])->find($id);
 
         if($producto === null){
