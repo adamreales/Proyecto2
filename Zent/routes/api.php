@@ -21,12 +21,14 @@ use App\Http\Controllers\ControllerProductos;
 Route::post('/login', [ControllerLogin::class,'login'])->name('login');
 Route::post('/registro',[ControllerRegistro::class,'registro'])->name('registro');
 
+Route::get('/productos', [ControllerProductos::class,'productos'])->name('productos');
+Route::get('/producto/{id}', [ControllerProductos::class,'producto'])->name('producto');
+Route::get('/productos_mas_vendidos', [ControllerProductos::class,'productos_mas_vendidos'])->name('productos_mas_vendidos');
+Route::get('/productos_mas_populares', [ControllerProductos::class,'productos_mas_populares'])->name('productos_mas_populares');
+
 Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('/perfil', [ControllerLogin::class,'perfil'])->name('perfil');
-    
-    Route::get('/productos', [ControllerProductos::class,'productos'])->name('productos');
-    Route::get('/producto/{id}', [ControllerProductos::class,'producto'])->name('producto');
     
     Route::post('/anadir_producto', [ControllerProductos::class,'anadir_producto'])->name('anadir_producto');
     Route::post('/eliminar_producto', [ControllerProductos::class,'eliminar_producto'])->name('eliminar_producto');

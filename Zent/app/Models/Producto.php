@@ -15,7 +15,7 @@ class Producto extends Model
 
     protected $table = "producto";
 
-    protected $fillable = ["titulo","subtitulo","descripcion","precio","valoracion","stock"];
+    protected $fillable = ["titulo","subtitulo","descripcion","precio","valoracion","stock","ventas"];
 
     public function doJuego(){
         return $this->hasOne(Juego::class,'id_producto');

@@ -36,6 +36,50 @@ class ControllerProductos extends Controller
         ]);
     }
 
+    public function productos_mas_vendidos(){
+        $productos = Producto::with([
+            'doValoraciones',
+            'doImagenes',
+            'doCategoriasProducto.doCategoria',
+            'doJuego.doJuegoPegi.doEdad',
+            'doJuego.doJuegoPegi.doDescripcion',
+            'doJuego.doPlataformas'
+        ])->orderBy('ventas','desc')->get();
+
+        if($productos === null){
+            return response()->json([
+                'error' => 'Error al cargar productos o no hay ninguno'
+            ],404);
+        }
+
+        return response()->json([
+            'masVendidos' => $productos
+        ]);
+
+    }
+
+    public function productos_mas_populares(){
+        $productos = Producto::with([
+            'doValoraciones',
+            'doImagenes', 
+            'doCategoriasProducto.doCategoria', 
+            'doJuego.doJuegoPegi.doEdad', 
+            'doJuego.doJuegoPegi.doDescripcion', 
+            'doJuego.doPlataformas'
+        ])->orderByDesc('valoracion','desc')->get();
+
+        if($productos === null){
+            return response()->json([
+                'error' => 'Error al cargar productos o no hay ninguno'
+            ],404);
+        }
+
+        return response()->json([
+            'masPopulares' => $productos
+        ]);
+
+    }
+
     public function producto($id){
         $producto = Producto::with([
             'doValoraciones',
@@ -177,10 +221,6 @@ class ControllerProductos extends Controller
 
     public function eliminar_producto(Request $r){
         DB::beginTransaction();
-
-        // return response()->json([
-        //     'error' => $r
-        // ],404);
 
         try{
             $producto = Producto::find($r->id_producto);
