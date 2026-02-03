@@ -15,7 +15,7 @@ class Producto extends Model
 
     protected $table = "producto";
 
-    protected $fillable = ["titulo","subtitulo","descripcion","precio","valoracion","stock"];
+    protected $fillable = ["titulo","subtitulo","descripcion","precio","valoracion","stock","ventas"];
 
     public function doJuego(){
         return $this->hasOne(Juego::class,'id_producto');
@@ -31,6 +31,11 @@ class Producto extends Model
 
     public function doCategoriasProducto(){
         return $this->hasMany(CategoriaProducto::class,'id_producto');
+    }
+
+    public function doCategorias()
+    {
+        return $this->belongsToMany(Categoria::class);
     }
 
 }

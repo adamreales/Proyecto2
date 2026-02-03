@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("descripcion",255)->nullable();
             $table->unsignedFloat("precio");
             $table->unsignedInteger("valoracion");
+            $table->unsignedInteger("ventas")->default(0);
             $table->unsignedInteger("stock");
             $table->timestamps();
         });

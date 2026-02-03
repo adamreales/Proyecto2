@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Juego;
+use App\Models\Plataforma;
 
 class PlataformaJuego extends Model
 {
@@ -16,6 +17,10 @@ class PlataformaJuego extends Model
 
     public function doJuego(){
         return $this->belongsTo(Juego::class,"id_juego");
+    }
+
+    public function doPlataforma(){
+        return $this->belongsTo(Plataforma::class,"id_plataforma");
     }
 
 }
