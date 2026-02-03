@@ -1,15 +1,18 @@
 import "./Home.css";
 import {useEffect,useState} from "react";
+import {Link} from "react-router-dom";
 
 function Home(){
-	const [productos,setProductos] = useState([]);
+	const [masvendidos,setMasvendidos] = useState([]);
+	const [masvalorados,setMasvalorados] = useState([]);
 
 	useEffect(()=>
 	{
-		fetch("http://localhost:8000/api/masvendidos")
+		fetch("http://localhost:8000/api/home")
 		.then(res=>res.json())
 		.then(data => {
-        setProductos(data.productos);
+        setMasvendidos(data.masvendidos);
+		setMasvalorados(data.masvalorados);
 		})
 		.catch(err => console.error(err));
 	}, []);
@@ -29,7 +32,7 @@ function Home(){
 		<main>
 			<h2 className="subtitulo">Los Mas Vendidos</h2>
 			<section className="MasVendidos">
-				{productos.slice(0, 5).map(p => (
+				{masvendidos.slice(0, 5).map(p => (
 				<div className="producto-catalogo" key={p.id}>
 					<div className="imagen-producto">
 						<img src={`http://localhost:8000/storage/${p.imagen}`}/>
@@ -41,6 +44,23 @@ function Home(){
 				</div>
 				))}
 			</section>
+			<h2 className="subtitulo">Los Mas Valorados</h2>
+			<section className="MasVendidos">
+				{masvalorados.slice(0, 5).map(p => (
+				<div className="producto-catalogo" key={p.id}>
+					<div className="imagen-producto">
+						<img src={`http://localhost:8000/storage/${p.imagen}`}/>
+					</div>
+					<div className="info-producto">
+						<h3>{p.nombre}</h3>
+						<p>{p.precio}</p>
+					</div>
+				</div>
+				))}
+			</section>
+			<article className="Sponsor">
+				<Link to="/videojuegos"><img className="Promo" src="/imagesideas/promo.jpeg"></img></Link>
+			</article>
 		</main>
         </>
     );

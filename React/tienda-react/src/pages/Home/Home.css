@@ -71,3 +71,14 @@ body main .MasVendidos .producto-catalogo .info-producto p {
   font-size: 15px;
   margin: 0px;
 }
+body .Sponsor {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
+  margin: 20px;
+}
+body .Sponsor img {
+  width: 100%;
+  height: 100%;
+}
