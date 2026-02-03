@@ -9,7 +9,7 @@ body .portada {
   grid-template-columns: 1fr 0.35fr;
   padding: 15px 50px ;
   gap: 25px;
-  height: 550px;
+  height: 500px;
 }
 body .portada .box1 #video-portada {
   width: 100%;
@@ -19,4 +19,66 @@ body .portada .box1 #video-portada {
 body .portada .box2 img {
   width: 100%;
   height: 90%;
+}
+body main {
+  padding: 40px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+body main .subtitulo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 30px;
+  color: black;
+  margin-bottom: 20px;
+}
+body main .MasVendidos {
+  display: flex;
+  width: 100%;
+  gap: 30px;
+}
+body main .MasVendidos .producto-catalogo {
+  width: 200px;
+  height: 300px;
+  border-radius: 10px;
+  border: 2px solid #00eaff;
+  padding: 15px;
+}
+body main .MasVendidos .producto-catalogo .imagen-producto {
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+body main .MasVendidos .producto-catalogo .imagen-producto img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+body main .MasVendidos .producto-catalogo .info-producto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+body main .MasVendidos .producto-catalogo .info-producto h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  padding-top: 10px;
+  margin: 0px;
+}
+body main .MasVendidos .producto-catalogo .info-producto p {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  margin: 0px;
+}
+body .Sponsor {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
+  margin: 20px;
+}
+body .Sponsor img {
+  width: 100%;
+  height: 100%;
 }

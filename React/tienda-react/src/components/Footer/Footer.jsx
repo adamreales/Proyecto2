@@ -1,4 +1,5 @@
 import "./Footer.css"
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -7,36 +8,36 @@ function Footer() {
         <div className="footer-col">
           <h3>WHO WE ARE?</h3>
           <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Tour</a></li>
+             <li><Link to="/normas">About Us</Link></li>
+            <li><Link to="/normas">Careers</Link></li>
+            <li><Link to="/normas">Tour</Link></li>
           </ul>
         </div>
 
         <div className="footer-col">
           <h3>SUPPORT</h3>
           <ul>
-            <li><a href="#">Affiliate Programs</a></li>
-            <li><a href="#">Advertise</a></li>
-            <li><a href="#">FAQ</a></li>
+            <li><Link to="/normas">Affiliate Programs</Link></li>
+            <li><Link to="/normas">Advertise</Link></li>
+            <li><Link to="/normas">FAQ</Link></li>
           </ul>
         </div>
 
         <div className="footer-col">
           <h3>PARTNERS</h3>
           <ul>
-            <li><a href="#">Knowledge Base</a></li>
-            <li><a href="#">Video Guides</a></li>
-            <li><a href="#">Report a Bug</a></li>
+            <li><Link to="/normas">Knowledge Base</Link></li>
+            <li><Link to="/normas">Video Guides</Link></li>
+            <li><Link to="/normas">Report a Bug</Link></li>
           </ul>
         </div>
 
         <div className="footer-col">
           <h3>LEGAL</h3>
           <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms &amp; Conditions</a></li>
-            <li><a href="#">Cookie Policy</a></li>
+            <li><Link to="/normas">Privacy Policy</Link></li>
+            <li><Link to="/normas">Terms &amp; Conditions</Link></li>
+            <li><Link to="/normas">Cookie Policy</Link></li>
           </ul>
         </div>
 

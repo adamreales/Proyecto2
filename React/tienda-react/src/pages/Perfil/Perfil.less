@@ -1,0 +1,82 @@
+/* COLORES */
+@neon-azul: #00eaff;
+@neon-magenta: #ff2fd0;
+
+/* TIPOGRAFÍA */
+@tipo-letra-btn: 'Inter', sans-serif;
+@tipo-letra-gaming: 'Orbitron', sans-serif;
+@tipo-letra-p: 'Inter', sans-serif;
+
+
+.Perfil
+{
+    margin:0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .Perfil-card{
+        border-radius: 10px;
+        border: 2px solid @neon-azul;
+        padding: 60px;
+        width:400px;
+        height: 500px;
+        box-sizing: border-box;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .perfil{
+            text-align: center;
+            margin-bottom: 20px;
+            h1{
+                font-family: @tipo-letra-gaming;
+                font-size: 60px;
+                color: @neon-azul;
+                margin: 0;
+            }
+        }
+
+        .datos{
+            width: 100%;
+            margin-top: 60px;
+            text-align: left;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+            p{
+                font-family: @tipo-letra-p;
+                font-size: 15px;
+                color: black;
+                margin: 6px 0;
+            }
+
+        }
+        button
+        {
+            background: transparent;
+            font-family: @tipo-letra-btn;
+            font-size: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            border: 1px solid @neon-azul;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 60px;
+
+            &:hover {
+                background: @neon-azul;
+                color: black;
+                box-shadow: 0 0 10px fade(@neon-azul, 70%);
+            }
+        }
+    }
+
+    
+}
