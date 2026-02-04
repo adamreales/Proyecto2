@@ -69,7 +69,7 @@
                 let imagenesDiv = document.createElement('div');
                 producto.do_imagenes.forEach(imagen => {
                     let img = document.createElement('img');
-                    img.src = imagen.url;
+                    img.src = "https://zent.es/"+imagen.url;
                     imagenesDiv.appendChild(img);
                 });
                 
