@@ -3,16 +3,17 @@ import {useEffect,useState} from "react";
 import {Link} from "react-router-dom";
 
 function Home(){
-	const [masvendidos,setMasvendidos] = useState([]);
-	const [masvalorados,setMasvalorados] = useState([]);
+	const [masVendidos,setMasvendidos] = useState([]);
+	const [masValorados,setMasvalorados] = useState([]);
 
 	useEffect(()=>
 	{
-		fetch("http://localhost:8000/api/home")
+		fetch("http://127.0.0.1:8000/api/productos_mas_vendidos")
 		.then(res=>res.json())
 		.then(data => {
-        setMasvendidos(data.masvendidos);
-		setMasvalorados(data.masvalorados);
+			console.log(data);
+        setMasvendidos(data.masVendidos);
+		setMasvalorados(data.masValorados);
 		})
 		.catch(err => console.error(err));
 	}, []);
@@ -32,21 +33,21 @@ function Home(){
 		<main>
 			<h2 className="subtitulo">Los Mas Vendidos</h2>
 			<section className="MasVendidos">
-				{masvendidos.slice(0, 5).map(p => (
+				{masVendidos.slice(0, 5).map(p => (
 				<div className="producto-catalogo" key={p.id}>
 					<div className="imagen-producto">
-						<img src={`http://localhost:8000/storage/${p.imagen}`}/>
+						<img src={`http://127.0.0.1:8000/storage/${p.do_imagenes.url}`}/>
 					</div>
 					<div className="info-producto">
-						<h3>{p.nombre}</h3>
+						<h3>{p.titulo}</h3>
 						<p>${p.precio}</p>
 					</div>
 				</div>
 				))}
 			</section>
-			<h2 className="subtitulo">Los Mas Valorados</h2>
+			{/* <h2 className="subtitulo">Los Mas Valorados</h2>
 			<section className="MasVendidos">
-				{masvalorados.slice(0, 5).map(p => (
+				{masValorados.slice(0, 5).map(p => (
 				<div className="producto-catalogo" key={p.id}>
 					<div className="imagen-producto">
 						<img src={`http://localhost:8000/storage/${p.imagen}`}/>
@@ -57,7 +58,7 @@ function Home(){
 					</div>
 				</div>
 				))}
-			</section>
+			</section> */}
 			<article className="Sponsor">
 				<Link to="/videojuegos"><img className="Promo" src="/imagesideas/promo.jpeg"></img></Link>
 			</article>
