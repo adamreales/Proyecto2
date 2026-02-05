@@ -17,28 +17,84 @@ class ImagenProductoSeeder extends Seeder
         DB::table('imagen_producto')->insert([
             [
                 'id_producto' => 1,
-                'url' => 'images/productos/hk1.jpg'
+                'url' => 'imagenes_producto/hk1.jpg'
             ],
             [
                 'id_producto' => 1,
-                'url' => 'images/productos/hk2.jpg'
+                'url' => 'imagenes_producto/hk2.jpg'
+            ],
+            [
+                'id_producto' => 1,
+                'url' => 'imagenes_producto/hk3.jpg'
+            ],
+            [
+                'id_producto' => 1,
+                'url' => 'imagenes_producto/hk4.jpg'
             ],
             [
                 'id_producto' => 2,
-                'url' => 'images/productos/zelda_botw.jpg'
+                'url' => 'imagenes_producto/botw1.jpg'
+            ],
+            [
+                'id_producto' => 2,
+                'url' => 'imagenes_producto/botw2.jpg'
+            ],
+            [
+                'id_producto' => 2,
+                'url' => 'imagenes_producto/botw3.webp'
+            ],
+            [
+                'id_producto' => 2,
+                'url' => 'imagenes_producto/botw4.jpg'
             ],
             [
                 'id_producto' => 3,
-                'url' => 'images/productos/elden_ring.jpg'
+                'url' => 'imagenes_producto/eldenring1.webp'
+            ],
+            [
+                'id_producto' => 3,
+                'url' => 'imagenes_producto/eldenring2.webp'
+            ],
+            [
+                'id_producto' => 3,
+                'url' => 'imagenes_producto/eldenring3.webp'
+            ],
+            [
+                'id_producto' => 3,
+                'url' => 'imagenes_producto/eldenring4.avif'
             ],
             [
                 'id_producto' => 4,
-                'url' => 'images/productos/fc25.jpg'
+                'url' => 'imagenes_producto/fifa251.jpg'
+            ],
+            [
+                'id_producto' => 4,
+                'url' => 'imagenes_producto/fifa252.jpg'
+            ],
+            [
+                'id_producto' => 4,
+                'url' => 'imagenes_producto/fifa253.jpg'
+            ],
+            [
+                'id_producto' => 4,
+                'url' => 'imagenes_producto/fifa254.jpg'
             ],
             [
                 'id_producto' => 5,
-                'url' => 'images/productos/mk8.jpg'
-            ]
+                'url' => 'imagenes_producto/mk8deluxe1.jpg'
+            ],
+            [
+                'id_producto' => 5,
+                'url' => 'imagenes_producto/mk8deluxe2.jpg'
+            ],
+            [
+                'id_producto' => 5,
+                'url' => 'imagenes_producto/mk8deluxe3.jpg'
+            ],
+            [
+                'id_producto' => 5,
+                'url' => 'imagenes_producto/mk8deluxe4.jpg'
+            ],
         ]);
     }
 }
