@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\ControllerLogin;
 use App\Http\Controllers\ControllerRegistro;
 use App\Http\Controllers\ControllerProductos;
+use App\Http\Controllers\ControllerStripe;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::get('/productos', [ControllerProductos::class,'productos'])->name('produc
 Route::get('/producto/{id}', [ControllerProductos::class,'producto'])->name('producto');
 Route::get('/productos_mas_vendidos', [ControllerProductos::class,'productos_mas_vendidos'])->name('productos_mas_vendidos');
 Route::get('/productos_mas_populares', [ControllerProductos::class,'productos_mas_populares'])->name('productos_mas_populares');
+
+Route::post('/crear_pago',[ControllerStripe::class,'crear_pago'])->name('crear_pago');
 
 Route::middleware('auth:sanctum')->group(function(){
 

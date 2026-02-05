@@ -21,3 +21,7 @@ Route::get('/productos-vista', function() {
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/stripe-simple', function () {
+    return view('stripe-simple');
+});
