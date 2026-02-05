@@ -4,6 +4,7 @@
 /*TIPOS DE LETRAS*/
 /*padding*/
 body .portada {
+  background-color: green;
   display: grid;
   height: 700px;
   grid-template-columns: 1fr 0.35fr;
