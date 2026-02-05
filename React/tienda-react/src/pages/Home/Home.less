@@ -19,7 +19,6 @@
 body{
     .portada
     {
-        background-color: green;
         display:grid;
         height: 700px;
         grid-template-columns: 1fr 0.35fr;
@@ -65,37 +64,40 @@ body{
             gap:30px;
             .producto-catalogo
             {
-                width: 200px;
+                width: 400px;
                 height: 300px;
                 border-radius: 10px;
-                border: 2px solid @neon-azul;
+                // border: 2px solid @neon-azul;
+                border:none;
                 padding: 15px;
                 .imagen-producto{
                     width: 100%;
                     height: 80%;
-                    object-fit: cover;  
                     border-radius: 10px;
+
                     img{
                         width: 100%;
                         height: 100%;
                         border-radius: 10px;
+                        object-fit: cover;  
                     }
                 }
                  .info-producto
                 {
                     display: flex;
-                    flex-direction: column;
-                    align-items: flex-start;
-
+                    align-items: center;
+                    justify-content: space-between;
+                    padding-top: 15px;
+                    margin-right: 15px;
                     h3{
                         font-family: @tipo-letra-p;
-                        font-size: 15px;
-                        padding-top: 10px;
+                        font-size: 18px;
                         margin: 0px;
                     }
                     p{
                         font-family: @tipo-letra-p;
-                        font-size: 15px;
+                        color:black;
+                        font-size: 18px;
                         margin: 0px;
                     }
                 } 
@@ -104,15 +106,16 @@ body{
     }
 
     .Sponsor{
-        display: flex;
-        justify-content: center;
         width: 100%;
-        height: 200px;
+        height: 250px;
         margin:20px;
-        
+        padding-top: 20px;
+        padding-bottom: 20px;
         img{
+            object-fit: cover;
             width: 100%;
             height: 100%;
         }
+        
     }
 }
