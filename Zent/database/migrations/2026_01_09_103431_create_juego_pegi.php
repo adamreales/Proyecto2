@@ -14,21 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('juego_pegi', function (Blueprint $table) {
-            $table->id();
-        
-            $table->foreignId('id_juego')
-                ->constrained('juego')
-                ->cascadeOnDelete();
-        
-            $table->foreignId('id_edad_pegi')
-                ->constrained('edad_pegi');
-        
-            $table->foreignId('id_desc_pegi')
-                ->constrained('descripcion_pegi');
-        
-            $table->timestamps();
-        
-            $table->unique(['id_juego', 'id_edad_pegi', 'id_desc_pegi']);
+            $table->engine = 'InnoDB';
+            $table->unsignedBigInteger('juego_id');
+            $table->unsignedBigInteger('edad_pegi_id');
+
+            $table->primary(['juego_id', 'edad_pegi_id']);
         });
     }
 

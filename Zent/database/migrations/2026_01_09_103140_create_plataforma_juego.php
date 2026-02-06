@@ -14,15 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('plataforma_juego', function (Blueprint $table) {
-            $table->foreignId('id_juego')
-                ->constrained('juego')
-                ->cascadeOnDelete();
+            $table->engine = 'InnoDB';
+            $table->unsignedBigInteger('plataforma_id');
+            $table->unsignedBigInteger('juego_id');
 
-            $table->foreignId('id_plataforma')
-                ->constrained('plataforma')
-                ->cascadeOnDelete();
-
-            $table->primary(['id_juego', 'id_plataforma']);
+            $table->primary(['plataforma_id', 'juego_id']);
         });
     }
 

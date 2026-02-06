@@ -17,54 +17,24 @@ class PlataformaJuegoSeeder extends Seeder
     {
         DB::table('plataforma_juego')->insert([
             // Hollow Knight
-            [
-                'id_juego' => 1,
-                'id_plataforma' => 1, // PC
-            ],
-            [
-                'id_juego' => 1,
-                'id_plataforma' => 4, // Nintendo Switch
-            ],
+            ['plataforma_id' => 1, 'juego_id' => 1], // PC
+            ['plataforma_id' => 4, 'juego_id' => 1], // Nintendo Switch
 
             // Zelda BOTW
-            [
-                'id_juego' => 2,
-                'id_plataforma' => 4, // Nintendo Switch
-            ],
+            ['plataforma_id' => 4, 'juego_id' => 2], // Nintendo Switch
 
             // Elden Ring
-            [
-                'id_juego' => 3,
-                'id_plataforma' => 1, // PC
-            ],
-            [
-                'id_juego' => 3,
-                'id_plataforma' => 2, // PS5
-            ],
-            [
-                'id_juego' => 3,
-                'id_plataforma' => 3, // Xbox
-            ],
+            ['plataforma_id' => 1, 'juego_id' => 3], // PC
+            ['plataforma_id' => 2, 'juego_id' => 3], // PS5
+            ['plataforma_id' => 3, 'juego_id' => 3], // Xbox
 
             // FIFA 25
-            [
-                'id_juego' => 4,
-                'id_plataforma' => 1, // PC
-            ],
-            [
-                'id_juego' => 4,
-                'id_plataforma' => 2, // PS5
-            ],
-            [
-                'id_juego' => 4,
-                'id_plataforma' => 3, // Xbox
-            ],
+            ['plataforma_id' => 1, 'juego_id' => 4], // PC
+            ['plataforma_id' => 2, 'juego_id' => 4], // PS5
+            ['plataforma_id' => 3, 'juego_id' => 4], // Xbox
 
             // Mario Kart 8
-            [
-                'id_juego' => 5,
-                'id_plataforma' => 4, // Nintendo Switch
-            ],
+            ['plataforma_id' => 4, 'juego_id' => 5], // Nintendo Switch
         ]);
     }
 }
