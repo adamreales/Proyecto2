@@ -532,6 +532,7 @@ class ComposerStaticInite8b2c5a8d7e10242d9194b096654f0bf
         'App\\Http\\Controllers\\ControllerLogin' => __DIR__ . '/../..' . '/app/Http/Controllers/ControllerLogin.php',
         'App\\Http\\Controllers\\ControllerProductos' => __DIR__ . '/../..' . '/app/Http/Controllers/ControllerProductos.php',
         'App\\Http\\Controllers\\ControllerRegistro' => __DIR__ . '/../..' . '/app/Http/Controllers/ControllerRegistro.php',
+        'App\\Http\\Controllers\\ControllerStripe' => __DIR__ . '/../..' . '/app/Http/Controllers/ControllerStripe.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
