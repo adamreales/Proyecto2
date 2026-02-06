@@ -19,10 +19,9 @@ class ControllerProductos extends Controller
         $productos = Producto::with([
             'doValoraciones',
             'doImagenes',
-            'doCategoriasProducto.doCategoria',
-            'doJuego.doJuegoPegi.doEdad',
-            'doJuego.doJuegoPegi.doDescripcion',
-            'doJuego.doPlataformas'
+            'doCategorias',
+            'doJuego.doPlataformas',
+            'doJuego.doPegi'
         ])->get();
 
         if($productos === null){
@@ -40,10 +39,9 @@ class ControllerProductos extends Controller
         $productos = Producto::with([
             'doValoraciones',
             'doImagenes',
-            'doCategoriasProducto.doCategoria',
-            'doJuego.doJuegoPegi.doEdad',
-            'doJuego.doJuegoPegi.doDescripcion',
-            'doJuego.doPlataformas'
+            'doCategorias',
+            'doJuego.doPlataformas',
+            'doJuego.doPegi'
         ])->orderBy('ventas','desc')->get();
 
         if($productos === null){
@@ -61,11 +59,10 @@ class ControllerProductos extends Controller
     public function productos_mas_populares(){
         $productos = Producto::with([
             'doValoraciones',
-            'doImagenes', 
-            'doCategoriasProducto.doCategoria', 
-            'doJuego.doJuegoPegi.doEdad', 
-            'doJuego.doJuegoPegi.doDescripcion', 
-            'doJuego.doPlataformas'
+            'doImagenes',
+            'doCategorias',
+            'doJuego.doPlataformas',
+            'doJuego.doPegi'
         ])->orderByDesc('valoracion','desc')->get();
 
         if($productos === null){
@@ -84,10 +81,9 @@ class ControllerProductos extends Controller
         $producto = Producto::with([
             'doValoraciones',
             'doImagenes',
-            'doCategoriasProducto.doCategoria',
-            'doJuego.doJuegoPegi.doEdad',
-            'doJuego.doJuegoPegi.doDescripcion',
-            'doJuego.doPlataformas'
+            'doCategorias',
+            'doJuego.doPlataformas',
+            'doJuego.doPegi'
         ])->find($id);
 
         if($producto === null){
@@ -149,35 +145,28 @@ class ControllerProductos extends Controller
 
             $p = Producto::create($producto);
 
-            // Parte de Categorias Producto
+            // Parte de Categorias
 
             $categorias_productos = $r->categorias_producto;
 
             $categorias = Categoria::whereIn('id',$categorias_productos)->get();
 
-            if($categorias->count() != count($categorias_productos)){
+            if($categorias->count() != count($r->categorias_producto)){
                 throw new \Exception('Hay categorias que no coinciden');
             }
 
-            $cat_productos = [];
-            foreach($categorias_productos as $cat){
-                $cat_productos[] = [
-                    'id_producto' => $p->id,
-                    'id_categoria' => $cat,
-                ];
-            }
-
-            CategoriaProducto::insert($cat_productos);
+            $p->doCategorias()->sync($r->categorias_producto);
             
 
             //Imagenes
-            foreach($r->imagenes as $img){
-                ImagenProducto::create([
-                    'id_producto' => $p->id,
-                    'url' => $img
-                ]);
+            if(!empty($r->imagenes)){
+                foreach($r->imagenes as $img){
+                    ImagenProducto::create([
+                        'id_producto' => $p->id,
+                        'url' => $img
+                    ]);
+                }
             }
-            
 
             // Parte de Juego JuegoPegi
             if($r->esJuego){
@@ -188,21 +177,18 @@ class ControllerProductos extends Controller
 
                 $j = Juego::create($juego);
 
-                $juegos_pegi = $r->juegos_pegi;
-
-                $a_pegis = [];
-                foreach($juegos_pegi as $jp){
-                    $a_pegis[] = [
-                        'id_juego' => $j->id,
-                        'id_edad_pegi'=> $jp['id_edad_pegi'],
-                        'id_desc_pegi' => $jp['id_desc_pegi'], 
-                    ];
+                if (!empty($r->edad_pegi_id)) {
+                    $j->doPegi()->sync([$r->edad_pegi_id]);
+                }else{
+                    throw new \Exception('Error No hay ningunta edad del juego');
                 }
-                
-                $jp = JuegoPegi::insert($a_pegis);
 
-                //Plataformas
-                $j->doPlataformas()->sync($r->plataformas);
+                if (!empty($r->plataformas)) {
+                    $j->doPlataformas()->sync($r->plataformas);
+                }else{
+                    throw new \Exception('Error No hay ningunta plataforma del juego');
+                }
+
             }
 
             DB::commit();
@@ -232,12 +218,13 @@ class ControllerProductos extends Controller
             }
             $producto->doValoraciones()->delete();
             $producto->doImagenes()->delete();
-            $producto->doCategoriasProducto()->delete();
+            $producto->doCategorias->detach();
 
-            if($producto->doJuego){
-                $producto->doJuego->doJuegoPegi()->delete();
-                $producto->doJuego->doPlataformas()->detach();
-                $producto->doJuego()->delete();
+            if($producto->doJuego()->exists()){
+                $juego = $producto->doJuego;
+                $juego->doPegi()->detach();
+                $juego->doPlataformas()->detach();
+                $juego->delete();
             }
 
             $producto->delete();

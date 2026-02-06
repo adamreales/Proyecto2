@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Producto;
+use App\Models\EdadPegi;
+use App\Models\Plataforma;
 
 class Juego extends Model
 {
@@ -20,11 +22,17 @@ class Juego extends Model
 
     public function doPlataformas()
     {
-        return $this->belongsToMany(Plataforma::class,'plataforma_juego','id_juego','id_plataforma');
+        return $this->belongsToMany(Plataforma::class,'plataforma_juego','juego_id','plataforma_id');
     }
 
-    public function doJuegoPegi(){
-        return $this->hasMany(JuegoPegi::class,'id_juego');
+    public function doPegi()
+    {
+        return $this->belongsToMany(
+            EdadPegi::class,
+            'juego_pegi',
+            'juego_id',
+            'edad_pegi_id'
+        );
     }
 
 }
