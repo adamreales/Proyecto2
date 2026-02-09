@@ -1,0 +1,15 @@
+/* VARIABLES */
+.VideoJuegos {
+  width: 100%;
+}
+.VideoJuegos h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 30px;
+  color: black;
+  margin-bottom: 25px;
+}
+.VideoJuegos .Productos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}

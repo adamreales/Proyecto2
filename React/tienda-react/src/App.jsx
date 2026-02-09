@@ -9,7 +9,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Registro/Register";
 import Perfil from "./pages/Perfil/Perfil";
 import Normas from "./pages/Normas/Normas";
-
+import Videojuegos from "./pages/Videojuegos/Videojuegos";
 import "./App.css";
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
         <Route path="/conocenos" element={<Conocenos />} />
         <Route path="/normas" element={<Normas />} />
         <Route path="/profile" element={<Perfil />} />
+        <Route path="/videojuegos" element={<Videojuegos />} />
       </Route>
 
       {/* RUTAS DE AUTENTICACIÓN */}

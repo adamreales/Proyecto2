@@ -10,7 +10,7 @@ function Header()
 				<Link to ="/"><button id="btn-logo"><img src="imagesideas/Logo.png"></img></button></Link>
 			</div>	
 			<div className="Barra-menu">
-					<button className="menu-btn">VIDEOJUEGOS</button>
+					<Link to="/videojuegos"><button className="menu-btn">VIDEOJUEGOS</button></Link>
 					<button className="menu-btn">CONSOLAS</button>
 					<button className="menu-btn">MERCHANDISING</button>
 					<Link to="/conocenos"><button className="menu-btn" id="btn-conocenos" >CONOCENOS</button>	</Link>
