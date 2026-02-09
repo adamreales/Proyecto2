@@ -1,0 +1,49 @@
+/* VARIABLES */
+/* COLORES */
+/* MIDAS DE LETRA */
+/* TIPOS DE LETRAS */
+/* PADDING */
+.Anuncio {
+  background-image: url('/imagesideas/AnuncioJuego.jpg');
+  width: 100%;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+.Anuncio .Precio {
+  margin-left: 40px;
+  color: white;
+}
+.Anuncio .Precio h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  color: white;
+  margin: 0 0 10px 0;
+}
+.Anuncio .Precio .LineaPrecio {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.Anuncio .Precio .LineaPrecio .Rebaja {
+  background: #ff6a00;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.Anuncio .Precio .LineaPrecio .Rebaja p {
+  font-family: 'Inter', sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  margin: 0;
+}
+.Anuncio .Precio .PrecioFinal {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 45px;
+  font-weight: 500;
+}

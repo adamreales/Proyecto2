@@ -1,0 +1,70 @@
+/* VARIABLES */
+
+/* COLORES */
+@neon-azul: #00eaff;
+@neon-magenta: #ff2fd0;
+
+/* MIDAS DE LETRA */
+@mida-letra-botones: 15px;
+@mida-letra-p: 15px;
+
+/* TIPOS DE LETRAS */
+@tipo-letra-btn: 'Inter', sans-serif;
+@tipo-letra-gaming: 'Orbitron', sans-serif;
+@tipo-letra-p: 'Inter', sans-serif;
+
+/* PADDING */
+@padding-pantalla: 20px;
+
+
+.Anuncio
+{
+    background-image: url('/imagesideas/AnuncioJuego.jpg');
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+
+    .Precio
+    {
+        margin-left: 40px;
+        color: white;
+        h2{
+            font-family: @tipo-letra-gaming;
+            font-size: 40px;
+            font-weight: 500;
+            color: white;
+            margin: 0 0 10px 0
+        }
+        .LineaPrecio
+        {
+            display: flex;
+            align-items: center;
+            gap:15px;
+
+            .Rebaja
+            {
+                background: #ff6a00;
+                padding: 6px 10px;
+                border-radius: 6px;
+                p{
+                    font-family: @tipo-letra-p;
+                    font-size: 40px;
+                    font-weight: 500;
+                    margin: 0;
+                }
+            }
+        }
+        .PrecioFinal {
+            margin: 0;
+            font-family: @tipo-letra-p;
+            font-size: 45px;
+            font-weight: 500;
+        }
+    }
+    
+}

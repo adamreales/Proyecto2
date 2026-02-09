@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Valoraciones from "../../components/Valoraciones/Valoraciones";
 import SeccionProductos from "../../components/SeccionProductos/SeccionProductos";
+import AnuncioVideojuego from "../../components/AnuncioVideoJuego/AnuncioVideojuego";
 
 function Home() {
     const [masVendidos, setMasvendidos] = useState([]);
@@ -57,6 +58,7 @@ function Home() {
                 <Valoraciones />
 
                 <SeccionProductos titulo="Weekly deals" productos={productos} />
+                <AnuncioVideojuego />
             </main>
         </>
     );
