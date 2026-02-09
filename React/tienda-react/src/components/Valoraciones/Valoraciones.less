@@ -1,0 +1,76 @@
+/*VARIABLES */
+
+/*COLORES */
+@neon-azul: #00eaff;
+@neon-magenta: #ff2fd0;
+
+
+/*MIDAS DE LETRA*/
+@mida-letra-botones : 15px;
+@mida-letra-p:20px;
+
+/*TIPOS DE LETRAS*/
+@tipo-letra-btn:'Inter', sans-serif;
+@tipo-letra-gaming:'Orbitron', sans-serif;
+@tipo-letra-p:'Inter',sans-serif;
+
+/*padding*/
+@padding-pantalla:20px;
+
+h2{
+    color:black;
+    font-size: 30px;
+}
+.Valoraciones
+{
+    // background-color:rgb(239, 239, 239);
+    width: 100%;
+    height: 400px;
+    display: grid;
+    padding-bottom: 30px;
+    grid-template-columns: 0.5fr 1fr;
+    
+    .imagenfundador
+    {
+        background-image: url("/imagesideas/Adam.png");
+        background-repeat: no-repeat; 
+        background-size: contain;   
+        background-position: center;  
+    }
+
+    .BloqueInformativo
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap:35px;
+
+        .Estrellas
+        {
+            font-size: 35px;
+        }
+        .Informacion
+        {
+            width: 50%;
+            p{
+                font-family: @tipo-letra-p;
+                font-size: @mida-letra-p;
+            }
+            
+        }
+        .BotonValoraciones{
+            display: flex;
+            justify-content: center;
+            width: 250px;
+            height: 50px;
+            background-color: black;
+            color: white;
+
+            &:hover{
+                background-color: transparent;
+                color: black;
+            }
+        }
+    }
+}

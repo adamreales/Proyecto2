@@ -38,20 +38,22 @@ function Perfil()
 
     if(!user) return <p>Cargando el perfil....</p>;
     return (
-       <div className="Perfil">
-            <div className="Perfil-card">
-                    <div className="perfil">
-                        <h1>Mi Perfil</h1>
-                    </div>
-                    <div className="datos">
-                        <p><b>Nombre:  </b> {user.name}</p>
-                        <p><b>Email:  </b> {user.email}</p>
-                        <p><b>Te uniste a Zent el :   </b> {" "} 
-                        { new Date(user.created_at).toLocaleDateString("es-ES")}</p>
-                    </div> 
-                    <Link to="/"><button type="submit"className="btn-volver">Volver</button></Link>
+       <div className="Perfil-page">
+            <div className="Perfil">
+                <div className="Perfil-card">
+                        <div className="perfil">
+                            <h1>Mi Perfil</h1>
+                        </div>
+                        <div className="datos">
+                            <p><b>Nombre:  </b> {user.name}</p>
+                            <p><b>Email:  </b> {user.email}</p>
+                            <p><b>Te uniste a Zent el :   </b> {" "} 
+                            { new Date(user.created_at).toLocaleDateString("es-ES")}</p>
+                        </div> 
+                        <Link to="/"><button type="submit"className="btn-volver">Volver</button></Link>
+                </div>
             </div>
-        </div>
+       </div>
     );
 }
 export default Perfil;

@@ -1,121 +1,58 @@
-/*VARIABLES */
-
-/*COLORES */
+/* VARIABLES */
 @neon-azul: #00eaff;
 @neon-magenta: #ff2fd0;
 
+@tipo-letra-gaming: 'Orbitron', sans-serif;
+@tipo-letra-p: 'Inter', sans-serif;
 
-/*MIDAS DE LETRA*/
-@mida-letra-botones : 15px;
-@mida-letra-p:15px;
-
-/*TIPOS DE LETRAS*/
-@tipo-letra-btn:'Inter', sans-serif;
-@tipo-letra-gaming:'Orbitron', sans-serif;
-@tipo-letra-p:'Inter',sans-serif;
-
-/*padding*/
-@padding-pantalla:20px;
-body{
-    .portada
-    {
-        display:grid;
-        height: 700px;
+body {
+    .portada {
+        display: grid;
         grid-template-columns: 1fr 0.35fr;
-        padding: 15px 50px ;
-        gap:25px;
+        padding: 15px 50px;
+        gap: 25px;
         height: 500px;
-        
-        .box1{
-            #video-portada
-            {
-                width: 100%;
-                height: 90%;
-                object-fit: cover;
-            }
-        }
-
-        .box2
-        {
-            img{
-                width: 100%;
-                height: 90%;
-            }
-        }
     }
 
-    main
-    { 
-        padding:40px 50px;
-        display:flex;
+    #video-portada {
+        width: 100%;
+        height: 90%;
+        object-fit: cover;
+    }
+
+    .box2 img {
+        width: 100%;
+        height: 90%;
+    }
+
+    main {
+        padding: 40px 50px;
+        display: flex;
         flex-direction: column;
         align-items: flex-start;
-        .subtitulo
-        {
-            font-family: @tipo-letra-gaming;
-            font-size: 30px;
-            color: black;
-            margin-bottom: 20px;
-        }
-        .MasVendidos
-        {
-            display: flex;
-            width:100%;
-            gap:30px;
-            .producto-catalogo
-            {
-                width: 400px;
-                height: 300px;
-                border-radius: 10px;
-                // border: 2px solid @neon-azul;
-                border:none;
-                padding: 15px;
-                .imagen-producto{
-                    width: 100%;
-                    height: 80%;
-                    border-radius: 10px;
-
-                    img{
-                        width: 100%;
-                        height: 100%;
-                        border-radius: 10px;
-                        object-fit: cover;  
-                    }
-                }
-                 .info-producto
-                {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    padding-top: 15px;
-                    margin-right: 15px;
-                    h3{
-                        font-family: @tipo-letra-p;
-                        font-size: 18px;
-                        margin: 0px;
-                    }
-                    p{
-                        font-family: @tipo-letra-p;
-                        color:black;
-                        font-size: 18px;
-                        margin: 0px;
-                    }
-                } 
-            }
-        }
     }
 
-    .Sponsor{
+    .subtitulo {
+        font-family: @tipo-letra-gaming;
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    .MasVendidos {
+        display: flex;
+        width: 100%;
+        gap: 30px;
+    }
+
+    .Sponsor {
         width: 100%;
         height: 250px;
-        margin:20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        img{
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-        }
-        
+        padding: 50px 0;
+    }
+
+    .Sponsor img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 }

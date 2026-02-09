@@ -18,17 +18,18 @@ function App() {
 
       {/* RUTAS PÚBLICAS */}
       <Route element={<PublicLayout />}>
-        {/* <Route path="/home" element={<Home />} /> */}
+         <Route path="/home" element={<Home />} /> 
         <Route path="/" element={<Home />} />
         <Route path="/conocenos" element={<Conocenos />} />
         <Route path="/normas" element={<Normas />} />
+        <Route path="/profile" element={<Perfil />} />
       </Route>
 
       {/* RUTAS DE AUTENTICACIÓN */}
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Perfil />} />
+        
       </Route>
 
     </Routes>
