@@ -31,6 +31,11 @@ class JuegoSeeder extends Seeder
             [
                 'id_producto' => 5, // Mario Kart 8
             ],
+            ['id_producto' => 6],
+            ['id_producto' => 7],
+            ['id_producto' => 8],
+            ['id_producto' => 9],
+            ['id_producto' => 10],
         ]);
     }
 }

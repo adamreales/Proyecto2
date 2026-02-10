@@ -95,6 +95,11 @@ class ImagenProductoSeeder extends Seeder
                 'id_producto' => 5,
                 'url' => 'imagenes_producto/mk8deluxe4.jpg'
             ],
+            ['id_producto' => 6, 'url' => 'imagenes_producto/minecraft.jpg'],
+            ['id_producto' => 7, 'url' => 'imagenes_producto/animal_crossing_new_leaf.jpg'],
+            ['id_producto' => 8, 'url' => 'imagenes_producto/witcher3.jpg'],
+            ['id_producto' => 9, 'url' => 'imagenes_producto/stardew_valley.jpg'],
+            ['id_producto' => 10, 'url' => 'imagenes_producto/celeste.jpg'],
         ]);
     }
 }

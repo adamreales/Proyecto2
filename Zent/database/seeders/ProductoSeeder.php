@@ -71,6 +71,61 @@ class ProductoSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'titulo' => 'Minecraft',
+                'subtitulo' => 'Construye tu propio mundo',
+                'descripcion' => 'Juego sandbox de construcción, exploración y supervivencia',
+                'precio' => 20,
+                'valoracion' => 5,
+                'ventas' => 100000,
+                'stock' => 50,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'titulo' => 'Animal Crossing: New Leaf',
+                'subtitulo' => 'Vive a tu ritmo',
+                'descripcion' => 'Simulación social relajante en un pueblo lleno de vida',
+                'precio' => 25,
+                'valoracion' => 4,
+                'ventas' => 60000,
+                'stock' => 30,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'titulo' => 'The Witcher 3: Wild Hunt',
+                'subtitulo' => 'Conviértete en un cazador de monstruos',
+                'descripcion' => 'RPG de mundo abierto con narrativa profunda y decisiones morales',
+                'precio' => 30,
+                'valoracion' => 5,
+                'ventas' => 90000,
+                'stock' => 25,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'titulo' => 'Stardew Valley',
+                'subtitulo' => 'Escapa a la vida rural',
+                'descripcion' => 'Simulador de granja con exploración, relaciones y gestión',
+                'precio' => 15,
+                'valoracion' => 5,
+                'ventas' => 70000,
+                'stock' => 40,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'titulo' => 'Celeste',
+                'subtitulo' => 'Escala la montaña',
+                'descripcion' => 'Plataformas desafiante con una fuerte narrativa emocional',
+                'precio' => 18,
+                'valoracion' => 5,
+                'ventas' => 45000,
+                'stock' => 20,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
         ]);
     }
 }
