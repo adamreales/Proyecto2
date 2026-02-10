@@ -42,7 +42,7 @@ class ControllerProductos extends Controller
             'doCategorias',
             'doJuego.doPlataformas',
             'doJuego.doPegi'
-        ])->orderBy('ventas','desc')->get();
+        ])->orderByDesc('ventas')->get();
 
         if($productos === null){
             return response()->json([
@@ -63,7 +63,7 @@ class ControllerProductos extends Controller
             'doCategorias',
             'doJuego.doPlataformas',
             'doJuego.doPegi'
-        ])->orderByDesc('valoracion','desc')->get();
+        ])->orderByDesc('valoracion')->get();
 
         if($productos === null){
             return response()->json([
@@ -73,6 +73,48 @@ class ControllerProductos extends Controller
 
         return response()->json([
             'masPopulares' => $productos
+        ]);
+
+    }
+
+    public function productos_mas_actuales(){
+        $productos = Producto::with([
+            'doValoraciones',
+            'doImagenes',
+            'doCategorias',
+            'doJuego.doPlataformas',
+            'doJuego.doPegi'
+        ])->orderByDesc('created_at')->get();
+
+        if($productos === null){
+            return response()->json([
+                'error' => 'Error al cargar productos o no hay ninguno'
+            ],404);
+        }
+
+        return response()->json([
+            'masActuales' => $productos
+        ]);
+
+    }
+
+    public function productos_mas_baratos(){
+        $productos = Producto::with([
+            'doValoraciones',
+            'doImagenes',
+            'doCategorias',
+            'doJuego.doPlataformas',
+            'doJuego.doPegi'
+        ])->orderBy('precio')->get();
+
+        if($productos === null){
+            return response()->json([
+                'error' => 'Error al cargar productos o no hay ninguno'
+            ],404);
+        }
+
+        return response()->json([
+            'masBaratos' => $productos
         ]);
 
     }

@@ -45,4 +45,18 @@ class ControllerLogin extends Controller
 
     }
 
+    function cerrar_session(Request $r){
+
+        if(!$r->user()){
+            return response()->json([
+                'error' => 'Error no existe el usuario'
+            ],401);
+        }
+
+        $r->user()->currentAccessToken()->delete();
+        return response()->json([
+            'msg' => 'Session Cerrada'
+        ]);
+    }
+
 }

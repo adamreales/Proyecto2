@@ -15,11 +15,9 @@ return new class extends Migration
     {
         Schema::create('carrito', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_producto')
-                ->constrained('producto');
             $table->foreignId('id_usuario')
                 ->constrained('users');
-            $table->integer('cantidad');
+            $table->enum('estado',['Activo','Cerrado'])->default('Activo');
             $table->timestamps();
         });
     }
