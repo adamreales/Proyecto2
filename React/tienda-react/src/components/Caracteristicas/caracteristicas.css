@@ -1,0 +1,26 @@
+/*VARIABLES */
+/*COLORES */
+/*MIDAS DE LETRA*/
+/*TIPOS DE LETRAS*/
+/*padding*/
+.card-info {
+  width: 100%;
+  background-color: green;
+}
+.card-info .Especificado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: 150px;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+}
+.card-info .Especificado img {
+  object-fit: cover;
+  width: 90px;
+  height: 90px;
+  border-radius: 1000px;
+  border: 2px solid black;
+}
