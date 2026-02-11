@@ -1,163 +1,153 @@
 <!-- resources/views/productos.blade.php -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Producto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Productos</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
-            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
         }
-        .producto {
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin-bottom: 20px;
+        .producto-img {
+            max-height: 200px;
+            object-fit: cover;
         }
-        .producto h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-        .producto img {
-            max-width: 300px;
-            margin-right: 10px;
-        }
-        .valoraciones, .categorias, .plataformas {
-            margin-top: 20px;
-        }
-        .valoraciones ul, .categorias ul, .plataformas ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .valoraciones li, .categorias li, .plataformas li {
-            margin-bottom: 10px;
+        .badge-plataforma {
+            margin-right: 5px;
         }
     </style>
 </head>
 <body>
-    <h1>Productos</h1>
-    
-    <div id="productos">
-        <!-- Aquí se listarán los productos -->
+
+<div class="container py-5">
+    <h1 class="mb-4 text-center">🛒 Productos</h1>
+
+    <div id="productos" class="row g-4">
+        <!-- Productos aquí -->
     </div>
+</div>
 
-    <script>
-        fetch('http://localhost:8000/api/productos')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+<script>
+fetch('http://localhost:8000/api/productos')
+.then(response => {
+    if (!response.ok) throw new Error('Error en la respuesta');
+    return response.json();
+})
+.then(data => {
+    const productosDiv = document.getElementById('productos');
+
+    if (!data || !data.productos || data.productos.length === 0) {
+        productosDiv.innerHTML = '<p class="text-center">No hay productos disponibles.</p>';
+        return;
+    }
+
+    data.productos.forEach(producto => {
+        const col = document.createElement('div');
+        col.className = 'col-12 col-md-6 col-lg-4';
+
+        const card = document.createElement('div');
+        card.className = 'card h-100 shadow-sm';
+
+        // Imagen principal
+        let imagenHTML = `
+            <img src="https://via.placeholder.com/400x200?text=Sin+Imagen" class="card-img-top producto-img">
+        `;
+        if (producto.do_imagenes && producto.do_imagenes.length > 0) {
+            imagenHTML = `
+                <img src="https://zent.es/${producto.do_imagenes[0].url}" class="card-img-top producto-img">
+            `;
         }
-        return response.json();
-    })
-    .then(data => {
-        let productosDiv = document.getElementById('productos');
-        if (data && data.productos) {
-            data.productos.forEach(producto => {
-                let productoDiv = document.createElement('div');
-                productoDiv.classList.add('producto');
-                
-                // Mostrar el título, subtítulo y descripción
-                productoDiv.innerHTML = `
-                    <h1>${producto.titulo}</h1>
-                    <h2>${producto.subtitulo}</h2>
-                    <p><strong>Descripción:</strong> ${producto.descripcion}</p>
-                    <p><strong>Precio:</strong> $${producto.precio}</p>
-                    <p><strong>Stock:</strong> ${producto.stock}</p>
+
+        card.innerHTML = `
+            ${imagenHTML}
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">${producto.titulo}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${producto.subtitulo ?? ''}</h6>
+
+                <p class="card-text">${producto.descripcion}</p>
+
+                <p class="fw-bold mb-1">💰 ${producto.precio} €</p>
+                <p class="text-muted">📦 Stock: ${producto.stock}</p>
+        `;
+
+        // Categorías
+        if (producto.do_categorias_producto?.length > 0) {
+            let categoriasHTML = '<div class="mb-2">';
+            producto.do_categorias_producto.forEach(cat => {
+                categoriasHTML += `
+                    <span class="badge bg-secondary me-1">
+                        ${cat.do_categoria.nombre}
+                    </span>
                 `;
-                
-                // Mostrar imágenes del producto
-                let imagenesDiv = document.createElement('div');
-                producto.do_imagenes.forEach(imagen => {
-                    let img = document.createElement('img');
-                    img.src = "https://zent.es/"+imagen.url;
-                    imagenesDiv.appendChild(img);
-                });
-                
-                // Mostrar las valoraciones
-                let valoracionesDiv = document.createElement('div');
-                valoracionesDiv.classList.add('valoraciones');
-                valoracionesDiv.innerHTML = '<h3>Valoraciones</h3>';
-                if (producto.do_valoraciones.length > 0) {
-                    let ul = document.createElement('ul');
-                    producto.do_valoraciones.forEach(valoracion => {
-                        let li = document.createElement('li');
-                        li.innerHTML = `⭐ ${valoracion.estrellas} estrellas - "${valoracion.comentario}"`;
-                        ul.appendChild(li);
-                    });
-                    valoracionesDiv.appendChild(ul);
-                } else {
-                    valoracionesDiv.innerHTML += '<p>No hay valoraciones.</p>';
-                }
-
-                // Mostrar las categorías del producto
-                let categoriasDiv = document.createElement('div');
-                categoriasDiv.classList.add('categorias');
-                categoriasDiv.innerHTML = '<h3>Categorías</h3>';
-                if (producto.do_categorias_producto.length > 0) {
-                    let ul = document.createElement('ul');
-                    producto.do_categorias_producto.forEach(categoria => {
-                        let li = document.createElement('li');
-                        li.innerHTML = `${categoria.do_categoria.nombre} - ${categoria.do_categoria.descripcion}`;
-                        ul.appendChild(li);
-                    });
-                    categoriasDiv.appendChild(ul);
-                } else {
-                    categoriasDiv.innerHTML += '<p>No hay categorías.</p>';
-                }
-
-                // Si el producto es un juego, mostrar la información relacionada con el juego
-                if (producto.do_juego) {
-                    let plataformasDiv = document.createElement('div');
-                    plataformasDiv.classList.add('plataformas');
-                    plataformasDiv.innerHTML = '<h3>Plataformas</h3>';
-                    if (producto.do_juego.do_plataformas.length > 0) {
-                        let ul = document.createElement('ul');
-                        producto.do_juego.do_plataformas.forEach(plataforma => {
-                            let li = document.createElement('li');
-                            li.innerHTML = plataforma.nombre;
-                            ul.appendChild(li);
-                        });
-                        plataformasDiv.appendChild(ul);
-                    } else {
-                        plataformasDiv.innerHTML += '<p>No hay plataformas disponibles.</p>';
-                    }
-
-                    let pegiDiv = document.createElement('div');
-                    pegiDiv.classList.add('pegi');
-                    pegiDiv.innerHTML = '<h3>Clasificación PEGI</h3>';
-                    if (producto.do_juego.do_juego_pegi.length > 0) {
-                        let ul = document.createElement('ul');
-                        producto.do_juego.do_juego_pegi.forEach(pegi => {
-                            let li = document.createElement('li');
-                            li.innerHTML = `${pegi.do_edad.edad}+ - ${pegi.do_descripcion.nombre}: ${pegi.do_descripcion.descripcion}`;
-                            ul.appendChild(li);
-                        });
-                        pegiDiv.appendChild(ul);
-                    } else {
-                        pegiDiv.innerHTML += '<p>No hay clasificación PEGI.</p>';
-                    }
-
-                    productoDiv.appendChild(plataformasDiv);
-                    productoDiv.appendChild(pegiDiv);
-                }
-                
-                // Añadir todas las secciones a la div principal
-                productoDiv.appendChild(imagenesDiv);
-                productoDiv.appendChild(valoracionesDiv);
-                productoDiv.appendChild(categoriasDiv);
-                
-                // Finalmente, añadir el producto a la lista de productos
-                productosDiv.appendChild(productoDiv);
             });
-        } else {
-            productosDiv.innerHTML = '<p>No se encontraron productos.</p>';
+            categoriasHTML += '</div>';
+            card.querySelector('.card-body').innerHTML += categoriasHTML;
         }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('productos').innerHTML = '<p>Error al cargar los productos.</p>';
-    });
 
-    </script>
+        // Plataformas
+        if (producto.do_juego?.do_plataformas?.length > 0) {
+            let plataformasHTML = '<div class="mb-2">';
+            producto.do_juego.do_plataformas.forEach(p => {
+                plataformasHTML += `
+                    <span class="badge bg-info text-dark badge-plataforma">
+                        ${p.nombre}
+                    </span>
+                `;
+            });
+            plataformasHTML += '</div>';
+            card.querySelector('.card-body').innerHTML += plataformasHTML;
+        }
+
+        // PEGI
+        if (producto.do_juego?.do_juego_pegi?.length > 0) {
+            let pegiHTML = '<ul class="list-group list-group-flush mt-2">';
+            producto.do_juego.do_juego_pegi.forEach(pegi => {
+                pegiHTML += `
+                    <li class="list-group-item small">
+                        🔞 ${pegi.do_edad.edad}+ — 
+                        <strong>${pegi.do_descripcion.nombre}</strong>
+                    </li>
+                `;
+            });
+            pegiHTML += '</ul>';
+            card.innerHTML += pegiHTML;
+        }
+
+        // Valoraciones
+        let valoracionesHTML = `
+            <div class="mt-auto pt-3">
+                <h6>⭐ Valoraciones</h6>
+        `;
+        if (producto.do_valoraciones?.length > 0) {
+            valoracionesHTML += '<ul class="list-unstyled small">';
+            producto.do_valoraciones.forEach(v => {
+                valoracionesHTML += `
+                    <li>⭐ ${v.estrellas} - "${v.comentario}"</li>
+                `;
+            });
+            valoracionesHTML += '</ul>';
+        } else {
+            valoracionesHTML += '<p class="text-muted small">Sin valoraciones</p>';
+        }
+        valoracionesHTML += '</div>';
+
+        card.querySelector('.card-body').innerHTML += valoracionesHTML;
+
+        col.appendChild(card);
+        productosDiv.appendChild(col);
+    });
+})
+.catch(error => {
+    console.error(error);
+    document.getElementById('productos').innerHTML =
+        '<p class="text-danger text-center">Error al cargar productos.</p>';
+});
+</script>
+
 </body>
 </html>
