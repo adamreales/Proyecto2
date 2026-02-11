@@ -10,6 +10,7 @@ import Register from "./pages/Registro/Register";
 import Perfil from "./pages/Perfil/Perfil";
 import Normas from "./pages/Normas/Normas";
 import Videojuegos from "./pages/Videojuegos/Videojuegos";
+import Producto from "./pages/Producto/Producto";
 import "./App.css";
 
 function App() {
@@ -18,12 +19,13 @@ function App() {
 
       {/* RUTAS PÚBLICAS */}
       <Route element={<PublicLayout />}>
-         <Route path="/home" element={<Home />} /> 
+        <Route path="/home" element={<Home />} /> 
         <Route path="/" element={<Home />} />
         <Route path="/conocenos" element={<Conocenos />} />
         <Route path="/normas" element={<Normas />} />
         <Route path="/profile" element={<Perfil />} />
         <Route path="/videojuegos" element={<Videojuegos />} />
+        <Route path="/producto/:id" element={<Producto />} />
       </Route>
 
       {/* RUTAS DE AUTENTICACIÓN */}

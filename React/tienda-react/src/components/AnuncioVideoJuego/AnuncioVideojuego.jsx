@@ -3,6 +3,7 @@ import "./AnuncioVideojuego.less";
 function AnuncioVideojuego() {
     return (
         <>
+        
             <div className="Anuncio">
                 <div className="Precio">
                     <h2>ARC RAIDERS</h2>

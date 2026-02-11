@@ -9,7 +9,8 @@ function Home() {
     const [masVendidos, setMasvendidos] = useState([]);
     const [masValorados, setMasvalorados] = useState([]);
     const [productos, setProductos] = useState([]);
-
+    const [ofertas,setOfertas] = useState([]);
+    const [recientes,setRecientes] = useState([]);
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/productos_mas_vendidos")
             .then(res => res.json())
@@ -28,6 +29,17 @@ function Home() {
             .then(res => res.json())
             .then(data => setProductos(data.productos));
     }, []);
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/api/ofertas_semanales")
+        .then(res => res.json())
+        .then(data => setOfertas(data.ofertas));
+    },[]);
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/api/anadidos_recientemente")
+        .then(res => res.json())
+        .then(data => setRecientes(data.recientes));
+    },[]);
 
     return (
         <>
@@ -49,7 +61,7 @@ function Home() {
 
                 <article className="Sponsor">
                     <Link to="/videojuegos">
-                        <img className="Promo" src="/imagesideas/Anuncio.jpeg" />
+                        <img className="Promo" src="/imagesideas/AnimalCrosin.jpg" />
                     </Link>
                 </article>
 
@@ -57,8 +69,9 @@ function Home() {
 
                 <Valoraciones />
 
-                <SeccionProductos titulo="Weekly deals" productos={productos} />
-                <AnuncioVideojuego />
+                <SeccionProductos titulo="Añadidos Recientemente" productos={recientes} />
+                  <AnuncioVideojuego />
+                <SeccionProductos titulo="Weekly deals" productos={ofertas} />
             </main>
         </>
     );

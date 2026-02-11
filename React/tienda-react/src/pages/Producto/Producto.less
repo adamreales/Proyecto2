@@ -1,0 +1,121 @@
+/* COLORES */
+@neon-azul: #00eaff;
+@neon-magenta: #ff2fd0;
+
+/* TIPOGRAFÍA */
+@tipo-letra-btn: 'Inter', sans-serif;
+@tipo-letra-gaming: 'Orbitron', sans-serif;
+@tipo-letra-p: 'Inter', sans-serif;
+
+.box
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 40px;
+    justify-items: center;
+    gap:100px;
+    margin-left: 40px;
+    .box-img{
+        width: 600px;
+        height: 350px;
+      
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    }
+    //do_plataformas.nombre
+    .box-datos{
+        border-radius: 10px;
+        width: 100%;
+        height: 350px;
+        //background: radial-gradient(circle,rgba(255, 252, 252, 1) 29%, rgba(70, 252, 231, 1) 100%);
+       
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap:20px;
+        h1{
+            font-family: @tipo-letra-gaming;
+            color: black;
+            font-size: 40px;
+            margin-top: 20px;
+        }
+
+        .Stream{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;              // separación icono-texto
+            padding: 5px 18px;      // da forma de cápsula
+            border-radius: 999px;
+            background-color: black;
+            color: white;
+            width:300px;
+           
+        }
+
+        .precio
+        {  
+            display: flex;
+            width: 100%;
+            margin:20px; 
+            justify-content: left;
+            align-items: center;
+            .final{
+                width: 300px;
+                font-family: @tipo-letra-p;
+                color: black;
+                font-size: 30px;
+            }
+         
+        }
+        
+
+        .plataformas{
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            padding: 10px;
+           
+            
+        }
+
+        .btn-box{
+            display: flex;
+            gap:20px;
+
+            .btn-favoritos,
+            .btn-cesta
+            {
+                font-size: 20px;
+                background-color: black;
+                color:white;
+                width: 250px;
+            }
+        }
+    }
+}
+
+.imagenes{
+    display: flex;
+    gap:30px;
+    width: 650px;
+    height: 150px;
+    padding:20px;
+    .caja-imagen{
+        border-radius: 10px;
+        width: 120px;
+        height: 120px;
+
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    }
+}
