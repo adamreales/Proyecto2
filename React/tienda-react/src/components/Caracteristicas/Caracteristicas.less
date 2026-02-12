@@ -20,23 +20,33 @@
 
 .card-info {
     width: 100%;
-    background-color: green;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     .Especificado
     {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
         justify-content: center;
         align-items: center;
-        width: 350px;
-        height: 150px;
-        gap:10px;
+        width: 100%;
+        height: auto;
+        gap:50px;
         font-family: @tipo-letra-p;
         font-size:@mida-letra-p;
-        img{
-            object-fit: cover;
-            width: 90px;
-            height: 90px;
-            border-radius: 1000px;
-            border: 2px solid black;
+       
+        .box-informacion{
+            display: flex;
+               align-items: center;
+               justify-content: center;
+               gap:10px;
+
+            img{
+                object-fit: cover;
+                width: 90px;
+                height: 90px;
+            }
         }
+        
     }
 }

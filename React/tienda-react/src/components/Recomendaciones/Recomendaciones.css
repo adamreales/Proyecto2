@@ -1,0 +1,24 @@
+/*VARIABLES */
+/*COLORES */
+/*MIDAS DE LETRA*/
+/*TIPOS DE LETRAS*/
+/*padding*/
+.contenido {
+  display: grid;
+  grid-template-columns: 0.25fr 1fr;
+}
+.contenido .Atencion img {
+  width: 100%;
+  height: 100%;
+}
+.contenido .informacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  padding: 10px;
+}
+.contenido .informacion p {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 21px;
+}

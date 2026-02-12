@@ -1,13 +1,15 @@
 import "./Producto.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Caracteristicas from "../../components/Caracteristicas/caracteristicas";
-import Requisitos from "../../components/Recomendaciones/Recomendaciones";
+import Caracteristicas from "../../components/Caracteristicas/Caracteristicas";
+import Recomendaciones from "../../components/Recomendaciones/Recomendaciones";
+import SeccionProductos from "../../components/SeccionProductos/SeccionProductos";
 
 function Producto() {
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
   const [imgPrincipal, setImgPrincipal] = useState(null);
+  const [masVendidos,setMasVendidos] = useState([]);
 
   useEffect(() => {
     fetch(`http://127.0.0.1:8000/api/producto/${id}?token=TU_TOKEN`)
@@ -18,22 +20,31 @@ function Producto() {
       });
   }, [id]);
 
-  if (!producto) return <p>Cargando...</p>;
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/productos_mas_vendidos")
+        .then(res => res.json())
+        .then(data => setMasVendidos(data.masVendidos))
+        .catch(err => console.error(err));
+  }, []);
 
+  if (!producto) {
+    return <div>Cargando...</div>;
+  }
+    
   return (
     <>
       <div className="box">
         <div className="box-img">
           <img
             src={`http://zent.es/${imgPrincipal}`}
-            alt={producto.titulo}
+            alt={producto?.titulo || "Producto"}
           />
         </div>
 
         <div className="box-datos">
           <div>
-            <h1>{producto.titulo}</h1>
-            <p>{producto.descripcion}</p>
+            <h1>{producto?.titulo}</h1>
+            <p>{producto?.descripcion}</p>
           </div>
 
           <div className="Stream">
@@ -41,7 +52,7 @@ function Producto() {
           </div>
 
           <select className="plataformas">
-            {producto.do_juego.do_plataformas?.map(plataforma => (
+            {producto?.do_juego?.do_plataformas?.map(plataforma => (
               <option key={plataforma.id} value={plataforma.id}>
                 {plataforma.nombre}
               </option>
@@ -49,7 +60,9 @@ function Producto() {
           </select>
 
           <div className="precio">
-            <span className="final">{producto.precio} €</span>
+            <span className="final">{producto?.precio} € </span>
+            <p>Valoraciones :  {"⭐".repeat(producto?.valoracion || 0)}  / 5</p>
+            
           </div>
 
           <div className="btn-box">
@@ -60,21 +73,23 @@ function Producto() {
       </div>
 
       <div className="imagenes">
-        {producto.do_imagenes?.map((img, index) => (
+        {producto?.do_imagenes?.map((img, index) => (
           <div className="caja-imagen" key={index}>
             <img
               src={`http://zent.es/${img.url}`}
-              alt={producto.titulo}
+              alt={producto?.titulo || "Producto"}
               onClick={() => setImgPrincipal(img.url)}
               className={imgPrincipal === img.url ? "activa" : ""}
             />
           </div>
         ))}
       </div>
-    <div className="Descripciones">
-        <Caracteristicas producto={producto} />
-        {/* <Requisitos producto={producto} /> */}
-    </div>
+      <div className="Descripciones">
+          <Caracteristicas producto={producto} />
+      </div>
+      <Recomendaciones producto={producto} />
+
+      <SeccionProductos titulo="Lo Mas Vendidos" productos={masVendidos} />
     </>
   );
 }

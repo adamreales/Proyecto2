@@ -37,7 +37,7 @@
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        gap:20px;
+        gap:30px;
         h1{
             font-family: @tipo-letra-gaming;
             color: black;
@@ -62,14 +62,21 @@
         {  
             display: flex;
             width: 100%;
-            margin:20px; 
+            margin:10px; 
             justify-content: left;
             align-items: center;
+
             .final{
                 width: 300px;
                 font-family: @tipo-letra-p;
                 color: black;
                 font-size: 30px;
+            }
+
+            p{
+                font-family: @tipo-letra-p; 
+                font-size: 20px;
+                padding-right: 10px;
             }
          
         }
@@ -79,9 +86,7 @@
             width: 200px;
             height: auto;
             border-radius: 10px;
-            padding: 10px;
-           
-            
+            padding: 10px;            
         }
 
         .btn-box{
@@ -90,6 +95,7 @@
 
             .btn-favoritos
             {
+                width: 70px;
                 font-size: 20px;
                 background-color: black;
                 color:white;   
@@ -100,7 +106,7 @@
             }
 
             .btn-cesta{
-                width: 300px;
+                width: 350px;
                 background-color: black;
                 color:white;
 
@@ -137,5 +143,8 @@
 .Descripciones{
     // display: grid;
     // grid-template-columns: 1fr 1fr;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
 }

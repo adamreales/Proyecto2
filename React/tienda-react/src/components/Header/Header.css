@@ -1,15 +1,21 @@
-/*VARIABLES */
-/*COLORES */
-/*MIDAS DE LETRA*/
-/*TIPOS DE LETRAS*/
-/*padding*/
+/* COLORES */
+/* TIPOGRAFÍA */
+/* TAMAÑO DE LETRA */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  justify-items: center;
   width: 100%;
   height: 100px;
+  /* LOGO */
+  /* MENÚ DESKTOP */
+  /* LOGIN */
+  /* ICONOS */
+  /* HAMBURGUESA */
+  /* MENÚ LATERAL */
+  /* ========================= */
+  /* RESPONSIVE */
+  /* ========================= */
 }
 header .Logo {
   margin-left: 50px;
@@ -25,29 +31,26 @@ header .Logo img {
   width: 100%;
   height: auto;
 }
-header .Barra-menu {
+header .Barra-menu-desktop {
   display: flex;
   align-items: center;
   gap: 25px;
 }
-header .Barra-menu .menu-btn {
+header .menu-btn {
   background-color: transparent;
   border: none;
   outline: none;
   color: black;
   font-family: 'Orbitron', sans-serif;
-  font-weight: 600px;
-  font-size: 15px;
+  font-size: 16px;
 }
-header .Barra-menu .menu-btn::after {
-  background: #00eaff;
-  transition: width 0.3s ease;
-}
-header .Barra-menu .menu-btn:hover {
+header .menu-btn:hover {
   color: #00eaff;
 }
 header .Login {
   margin-right: 40px;
+  display: flex;
+  align-items: center;
 }
 header .Login button {
   cursor: pointer;
@@ -55,7 +58,8 @@ header .Login button {
   outline: none;
   margin: 10px;
   padding: 15px 40px;
-  font-size: 15px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
   color: black;
 }
 header .Login .Log {
@@ -74,4 +78,65 @@ header .btn-carrito img,
 header .btn-perfil img {
   width: 30px;
   height: auto;
+}
+header .hamburger {
+  display: none;
+  font-size: 28px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 20px;
+}
+header .Barra-menu {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: white;
+  padding-top: 180px;
+  gap: 40px;
+  transition: left 0.3s ease;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+}
+header .Barra-menu.active {
+  left: 0;
+}
+header .cerrar-btn {
+  display: none;
+}
+@media (max-width: 768px) {
+  header {
+    height: 80px;
+  }
+  header .Logo {
+    display: none;
+  }
+  header .hamburger {
+    display: block;
+  }
+  header .Barra-menu-desktop {
+    display: none;
+  }
+  header .Login {
+    margin-right: 10px;
+  }
+  header .Login button {
+    padding: 10px;
+  }
+  header .cerrar-btn {
+    display: block;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 24px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
 }

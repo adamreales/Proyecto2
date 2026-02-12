@@ -5,22 +5,29 @@
 /*padding*/
 .card-info {
   width: 100%;
-  background-color: green;
-}
-.card-info .Especificado {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+}
+.card-info .Especificado {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
   align-items: center;
-  width: 350px;
-  height: 150px;
-  gap: 10px;
+  width: 100%;
+  height: auto;
+  gap: 50px;
   font-family: 'Inter', sans-serif;
   font-size: 20px;
 }
-.card-info .Especificado img {
+.card-info .Especificado .box-informacion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.card-info .Especificado .box-informacion img {
   object-fit: cover;
   width: 90px;
   height: 90px;
-  border-radius: 1000px;
-  border: 2px solid black;
 }
