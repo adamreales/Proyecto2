@@ -8,6 +8,12 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding: 20px;
+}
+.card-info h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  margin-bottom: 30px;
 }
 .card-info .Especificado {
   display: grid;
@@ -30,4 +36,36 @@
   object-fit: cover;
   width: 90px;
   height: 90px;
+}
+@media (max-width: 1024px) {
+  .card-info .Especificado {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  .card-info .Especificado .box-informacion img {
+    width: 70px;
+    height: 70px;
+  }
+}
+@media (max-width: 768px) {
+  .card-info {
+    padding: 10px;
+  }
+  .card-info h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+  .card-info .Especificado {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    font-size: 16px;
+  }
+  .card-info .Especificado .box-informacion {
+    justify-content: flex-start;
+    padding: 10px;
+  }
+  .card-info .Especificado .box-informacion img {
+    width: 50px;
+    height: 50px;
+  }
 }

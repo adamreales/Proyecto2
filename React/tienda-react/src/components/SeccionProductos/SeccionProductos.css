@@ -1,0 +1,19 @@
+.seccion-videojuegos {
+  width: 100%;
+  padding: 0 20px;
+}
+.titulo-seccion {
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: black;
+}
+.MasVendidos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+.grid-productos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}

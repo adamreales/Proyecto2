@@ -62,7 +62,6 @@ function Producto() {
           <div className="precio">
             <span className="final">{producto?.precio} € </span>
             <p>Valoraciones :  {"⭐".repeat(producto?.valoracion || 0)}  / 5</p>
-            
           </div>
 
           <div className="btn-box">
