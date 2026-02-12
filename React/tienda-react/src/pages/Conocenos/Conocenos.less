@@ -4,15 +4,15 @@
 @neon-azul: #00eaff;
 @neon-magenta: #ff2fd0;
 
-
 /*MIDAS DE LETRA*/
 @mida-letra-botones : 17px;
 @mida-letra-titulo:15px;
+
 /*TIPOS DE LETRAS*/
 @tipo-letra-btn:'Inter', sans-serif;
 @tipo-letra-gaming:'Orbitron', sans-serif;
- 
 @tipo-letra-p:'Inter',sans-serif;
+
 body
 {
     .Titulo
@@ -25,10 +25,12 @@ body
         font-weight: 500;
         letter-spacing: 1.5px;
         text-transform: uppercase;
+
         span{
             color:@neon-azul;
         }
     }
+
     main 
     {
         .Fundacion{
@@ -52,5 +54,55 @@ body
                 max-width: 600px;
             }
         }
+    }
+}
+
+/* ========================= */
+/* TABLET */
+/* ========================= */
+@media (max-width: 1024px)
+{
+    body main .Fundacion{
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    body main .Fundacion .texto-fundacion{
+        max-width: 100%;
+        font-size: 16px;
+    }
+
+    body .Titulo{
+        font-size: 18px;
+        justify-content: center;
+    }
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+@media (max-width: 600px)
+{
+    body main .Fundacion{
+        grid-template-columns: 1fr;
+        padding: 25px 15px;
+        gap:15px;
+    }
+
+    /* Fuerza que en ambos artículos la imagen quede arriba */
+    body main .Fundacion .Imagenes{
+        order: -1;
+    }
+
+    body main .Fundacion .texto-fundacion{
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    body .Titulo{
+        font-size: 16px;
+        padding: 15px;
+        justify-content: center;
+        text-align: center;
     }
 }

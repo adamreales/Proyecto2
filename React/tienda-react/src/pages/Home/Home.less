@@ -21,9 +21,61 @@ body {
         object-fit: cover;
     }
 
-    .box2 img {
+    .box2 {
+        position: relative;
         width: 100%;
-        height: 90%;
+        height: 100%;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 90%;
+            object-fit: cover;
+        }
+    }
+
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: 100%;
+            height: 90%;
+            object-fit: cover;
+        }
+    }
+
+    .carousel-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        height: 10%;
+        width: 100%;
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+
+            &:hover {
+                background-color: #999;
+            }
+
+            &.active {
+                background-color: @neon-azul;
+                box-shadow: 0 0 10px @neon-azul;
+            }
+        }
     }
 
     main {

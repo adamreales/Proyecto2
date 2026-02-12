@@ -39,7 +39,7 @@ header .Barra-menu-desktop {
 header .menu-btn {
   background-color: transparent;
   border: none;
-  outline: none;
+  cursor: pointer;
   color: black;
   font-family: 'Orbitron', sans-serif;
   font-size: 16px;

@@ -89,7 +89,7 @@ function Producto() {
       </div>
       <Recomendaciones producto={producto} />
 
-      <SeccionProductos titulo="Lo Mas Vendidos" productos={masVendidos} />
+      <SeccionProductos titulo="Lo Mas Vendidos" productos={masVendidos} reload={true} />
     </>
   );
 }

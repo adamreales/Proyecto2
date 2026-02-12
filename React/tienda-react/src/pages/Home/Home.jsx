@@ -11,6 +11,25 @@ function Home() {
     const [productos, setProductos] = useState([]);
     const [ofertas,setOfertas] = useState([]);
     const [recientes,setRecientes] = useState([]);
+    const [currentSlide, setCurrentSlide] = useState(0);
+    
+    const imagenes = [
+        "/imagesideas/MejoresPrecio.png",
+        "/imagesideas/Oferta.jpeg",
+        "/imagesideas/Oferta2.jpeg"
+    ];
+
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev + 1) % imagenes.length);
+    };
+
+    const prevSlide = () => {
+        setCurrentSlide((prev) => (prev - 1 + imagenes.length) % imagenes.length);
+    };
+
+    const goToSlide = (index) => {
+        setCurrentSlide(index);
+    };
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/productos_mas_vendidos")
             .then(res => res.json())
@@ -51,7 +70,18 @@ function Home() {
                 </div>
 
                 <div className="box2">
-                    <img src="/imagesideas/MejoresPrecio.png" />
+                    <div className="carousel-container">
+                        <img src={imagenes[currentSlide]} alt="Slide" />
+                        <div className="carousel-dots">
+                            {imagenes.map((_, index) => (
+                                <span
+                                    key={index}
+                                    className={`dot ${index === currentSlide ? "active" : ""}`}
+                                    onClick={() => goToSlide(index)}
+                                ></span>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </article>
 

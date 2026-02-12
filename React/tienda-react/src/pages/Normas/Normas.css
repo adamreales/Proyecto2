@@ -3,8 +3,10 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 900px;
   height: auto;
   margin: auto;
+  padding: 30px 25px;
   font-size: 15px;
   line-height: 1.5;
   color: #666;
@@ -16,7 +18,44 @@
   font-size: 22px;
   font-weight: 600;
   color: black;
+  margin-top: 25px;
 }
 .normas-container p {
+  width: 100%;
   font-size: 15px;
+  margin: 6px 0;
+}
+/* ========================= */
+/* TABLET */
+/* ========================= */
+@media (max-width: 1024px) {
+  .normas-container {
+    max-width: 95%;
+    padding: 25px 20px;
+  }
+  .normas-container h2 {
+    font-size: 20px;
+  }
+  .normas-container p {
+    font-size: 14.5px;
+  }
+}
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+@media (max-width: 600px) {
+  .normas-container {
+    max-width: 100%;
+    padding: 20px 15px;
+    border-left: none;
+    border-right: none;
+  }
+  .normas-container h2 {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  .normas-container p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
 }

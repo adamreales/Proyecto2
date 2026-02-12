@@ -1,14 +1,23 @@
 import "./ProductoCard.less";
 import { useNavigate } from "react-router-dom";
 
-function ProductoCard({ producto }) {
+function ProductoCard({ producto, reload = false }) {
     const navigate = useNavigate();
+
+    const handleClick = () => {
+        if (reload) {
+            window.location.href = `/producto/${producto.id}`;
+        } else {
+            navigate(`/producto/${producto.id}`);
+        }
+    };
 
     return (
         <div className="producto-catalogo">
             <div 
                 className="imagen-producto" 
-                onClick={() => navigate(`/producto/${producto.id}`)}style={{ cursor: "pointer" }} >
+                onClick={handleClick}
+                style={{ cursor: "pointer" }} >
                 <img
                     src={`http://zent.es/${producto.do_imagenes?.[0]?.url}`}
                     alt={producto.titulo}
