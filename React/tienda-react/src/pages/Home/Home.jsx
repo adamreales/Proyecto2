@@ -64,14 +64,14 @@ function Home() {
         <>
             <article className="portada">
                 <div className="box1">
-                    <video id="video-portada" autoPlay muted playsInline preload="auto">
+                    <Link to="/videojuegos"><video id="video-portada" autoPlay muted playsInline preload="auto">
                         <source src="/imagesideas/Tienda.mp4" type="video/mp4" />
-                    </video>
+                    </video></Link>
                 </div>
 
                 <div className="box2">
                     <div className="carousel-container">
-                        <img src={imagenes[currentSlide]} alt="Slide" />
+                          <Link to="/videojuegos"><img src={imagenes[currentSlide]} alt="Slide" /></Link>
                         <div className="carousel-dots">
                             {imagenes.map((_, index) => (
                                 <span
