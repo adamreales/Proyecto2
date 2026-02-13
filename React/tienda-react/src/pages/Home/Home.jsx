@@ -89,18 +89,14 @@ function Home() {
                 <SeccionProductos titulo="Los Mas Vendidos" productos={masVendidos} />
                 <SeccionProductos titulo="Los Mas Valorados" productos={masValorados} />
 
-                <article className="Sponsor">
-                    <Link to="/videojuegos">
-                        <img className="Promo" src="/imagesideas/AnimalCrosin.jpg" />
-                    </Link>
-                </article>
+                <AnuncioVideojuego imageSrc="/imagesideas/AnimalCrosin.jpg" />
 
                 <SeccionProductos titulo="Reservas" productos={productos} />
 
                 <Valoraciones />
 
                 <SeccionProductos titulo="Añadidos Recientemente" productos={recientes} />
-                  <AnuncioVideojuego />
+                <AnuncioVideojuego imageSrc="/imagesideas/AnuncioJuego.jpg" />
                 <SeccionProductos titulo="Weekly deals" productos={ofertas} />
             </main>
         </>

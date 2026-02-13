@@ -4,34 +4,40 @@
 /* TIPOS DE LETRAS */
 /* PADDING */
 .producto-catalogo {
-  width: 400px;
+  width: 450px;
   height: 300px;
   border-radius: 10px;
   padding: 15px;
 }
-.imagen-producto {
+.producto-catalogo .imagen-producto {
   cursor: pointer;
   width: 100%;
   height: 80%;
 }
-.imagen-producto img {
+.producto-catalogo .imagen-producto img {
   width: 100%;
   height: 100%;
   border-radius: 10px;
   object-fit: cover;
 }
-.info-producto {
+.producto-catalogo .info-producto {
   display: flex;
   justify-content: space-between;
   padding-top: 15px;
 }
-.info-producto h3 {
+.producto-catalogo .info-producto h3 {
   font-family: 'Inter', sans-serif;
   font-size: 18px;
   margin: 0;
 }
-.info-producto p {
+.producto-catalogo .info-producto p {
   font-family: 'Inter', sans-serif;
   font-size: 18px;
   margin: 0;
+}
+@media (max-width: 768px) {
+  .producto-catalogo {
+    width: 100%;
+    height: auto;
+  }
 }

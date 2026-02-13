@@ -1,19 +1,24 @@
-.seccion-videojuegos {
+/* VARIABLES */
+/* COLORES */
+/* MIDAS DE LETRA */
+/* TIPOS DE LETRAS */
+/* PADDING */
+.box-seccion {
   width: 100%;
-  padding: 0 20px;
 }
-.titulo-seccion {
-  font-size: 28px;
-  margin-bottom: 25px;
-  color: black;
-}
-.MasVendidos {
+.box-seccion .MasVendidos {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 20px;
 }
-.grid-productos {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+@media (max-width: 1200px) {
+  .box-seccion .MasVendidos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .box-seccion .MasVendidos {
+    grid-template-columns: 1fr;
+  }
 }

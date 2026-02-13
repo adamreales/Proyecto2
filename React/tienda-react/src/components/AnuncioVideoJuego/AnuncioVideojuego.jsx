@@ -1,10 +1,14 @@
+import { Link } from "react-router-dom";
 import "./AnuncioVideojuego.less";
 
-function AnuncioVideojuego() {
+function AnuncioVideojuego({ imageSrc = "/imagesideas/AnuncioJuego.jpg" }) {
+    const backgroundStyle = {
+        backgroundImage: `url(${imageSrc})`
+    };
+
     return (
         <>
-        
-            <div className="Anuncio">
+            <Link to="/videojuegos" className="AnuncioLink"><div className="Anuncio" style={backgroundStyle}>
                 <div className="Precio">
                     <h2>ARC RAIDERS</h2>
 
@@ -16,7 +20,7 @@ function AnuncioVideojuego() {
                         <p className="PrecioFinal">27.69 €</p>
                     </div>
                 </div>  
-            </div>
+            </div></Link>
         </>
     );
 }

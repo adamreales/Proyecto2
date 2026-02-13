@@ -119,23 +119,78 @@
 }
 @media (max-width: 1024px) {
   .box {
+    grid-template-columns: 1fr;
     gap: 50px;
-    margin-left: 20px;
+    justify-items: center;
+    margin: 0 auto;
+    padding: 0 20px;
   }
   .box .box-img {
-    width: 500px;
+    width: 100%;
     height: 300px;
+    max-width: 500px;
+    margin: 0 auto;
   }
   .box .box-datos {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
     gap: 20px;
+    height: auto;
   }
   .box .box-datos h1 {
     font-size: 32px;
+    margin-top: 10px;
+  }
+  .box .box-datos .Stream {
+    width: 100%;
+    max-width: 300px;
+    font-size: 14px;
+    margin: 0 auto;
+  }
+  .box .box-datos .plataformas {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+  .box .box-datos .precio {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .box .box-datos .precio .final {
+    width: 100%;
+    max-width: 250px;
+    font-size: 24px;
+    text-align: center;
+  }
+  .box .box-datos .precio p {
+    padding-right: 0;
+    font-size: 16px;
+    text-align: center;
+  }
+  .box .box-datos .btn-box {
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .box .box-datos .btn-box .btn-favoritos {
+    max-width: 70px;
+  }
+  .box .box-datos .btn-box .btn-cesta {
+    max-width: 350px;
   }
   .imagenes {
-    width: 550px;
+    justify-content: center;
+    padding-top: 60px;
+    width: 100%;
+    max-width: 550px;
     height: 120px;
     gap: 20px;
+    margin: 0 auto;
+    padding-left: 0;
   }
   .imagenes .caja-imagen {
     width: 120px;
