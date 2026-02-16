@@ -13,6 +13,7 @@ import Videojuegos from "./pages/Videojuegos/Videojuegos";
 import Producto from "./pages/Producto/Producto";
 import Oulet from "./pages/Oulet/Oulet";
 import Consolas from "./pages/Consolas/Consolas";
+import Merchan from "./pages/Merchan/Merchan";
 import "./App.css";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/producto/:id" element={<Producto />} />
         <Route path="/oulet" element={<Oulet />} />
         <Route path="/consolas" element={<Consolas />} />
+        <Route path="/merchan" element={<Merchan />} />
       </Route>
 
       {/* RUTAS DE AUTENTICACIÓN */}

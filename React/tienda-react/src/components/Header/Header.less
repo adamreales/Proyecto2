@@ -87,10 +87,141 @@ header{
         width:50px;
         height:auto;
         border:none;
-
+        outline:none;
+        background: transparent;
+        cursor: pointer;
+        position: relative;
+     
         img{
             width:30px;
             height:auto;
+        }
+    }
+    
+    /* No quitar esta mierda me hacia erwncia de algo y me creaba bordes de la nada */
+    button:focus,
+    button:focus-visible{
+        outline: none !important;
+    }
+    .cart-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .cart-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: @neon-magenta;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    /* MINI CARRITO */
+    .mini-cart {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border: 2px solid black;
+        border-radius: 8px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        width: 350px;
+        max-height: 500px;
+        overflow-y: auto;
+        z-index: 1000;
+        margin-top: 10px;
+
+        h3 {
+            margin: 0 0 15px 0;
+            color: black;
+            font-family: @tipo-letra-gaming;
+            text-align: center;
+            border-bottom: 2px solid black;
+            padding-bottom: 10px;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+        }
+
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 15px;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 12px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+            align-items: flex-start;
+
+            img {
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+                border-radius: 4px;
+            }
+
+            .item-info {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+
+                .item-nombre {
+                    font-weight: bold;
+                    font-size: 14px;
+                    margin: 0;
+                    color: black;
+                }
+
+                .item-cantidad {
+                    font-size: 12px;
+                    color: #666;
+                    margin: 0;
+                }
+
+                .item-precio {
+                    font-weight: bold;
+                    color: @neon-magenta;
+                    margin: 0;
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .btn-ir-carrito {
+            width: 100%;
+            padding: 12px;
+            background-color: @neon-azul;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: @tipo-letra-gaming;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: @neon-magenta;
+                box-shadow: 0 0 10px @neon-magenta;
+            }
         }
     }
 

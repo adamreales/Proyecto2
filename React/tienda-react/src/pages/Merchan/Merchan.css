@@ -1,0 +1,10 @@
+/* VARIABLES */
+.VideoJuegos {
+  width: 100%;
+}
+.VideoJuegos h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 30px;
+  color: black;
+  margin-bottom: 25px;
+}
