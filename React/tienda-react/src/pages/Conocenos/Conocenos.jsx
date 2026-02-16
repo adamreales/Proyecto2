@@ -6,7 +6,7 @@ function Conocenos() {
     <>
       <div className="Titulo">
         <h1>
-          Quienes <span>SOMOS</span>?
+            ¿QUIENES SOMOS?
         </h1>
       </div>
 

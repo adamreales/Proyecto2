@@ -49,3 +49,17 @@ h2 {
   background-color: transparent;
   color: black;
 }
+@media (max-width: 768px) {
+  .Valoraciones {
+    grid-template-columns: 1fr;
+  }
+  .Valoraciones .imagenfundador {
+    display: none;
+  }
+  .Valoraciones .BloqueInformativo {
+    width: 100%;
+  }
+  .Valoraciones .BloqueInformativo .Informacion {
+    width: 80%;
+  }
+}

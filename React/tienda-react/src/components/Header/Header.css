@@ -110,6 +110,36 @@ header .Barra-menu.active {
 header .cerrar-btn {
   display: none;
 }
+@media (max-width: 1024px) {
+  header {
+    height: 80px;
+  }
+  header .Logo {
+    display: none;
+  }
+  header .hamburger {
+    display: block;
+  }
+  header .Barra-menu-desktop {
+    display: none;
+  }
+  header .Login {
+    margin-right: 10px;
+  }
+  header .Login button {
+    padding: 10px;
+  }
+  header .cerrar-btn {
+    display: block;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 24px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+}
 @media (max-width: 768px) {
   header {
     height: 80px;

@@ -13,6 +13,14 @@ body {
         padding: 15px 50px;
         gap: 25px;
         height: 500px;
+        margin-bottom: 10px;
+    }
+
+    .box1 {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
     }
 
     #video-portada {
@@ -29,7 +37,7 @@ body {
 
         img {
             width: 100%;
-            height: 90%;
+            height: 100%;
             object-fit: cover;
         }
     }
@@ -45,7 +53,7 @@ body {
 
         img {
             width: 100%;
-            height: 93%;
+            height: 100%;
             object-fit: cover;
         }
     }
@@ -109,34 +117,72 @@ body {
         .portada {
             grid-template-columns: 1fr;
             justify-items: center;
+            padding: 15px 30px;
+            height: auto;
+            
             .box1{
-                align-items: center;
-                width: 600px;
-                height:auto;
+                width: 100%;
+                max-width: 800px;
+                height: auto;
             }
+            
             .box2{
                 display:none;
             }
-
-           
+        }
+        
+        main {
+            padding: 30px 30px;
         }
     }
 }
+
 @media(max-width:768px) {
     body{
         .portada {
             grid-template-columns: 1fr;
             justify-items: center;
+            padding: 10px 20px;
+            height: auto;
+            
             .box1{
-                align-items: center;
-                width: 600px;
-                height:auto;
+                width: 100%;
+                height: auto;
             }
+            
+            #video-portada {
+                height: auto;
+                max-height: 400px;
+            }
+            
             .box2{
                 display:none;
             }
+        }
+        
+        main {
+            padding: 20px 20px;
+        }
+    }
+}
 
-           
+@media(max-width:480px) {
+    body{
+        .portada {
+            padding: 10px 15px;
+            
+            .box1{
+                width: 100%;
+            }
+            
+            #video-portada {
+                height: auto;
+                max-height: 300px;
+            }
+        }
+        
+        main {
+            padding: 15px 15px;
         }
     }
 }

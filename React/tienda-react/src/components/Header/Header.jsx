@@ -45,19 +45,19 @@ function Header() {
 
         <Link to="/"><button className="menu-btn">HOME</button></Link>
         <Link to="/videojuegos"><button className="menu-btn">VIDEOJUEGOS</button></Link>
-        <button className="menu-btn">CONSOLAS</button>
+        <Link to="/consolas"><button className="menu-btn">CONSOLAS</button></Link>
         <button className="menu-btn">MERCHANDISING</button>
         <Link to="/conocenos"><button className="menu-btn">CONOCENOS</button></Link>
-        <button className="menu-btn">OUTLET</button>
+        <Link to="/oulet"><button className="menu-btn">OUTLET</button></Link>
       </div>
 
       {/* MENÚ DESKTOP */}
       <div className="Barra-menu-desktop">
         <Link to="/videojuegos"><button className="menu-btn">VIDEOJUEGOS</button></Link>
-        <button className="menu-btn">CONSOLAS</button>
+        <Link to="/consolas"><button className="menu-btn">CONSOLAS</button></Link>
         <button className="menu-btn">MERCHANDISING</button>
         <Link to="/conocenos"><button className="menu-btn">CONOCENOS</button></Link>
-        <button className="menu-btn">OUTLET</button>
+        <Link to="/oulet"><button className="menu-btn">OUTLET</button></Link>
       </div>
 
       {/* PERFIL + CARRITO */}

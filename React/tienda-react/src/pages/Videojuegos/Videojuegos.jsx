@@ -14,7 +14,7 @@ function Videojuegos()
     return(
     <>
         <div className="VideoJuegos"> 
-            <h2>VideoJuegos</h2>
+            <h2>VIDEOJUEGOS</h2>
 
             <div className="Productos">
                 <SeccionProductosVideojuegos  productos={productos} />

@@ -11,6 +11,8 @@ import Perfil from "./pages/Perfil/Perfil";
 import Normas from "./pages/Normas/Normas";
 import Videojuegos from "./pages/Videojuegos/Videojuegos";
 import Producto from "./pages/Producto/Producto";
+import Oulet from "./pages/Oulet/Oulet";
+import Consolas from "./pages/Consolas/Consolas";
 import "./App.css";
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
         <Route path="/profile" element={<Perfil />} />
         <Route path="/videojuegos" element={<Videojuegos />} />
         <Route path="/producto/:id" element={<Producto />} />
+        <Route path="/oulet" element={<Oulet />} />
+        <Route path="/consolas" element={<Consolas />} />
       </Route>
 
       {/* RUTAS DE AUTENTICACIÓN */}
