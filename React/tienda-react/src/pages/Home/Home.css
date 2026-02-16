@@ -45,7 +45,7 @@ body .carousel-container img {
 }
 body .carousel-dots {
   position: absolute;
-  bottom: 15%;
+  bottom: 10%;
   left: 0;
   display: flex;
   justify-content: center;
