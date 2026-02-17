@@ -36,6 +36,7 @@ class JuegoPegiSeeder extends Seeder
             ['juego_id' => 8, 'edad_pegi_id' => 4], // Witcher 3
             ['juego_id' => 9, 'edad_pegi_id' => 1], // Stardew Valley
             ['juego_id' => 10, 'edad_pegi_id' => 2], // Celeste
+            ['juego_id' => 11, 'edad_pegi_id' => 3], // Arc Raiders
 
         ]);
     }

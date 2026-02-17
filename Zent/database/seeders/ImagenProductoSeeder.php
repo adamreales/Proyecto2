@@ -175,6 +175,22 @@ class ImagenProductoSeeder extends Seeder
                 'id_producto' => 10, 
                 'url' => 'imagenes_producto/celeste4.webp'
             ],
+            [
+                'id_producto' => 11, 
+                'url' => 'imagenes_producto/arc_raiders1.jpg'
+            ],
+            [
+                'id_producto' => 11, 
+                'url' => 'imagenes_producto/arc_raiders2.jpg'
+            ],
+            [
+                'id_producto' => 11, 
+                'url' => 'imagenes_producto/arc_raiders3.jpg'
+            ],
+            [
+                'id_producto' => 11, 
+                'url' => 'imagenes_producto/arc_raiders4.jpg'
+            ],
         ]);
     }
 }

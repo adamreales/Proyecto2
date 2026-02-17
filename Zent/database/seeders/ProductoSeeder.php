@@ -126,6 +126,17 @@ class ProductoSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
+            [
+                'titulo' => 'Arc Raiders',
+                'subtitulo' => 'Lucha por la supervivencia',
+                'descripcion' => 'Un shooter de acción en tercera persona con elementos de RPG',
+                'precio' => 40,
+                'valoracion' => 5,
+                'ventas' => 15000,
+                'stock' => 20,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
         ]);
     }
 }

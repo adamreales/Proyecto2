@@ -52,6 +52,10 @@ class CategoriaProductoSeeder extends Seeder
             // Celeste
             ['id_producto' => 10, 'id_categoria' => 1],
             ['id_producto' => 10, 'id_categoria' => 2],
+
+            // Arc Raiders
+            ['id_producto' => 11, 'id_categoria' => 1], // Acción
+            ['id_producto' => 11, 'id_categoria' => 6], // Shooter
         ]);
     }
 

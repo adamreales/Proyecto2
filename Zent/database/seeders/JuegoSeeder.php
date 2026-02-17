@@ -36,6 +36,7 @@ class JuegoSeeder extends Seeder
             ['id_producto' => 8],
             ['id_producto' => 9],
             ['id_producto' => 10],
+            ['id_producto' => 11],
         ]);
     }
 }

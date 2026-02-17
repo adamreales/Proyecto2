@@ -12,7 +12,8 @@ function Home() {
     const [ofertas,setOfertas] = useState([]);
     const [recientes,setRecientes] = useState([]);
     const [currentSlide, setCurrentSlide] = useState(0);
-    
+    const animalcrossing = masVendidos.find(p => p.titulo === "Animal Crossing: New Leaf");
+    const  raiders= masVendidos.find(p => p.titulo === "Arc Raiders");
     const imagenes = [
         "/imagesideas/MejoresPrecio.png",
         "/imagesideas/Oferta.jpeg",
@@ -88,15 +89,16 @@ function Home() {
             <main>
                 <SeccionProductos titulo="Los Mas Vendidos" productos={masVendidos} />
                 <SeccionProductos titulo="Los Mas Valorados" productos={masValorados} />
-
-                <AnuncioVideojuego imageSrc="/imagesideas/AnimalCrosin.jpg" />
+             
+                {animalcrossing && (<AnuncioVideojuego imageSrc="/imagesideas/AnimalCrosin.jpg" producto={animalcrossing} />
+)}
 
                 <SeccionProductos titulo="Reservas" productos={productos} />
 
                 <Valoraciones />
 
                 <SeccionProductos titulo="Añadidos Recientemente" productos={recientes} />
-                <AnuncioVideojuego imageSrc="/imagesideas/AnuncioJuego.jpg" />
+                {animalcrossing && (<AnuncioVideojuego imageSrc="/imagesideas/AnuncioJuego.jpg" producto={raiders} />)}
                 <SeccionProductos titulo="Weekly deals" productos={ofertas} />
             </main>
         </>

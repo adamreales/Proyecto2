@@ -58,6 +58,11 @@ class PlataformaJuegoSeeder extends Seeder
             ['plataforma_id' => 1, 'juego_id' => 10],
             ['plataforma_id' => 4, 'juego_id' => 10],
 
+            // Arc Raiders
+            ['plataforma_id' => 1, 'juego_id' => 11],
+            ['plataforma_id' => 2, 'juego_id' => 11],
+            ['plataforma_id' => 3, 'juego_id' => 11],
+
         ]);
     }
 }
