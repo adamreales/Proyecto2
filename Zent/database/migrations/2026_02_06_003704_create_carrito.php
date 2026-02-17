@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categoria_juego', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->unsignedBigInteger('categoria_id');
-            $table->unsignedBigInteger('juego_id');
-
-            $table->primary(['categoria_id', 'juego_id']);
+        Schema::create('carrito', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('id_usuario')
+                ->constrained('users');
+            $table->enum('estado',['Activo','Cerrado'])->default('Activo');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categoria_juego');
+        Schema::dropIfExists('carrito');
     }
 };

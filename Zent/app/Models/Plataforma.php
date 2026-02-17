@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Juego;
-use App\Models\EdadPegi;
 
 class Plataforma extends Model
 {
@@ -15,13 +14,14 @@ class Plataforma extends Model
 
     protected $fillable = ["nombre"];
 
-    public function doJuegos(){
-        return $this->belongsToMany(Juego::class,'plataforma_juego','id_plataforma','id_juego');
-    }
-
-    public function doPegi()
+    public function doJuegos()
     {
-        return $this->hasOne(JuegoPegi::class, 'id_juego');
+        return $this->belongsToMany(
+            Juego::class,
+            'plataforma_juego',
+            'plataforma_id',
+            'juego_id'
+        );
     }
 
 }

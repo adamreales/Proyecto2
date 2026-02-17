@@ -1,0 +1,13 @@
+Desde rama main
+git fetch
+git merge origin/backend3 La rama que queremos fusionar
+git status
+git push
+git tag v1.0.0
+git push origin v1.0.0.0
+git chekout -b Develop Crea una rama y te pone dentro de ella
+git push origin Develop Para publicar la rama
+git commit -a -m develop
+git push --set-upstream origin Develop
+
+Source tree para ver mejor el grafico de ramas

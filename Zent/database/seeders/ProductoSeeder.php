@@ -23,7 +23,9 @@ class ProductoSeeder extends Seeder
                 'precio' => 15,
                 'valoracion' => 5,
                 'ventas' => 5000,
-                'stock' => 20
+                'stock' => 20,
+                'created_at' => now(),
+                'updated_at' => now() 
             ],
             [
                 'titulo' => 'The Legend of Zelda: Breath of the Wild',
@@ -32,7 +34,9 @@ class ProductoSeeder extends Seeder
                 'precio' => 59,
                 'valoracion' => 4.9,
                 'ventas' => 7000,
-                'stock' => 15
+                'stock' => 15,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'titulo' => 'Elden Ring',
@@ -41,7 +45,9 @@ class ProductoSeeder extends Seeder
                 'precio' => 49,
                 'valoracion' => 4.8,
                 'ventas' => 3000,
-                'stock' => 10
+                'stock' => 10,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'titulo' => 'FIFA 25',
@@ -50,7 +56,9 @@ class ProductoSeeder extends Seeder
                 'precio' => 69,
                 'valoracion' => 3,
                 'ventas' => 700,
-                'stock' => 30
+                'stock' => 30,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'titulo' => 'Mario Kart 8 Deluxe',
@@ -59,7 +67,64 @@ class ProductoSeeder extends Seeder
                 'precio' => 49,
                 'valoracion' => 4.5,
                 'ventas' => 2000,
-                'stock' => 25
+                'stock' => 25,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'titulo' => 'Minecraft',
+                'subtitulo' => 'Construye tu propio mundo',
+                'descripcion' => 'Juego sandbox de construcción, exploración y supervivencia',
+                'precio' => 20,
+                'valoracion' => 5,
+                'ventas' => 100000,
+                'stock' => 50,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'titulo' => 'Animal Crossing: New Leaf',
+                'subtitulo' => 'Vive a tu ritmo',
+                'descripcion' => 'Simulación social relajante en un pueblo lleno de vida',
+                'precio' => 25,
+                'valoracion' => 4,
+                'ventas' => 60000,
+                'stock' => 30,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'titulo' => 'The Witcher 3: Wild Hunt',
+                'subtitulo' => 'Conviértete en un cazador de monstruos',
+                'descripcion' => 'RPG de mundo abierto con narrativa profunda y decisiones morales',
+                'precio' => 30,
+                'valoracion' => 5,
+                'ventas' => 90000,
+                'stock' => 25,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'titulo' => 'Stardew Valley',
+                'subtitulo' => 'Escapa a la vida rural',
+                'descripcion' => 'Simulador de granja con exploración, relaciones y gestión',
+                'precio' => 15,
+                'valoracion' => 5,
+                'ventas' => 70000,
+                'stock' => 40,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'titulo' => 'Celeste',
+                'subtitulo' => 'Escala la montaña',
+                'descripcion' => 'Plataformas desafiante con una fuerte narrativa emocional',
+                'precio' => 18,
+                'valoracion' => 5,
+                'ventas' => 45000,
+                'stock' => 20,
+                'created_at' => now(),
+                'updated_at' => now()
             ],
         ]);
     }

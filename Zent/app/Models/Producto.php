@@ -29,13 +29,14 @@ class Producto extends Model
         return $this->hasMany(ImagenProducto::class,'id_producto');
     }
 
-    public function doCategoriasProducto(){
-        return $this->hasMany(CategoriaProducto::class,'id_producto');
+    public function doCategorias(){
+        return $this->belongsToMany(
+            Categoria::class,
+            'categoria_producto',
+            'id_producto',
+            'id_categoria'
+        );
     }
 
-    public function doCategorias()
-    {
-        return $this->belongsToMany(Categoria::class);
-    }
 
 }
