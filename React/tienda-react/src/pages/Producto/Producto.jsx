@@ -10,7 +10,7 @@ function Producto() {
   const [producto, setProducto] = useState(null);
   const [imgPrincipal, setImgPrincipal] = useState(null);
   const [masVendidos,setMasVendidos] = useState([]);
-
+  const masVendidosFiltrados = masVendidos.filter(p => p.id !== producto.id);
   useEffect(() => {
     fetch(`http://127.0.0.1:8000/api/producto/${id}?token=TU_TOKEN`)
       .then(res => res.json())
@@ -23,7 +23,7 @@ function Producto() {
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/productos_mas_vendidos")
         .then(res => res.json())
-        .then(data => setMasVendidos(data.masVendidos))
+        .then(data => setMasVendidos(data.productos))
         .catch(err => console.error(err));
   }, []);
 
@@ -88,7 +88,7 @@ function Producto() {
       </div>
       <Recomendaciones producto={producto} />
 
-      <SeccionProductos titulo="Lo Mas Vendidos" productos={masVendidos} reload={true} />
+      <SeccionProductos titulo="Lo Mas Vendidos" productos={masVendidosFiltrados} reload={true} />
     </>
   );
 }

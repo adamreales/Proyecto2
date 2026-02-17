@@ -1,6 +1,6 @@
 import ProductoCard from "../ProductoCard/ProductoCard";
 import "./SeccionProductos.css";
-function SeccionProductos({ titulo, productos, reload = false }) {
+function SeccionProductos({ titulo, productos = [], reload = false }) {
     return (
         <>
         <h2 className="subtitulo">{titulo}</h2>

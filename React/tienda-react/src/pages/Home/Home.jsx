@@ -33,14 +33,14 @@ function Home() {
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/productos_mas_vendidos")
             .then(res => res.json())
-            .then(data => setMasvendidos(data.masVendidos))
+            .then(data => setMasvendidos(data.productos))
             .catch(err => console.error(err));
     }, []);
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/productos_mas_populares")
             .then(res => res.json())
-            .then(data => setMasvalorados(data.masPopulares));
+            .then(data => setMasvalorados(data.productos));
     }, []);
 
     useEffect(() => {
@@ -50,14 +50,14 @@ function Home() {
     }, []);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/ofertas_semanales")
+        fetch("http://127.0.0.1:8000/api/productos_mas_actuales")
         .then(res => res.json())
-        .then(data => setOfertas(data.ofertas));
+        .then(data => setOfertas(data.productos));
     },[]);
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/anadidos_recientemente")
+        fetch("http://127.0.0.1:8000/api/productos_mas_actuales")
         .then(res => res.json())
-        .then(data => setRecientes(data.recientes));
+        .then(data => setRecientes(data.productos));
     },[]);
 
     return (

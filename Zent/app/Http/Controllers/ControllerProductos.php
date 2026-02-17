@@ -51,7 +51,7 @@ class ControllerProductos extends Controller
         }
 
         return response()->json([
-            'masVendidos' => $productos
+            'productos' => $productos
         ]);
 
     }
@@ -72,7 +72,7 @@ class ControllerProductos extends Controller
         }
 
         return response()->json([
-            'masPopulares' => $productos
+            'productos' => $productos
         ]);
 
     }
@@ -93,7 +93,7 @@ class ControllerProductos extends Controller
         }
 
         return response()->json([
-            'masActuales' => $productos
+            'productos' => $productos
         ]);
 
     }
@@ -114,7 +114,7 @@ class ControllerProductos extends Controller
         }
 
         return response()->json([
-            'masBaratos' => $productos
+            'productos' => $productos
         ]);
 
     }
