@@ -11,6 +11,32 @@ function Producto() {
   const [imgPrincipal, setImgPrincipal] = useState(null);
   const [masVendidos,setMasVendidos] = useState([]);
   const masVendidosFiltrados = masVendidos.filter(p => p.id !== producto.id);
+
+  const handleAddToCart = () => {
+    if (!producto) {
+      return;
+    }
+
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const imagenBase = imgPrincipal || producto?.do_imagenes?.[0]?.url || "";
+    const imagen = imagenBase ? `http://zent.es/${imagenBase}` : "";
+    const index = carrito.findIndex(item => item.id === producto.id);
+
+    if (index >= 0) {
+      carrito[index].cantidad += 1;
+    } else {
+      carrito.push({
+        id: producto.id,
+        nombre: producto.titulo,
+        precio: Number(producto.precio) || 0,
+        cantidad: 1,
+        imagen,
+      });
+    }
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    window.dispatchEvent(new Event("carritoActualizado"));
+  };
   useEffect(() => {
     fetch(`http://127.0.0.1:8000/api/producto/${id}?token=TU_TOKEN`)
       .then(res => res.json())
@@ -66,7 +92,9 @@ function Producto() {
 
           <div className="btn-box">
             <button className="btn-favoritos">♡</button>
-            <button className="btn-cesta">Añadir al Carrito</button>
+            <button className="btn-cesta" onClick={handleAddToCart}>
+              Añadir al Carrito
+            </button>
           </div>
         </div>
       </div>

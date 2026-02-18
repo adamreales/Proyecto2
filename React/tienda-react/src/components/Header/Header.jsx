@@ -1,6 +1,6 @@
 import "./Header.css"
 import { Link } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 function Header() {
   const token = localStorage.getItem("token");
@@ -33,14 +33,47 @@ function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Cargar carrito del localStorage
-  useEffect(() => {
+  const loadCart = useCallback(() => {
     const cart = localStorage.getItem("carrito");
     if (cart) {
       setCartItems(JSON.parse(cart));
+      return;
     }
+    setCartItems([]);
   }, []);
-  
+
+  // Cargar carrito del localStorage
+  useEffect(() => {
+    loadCart();
+  }, [loadCart]);
+
+  // Escuchar cambios del carrito
+  useEffect(() => {
+    const handleCartUpdate = () => loadCart();
+
+    window.addEventListener("carritoActualizado", handleCartUpdate);
+    window.addEventListener("storage", handleCartUpdate);
+
+    return () => {
+      window.removeEventListener("carritoActualizado", handleCartUpdate);
+      window.removeEventListener("storage", handleCartUpdate);
+    };
+  }, [loadCart]);
+
+  // ELIMINAR PRODUCTO
+  const eliminarProducto = (id) => {
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    const nuevoCarrito = carrito.filter(item => item.id !== id);
+
+    localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
+    setCartItems(nuevoCarrito);
+
+    window.dispatchEvent(new Event("carritoActualizado"));
+  };
+
+  // CONTADOR REAL DE PRODUCTOS
+  const totalItems = cartItems.reduce((total, item) => total + item.cantidad, 0);
 
   return (
     <header>
@@ -53,7 +86,7 @@ function Header() {
         ☰
       </button>
 
-      {/* LOGO SOLO DESKTOP */}
+      {/* LOGO */}
       <div className="Logo">
         <Link to="/">
           <button id="btn-logo">
@@ -62,7 +95,7 @@ function Header() {
         </Link>
       </div>
 
-      {/* MENÚ LATERAL MOBILE */}
+      {/* MENÚ MOBILE */}
       <div className={`Barra-menu ${menuOpen ? "active" : ""}`}>
         <button className="cerrar-btn" onClick={() => setMenuOpen(false)}>✕</button>
 
@@ -83,7 +116,7 @@ function Header() {
         <Link to="/oulet"><button className="menu-btn">OUTLET</button></Link>
       </div>
 
-      {/* PERFIL + CARRITO */}
+      {/* LOGIN + CARRITO */}
       <div className="Login">
         {!token && (
           <>
@@ -92,54 +125,66 @@ function Header() {
           </>
         )}
 
-        {token && (
-          <>
-            <div className="cart-container" ref={cartRef}>
-              <button 
-                className="btn-carrito"
-                onClick={() => setCartOpen(!cartOpen)}
-              >
-                <img src="/imagesideas/carrito.png" />
-                {cartItems.length > 0 && (
-                  <span className="cart-badge">{cartItems.length}</span>
-                )}
-              </button>
+        <div className="cart-container" ref={cartRef}>
+          <button 
+            className="btn-carrito"
+            onClick={() => setCartOpen(!cartOpen)}
+          >
+            <img src="/imagesideas/carrito.png" />
+            {totalItems > 0 && (
+              <span className="cart-badge">{totalItems}</span>
+            )}
+          </button>
 
-              {/* MINI CARRITO DESPLEGABLE */}
-              {cartOpen && (
-                <div className="mini-cart">
-                  <h3>Mi Carrito</h3>
-                  {cartItems.length === 0 ? (
-                    <p className="empty-cart">Tu carrito está vacío</p>
-                  ) : (
-                    <>
-                      <div className="cart-items">
-                        {cartItems.map((item, index) => (
-                          <div key={index} className="cart-item">
-                            <img src={item.imagen} alt={item.nombre} />
-                            <div className="item-info">
-                              <p className="item-nombre">{item.nombre}</p>
-                              <p className="item-cantidad">Cantidad: {item.cantidad}</p>
-                              <p className="item-precio">${item.precio}</p>
-                            </div>
-                          </div>
-                        ))}
+          {/* MINI CARRITO */}
+          {cartOpen && (
+            <div className="mini-cart">
+              <h3>Mi Carrito</h3>
+
+              {cartItems.length === 0 ? (
+                <p className="empty-cart">Tu carrito está vacío</p>
+              ) : (
+                <>
+                  <div className="cart-items">
+                    {cartItems.map((item) => (
+                      <div key={item.id} className="cart-item">
+                        <img src={item.imagen} alt={item.nombre} />
+
+                        <div className="item-info">
+                          <p className="item-nombre">{item.nombre}</p>
+                          <p className="item-cantidad">Cantidad: {item.cantidad}</p>
+                          <p className="item-precio">{item.precio}€</p>
+                        </div>
+
+                        <button 
+                          className="btn-delete"
+                          onClick={() => eliminarProducto(item.id)}
+                        >
+                          ✕
+                        </button>
                       </div>
-                      <Link to="/carrito">
-                        <button className="btn-ir-carrito">Ir al Carrito</button>
-                      </Link>
-                    </>
-                  )}
-                </div>
+                    ))}
+                  </div>
+
+                  <p className="total">
+                    Total : {cartItems.reduce((total, item) => total + item.precio * item.cantidad, 0)}€
+                  </p>
+
+                  <Link to="/carrito">
+                    <button className="btn-ir-carrito">Ir al Carrito</button>
+                  </Link>
+                </>
               )}
             </div>
+          )}
+        </div>
 
-            <Link to="/profile">
-              <button className="btn-perfil">
-                <img src="/imagesideas/perfil.png" />
-              </button>
-            </Link>
-          </>
+        {token && (
+          <Link to="/profile">
+            <button className="btn-perfil">
+              <img src="/imagesideas/perfil.png" />
+            </button>
+          </Link>
         )}
       </div>
     </header>

@@ -112,11 +112,11 @@ header{
         position: absolute;
         top: -8px;
         right: -8px;
-        background-color: @neon-magenta;
+        background-color: black;
         color: white;
         border-radius: 50%;
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -199,17 +199,25 @@ header{
 
                 .item-precio {
                     font-weight: bold;
-                    color: @neon-magenta;
+                    color: black;
                     margin: 0;
                     font-size: 14px;
                 }
+            }
+            button{
+                    background-color: transparent;
+                    border: none;
+                    color: black;
+                    font-weight: bold;
+                    cursor: pointer;
+                    font-size: 14px;
             }
         }
 
         .btn-ir-carrito {
             width: 100%;
             padding: 12px;
-            background-color: @neon-azul;
+            background-color: black;
             color: white;
             border: none;
             border-radius: 4px;
@@ -219,8 +227,9 @@ header{
             transition: all 0.3s ease;
 
             &:hover {
-                background-color: @neon-magenta;
-                box-shadow: 0 0 10px @neon-magenta;
+                background-color: transparent;
+                color:black;
+                border: 1px solid black;
             }
         }
     }
