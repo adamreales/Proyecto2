@@ -3,10 +3,78 @@
 /* MIDAS DE LETRA */
 /* TIPOS DE LETRAS */
 /* PADDING */
+.cabezera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 20px;
+  /* Hover derecha (corre hacia la derecha) */
+  /* Sprint al hacer click */
+  /* Estado desactivado */
+}
+.cabezera .botones {
+  display: flex;
+  gap: 10px;
+}
+.cabezera button {
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+.cabezera button .mario {
+  width: 90px;
+  transition: transform 0.25s ease;
+  animation: idle 2s infinite ease-in-out;
+}
+.cabezera button:focus,
+.cabezera button:active {
+  outline: none;
+  box-shadow: none;
+}
+.cabezera .btn-next:hover .mario {
+  transform: translateX(15px);
+  animation: none;
+}
+.cabezera .btn-prev:hover .mario {
+  transform: translateX(-15px);
+  animation: none;
+}
+.cabezera .btn-next:active .mario {
+  transform: translateX(30px) scale(1.05);
+}
+.cabezera .btn-prev:active .mario {
+  transform: translateX(30px) scale(1.05);
+}
+.cabezera button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.cabezera button:disabled .mario {
+  opacity: 0.4;
+  transform: scale(0.9);
+  animation: none;
+}
+/* Animación suave cuando está quieto */
+@keyframes idle {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 .box-seccion {
   width: 100%;
 }
 .box-seccion .MasVendidos {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;

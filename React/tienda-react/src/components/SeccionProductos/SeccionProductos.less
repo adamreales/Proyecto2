@@ -16,35 +16,101 @@
 /* PADDING */
 @padding-pantalla: 20px;
 
+.cabezera{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 20px;
 
-.box-seccion
-{
-   width: 100%;
+  .botones{
+    display: flex;
+    gap: 10px;
+  }
 
-   .MasVendidos{
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap:20px;
-   }
+  button{
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    .mario{
+      width: 90px;
+      transition: transform 0.25s ease;
+      animation: idle 2s infinite ease-in-out;
+    }
+  }button:focus,
+  button:active{
+    outline: none;
+    box-shadow: none;
+  }
+
+  /* Hover derecha (corre hacia la derecha) */
+  .btn-next:hover .mario{
+    transform: translateX(15px);
+    animation: none;
+  }
+
+  .btn-prev:hover .mario{
+    transform: translateX(-15px);
+    animation: none;
+  }
+
+  /* Sprint al hacer click */
+  .btn-next:active .mario{
+    transform: translateX(30px) scale(1.05);
+  }
+
+  .btn-prev:active .mario{
+    transform: translateX(30px) scale(1.05);
+  }
+
+  /* Estado desactivado */
+  button:disabled{
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    .mario{
+      opacity: 0.4;
+      transform: scale(0.9);
+      animation: none;
+    }
+  }
 }
 
-@media(max-width:1200px)
-{
-  .box-seccion{
+/* Animación suave cuando está quieto */
+@keyframes idle{
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+.box-seccion{
+  width: 100%;
+
   .MasVendidos{
-    grid-template-columns: repeat(2,1fr);
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
     gap:20px;
   }
 }
-}
-@media(max-width:768px)
-{
-   .box-seccion{
-     .MasVendidos{
-      grid-template-columns: 1fr;
-      
-     }
 
-    
-   }
+@media(max-width:1200px){
+  .box-seccion{
+    .MasVendidos{
+      grid-template-columns: repeat(2,1fr);
+      gap:20px;
+    }
+  }
+}
+
+@media(max-width:768px){
+  .box-seccion{
+    .MasVendidos{
+      grid-template-columns: 1fr;
+    }
+  }
 }
