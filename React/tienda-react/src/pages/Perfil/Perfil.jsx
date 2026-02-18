@@ -35,6 +35,19 @@ function Perfil()
         });
 
     }, []);
+    const  cerrarSession = async () => {
+        try{
+
+            await fetch("http://localhost:8000/api/cerrar_session", {
+                method: "POST"
+            });
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            window.location.href = "/login";
+        }catch(error){
+            console.error("Error al cerrar sesion",error);
+        }
+    }
 
     if(!user) return <p>Cargando el perfil....</p>;
     return (
@@ -51,6 +64,8 @@ function Perfil()
                             { new Date(user.created_at).toLocaleDateString("es-ES")}</p>
                         </div> 
                         <Link to="/"><button type="submit"className="btn-volver">Volver</button></Link>
+                        <button className="btn-volver"onClick={cerrarSession}> Cerrar sesión</button>
+                        
                 </div>
             </div>
        </div>
