@@ -41,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/anadir_producto', [ControllerProductos::class,'anadir_producto'])->name('anadir_producto');
     Route::post('/eliminar_producto', [ControllerProductos::class,'eliminar_producto'])->name('eliminar_producto');
 
+    Route::post('/crear_carrito',[ControllerCarrito::class,'crear_carrito'])->name('crear_carrito');
     Route::post('/anadir_carrito',[ControllerCarrito::class,'anadir_carrito'])->name('anadir_carrito');
 
     Route::post('/cerrar_session',[ControllerLogin::class,'cerrar_session'])->name('cerrar_session');
