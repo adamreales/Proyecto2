@@ -2,9 +2,7 @@
 
 use App\Http\Controllers\ControllerCarrito;
 use App\Http\Controllers\ControllerCategoria;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\ControllerLogin;
 use App\Http\Controllers\ControllerRegistro;
 use App\Http\Controllers\ControllerProductos;
@@ -43,6 +41,8 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::post('/crear_carrito',[ControllerCarrito::class,'crear_carrito'])->name('crear_carrito');
     Route::post('/anadir_carrito',[ControllerCarrito::class,'anadir_carrito'])->name('anadir_carrito');
+    Route::post('/quitar_carrito',[ControllerCarrito::class,'quitar_carrito'])->name('quitar_carrito');
+    Route::post('/ver_carrito',[ControllerCarrito::class,'ver_carrito'])->name('ver_carrito');
 
     Route::post('/cerrar_session',[ControllerLogin::class,'cerrar_session'])->name('cerrar_session');
 });

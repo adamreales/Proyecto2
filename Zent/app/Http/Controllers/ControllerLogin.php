@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 class ControllerLogin extends Controller
 {
     function login(Request $request){
-        
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -56,7 +55,7 @@ class ControllerLogin extends Controller
         $r->user()->currentAccessToken()->delete();
         return response()->json([
             'msg' => 'Session Cerrada'
-        ]);
+        ],200);
     }
 
 }

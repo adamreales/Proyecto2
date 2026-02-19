@@ -7,6 +7,7 @@ use App\Models\Carrito;
 use App\Models\CarritoProducto;
 use App\Models\Producto;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
@@ -117,4 +118,81 @@ class ControllerCarrito extends Controller
             ],400);
         }
     }
+
+    public function quitar_carrito(Request $r){
+        DB::beginTransaction();
+
+        try{
+
+            if(!$r->has(['id_usuario','id_producto'])){
+                throw new \Exception("Error Faltan campos de envio");
+            }
+
+            $u = User::find($r->id_usuario);
+            if($u === null){
+                throw new \Exception("Error usuario no encontrado");
+            }
+
+            $p = Producto::find($r->id_producto);
+            if($p === null){
+                throw new \Exception("Error producto no encontrado");
+            }
+
+            $carrito = Carrito::where('id_usuario',$u->id)->where('estado','Activo')->first();
+            if($carrito === null){
+                throw new \Exception("Error carrito no encontrado");
+            }
+
+            $item_carrito = CarritoProducto::where('id_carrito',$carrito->id)->where('id_producto',$p->id)->lockForUpdate()->first();
+
+            if($item_carrito === null){
+                throw new \Exception("Error producto no encontrado en el carrito");
+            }
+
+            $item_carrito->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'carrito' => 'Eliminado el producto del carrito'
+            ],200);
+        }catch(\Exception $e){
+            DB::rollBack();
+            return response()->json([
+                'error' => $e->getMessage()
+            ],400);
+        }
+    }
+
+    public function ver_carrito(Request $r){
+        try{
+            if(!$r->has(['id_usuario'])){
+                throw new \Exception('Error faltan campos de envio');
+            }
+
+            $u = User::find($r->id_usuario);
+            if($u === null){
+                throw new Exception('Error usuario no encontrado');
+            }
+
+            $carrito = Carrito::where('id_usuario',$r->id_usuario)->first();
+
+            if($carrito === null){
+                throw new Exception('Error carrito no encontrado');
+            }
+
+            $items_carrito = CarritoProducto::where('id_carrito',$carrito->id)->with('doProducto')->get();
+
+            return response()->json([
+                'carrito' => $items_carrito,
+                'msg' => 'Ver carrito'
+            ],200);
+
+        }catch(\Exception $e){
+            return response()->json([
+                'error' => $e->getMessage()
+            ],400);
+        }
+    }
+
 }
