@@ -1,0 +1,9 @@
+.Carrito {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+.Carrito .target-payment {
+  background-color: cadetblue;
+  border-radius: 10px;
+}
