@@ -1,13 +1,14 @@
 import "./Header.css"
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useHeaderCart } from "./Header.js";
 
 function Header() {
   const token = localStorage.getItem("token");
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
   const cartRef = useRef(null);
+  const { cartItems, totalItems, totalPrecio, eliminarProducto } = useHeaderCart();
 
   // Cerrar menú cuando la pantalla sea mayor a 768px
   useEffect(() => {
@@ -32,48 +33,6 @@ function Header() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const loadCart = useCallback(() => {
-    const cart = localStorage.getItem("carrito");
-    if (cart) {
-      setCartItems(JSON.parse(cart));
-      return;
-    }
-    setCartItems([]);
-  }, []);
-
-  // Cargar carrito del localStorage
-  useEffect(() => {
-    loadCart();
-  }, [loadCart]);
-
-  // Escuchar cambios del carrito
-  useEffect(() => {
-    const handleCartUpdate = () => loadCart();
-
-    window.addEventListener("carritoActualizado", handleCartUpdate);
-    window.addEventListener("storage", handleCartUpdate);
-
-    return () => {
-      window.removeEventListener("carritoActualizado", handleCartUpdate);
-      window.removeEventListener("storage", handleCartUpdate);
-    };
-  }, [loadCart]);
-
-  // ELIMINAR PRODUCTO
-  const eliminarProducto = (id) => {
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-    const nuevoCarrito = carrito.filter(item => item.id !== id);
-
-    localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
-    setCartItems(nuevoCarrito);
-
-    window.dispatchEvent(new Event("carritoActualizado"));
-  };
-
-  // CONTADOR REAL DE PRODUCTOS
-  const totalItems = cartItems.reduce((total, item) => total + item.cantidad, 0);
 
   return (
     <header>
