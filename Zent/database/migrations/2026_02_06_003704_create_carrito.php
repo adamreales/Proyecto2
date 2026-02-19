@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('carrito', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_usuario')
-                ->constrained('users');
+            $table->foreignId('id_usuario')->nullable()->constrained('users')->nullOnDelete();
+            $table->string('session_id')->nullable()->index();
             $table->enum('estado',['Activo','Cerrado'])->default('Activo');
+            $table->boolean('activo_unico')->storedAs("estado = 'Activo'");
+            $table->unique(['id_usuario','activo_unico']);
             $table->timestamps();
         });
     }
