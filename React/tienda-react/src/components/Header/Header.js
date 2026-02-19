@@ -3,6 +3,42 @@ import { useState, useEffect, useCallback } from "react";
 export function useHeaderCart() {
   const [cartItems, setCartItems] = useState([]);
 
+  const parseJsonSafe = async (res) => {
+    const raw = await res.text();
+    try {
+      return JSON.parse(raw);
+    } catch {
+      throw new Error("La API devolvió HTML/no JSON. Revisa errores en Laravel/PHP.");
+    }
+  };
+
+  const getSessionId = () => {
+    let sessionId = localStorage.getItem("sessionId");
+    if (!sessionId) {
+      sessionId = crypto.randomUUID();
+      localStorage.setItem("sessionId", sessionId);
+    }
+    return sessionId;
+  };
+
+  const mapCartItems = (items = []) => {
+    return items.map((item) => {
+      const producto = item.do_producto || item.doProducto || {};
+      const imagenes = producto.do_imagenes || producto.doImagenes || [];
+      const imagenUrl = imagenes[0]?.url
+        ? `http://zent.es/${imagenes[0].url}`
+        : "";
+
+      return {
+        id: item.id_producto,
+        nombre: producto.titulo || "Producto",
+        precio: Number(producto.precio) || 0,
+        cantidad: Number(item.cantidad) || 0,
+        imagen: imagenUrl,
+      };
+    });
+  };
+
   /*
     Nombre: loadCart
     Descripción: Solicita el carrito al backend y lo carga
@@ -11,21 +47,24 @@ export function useHeaderCart() {
   const loadCart = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
-      const sessionId = localStorage.getItem("sessionId");
+      const sessionId = getSessionId();
 
       const res = await fetch("http://localhost:8000/api/ver_carrito", {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: token ? `Bearer ${token}` : "",
-          "x-session-id": sessionId || ""
-        }
+        },
+        body: JSON.stringify({ session_id: sessionId }),
       });
 
-      const data = await res.json();
+      const data = await parseJsonSafe(res);
 
-      // El backend debe devolver: { items: [...] }
-      setCartItems(data.items || []);
+      if (!res.ok) {
+        throw new Error(data.error || "No se pudo cargar el carrito");
+      }
+
+      setCartItems(mapCartItems(data.carrito || []));
 
     } catch (error) {
       console.error("Error al cargar el carrito:", error);
@@ -57,16 +96,25 @@ export function useHeaderCart() {
   const eliminarProducto = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const sessionId = localStorage.getItem("sessionId");
+      const sessionId = getSessionId();
 
-      await fetch(`http://localhost:8000/api/eliminar_producto/${id}`, {
-        method: "DELETE",
+      const res = await fetch("http://localhost:8000/api/quitar_carrito", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: token ? `Bearer ${token}` : "",
-          "x-session-id": sessionId || ""
-        }
+        },
+        body: JSON.stringify({
+          id_producto: id,
+          session_id: sessionId,
+        }),
       });
+
+      const data = await parseJsonSafe(res);
+
+      if (!res.ok) {
+        throw new Error(data.error || "No se pudo eliminar el producto");
+      }
 
       // Recargar carrito desde backend (fuente real)
       await loadCart();

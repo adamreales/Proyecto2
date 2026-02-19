@@ -10,32 +10,55 @@ function Producto() {
   const [producto, setProducto] = useState(null);
   const [imgPrincipal, setImgPrincipal] = useState(null);
   const [masVendidos,setMasVendidos] = useState([]);
-  const masVendidosFiltrados = masVendidos.filter(p => p.id !== producto.id);
+  const masVendidosFiltrados = masVendidos.filter((p) => p.id !== producto?.id);
 
-  const handleAddToCart = () => {
+  const getSessionId = () => {
+    let sessionId = localStorage.getItem("sessionId");
+    if (!sessionId) {
+      sessionId = crypto.randomUUID();
+      localStorage.setItem("sessionId", sessionId);
+    }
+    return sessionId;
+  };
+
+  const handleAddToCart = async () => {
     if (!producto) {
       return;
     }
 
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    const imagenBase = imgPrincipal || producto?.do_imagenes?.[0]?.url || "";
-    const imagen = imagenBase ? `http://zent.es/${imagenBase}` : "";
-    const index = carrito.findIndex(item => item.id === producto.id);
+    const sessionId = getSessionId();
 
-    if (index >= 0) {
-      carrito[index].cantidad += 1;
-    } else {
-      carrito.push({
-        id: producto.id,
-        nombre: producto.titulo,
-        precio: Number(producto.precio) || 0,
-        cantidad: 1,
-        imagen,
+    try {
+      await fetch("http://localhost:8000/api/crear_carrito", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ session_id: sessionId }),
       });
-    }
 
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-    window.dispatchEvent(new Event("carritoActualizado"));
+      const res = await fetch("http://localhost:8000/api/anadir_carrito", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id_producto: producto.id,
+          cantidad: 1,
+          session_id: sessionId,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "No se pudo añadir al carrito");
+      }
+
+      window.dispatchEvent(new Event("carritoActualizado"));
+    } catch (error) {
+      console.error("Error al añadir al carrito:", error);
+    }
   };
   useEffect(() => {
     fetch(`http://127.0.0.1:8000/api/producto/${id}?token=TU_TOKEN`)

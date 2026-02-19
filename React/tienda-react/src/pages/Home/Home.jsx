@@ -31,34 +31,52 @@ function Home() {
     const goToSlide = (index) => {
         setCurrentSlide(index);
     };
+
+    const fetchJson = async (url) => {
+        const res = await fetch(url);
+        const raw = await res.text();
+
+        let data;
+        try {
+            data = JSON.parse(raw);
+        } catch {
+            throw new Error(`Respuesta no JSON en ${url}. Revisa errores PHP/Laravel.`);
+        }
+
+        if (!res.ok) {
+            throw new Error(data?.error || `Error ${res.status} en ${url}`);
+        }
+
+        return data;
+    };
+
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/productos_mas_vendidos")
-            .then(res => res.json())
-            .then(data => setMasvendidos(data.productos))
-            .catch(err => console.error(err));
+        fetchJson("http://127.0.0.1:8000/api/productos_mas_vendidos")
+            .then(data => setMasvendidos(data.productos || []))
+            .catch(err => console.error("Home mas vendidos:", err));
     }, []);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/productos_mas_populares")
-            .then(res => res.json())
-            .then(data => setMasvalorados(data.productos));
+        fetchJson("http://127.0.0.1:8000/api/productos_mas_populares")
+            .then(data => setMasvalorados(data.productos || []))
+            .catch(err => console.error("Home mas populares:", err));
     }, []);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/productos")
-            .then(res => res.json())
-            .then(data => setProductos(data.productos));
+        fetchJson("http://127.0.0.1:8000/api/productos")
+            .then(data => setProductos(data.productos || []))
+            .catch(err => console.error("Home productos:", err));
     }, []);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/productos_mas_actuales")
-        .then(res => res.json())
-        .then(data => setOfertas(data.productos));
+        fetchJson("http://127.0.0.1:8000/api/productos_mas_actuales")
+        .then(data => setOfertas(data.productos || []))
+        .catch(err => console.error("Home ofertas:", err));
     },[]);
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/productos_mas_actuales")
-        .then(res => res.json())
-        .then(data => setRecientes(data.productos));
+        fetchJson("http://127.0.0.1:8000/api/productos_mas_actuales")
+        .then(data => setRecientes(data.productos || []))
+        .catch(err => console.error("Home recientes:", err));
     },[]);
 
     return (
