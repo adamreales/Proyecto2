@@ -1,0 +1,39 @@
+/* VARIABLES */
+/* COLORES */
+/* MIDAS DE LETRA */
+/* TIPOS DE LETRAS */
+/* PADDING */
+.tarjeta-pago {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.tarjeta-pago .box-price {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  padding: 15px;
+}
+.tarjeta-pago .box-price .precio {
+  font-size: 25px;
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+}
+.tarjeta-pago .btn-Pagar {
+  width: 90%;
+  background-color: white;
+  color: black;
+}
+.tarjeta-pago.btn-Pagar:hover {
+  background-color: black;
+  color: white;
+}
+hr {
+  width: 90%;
+}
+.url {
+  color: white;
+  text-decoration: none;
+  font-size: 19.5px;
+}

@@ -17,7 +17,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: #a5f4d9;
+  background-color: rgba(0, 0, 0, 0.811);
   border-radius: 10px;
 }
 .targeta-carrito ul li .item-info {
@@ -31,8 +31,19 @@
   border-radius: 10px;
 }
 .targeta-carrito ul li .item-info .propeties {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 15px;
+  color: white;
+}
+.targeta-carrito ul li .settings {
+  color: white;
+}
+.targeta-carrito ul li .settings .Gestiones button {
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+.targeta-carrito ul li .settings .Gestiones button img {
+  width: 30px;
+  height: 30px;
 }

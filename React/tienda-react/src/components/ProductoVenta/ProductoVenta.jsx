@@ -1,6 +1,4 @@
 import "./ProductoVenta.less";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useHeaderCart } from "../../components/Header/Header";
 function ProductoVenta({ producto, reload = false }) {
    const {cartItems,totalItems,totalPrecio} = useHeaderCart(); 
@@ -17,17 +15,25 @@ function ProductoVenta({ producto, reload = false }) {
                                     <div className="item-info">
                                         <img src={item.imagen} alt={item.nombre} width="50" />
                                         <div className="propeties">
-                                            <label>- Nombre : {item.nombre} </label>
-                                            <label>- Cantidad: {item.cantidad}</label> 
-                                            <label>- Precio: {item.precio}€</label>
+                                            <label>- Nombre : {item.nombre} </label> 
+                                          
                                         </div>
                                     </div>
-                                    <div className="setings">
-                                        <p>X</p>
+                                    <div className="settings">
+                                        <div className="precio">
+                                            <p>- Precio unitario : {item.precio}€</p>
+                                        </div>
+                                        <p>- Cantidad : {item.cantidad}</p>
+                                        <hr/>
+                                        <div className="Gestiones">
+                                            <button className="btn-Eliminar"><img src="imagesideas/basura.png" alt="Eliminar" /></button>
+                                            <button className="btn-deseos">Mover a la lista de deseos</button>
+                                        </div>
                                     </div>
+                                    
                                 </li>
                             ))}
-                        </ul>
+                </ul>
             )}
         </>
     );

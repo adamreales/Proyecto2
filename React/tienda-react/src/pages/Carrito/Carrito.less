@@ -1,5 +1,10 @@
 
-
+.Titulos{
+    display: flex;
+    justify-content: space-between;
+    max-width: 1250px; /* mismo ancho que tu layout */
+    width: 100%;
+}
 .Carrito{
     display:grid;
     grid-template-columns: 2fr 1fr;
@@ -7,8 +12,13 @@
    
 
     .target-payment{
-        background-color: cadetblue;
+        display: flex;
+        flex-direction: column;
+        gap:20px;
+        background-color: rgba(0, 0, 0, 0.811);
         border-radius: 10px;
+        padding-bottom: 25px;
+        height: 250px;
     }
 }
 
