@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Carrito;
+use App\Models\CarritoProducto;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;    
 
 class ControllerLogin extends Controller
 {
-    function login(Request $request){
+    function login(Request $request)
+    {
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -17,8 +21,58 @@ class ControllerLogin extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['error' => 'Credenciales incorrectas'], 401);
+        }
+
+        $sessionId = $request->header('X-Session-Id');
+
+        if ($sessionId) {
+
+            DB::transaction(function () use ($sessionId, $user) {
+
+                $carritoInvitado = Carrito::where('session_id', $sessionId)
+                    ->where('estado','Activo')
+                    ->lockForUpdate()
+                    ->first();
+
+                if (!$carritoInvitado) return;
+
+                $carritoUsuario = Carrito::where('id_usuario', $user->id)
+                    ->where('estado','Activo')
+                    ->lockForUpdate()
+                    ->first();
+
+                if (!$carritoUsuario) {
+
+                    $carritoInvitado->update([
+                        'id_usuario' => $user->id,
+                        'session_id' => null
+                    ]);
+
+                    return;
+                }
+
+                // si ambos tienen carrito → combinar productos
+                $itemsInvitado = CarritoProducto::where('id_carrito', $carritoInvitado->id)->get();
+
+                foreach ($itemsInvitado as $itemInv) {
+
+                    $itemUsuario = CarritoProducto::where('id_carrito', $carritoUsuario->id)
+                        ->where('id_producto', $itemInv->id_producto)
+                        ->first();
+
+                    if ($itemUsuario) {
+                        $itemUsuario->cantidad += $itemInv->cantidad;
+                        $itemUsuario->save();
+                    } else {
+                        $itemInv->id_carrito = $carritoUsuario->id;
+                        $itemInv->save();
+                    }
+                }
+
+                $carritoInvitado->delete();
+            });
         }
 
         $token = $user->createToken('token_session')->plainTextToken;
@@ -27,7 +81,6 @@ class ControllerLogin extends Controller
             'token' => $token,
             'user' => $user
         ]);
-
     }
 
     function perfil(Request $r){

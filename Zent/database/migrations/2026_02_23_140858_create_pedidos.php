@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_usuario')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('id_usuario')->nullable()->constrained('users')->nullOnDelete();
+            $table->uuid('session_id')->nullable();
             $table->decimal('total',10,2);
             $table->enum('estado',['pendiente','pagado','cancelado','fallido'])->default('pendiente');
             $table->string('stripe_session_id')->nullable();

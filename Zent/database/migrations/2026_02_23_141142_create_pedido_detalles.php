@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('id_pedido')->constrained('pedidos')->cascadeOnDelete();
             $table->foreignId('id_producto')->constrained('producto');
             $table->decimal('precio_unitario',10,2);
+            $table->integer('cantidad');
             $table->decimal('subtotal',10,2);
             $table->timestamps();
         });
