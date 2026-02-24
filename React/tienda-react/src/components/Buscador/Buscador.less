@@ -1,0 +1,99 @@
+/* VARIABLES */
+
+/* COLORES */
+@neon-azul: #00eaff;
+@neon-magenta: #ff2fd0;
+
+/* MEDIDAS DE LETRA */
+@mida-letra-botones: 15px;
+@mida-letra-p: 15px;
+
+/* TIPOS DE LETRA */
+@tipo-letra-btn: 'Inter', sans-serif;
+@tipo-letra-gaming: 'Orbitron', sans-serif;
+@tipo-letra-p: 'Inter', sans-serif;
+
+/* PADDING */
+@padding-pantalla: 20px;
+
+.box-buscador
+{
+  display: flex;
+  justify-content: center;
+    
+  .buscador{
+    position: relative;
+    width: 500px;
+      .box-text{
+        width: 100%;
+        padding: 20px 20px;
+        border-radius: 10px;
+        border: 1px solid @neon-azul;
+        outline: none;
+        transition: 0.2s ease;
+        font-size: @mida-letra-p * 1.3;
+      }
+      .box-text:focus
+      {
+        border-color: @neon-magenta;
+      }
+
+      .resultados{
+        position:absolute;
+        top:100%;
+        left:0;
+        width: 100%;
+        margin-top: 5px;
+      }
+
+      .resultados:not(:empty){
+        padding:  20px 20px;
+        background: white;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+
+      .resultado-item{
+        display: flex;
+        width: 100%;
+        padding: 10px 15px;
+        color: black;
+        text-decoration: none;
+        transition: 0.2s ease;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        
+        img{
+          width: 120px;
+          height: 100px;
+          object-fit: cover;
+          border-radius: 10px;
+        }
+
+        .Titulo-juego{
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap:20px;
+          flex: 1;
+          margin-left: 10px;
+
+          .Plataformas-juego{
+            color:grey;
+          }
+        }
+
+        .precio-juego{
+          font-weight: bold;
+          margin-left: auto;
+          font-size: @mida-letra-p * 1.2;
+          padding-right: 20px;
+        }
+      }
+      .sin-resultados {
+        padding: 12px 16px;
+        font-size: 14px;
+        color: #999;
+      }
+  }
+}
