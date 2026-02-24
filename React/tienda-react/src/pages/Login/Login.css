@@ -40,12 +40,8 @@
 .formulario {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  align-items: flex-start;
-}
-.formulario label {
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  gap: 30px;
+  align-items: center;
 }
 .formulario input {
   width: 100%;

@@ -5,9 +5,9 @@ function Conocenos() {
   return (
     <>
       <div className="Titulo">
-        <h1>
+        <h2>
             ¿QUIENES SOMOS?
-        </h1>
+        </h2>
       </div>
 
       <main>

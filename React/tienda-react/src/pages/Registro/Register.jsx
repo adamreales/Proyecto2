@@ -29,38 +29,18 @@ function Register() {
         <Link to="/home"><button className="btn-volver"><img src="public/imagesideas/logo.png" alt="Logo" /></button></Link>
 
         <form className="formulario" onSubmit={handleSubmit}>
-          <label>Nombre:</label>
-          <input
-            type="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+         
+          <input type="text" value={name}onChange={(e) => setName(e.target.value)} placeholder="Nombre :"/>
           
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+   
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email : " />
 
-          <label>Contraseña:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          <label>Confirmar contraseña:</label>
-          <input
-            type="password"
-            value={passwordConfirm}
-            onChange={(e) => setPasswordConfirm(e.target.value)}
-          />
+          <input  type="password"value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña : "/>
+ 
+          <input type="password" value={passwordConfirm}  onChange={(e) => setPasswordConfirm(e.target.value)}placeholder="Confirmar contraseña : " />
 
           <div className="Botones">
-            <button type="button" className="btn-registro">
-              Registrarse
-            </button>
+            <button type="button" className="btn-registro"> Registrarse</button>
           </div>
         </form>
 

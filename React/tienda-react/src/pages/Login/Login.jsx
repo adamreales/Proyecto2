@@ -27,19 +27,9 @@ function Login() {
         <h1 className="titulo-login">Inicia sesión</h1>
         <Link to="/home"><button className="btn-volver"><img src="public/imagesideas/logo.png" alt="Logo" /></button></Link>
         <form className="formulario" onSubmit={handleSubmit}>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-
-          <label>Contraseña:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+       
+          <input  type="email"value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email : " />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña : "/>
 
           <div className="Botones">
             <button type="submit" className="btn-login">

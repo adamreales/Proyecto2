@@ -18,22 +18,22 @@
 .tarjeta-pago .box-price .precio {
   font-size: 25px;
   font-family: 'Orbitron', sans-serif;
-  color: white;
+  color: black;
 }
 .tarjeta-pago .btn-Pagar {
   width: 90%;
-  background-color: white;
-  color: black;
-}
-.tarjeta-pago.btn-Pagar:hover {
   background-color: black;
   color: white;
+}
+.tarjeta-pago.btn-Pagar:hover {
+  background-color: white;
+  color: black;
 }
 hr {
   width: 90%;
 }
 .url {
-  color: white;
+  color: black;
   text-decoration: none;
   font-size: 19.5px;
 }

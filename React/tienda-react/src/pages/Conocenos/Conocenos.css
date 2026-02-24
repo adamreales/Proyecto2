@@ -3,12 +3,14 @@
 /*MIDAS DE LETRA*/
 /*TIPOS DE LETRAS*/
 body .Titulo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
 }
-
 body main .Fundacion {
   display: grid;
-  grid-template-columns: 0.9fr 1fr;
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
   align-items: center;
   padding: 40px 20px;
