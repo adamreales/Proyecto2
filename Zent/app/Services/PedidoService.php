@@ -32,6 +32,7 @@ class PedidoService{
             $p = [
                 'id_usuario' => $dueno['campo']=='id_usuario' ? $dueno['valor'] : null,
                 'session_id' => $dueno['campo']=='session_id' ? $dueno['valor'] : null,
+                'id_carrito' => $carrito->id,
                 'total' => 0,
                 'estado' => 'pendiente'
             ];

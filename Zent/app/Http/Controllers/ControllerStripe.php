@@ -66,8 +66,8 @@ class ControllerStripe extends Controller
                 'mode' => 'payment',
                 'payment_method_types' => ['card'],
                 'line_items' => $productos,
-                'success_url' => env('FRONT_URL').'/pago-exito?session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => env('FRONT_URL').'/carrito',
+                'success_url' => env('FRONT_URL').'/', //pago-exito?session_id={CHECKOUT_SESSION_ID}
+                'cancel_url' => env('FRONT_URL').'/', //carrito
                 'metadata' => [
                     'pedido_id' => $pedido->id
                 ]
@@ -124,6 +124,7 @@ class ControllerStripe extends Controller
                         throw new \Exception("Stock inconsistente en webhook");
                     }
 
+                    $producto->ventas += $detalle->cantidad;
                     $producto->stock -= $detalle->cantidad;
                     $producto->save();
                 }
@@ -132,20 +133,13 @@ class ControllerStripe extends Controller
                 $pedido->stripe_payment_intent = $session->payment_intent;
                 $pedido->save();
 
-                if ($pedido->id_usuario) {
-                    \App\Models\Carrito::where('id_usuario', $pedido->id_usuario)
-                        ->where('estado','Activo')
-                        ->update(['estado'=>'Cerrado']);
-                } else {
-                    \App\Models\Carrito::where('session_id', $pedido->session_id)
-                        ->where('estado','Activo')
-                        ->update(['estado'=>'Cerrado']);
-                }
-
+                Carrito::where('id',$pedido->id_carrito)->where('estado','Activo')->update(['estado'=>'Cerrado']);
             });
         }
 
-        return response('ok', 200);
+        return response([
+            'msg' => 'Webhook completado'
+        ], 200);
     }
 
 }

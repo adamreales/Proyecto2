@@ -53,11 +53,3 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::post('/cerrar_session',[ControllerLogin::class,'cerrar_session'])->name('cerrar_session');
 });
-
-Route::get('/test-auth', function () {
-    return [
-        'check' => auth()->check(),
-        'id' => auth()->id(),
-        'user' => auth()->user()
-    ];
-})->middleware('auth:sanctum');

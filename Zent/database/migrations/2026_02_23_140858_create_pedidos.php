@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_usuario')->nullable()->constrained('users')->nullOnDelete();
             $table->uuid('session_id')->nullable();
+            $table->unsignedBigInteger('id_carrito');
+            $table->foreign('id_carrito')->references('id')->on('carrito');
             $table->decimal('total',10,2);
             $table->enum('estado',['pendiente','pagado','cancelado','fallido'])->default('pendiente');
             $table->string('stripe_session_id')->nullable();

@@ -11,7 +11,7 @@ class Pedido extends Model
 
     protected $table = 'pedidos';
 
-    protected $fillable = ['id_usuario','total','estado','stripe_session_id','stripe_payment_intent'];
+    protected $fillable = ['id_usuario','session_id','id_carrito','total','estado','stripe_session_id','stripe_payment_intent'];
 
     public function doDetalles(){
         return $this->hasMany(PedidoDetalle::class,'id_pedido');
