@@ -13,7 +13,7 @@
 }
 .box-buscador .buscador .box-text {
   width: 100%;
-  padding: 20px 20px;
+  padding: 15px 15px;
   border-radius: 10px;
   border: 1px solid #00eaff;
   outline: none;
@@ -31,7 +31,7 @@
   margin-top: 5px;
 }
 .box-buscador .buscador .resultados:not(:empty) {
-  padding: 20px 20px;
+  padding: 15px 15px;
   background: white;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }

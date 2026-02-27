@@ -1,7 +1,6 @@
 import "./ProductoVenta.less";
-import { useHeaderCart } from "../../components/Header/Header.js";
-function ProductoVenta({ producto, reload = false }) {
-    const { cartItems, eliminarProducto } = useHeaderCart(); 
+function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad }) {
+
     return (
         <>
         {cartItems.length === 0 ? (
@@ -19,21 +18,19 @@ function ProductoVenta({ producto, reload = false }) {
                                             <img src={item.imagen} alt={item.nombre} width="50" />
                                             <div className="propeties">
                                                 <h3>{item.nombre} </h3> 
+                                                <p>{item.plataforma}PC</p>
                                             </div>
                                         </div>
                                         <div className="blq-acciones">      
                                             <div className="precio">
                                                 <p>{item.precio}€</p>
-                                                {/* <p>{item.cantidad}</p> */}
-                                                <select id="opc" name="opc" defaultValue={cantidadSeleccionada}>
-                                                   {[...Array(stockMaximo)].map((_, index) => (
-                                                        <option key={index} value={index + 1}>
-                                                            {index + 1}
-                                                        </option>
-                                                    ))}
-                                                </select>
+                                               <div className="contador">
+                                                    <button type="button" onClick={() => actualizarCantidad(item.id, cantidadSeleccionada - 1)}>-</button>
+                                                    <input type="number" value={cantidadSeleccionada}min="1" max={stockMaximo} onChange={(e) => actualizarCantidad(item.id, Number(e.target.value))}/>
+                                                    <button type="button" onClick={() => actualizarCantidad(item.id, cantidadSeleccionada + 1)}>+</button>
+                                               </div>
                                             </div>
- 
+
                                             <hr/>
 
                                             <div className="Gestiones">

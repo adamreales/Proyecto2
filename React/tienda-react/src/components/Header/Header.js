@@ -133,6 +133,27 @@ export function useHeaderCart() {
     }
   };
 
+  const actualizarCantidad = (id, nuevaCantidad) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) => {
+        if (item.id !== id) {
+          return item;
+        }
+
+        const stockMaximo = Math.max(1, Number(item.stock) || 1);
+        const cantidadClampeada = Math.max(
+          1,
+          Math.min(Number(nuevaCantidad) || 1, stockMaximo)
+        );
+
+        return {
+          ...item,
+          cantidad: cantidadClampeada,
+        };
+      })
+    );
+  };
+
   const totalItems = cartItems.reduce(
     (total, item) => total + (item.cantidad || 0),
     0
@@ -148,5 +169,6 @@ export function useHeaderCart() {
     totalItems,
     totalPrecio,
     eliminarProducto,
+    actualizarCantidad,
   };
 }

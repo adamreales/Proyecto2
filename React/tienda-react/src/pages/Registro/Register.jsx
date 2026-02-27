@@ -8,6 +8,8 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,12 +37,42 @@ function Register() {
    
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email : " />
 
-          <input  type="password"value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña : "/>
- 
-          <input type="password" value={passwordConfirm}  onChange={(e) => setPasswordConfirm(e.target.value)}placeholder="Confirmar contraseña : " />
+          <div className="password-row">
+            <input
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Contraseña : "
+            />
+            <button
+              type="button"
+              className="btn-ojo"
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </button>
+          </div>
+
+          <div className="password-row">
+            <input
+              type={showPasswordConfirm ? "text" : "password"}
+              value={passwordConfirm}
+              onChange={(e) => setPasswordConfirm(e.target.value)}
+              placeholder="Confirmar contraseña : "
+            />
+            <button
+              type="button"
+              className="btn-ojo"
+              onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+              aria-label={showPasswordConfirm ? "Ocultar confirmación" : "Mostrar confirmación"}
+            >
+              {showPasswordConfirm ? "🙈" : "👁️"}
+            </button>
+          </div>
 
           <div className="Botones">
-            <button type="button" className="btn-registro"> Registrarse</button>
+            <button type="submit" className="btn-registro"> Registrarse</button>
           </div>
         </form>
 

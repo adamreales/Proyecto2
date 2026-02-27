@@ -55,16 +55,45 @@
   border-color: #00eaff;
   box-shadow: 0 0 5px rgba(0, 234, 255, 0.6);
 }
+.password-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.password-row input {
+  flex: 1;
+}
+.password-row .btn-ojo {
+  border:none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+}
+.password-row .btn-ojo:hover {
+  border-color: #00eaff;
+}
 .formulario .Botones {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 25px;
+  width: 100%;
 }
+
+.formulario .Botones a {
+  flex: 1;
+}
+
+.formulario .Botones a .btn-registro {
+  width: 100%;
+}
+
 .formulario .Botones .btn-login,
 .formulario .Botones .btn-registro {
   margin-top: 20px;
   align-self: center;
+  width: 100%;
   padding: 10px 25px;
   border-radius: 8px;
   background: transparent;
@@ -75,6 +104,7 @@
 }
 .formulario .Botones .btn-login {
   border: 1px solid #00eaff;
+  flex: 1;
 }
 .formulario .Botones .btn-login:hover {
   background: #00eaff;
