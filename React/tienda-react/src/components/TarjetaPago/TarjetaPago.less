@@ -1,0 +1,56 @@
+/* VARIABLES */
+
+/* COLORES */
+@neon-azul: #00eaff;
+@neon-magenta: #ff2fd0;
+
+/* MIDAS DE LETRA */
+@mida-letra-botones: 15px;
+@mida-letra-p: 15px;
+
+/* TIPOS DE LETRAS */
+@tipo-letra-btn: 'Inter', sans-serif;
+@tipo-letra-gaming: 'Orbitron', sans-serif;
+@tipo-letra-p: 'Inter', sans-serif;
+
+/* PADDING */
+@padding-pantalla: 20px;
+
+.tarjeta-pago {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .box-price{
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+      padding: 15px;
+
+      .precio{
+        font-size: 25px;
+        font-family: @tipo-letra-gaming;
+        color:black;
+      }
+    }
+
+  .btn-Pagar{
+      width: 90%;
+      background-color: black;
+      color: white;
+  }
+  &.btn-Pagar:hover{
+      background-color: white;
+      color: black;
+  }
+}
+
+hr{
+  width:90%;
+}
+.url{
+  color:black;
+  text-decoration:none;
+  font-size: @mida-letra-p * 1.3;
+}

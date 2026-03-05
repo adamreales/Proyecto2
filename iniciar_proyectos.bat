@@ -1,6 +1,6 @@
 @echo off
 echo Iniciando Backend (Laravel)...
-start cmd /k "cd /d .\Zent && php artisan migrate:refresh --seed && php artisan serve"
+start cmd /k "cd /d .\Zent && php artisan serve"
 
 timeout /t 3
 

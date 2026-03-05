@@ -1,0 +1,107 @@
+/* COLORES */
+@neon-azul: #00eaff;
+@neon-magenta: #ff2fd0;
+
+/* TIPOGRAFÍA */
+@tipo-letra-btn: 'Inter', sans-serif;
+@tipo-letra-gaming: 'Orbitron', sans-serif;
+@tipo-letra-p: 'Inter', sans-serif;
+
+
+.pagina-blog{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    .blog-container{
+      border: 1px solid #000000;
+      justify-content: center;
+      gap:20px;
+      padding: 20px;
+      .post-blog{
+        width: 100%;
+          display: grid;
+          grid-template-columns: 0.5fr 1fr;
+          justify-items: center;
+          gap: 20px;
+          .img-post{
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              
+              img{
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  
+                  object-position: center;
+                  border-radius: 10px;
+              }
+          }
+
+          .contenido-post{
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+             
+              h3{
+                  font-family: @tipo-letra-gaming;
+                  font-size: 20px;
+                  color:black;
+                  font-weight: 600;
+              }
+              p{
+                  font-family: @tipo-letra-p;
+                  font-size: 15px;
+                  color: #000000;
+                  text-align: left;
+              }
+          }
+      }
+    }
+    hr{
+        width: 90%;
+        margin: 40px auto;
+        
+    }
+}
+
+@media (max-width: 768px){
+    .pagina-blog{
+        .blog-container{
+            padding: 16px;
+
+            .post-blog{
+                grid-template-columns: 1fr;
+                gap: 14px;
+
+                .img-post{
+                    order: 1;
+
+                    img{
+                        height: auto;
+                        max-height: 280px;
+                    }
+                }
+
+                .contenido-post{
+                    order: 2;
+
+                    h3{
+                        font-size: 18px;
+                    }
+
+                    p{
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        hr{
+            margin: 28px auto;
+        }
+    }
+}

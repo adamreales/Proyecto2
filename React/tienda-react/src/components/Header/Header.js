@@ -28,6 +28,14 @@ export function useHeaderCart() {
       const imagenUrl = imagenes[0]?.url
         ? `http://zent.es/${imagenes[0].url}`
         : "";
+      const stockValue = Number(
+        producto.stock ??
+          producto.cantidad_stock ??
+          producto.unidades ??
+          item.stock ??
+          0
+      );
+      const stock = stockValue > 0 ? stockValue : Number(item.cantidad) || 1;
 
       return {
         id: item.id_producto,
@@ -35,6 +43,7 @@ export function useHeaderCart() {
         precio: Number(producto.precio) || 0,
         cantidad: Number(item.cantidad) || 0,
         imagen: imagenUrl,
+        stock,
       };
     });
   };
@@ -116,12 +125,33 @@ export function useHeaderCart() {
         throw new Error(data.error || "No se pudo eliminar el producto");
       }
 
-      // Recargar carrito desde backend (fuente real)
-      await loadCart();
+      // Notificar a todas las vistas del carrito para que recarguen
+      window.dispatchEvent(new Event("carritoActualizado"));
 
     } catch (error) {
       console.error("Error al eliminar producto:", error);
     }
+  };
+
+  const actualizarCantidad = (id, nuevaCantidad) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) => {
+        if (item.id !== id) {
+          return item;
+        }
+
+        const stockMaximo = Math.max(1, Number(item.stock) || 1);
+        const cantidadClampeada = Math.max(
+          1,
+          Math.min(Number(nuevaCantidad) || 1, stockMaximo)
+        );
+
+        return {
+          ...item,
+          cantidad: cantidadClampeada,
+        };
+      })
+    );
   };
 
   const totalItems = cartItems.reduce(
@@ -139,5 +169,6 @@ export function useHeaderCart() {
     totalItems,
     totalPrecio,
     eliminarProducto,
+    actualizarCantidad,
   };
 }

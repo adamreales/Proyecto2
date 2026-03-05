@@ -8,9 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Carrito;
+use Filament\Models\Contracts\FilamentUser;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
+    // HasApiTokens
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -23,6 +27,8 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -43,8 +49,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //Cada vez que se guarde la contraseña laravel le hara un hash
+    // protected function password(): Attribute
+    // {
+    //     return Attribute::make(
+    //         set: fn ($value) => Hash::make($value),
+    //     );
+    // }
+
     public function doCarrito(){
         return $this->hasMany(Carrito::class,'id','id');
     }
+
+    //Hace que puedan acceder al panel de admin los usuarios
+    // public function canAccessFilament(): bool
+    // {
+    //     return true;
+    // }
 
 }

@@ -13,6 +13,8 @@ use App\Models\ImagenProducto;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Error;
 
+use function PHPUnit\Framework\isEmpty;
+
 class ControllerProductos extends Controller
 {
     public function productos(){
@@ -283,6 +285,29 @@ class ControllerProductos extends Controller
             ],500);
         }
         
+    }
+
+    public function buscador(Request $r){
+        
+        if(!$r->filled('producto_nombre')){
+            return response()->json([
+                'error' => 'No se ha enviado producto_nombre'
+            ],400);
+        }
+
+        $productos_buscador = Producto::with(
+                'doValoraciones',
+                'doImagenes',
+                'doCategorias',
+                'doJuego.doPlataformas',
+                'doJuego.doPegi')
+                ->whereRaw('LOWER(titulo) LIKE ?', ['%'.strtolower($r->producto_nombre).'%'])->get();
+
+        return response()->json([
+            'msg' => 'Productos encontrados',
+            'productos' => $productos_buscador
+        ],200);
+
     }
 
 }

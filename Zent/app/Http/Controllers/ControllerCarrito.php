@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\DuenoCarrito;
 use App\Http\Controllers\Controller;
 use App\Models\Carrito;
 use App\Models\CarritoProducto;
@@ -19,43 +20,25 @@ class ControllerCarrito extends Controller
 
         try{
 
-            if(!$r->filled('id_usuario') && !$r->filled('session_id')){
-                throw new \Exception('Se require id_usuario o session_id');
-            }
+            $dueno = DuenoCarrito::get();
 
-            $car = null;
-
-            if($r->filled('id_usuario')){
-                $u = User::find($r->id_usuario);
-                if($u === null){
-                    throw new \Exception('Error usuario no encontrado');
-                }
-
-                $car = Carrito::firstOrCreate([
-                    'id_usuario'=>$r->id_usuario,
-                    'estado'=>'Activo'
+            $carrito = Carrito::firstOrCreate(
+                [
+                    $dueno['campo'] => $dueno['valor'],
+                    'estado' => 'Activo'
                 ],
                 [
-                    'session_id' => null
-                ]);
-
-            }else{
-                $car = Carrito::firstOrCreate([
-                    'session_id'=>$r->session_id,
-                    'estado'=>'Activo'
-                ],
-                [
-                    'id_usuario' => null
-                ]);
-            }
+                    'id_usuario' => $dueno['campo'] == 'id_usuario' ? $dueno['valor'] : null,
+                    'session_id' => $dueno['campo'] == 'session_id' ? $dueno['valor'] : null
+                ]
+            );
 
             return response()->json([
-                'id_carrito' => $car->id, 
+                'id_carrito' => $carrito->id, 
                 'carrito' => 'Carrito activo'
             ],201);
 
         }catch(\Exception $e){
-            DB::rollBack();
             return response()->json([
                 'error' => $e->getMessage()
             ],400);
@@ -71,6 +54,8 @@ class ControllerCarrito extends Controller
                 throw new \Exception('Error faltan campos en el envio');
             }
 
+            $dueno = DuenoCarrito::get();
+
             $p = Producto::lockForUpdate()->find($r->id_producto);
             if($p === null){
                 throw new \Exception('Error Producto no encontrado');
@@ -80,30 +65,18 @@ class ControllerCarrito extends Controller
                 throw new \Exception("Error Cantidad tiene que ser entre (1-$p->stock)");
             }
 
-            if($r->filled('id_usuario')){
-                
-                $u = User::find($r->id_usuario);
-                if($u === null){
-                    throw new \Exception('Error Usuario no encontrado');
-                }
+            $c = Carrito::firstOrCreate(
+                [
+                    $dueno['campo'] => $dueno['valor'],
+                    'estado' => 'Activo'
+                ],
+                [
+                    'id_usuario' => $dueno['campo'] == 'id_usuario' ? $dueno['valor'] : null,
+                    'session_id' => $dueno['campo'] == 'session_id' ? $dueno['valor'] : null
+                ]
+            );
 
-                $c = Carrito::where('id_usuario',$u->id)->where('estado','Activo')->lockForUpdate()->first();
-
-            }else{
-
-                if(!$r->filled('session_id')){
-                    throw new \Exception('Session_id requerido');
-                }
-
-                $c = Carrito::where('session_id',$r->session_id)->where('estado','Activo')->lockForUpdate()->first();
-
-            }
-
-            if($c === null){
-                throw new \Exception('Carrito no encontrado');
-            }
-
-            $item_carrito = CarritoProducto::where('id_carrito',$c->id)->where('id_producto',$r->id_producto)->first();
+            $item_carrito = CarritoProducto::where('id_carrito',$c->id)->where('id_producto',$r->id_producto)->lockForUpdate()->first();
 
             if($item_carrito !== null){
                 $nueva_cantidad = $item_carrito->cantidad + $r->cantidad;;
@@ -142,24 +115,18 @@ class ControllerCarrito extends Controller
 
         try{
 
-            if(!$r->filled('id_producto') || (!$r->filled('id_usuario') && !$r->filled('session_id'))){
+            if(!$r->filled('id_producto')){
                 throw new \Exception("Error Faltan campos de envio");
             }
+
+            $dueno = DuenoCarrito::get();
 
             $p = Producto::find($r->id_producto);
             if($p === null){
                 throw new \Exception("Error id del producto no encontrado");
             }
 
-            if($r->filled('id_usuario')){
-                $u = User::find($r->id_usuario);
-                if($u === null){
-                    throw new \Exception("Error usuario no encontrado");
-                }
-                $carrito = Carrito::where('id_usuario',$u->id)->where('estado','Activo')->lockForUpdate()->first();
-            }else{
-                $carrito = Carrito::where('session_id',$r->session_id)->where('estado','Activo')->lockForUpdate()->first();
-            }
+            $carrito = Carrito::where($dueno['campo'], $dueno['valor'])->where('estado','Activo')->lockForUpdate()->first();
 
             if($carrito === null){
                 throw new \Exception("Error carrito no encontrado");
@@ -188,19 +155,9 @@ class ControllerCarrito extends Controller
 
     public function ver_carrito(Request $r){
         try{
-            if(!$r->filled(['id_usuario']) && !$r->filled('session_id')){
-                throw new \Exception('Error faltan campos de envio');
-            }
+            $dueno = DuenoCarrito::get();
 
-            if($r->filled('id_usuario')){
-                $u = User::find($r->id_usuario);
-                if($u === null){
-                    throw new Exception('Error usuario no encontrado');
-                }
-                $carrito = Carrito::where('id_usuario',$r->id_usuario)->first();
-            }else{
-                $carrito = Carrito::where('session_id',$r->session_id)->first();
-            }
+            $carrito = Carrito::where($dueno['campo'],$dueno['valor'])->where('estado','Activo')->first();
 
             if($carrito === null){
                 return response()->json([
@@ -209,7 +166,7 @@ class ControllerCarrito extends Controller
                 ], 200);
             }
 
-            $items_carrito = CarritoProducto::where('id_carrito',$carrito->id)->with(['doProducto','doProducto.doImagenes'])->get();
+            $items_carrito = CarritoProducto::where('id_carrito',$carrito->id)->whereHas('doProducto')->with(['doProducto','doProducto.doImagenes'])->get();
 
             return response()->json([
                 'carrito' => $items_carrito,
