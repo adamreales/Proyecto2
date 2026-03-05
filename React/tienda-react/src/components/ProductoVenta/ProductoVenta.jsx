@@ -1,9 +1,5 @@
 import "./ProductoVenta.less";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useHeaderCart } from "../../components/Header/Header";
-function ProductoVenta({ producto, reload = false }) {
-   const {cartItems,totalItems,totalPrecio} = useHeaderCart(); 
+function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad }) {
 
     return (
         <>
@@ -11,23 +7,43 @@ function ProductoVenta({ producto, reload = false }) {
                         <p>Tu carrito está vacío.</p>
                     ) : (
                         <ul>
-                            {cartItems.map((item) => (
+                            {cartItems.map((item) => {
+                                const stockMaximo = Math.max(1, Number(item.stock) || Number(item.cantidad) || 1);
+                                const cantidadSeleccionada = Math.min(Number(item.cantidad) || 1, stockMaximo);
+
+                                return (
                                 <li key={item.id}>
-                                    
                                     <div className="item-info">
-                                        <img src={item.imagen} alt={item.nombre} width="50" />
-                                        <div className="propeties">
-                                            <label>- Nombre : {item.nombre} </label>
-                                            <label>- Cantidad: {item.cantidad}</label> 
-                                            <label>- Precio: {item.precio}€</label>
+                                        <div className="bloq1">
+                                            <img src={item.imagen} alt={item.nombre} width="50" />
+                                            <div className="propeties">
+                                                <h3>{item.nombre} </h3> 
+                                                <p>{item.plataforma}PC</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="setings">
-                                        <p>X</p>
+                                        <div className="blq-acciones">      
+                                            <div className="precio">
+                                                <p>{item.precio}€</p>
+                                               <div className="contador">
+                                                    <button type="button" onClick={() => actualizarCantidad(item.id, cantidadSeleccionada - 1)}>-</button>
+                                                    <input type="number" value={cantidadSeleccionada}min="1" max={stockMaximo} onChange={(e) => actualizarCantidad(item.id, Number(e.target.value))}/>
+                                                    <button type="button" onClick={() => actualizarCantidad(item.id, cantidadSeleccionada + 1)}>+</button>
+                                               </div>
+                                            </div>
+
+                                            <hr/>
+
+                                            <div className="Gestiones">
+                                                <button className="btn-eliminar" onClick={() => eliminarProducto(item.id)}><img src="http://zent.es/imagenes_producto/basura.png" alt="Eliminar" /></button>
+                                                <button className="btn-deseos">❤️</button>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </li>
-                            ))}
-                        </ul>
+                                );
+                            })}
+                </ul>
             )}
         </>
     );

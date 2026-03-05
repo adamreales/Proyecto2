@@ -12,7 +12,7 @@ import Normas from "./pages/Normas/Normas";
 import Videojuegos from "./pages/Videojuegos/Videojuegos";
 import Producto from "./pages/Producto/Producto";
 import Oulet from "./pages/Oulet/Oulet";
-import Consolas from "./pages/Consolas/Consolas";
+import Blog from "./pages/Blog/Blog";
 import Merchan from "./pages/Merchan/Merchan";
 import Carrito from "./pages/Carrito/Carrito";
 import "./App.css";
@@ -31,7 +31,7 @@ function App() {
         <Route path="/videojuegos" element={<Videojuegos />} />
         <Route path="/producto/:id" element={<Producto />} />
         <Route path="/oulet" element={<Oulet />} />
-        <Route path="/consolas" element={<Consolas />} />
+        <Route path="/blog" element={<Blog />} />
         <Route path="/merchan" element={<Merchan />} />
         <Route path="/carrito" element={<Carrito />} />
       </Route>

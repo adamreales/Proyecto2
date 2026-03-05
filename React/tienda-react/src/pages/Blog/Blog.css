@@ -1,0 +1,83 @@
+/* COLORES */
+/* TIPOGRAFÍA */
+.pagina-blog {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.pagina-blog .blog-container {
+  border: 1px solid #000000;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+.pagina-blog .blog-container .post-blog {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  justify-items: center;
+  gap: 20px;
+}
+.pagina-blog .blog-container .post-blog .img-post {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pagina-blog .blog-container .post-blog .img-post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+.pagina-blog .blog-container .post-blog .contenido-post {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.pagina-blog .blog-container .post-blog .contenido-post h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  color: black;
+  font-weight: 600;
+}
+.pagina-blog .blog-container .post-blog .contenido-post p {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: #000000;
+  text-align: left;
+}
+.pagina-blog hr {
+  width: 90%;
+  margin: 40px auto;
+}
+@media (max-width: 768px) {
+  .pagina-blog .blog-container {
+    padding: 16px;
+  }
+  .pagina-blog .blog-container .post-blog {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .pagina-blog .blog-container .post-blog .img-post {
+    order: 1;
+  }
+  .pagina-blog .blog-container .post-blog .img-post img {
+    height: auto;
+    max-height: 280px;
+  }
+  .pagina-blog .blog-container .post-blog .contenido-post {
+    order: 2;
+  }
+  .pagina-blog .blog-container .post-blog .contenido-post h3 {
+    font-size: 18px;
+  }
+  .pagina-blog .blog-container .post-blog .contenido-post p {
+    font-size: 14px;
+  }
+  .pagina-blog hr {
+    margin: 28px auto;
+  }
+}

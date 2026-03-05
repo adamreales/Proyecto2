@@ -33,8 +33,8 @@ function SeccionProductos({ titulo, productos = [], reload = false }) {
         <>
             <div className="cabezera">
                 <div><h2 className="subtitulo">{titulo}</h2></div>
-            <div className="botones"><button className="btn-prev" onClick={prev} disabled={startIndex === 0}><img src="/imagesideas/correrizq.png" className="mario" /></button>
-            <button className="btn-next" onClick={next} disabled={startIndex + maxitems >= productos.length}><img src="/imagesideas/correr.png" className="mario mario-right" /></button></div>
+            <div className="botones"><button className="btn-prev" onClick={prev} disabled={startIndex === 0}><img src="http://zent.es/imagenes_producto/correrizq.png" className="mario" /></button>
+            <button className="btn-next" onClick={next} disabled={startIndex + maxitems >= productos.length}><img src="http://zent.es/imagenes_producto/correr.png" className="mario mario-right" /></button></div>
             </div>
             <div className="box-seccion">    
                 <section className="MasVendidos">

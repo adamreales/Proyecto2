@@ -17,10 +17,10 @@
 @padding-pantalla: 20px;
 
 
- .targeta-carrito{
-        
+.targeta-carrito{
+    width: 100%;
+    max-width: 100%;
         border-radius: 10px;
-        width: 1100px;
         height: auto;
   
         ul{
@@ -32,27 +32,208 @@
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
-                background-color: rgb(165, 244, 217);
+                background-color: transparent;
                 border-radius: 10px;
+                border: 1px solid black;
+                width: 100%;
             
                 .item-info{
                     display: flex;
+                    justify-content: space-between;
                     align-items: center;
                     gap:20px;
-                    
-                    img{
-                        width: 200px;
-                        height:150px;
-                        border-radius: 10px;
+                    height:200px;
+                    width: 100%;
+                    margin:20px;
+                  
+                    .bloq1
+                    {
+                        display: flex;
+                        align-items: center;
+                        gap:20px;
+                        width: 60%;
+                 
+                        img{
+                            width: 200px;
+                            height:150px;
+                            border-radius: 10px;
+                        }
+
+                        .propeties{
+                            h3{
+                                font-family: @tipo-letra-gaming;
+                                font-size: @mida-letra-p * 1.7;
+                                color: black;
+                                font-weight: bold;
+                            }
+                        }
                     }
 
-                    .propeties{
-                        display: flex;
+                    .blq-acciones{
+                        display:flex;
                         flex-direction: column;
-                        align-items: flex-start;
-                        gap:5px;
+                        align-items: center;
+                        
+                        .precio{
+                            display: flex;
+                            align-items: center;
+                            gap:10px;
+                            font-family: @tipo-letra-p;
+                            font-size: @mida-letra-p * 1.5;
+                            .contador{
+                                button{
+                                    background-color: transparent;
+                                    border: none;
+                                    cursor: pointer;
+                                    font-size: @mida-letra-botones * 1.3;
+                                    font-family: @tipo-letra-btn;
+                                }
+
+                                input{
+                                    width:30px;
+                                }
+                            }
+                        }
+
+                        hr{width: 200px;}
+
+                        .Gestiones{
+                            display: flex;
+                            align-items: center;
+                            button{
+                                background-color: transparent;
+                                border: none;
+                                cursor: pointer;
+                            }
+                            .btn-eliminar
+                            {    
+                                img{
+                                    width: 35px;
+                                    height: 35px;
+                                }
+                            }
+                        }
+                    }
+                }   
+            }
+        }
+}
+
+@media (max-width: 1024px) {
+    .targeta-carrito {
+        ul {
+            padding: 0;
+
+            li {
+                .item-info {
+                    .bloq1 {
+                        width: 55%;
+
+                        img {
+                            width: 160px;
+                            height: 120px;
+                        }
+
+                        .propeties {
+                            h3 {
+                                font-size: @mida-letra-p * 1.4;
+                            }
+                        }
+                    }
+
+                    .blq-acciones {
+                        .precio {
+                            font-size: @mida-letra-p * 1.2;
+                        }
+
+                        hr {
+                            width: 160px;
+                        }
                     }
                 }
             }
         }
     }
+}
+
+@media (max-width: 768px) {
+    .targeta-carrito {
+        ul {
+            li {
+                .item-info {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 14px;
+                    height: auto;
+
+                    .bloq1 {
+                        width: 100%;
+
+                        img {
+                            width: 130px;
+                            height: 100px;
+                        }
+
+                        .propeties {
+                            h3 {
+                                font-size: @mida-letra-p * 1.2;
+                            }
+                        }
+                    }
+
+                    .blq-acciones {
+                        width: 100%;
+                        align-items: flex-start;
+
+                        .precio {
+                            width: 100%;
+                            justify-content: space-between;
+
+                            .contador {
+                                input {
+                                    width: 40px;
+                                }
+                            }
+                        }
+
+                        hr {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .targeta-carrito {
+        ul {
+            li {
+                .item-info {
+                    margin: 12px;
+
+                    .bloq1 {
+                        gap: 12px;
+
+                        img {
+                            width: 105px;
+                            height: 82px;
+                        }
+                    }
+
+                    .blq-acciones {
+                        .precio {
+                            font-size: @mida-letra-p;
+                        }
+
+                        .Gestiones {
+                            width: 100%;
+                            justify-content: space-between;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

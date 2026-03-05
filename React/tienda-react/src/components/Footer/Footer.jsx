@@ -52,11 +52,11 @@ function Footer() {
 
       <div className="footer-bottom">
         <div className="social-icons">
-          <img src="/imagesideas/Instagram.png" alt="Instagram" />
-          <img src="/imagesideas/Twiter.png" alt="Twitter" />
-          <img src="/imagesideas/facebook.png" alt="Facebook" />
+          <img src="http://zent.es/imagenes_producto/Instagram.png" alt="Instagram" />
+          <img src="http://zent.es/imagenes_producto/Twiter.png" alt="Twitter" />
+          <img src="http://zent.es/imagenes_producto/facebook.png" alt="Facebook" />
         </div>
-        <p>Copyright © 2017 sendesingnz. All Rights Reserved</p>
+        <p>Copyright © 2026 Zent</p>
       </div>
     </footer>
   )

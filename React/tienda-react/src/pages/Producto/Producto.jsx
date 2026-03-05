@@ -79,6 +79,8 @@ function Producto() {
   if (!producto) {
     return <div>Cargando...</div>;
   }
+
+  const valoracion = Math.max(0, Math.min(5, Math.round(producto?.valoracion || 0)));
     
   return (
     <>
@@ -110,11 +112,22 @@ function Producto() {
 
           <div className="precio">
             <span className="final">{producto?.precio} € </span>
-            <p>Valoraciones :  {"⭐".repeat(producto?.valoracion || 0)}</p>
+            <p className="valoracion-estrellas">
+              Valoraciones :
+              {Array.from({ length: 5 }, (_, index) => (
+                <span
+                  key={index}
+                  className={`estrella ${index < valoracion ? "llena" : "vacia"}`}
+                  aria-hidden="true"
+                >
+                  ⭐
+                </span>
+              ))}
+            </p>
           </div>
 
           <div className="btn-box">
-            <button className="btn-favoritos">♡</button>
+            <button className="btn-favoritos">❤️</button>
             <button className="btn-cesta" onClick={handleAddToCart}>
               Añadir al Carrito
             </button>

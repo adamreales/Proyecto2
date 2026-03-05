@@ -15,9 +15,9 @@ function Home() {
     const animalcrossing = masVendidos.find(p => p.titulo === "Animal Crossing: New Leaf");
     const  raiders= masVendidos.find(p => p.titulo === "Arc Raiders");
     const imagenes = [
-        "/imagesideas/MejoresPrecio.png",
-        "/imagesideas/Oferta.jpeg",
-        "/imagesideas/Oferta2.jpeg"
+        "http://zent.es/imagenes_producto/MejoresPrecio.png",
+        "http://zent.es/imagenes_producto/Oferta.jpeg",
+        "http://zent.es/imagenes_producto/Oferta2.jpeg",
     ];
 
     const nextSlide = () => {
@@ -84,7 +84,7 @@ function Home() {
             <article className="portada">
                 <div className="box1">
                     <Link to="/videojuegos"><video id="video-portada" autoPlay muted playsInline preload="auto">
-                        <source src="/imagesideas/Tienda.mp4" type="video/mp4" />
+                        <source src="http://zent.es/imagenes_producto/Tienda.mp4" type="video/mp4" />
                     </video></Link>
                 </div>
 
@@ -108,7 +108,7 @@ function Home() {
                 <SeccionProductos titulo="Los Mas Vendidos" productos={masVendidos} />
                 <SeccionProductos titulo="Los Mas Valorados" productos={masValorados} />
              
-                {animalcrossing && (<AnuncioVideojuego imageSrc="/imagesideas/AnimalCrosin.jpg" producto={animalcrossing} />
+                {animalcrossing && (<AnuncioVideojuego imageSrc="http://zent.es/imagenes_producto/AnimalCrosin.jpg" producto={animalcrossing} />
 )}
 
                 <SeccionProductos titulo="Reservas" productos={productos} />
@@ -116,7 +116,7 @@ function Home() {
                 <Valoraciones />
 
                 <SeccionProductos titulo="Añadidos Recientemente" productos={recientes} />
-                {animalcrossing && (<AnuncioVideojuego imageSrc="/imagesideas/AnuncioJuego.jpg" producto={raiders} />)}
+                {animalcrossing && (<AnuncioVideojuego imageSrc="http://zent.es/imagenes_producto/AnuncioJuego.jpg" producto={raiders} />)}
                 <SeccionProductos titulo="Weekly deals" productos={ofertas} />
             </main>
         </>

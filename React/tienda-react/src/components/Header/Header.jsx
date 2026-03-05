@@ -49,7 +49,7 @@ function Header() {
       <div className="Logo">
         <Link to="/">
           <button id="btn-logo">
-            <img src="/imagesideas/Logo.png" />
+            <img src="http://zent.es/imagenes_producto/Logo.png" />
           </button>
         </Link>
       </div>
@@ -57,20 +57,18 @@ function Header() {
       {/* MENÚ MOBILE */}
       <div className={`Barra-menu ${menuOpen ? "active" : ""}`}>
         <button className="cerrar-btn" onClick={() => setMenuOpen(false)}>✕</button>
-
         <Link to="/"><button className="menu-btn">HOME</button></Link>
         <Link to="/videojuegos"><button className="menu-btn">VIDEOJUEGOS</button></Link>
-        <Link to="/consolas"><button className="menu-btn">CONSOLAS</button></Link>
-        <Link to="/merchan"><button className="menu-btn">MERCHANDISING</button></Link>
+        <Link to="/blog"><button className="menu-btn">BLOG</button></Link>
         <Link to="/conocenos"><button className="menu-btn">CONOCENOS</button></Link>
-        <Link to="/oulet"><button className="menu-btn">OUTLET</button></Link>
+        <Link to="/oulet"><button className="menu-btn">OUTLET</button></Link>  
       </div>
 
       {/* MENÚ DESKTOP */}
       <div className="Barra-menu-desktop">
+        <Link to="/"><button className="menu-btn">HOME</button></Link>
         <Link to="/videojuegos"><button className="menu-btn">VIDEOJUEGOS</button></Link>
-        <Link to="/consolas"><button className="menu-btn">CONSOLAS</button></Link>
-        <Link to="/merchan"><button className="menu-btn">MERCHANDISING</button></Link>
+        <Link to="/blog"><button className="menu-btn">BLOG</button></Link>
         <Link to="/conocenos"><button className="menu-btn">CONOCENOS</button></Link>
         <Link to="/oulet"><button className="menu-btn">OUTLET</button></Link>
       </div>
@@ -89,7 +87,7 @@ function Header() {
             className="btn-carrito"
             onClick={() => setCartOpen(!cartOpen)}
           >
-            <img src="/imagesideas/carrito.png" />
+            <img src="http://zent.es/imagenes_producto/carrito.png" />
             {totalItems > 0 && (
               <span className="cart-badge">{totalItems}</span>
             )}
@@ -141,7 +139,7 @@ function Header() {
         {token && (
           <Link to="/profile">
             <button className="btn-perfil">
-              <img src="/imagesideas/perfil.png" />
+              <img src="http://zent.es/imagenes_producto/perfil.png" />
             </button>
           </Link>
         )}
