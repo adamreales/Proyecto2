@@ -28,7 +28,7 @@ function Register() {
 
         <h1 className="titulo-login">Regístrate</h1>
 
-        <Link to="/home"><button className="btn-volver"><img src="public/imagesideas/logo.png" alt="Logo" /></button></Link>
+        <Link to="/home"><button className="btn-volver"><img src="http://zent.es/imagenes_producto/Logo.png" alt="Logo" /></button></Link>
 
         <form className="formulario" onSubmit={handleSubmit}>
          

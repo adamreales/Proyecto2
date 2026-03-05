@@ -53,3 +53,31 @@
   width: 90%;
   margin: 40px auto;
 }
+@media (max-width: 768px) {
+  .pagina-blog .blog-container {
+    padding: 16px;
+  }
+  .pagina-blog .blog-container .post-blog {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .pagina-blog .blog-container .post-blog .img-post {
+    order: 1;
+  }
+  .pagina-blog .blog-container .post-blog .img-post img {
+    height: auto;
+    max-height: 280px;
+  }
+  .pagina-blog .blog-container .post-blog .contenido-post {
+    order: 2;
+  }
+  .pagina-blog .blog-container .post-blog .contenido-post h3 {
+    font-size: 18px;
+  }
+  .pagina-blog .blog-container .post-blog .contenido-post p {
+    font-size: 14px;
+  }
+  .pagina-blog hr {
+    margin: 28px auto;
+  }
+}

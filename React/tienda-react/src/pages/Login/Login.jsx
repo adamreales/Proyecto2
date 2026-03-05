@@ -26,7 +26,7 @@ function Login() {
     <div className="login-page">
       <div className="login-container">
         <h1 className="titulo-login">Inicia sesión</h1>
-        <Link to="/home"><button className="btn-volver"><img src="public/imagesideas/logo.png" alt="Logo" /></button></Link>
+        <Link to="/home"><button className="btn-volver"><img src="http://zent.es/imagenes_producto/Logo.png" alt="Logo" /></button></Link>
         <form className="formulario" onSubmit={handleSubmit}>
        
           <input  type="email"value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email : " />

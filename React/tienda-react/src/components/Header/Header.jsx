@@ -49,7 +49,7 @@ function Header() {
       <div className="Logo">
         <Link to="/">
           <button id="btn-logo">
-            <img src="/imagesideas/Logo.png" />
+            <img src="http://zent.es/imagenes_producto/Logo.png" />
           </button>
         </Link>
       </div>
@@ -87,7 +87,7 @@ function Header() {
             className="btn-carrito"
             onClick={() => setCartOpen(!cartOpen)}
           >
-            <img src="/imagesideas/carrito.png" />
+            <img src="http://zent.es/imagenes_producto/carrito.png" />
             {totalItems > 0 && (
               <span className="cart-badge">{totalItems}</span>
             )}
@@ -139,7 +139,7 @@ function Header() {
         {token && (
           <Link to="/profile">
             <button className="btn-perfil">
-              <img src="/imagesideas/perfil.png" />
+              <img src="http://zent.es/imagenes_producto/perfil.png" />
             </button>
           </Link>
         )}

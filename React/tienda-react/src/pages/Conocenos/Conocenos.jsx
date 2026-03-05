@@ -13,10 +13,7 @@ function Conocenos() {
       <main>
         <article className="Fundacion">
           <div className="Imagenes tienda">
-            <img
-              src="/imagesideas/conocenos1.jpeg"
-              alt="Tienda Zent"
-            />
+            <img src="http://zent.es/imagenes_producto/conocenos1.jpeg"alt="Tienda Zent"/> 
           </div>
 
           <div className="texto-fundacion">
@@ -46,10 +43,7 @@ function Conocenos() {
           </div>
 
           <div className="Imagenes tienda">
-            <img
-              src="/imagesideas/conocenos2.jpeg"
-              alt="Setup gaming Zent"
-            />
+            <img src="http://zent.es/imagenes_producto/conocenos2.jpeg"alt="Setup gaming Zent"/>
           </div>
         </article>
       </main>

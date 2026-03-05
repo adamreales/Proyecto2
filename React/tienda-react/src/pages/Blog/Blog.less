@@ -67,3 +67,41 @@
         
     }
 }
+
+@media (max-width: 768px){
+    .pagina-blog{
+        .blog-container{
+            padding: 16px;
+
+            .post-blog{
+                grid-template-columns: 1fr;
+                gap: 14px;
+
+                .img-post{
+                    order: 1;
+
+                    img{
+                        height: auto;
+                        max-height: 280px;
+                    }
+                }
+
+                .contenido-post{
+                    order: 2;
+
+                    h3{
+                        font-size: 18px;
+                    }
+
+                    p{
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        hr{
+            margin: 28px auto;
+        }
+    }
+}

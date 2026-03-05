@@ -34,7 +34,7 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
                                             <hr/>
 
                                             <div className="Gestiones">
-                                                <button className="btn-eliminar" onClick={() => eliminarProducto(item.id)}><img src="imagesideas/basura.png" alt="Eliminar" /></button>
+                                                <button className="btn-eliminar" onClick={() => eliminarProducto(item.id)}><img src="http://zent.es/imagenes_producto/basura.png" alt="Eliminar" /></button>
                                                 <button className="btn-deseos">❤️</button>
                                             </div>
                                         </div>

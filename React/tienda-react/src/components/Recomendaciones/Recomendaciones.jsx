@@ -7,7 +7,7 @@ function Recomendaciones() {
       <h2>Recomendaciones</h2>
       <div className="contenido">
           <div className="Atencion">
-              <img src="/imagesideas/Atencion.png"/>
+              <img src="http://zent.es/imagenes_producto/Atencion.png"/>
           </div>
 
           <div className="informacion">
