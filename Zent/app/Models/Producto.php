@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Juego;
 use App\Models\Valoracion;
 use App\Models\ImagenProducto;
-use App\Models\CategoriaProducto;
 
 class Producto extends Model
 {
@@ -16,6 +15,14 @@ class Producto extends Model
     protected $table = "producto";
 
     protected $fillable = ["titulo","subtitulo","descripcion","precio","valoracion","stock","ventas"];
+    protected $guarded = [];
+
+    protected $casts = [
+        'precio' => 'decimal:2',
+        'valoracion' => 'float',
+        'stock' => 'integer',
+        'ventas' => 'integer',
+    ];
 
     public function doJuego(){
         return $this->hasOne(Juego::class,'id_producto');

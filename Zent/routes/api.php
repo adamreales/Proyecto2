@@ -19,6 +19,7 @@ use App\Http\Controllers\ControllerStripe;
 |
 */
 
+
 Route::post('/login', [ControllerLogin::class,'login'])->name('login');
 Route::post('/registro',[ControllerRegistro::class,'registro'])->name('registro');
 
@@ -28,14 +29,21 @@ Route::get('/productos_mas_vendidos', [ControllerProductos::class,'productos_mas
 Route::get('/productos_mas_populares', [ControllerProductos::class,'productos_mas_populares'])->name('productos_mas_populares');
 Route::get('/productos_mas_actuales',[ControllerProductos::class,'productos_mas_actuales'])->name('productos_mas_actuales');
 Route::get('/productos_mas_baratos', [ControllerProductos::class,'productos_mas_baratos'])->name('productos_mas_baratos');
+Route::post('/buscador',[ControllerProductos::class,'buscador'])->name('buscador');
 Route::get('/categorias',[ControllerCategoria::class,'categorias'])->name('categorias');
 Route::get('/categoria/{id}',[ControllerCategoria::class,'categoria'])->name('categoria');
-Route::post('/crear_pago',[ControllerStripe::class,'crear_pago'])->name('crear_pago');
 
-Route::post('/crear_carrito',[ControllerCarrito::class,'crear_carrito'])->name('crear_carrito');
-Route::post('/anadir_carrito',[ControllerCarrito::class,'anadir_carrito'])->name('anadir_carrito');
-Route::post('/quitar_carrito',[ControllerCarrito::class,'quitar_carrito'])->name('quitar_carrito');
-Route::post('/ver_carrito',[ControllerCarrito::class,'ver_carrito'])->name('ver_carrito');
+Route::post('/webhook', [ControllerStripe::class, 'webhook']);
+
+Route::middleware('optional.auth')->group(function(){
+    Route::post('/crear_carrito',[ControllerCarrito::class,'crear_carrito'])->name('crear_carrito');
+    Route::post('/anadir_carrito',[ControllerCarrito::class,'anadir_carrito'])->name('anadir_carrito');
+    Route::post('/quitar_carrito',[ControllerCarrito::class,'quitar_carrito'])->name('quitar_carrito');
+    Route::post('/ver_carrito',[ControllerCarrito::class,'ver_carrito'])->name('ver_carrito');
+
+    Route::post('/preparar_pago', [ControllerStripe::class, 'preparar_pago'])->name('preparar_pago');
+    Route::post('/pagar_pedido/{pedido}',[ControllerStripe::class,'pagar_pedido'])->name('pagar_pedido');
+});
 
 Route::middleware('auth:sanctum')->group(function(){
 

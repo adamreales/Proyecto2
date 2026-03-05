@@ -15,7 +15,14 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('login');
+
+            // 👇 Si la ruta es del panel Filament
+            if ($request->is('admin') || $request->is('admin/*')) {
+                return url('/admin/login');
+            }
+
+            // 👇 para el resto de web
+            return url('/login');
         }
     }
 }
