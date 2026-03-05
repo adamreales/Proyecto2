@@ -14,14 +14,10 @@ use App\Http\Controllers\ControllerProductos;
 |
 */
 
-Route::get('/productos-vista', function() {
-    return view('productos'); // Cargamos la vista productos
-});
-
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/stripe-simple', function () {
-    return view('stripe-simple');
+Route::get('/prueba',function () {
+    return view('pruebas');
 });

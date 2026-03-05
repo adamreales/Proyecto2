@@ -29,6 +29,7 @@ Route::get('/productos_mas_vendidos', [ControllerProductos::class,'productos_mas
 Route::get('/productos_mas_populares', [ControllerProductos::class,'productos_mas_populares'])->name('productos_mas_populares');
 Route::get('/productos_mas_actuales',[ControllerProductos::class,'productos_mas_actuales'])->name('productos_mas_actuales');
 Route::get('/productos_mas_baratos', [ControllerProductos::class,'productos_mas_baratos'])->name('productos_mas_baratos');
+Route::post('/buscador',[ControllerProductos::class,'buscador'])->name('buscador');
 Route::get('/categorias',[ControllerCategoria::class,'categorias'])->name('categorias');
 Route::get('/categoria/{id}',[ControllerCategoria::class,'categoria'])->name('categoria');
 

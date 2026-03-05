@@ -52,9 +52,18 @@ class Handler extends ExceptionHandler
 
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        return response()->json([
-            'message' => 'No autenticado'
-        ], 401);
+        // Si es Filament → login web
+        if ($request->is('admin') || $request->is('admin/*')) {
+            return redirect()->guest('/admin/login');
+        }
+
+        // Si es API → JSON
+        if ($request->expectsJson() || $request->is('api/*')) {
+            return response()->json(['message' => 'No autenticado'], 401);
+        }
+
+        // resto web
+        return redirect()->guest('/login');
     }
 
 }

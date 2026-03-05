@@ -68,7 +68,7 @@ class ControllerStripe extends Controller
                 'line_items' => $productos,
                 'success_url' => env('FRONT_URL').'/', //pago-exito?session_id={CHECKOUT_SESSION_ID}
                 'cancel_url' => env('FRONT_URL').'/', //carrito
-                'metadata' => [
+                'metadata' => [ 
                     'pedido_id' => $pedido->id
                 ]
             ]);
