@@ -46,6 +46,67 @@ body
                 max-width: 600px;
             }
         }
+
+        .Fundadores{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 50px;
+            .Co-fundador{
+                display: grid;
+                grid-template-columns: 350px 1fr;
+                align-items: start;
+                gap: 25px;
+                width: 100%;
+
+                &.cofundador-adrian{
+                    grid-template-columns: 1fr 350px;
+
+                    .descripcion{
+                        grid-column: 1;
+                        grid-row: 1;
+                    }
+
+                    .Imagen{
+                        grid-column: 2;
+                        grid-row: 1;
+                    }
+                }
+              
+
+                .Imagen{
+                    width: 100%;
+
+                    img{
+                        width: 100%;
+                        border-radius: 10px;
+                        display: block;
+                    }
+                }
+
+                .descripcion{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    text-align: left;
+                    padding: 10px;
+
+                    h2{
+                        margin: 0 0 20px 0;
+                    }
+
+                    p{
+                        margin: 0;
+                        font-family: @tipo-letra-p;
+                        font-size: @mida-letra-titulo + 5px;
+                        line-height: 1.8;
+                        color: #333;
+                        text-align: left;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -69,6 +130,19 @@ body
     body .Titulo{
         font-size: 18px;
         justify-content: center;
+    }
+
+    body main .Fundadores .Co-fundador{
+        grid-template-columns: 280px 1fr;
+        gap: 20px;
+    }
+
+    body main .Fundadores .Co-fundador.cofundador-adrian{
+        grid-template-columns: 1fr 280px;
+    }
+
+    body main .Fundadores .Co-fundador .descripcion p{
+        font-size: 18px;
     }
 }
 
@@ -98,5 +172,39 @@ body
         padding: 15px;
         justify-content: center;
         text-align: center;
+    }
+
+    body main .Fundadores{
+        padding: 0 15px 35px;
+    }
+
+    body main .Fundadores .Co-fundador,
+    body main .Fundadores .Co-fundador.cofundador-adrian{
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    body main .Fundadores .Co-fundador.cofundador-adrian .descripcion,
+    body main .Fundadores .Co-fundador.cofundador-adrian .Imagen{
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    body main .Fundadores .Co-fundador .Imagen{
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    body main .Fundadores .Co-fundador .descripcion{
+        padding: 0;
+    }
+
+    body main .Fundadores .Co-fundador .descripcion h2{
+        font-size: 22px;
+    }
+
+    body main .Fundadores .Co-fundador .descripcion p{
+        font-size: 16px;
+        line-height: 1.7;
     }
 }

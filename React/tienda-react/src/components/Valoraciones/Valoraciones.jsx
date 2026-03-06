@@ -7,7 +7,9 @@ function Valoraciones()
 		<>
 			<h2>Valoraciones</h2>
 			<div className="Valoraciones">
-				<div className="imagenfundador"></div>
+				<div className="imagenfundador">
+					<img src="http://zent.es/imagenes_producto/Faker.png" />
+				</div>
 				<div className="BloqueInformativo">
 					<div className="Estrellas">
 						<p>⭐⭐⭐⭐⭐</p>

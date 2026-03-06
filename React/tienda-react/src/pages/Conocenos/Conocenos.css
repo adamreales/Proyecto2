@@ -27,6 +27,57 @@ body main .Fundacion .texto-fundacion {
   color: #333;
   max-width: 600px;
 }
+body main .Fundadores {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 50px;
+}
+body main .Fundadores .Co-fundador {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  align-items: start;
+  gap: 25px;
+  width: 100%;
+}
+body main .Fundadores .Co-fundador.cofundador-adrian {
+  grid-template-columns: 1fr 350px;
+}
+body main .Fundadores .Co-fundador.cofundador-adrian .descripcion {
+  grid-column: 1;
+  grid-row: 1;
+}
+body main .Fundadores .Co-fundador.cofundador-adrian .Imagen {
+  grid-column: 2;
+  grid-row: 1;
+}
+body main .Fundadores .Co-fundador .Imagen {
+  width: 100%;
+}
+body main .Fundadores .Co-fundador .Imagen img {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+body main .Fundadores .Co-fundador .descripcion {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 10px;
+}
+body main .Fundadores .Co-fundador .descripcion h2 {
+  margin: 0 0 20px 0;
+}
+body main .Fundadores .Co-fundador .descripcion p {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  line-height: 1.8;
+  color: #333;
+  text-align: left;
+}
 /* ========================= */
 /* TABLET */
 /* ========================= */
@@ -42,6 +93,16 @@ body main .Fundacion .texto-fundacion {
   body .Titulo {
     font-size: 18px;
     justify-content: center;
+  }
+  body main .Fundadores .Co-fundador {
+    grid-template-columns: 280px 1fr;
+    gap: 20px;
+  }
+  body main .Fundadores .Co-fundador.cofundador-adrian {
+    grid-template-columns: 1fr 280px;
+  }
+  body main .Fundadores .Co-fundador .descripcion p {
+    font-size: 18px;
   }
 }
 /* ========================= */
@@ -66,5 +127,32 @@ body main .Fundacion .texto-fundacion {
     padding: 15px;
     justify-content: center;
     text-align: center;
+  }
+  body main .Fundadores {
+    padding: 0 15px 35px;
+  }
+  body main .Fundadores .Co-fundador,
+  body main .Fundadores .Co-fundador.cofundador-adrian {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  body main .Fundadores .Co-fundador.cofundador-adrian .descripcion,
+  body main .Fundadores .Co-fundador.cofundador-adrian .Imagen {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  body main .Fundadores .Co-fundador .Imagen {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  body main .Fundadores .Co-fundador .descripcion {
+    padding: 0;
+  }
+  body main .Fundadores .Co-fundador .descripcion h2 {
+    font-size: 22px;
+  }
+  body main .Fundadores .Co-fundador .descripcion p {
+    font-size: 16px;
+    line-height: 1.7;
   }
 }

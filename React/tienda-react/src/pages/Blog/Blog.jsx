@@ -8,7 +8,24 @@ function  Blog() {
     <>
        <div className="pagina-blog"> 
          <h2>BLOG</h2>
-          <div className="blog-container">   
+          <div className="blog-container">  
+            <div className="post-blog">
+                  <div className="img-post">
+                      <img src="http://zent.es/imagenes_producto/gta6.webp" alt="Post 1" />
+                  </div>
+                  <div className="contenido-post">
+                      <h3>Grand Theft Auto VI (GTA 6)</h3>
+                      <p>
+                      Grand Theft Auto VI (GTA 6) es el próximo título de la popular serie de videojuegos de acción y aventura desarrollada por Rockstar Games. 
+                      Ambientado en un mundo abierto, el juego promete una narrativa envolvente, gráficos de última generación y una experiencia de juego inmersiva.
+                      </p>
+                      <p>
+                      Desde su lanzamiento, ha recibido críticas muy positivas tanto por parte de la comunidad como de la prensa especializada, posicionándose como uno de los títulos emergentes más prometedores del año. 
+                      GTA 6 demuestra el potencial creativo y técnico de la industria del videojuego.
+                      </p>
+                  </div>
+              </div>
+              <hr /> 
               <div className="post-blog">
                   <div className="img-post">
                       <img src="http://zent.es/imagenes_producto/crisol.jpg" alt="Post 1" />
