@@ -1,7 +1,9 @@
 import "./Conocenos.css";
-
+import 'leaflet/dist/leaflet.css';
+import Mapa from "../../components/Mapa/Mapa";
 
 function Conocenos() {
+  
   return (
     <>
       <div className="Titulo">
@@ -46,6 +48,9 @@ function Conocenos() {
             <img src="http://zent.es/imagenes_producto/conocenos2.jpeg"alt="Setup gaming Zent"/>
           </div>
         </article>
+
+        
+        <Mapa/>
 
         <article className="Fundadores">
            <div className="Co-fundador">

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Valoraciones from "../../components/Valoraciones/Valoraciones";
 import SeccionProductos from "../../components/SeccionProductos/SeccionProductos";
 import AnuncioVideojuego from "../../components/AnuncioVideoJuego/AnuncioVideojuego";
-
+import Mapa from "../../components/Mapa/Mapa";
 function Home() {
     const [masVendidos, setMasvendidos] = useState([]);
     const [masValorados, setMasvalorados] = useState([]);
@@ -118,6 +118,8 @@ function Home() {
                 <SeccionProductos titulo="Añadidos Recientemente" productos={recientes} />
                 {animalcrossing && (<AnuncioVideojuego imageSrc="http://zent.es/imagenes_producto/AnuncioJuego.jpg" producto={raiders} />)}
                 <SeccionProductos titulo="Weekly deals" productos={ofertas} />
+
+                 <Mapa/>
             </main>
         </>
     );

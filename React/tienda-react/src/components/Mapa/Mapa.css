@@ -1,0 +1,38 @@
+.mapa-localizacion {
+	width: min(1100px, 92%);
+	margin: 3rem auto;
+}
+
+.mapa-localizacion__encabezado {
+	margin-bottom: 1rem;
+}
+
+.mapa-localizacion__encabezado h2 {
+	margin: 0;
+	font-size: clamp(1.5rem, 2.4vw, 2rem);
+}
+
+.mapa-localizacion__encabezado p {
+	margin: 0.6rem 0 0;
+	color: #475569;
+	line-height: 1.5;
+}
+
+.mapa-localizacion__mapa {
+	height: 460px;
+	width: 100%;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+}
+
+@media (max-width: 768px) {
+	.mapa-localizacion {
+		margin: 2rem auto;
+	}
+
+	.mapa-localizacion__mapa {
+		height: 340px;
+		border-radius: 12px;
+	}
+}
