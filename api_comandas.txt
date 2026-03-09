@@ -55,28 +55,6 @@ Comandas API Backend Zent
                     {
                         "error": "Las contraseñas no coinciden"
                     }            
-    api/perfil
-        Descripcion
-            Devuelve la informacion del usuario loginado
-        get
-            Parametros / Request:
-                token -> el token del usuario
-            Retorno
-                Si funciona bien:
-                    Te devolvera un json
-                        "user": {
-                            "id": 1,
-                            "name": "Adrian",
-                            "email": "adrian@test.com",
-                            "email_verified_at": "2026-01-27T18:51:50.000000Z",
-                            "created_at": "2026-01-27T18:51:50.000000Z",
-                            "updated_at": "2026-01-27T18:51:50.000000Z"
-                        }
-                        'status' => 200
-                Si da error
-                    Te devolvera un json
-                        "error": "Error al devolver el usuario"
-                        'status' => 401
     api/productos
         Descripcion
             Devuelve toda la informacion de los productos
@@ -245,5 +223,99 @@ Comandas API Backend Zent
                 'categoria' => $cat
             Si no funciona bien
                 'error' => 'Categoria no encontrada'
-    /api/webhook
-        Descripcion
+
+    Middleware de carrito
+        api/crear_carrito
+            Descripcion
+                Crea el carrito del usuario registrado o invitado
+            post
+                Parametros
+                    Header
+                        X-Session-Id
+                    Retorno
+                        Si funciona bien
+                            'id_carrito' => $carrito->id, 
+                            'carrito' => 'Carrito activo'
+                            201
+                        No funciona bien
+                            'error' => $e->getMessage()
+                            400
+        api/anadir_carrito
+            Descripcion
+                Añade un producto al carrito del usuario 
+            post
+                Parametros
+                    Header
+                        X-Session-Id
+                    Body
+                        id_producto,
+                        cantidad
+                    Retorno
+                        Si funciona bien
+                            'carrito' => 'Eliminado el producto del carrito'
+                        No funciona bien
+                            'error' => $e->getMessage()
+        api/quitar_carrito
+            Descripcion
+                Quita el producto del carrito
+            post
+                Parametros
+                    Header
+                        X-Session-Id
+                    Body
+                        id_producto
+                    Retorno
+                        Si funciona bien
+                            'id_carrito' => $carrito->id, 
+                            'carrito' => 'Carrito activo'
+                        No funciona bien
+                            'error' => $e->getMessage()
+        api/ver_carrito
+            Descripcion
+                Ver el carrito del usuario
+            post
+                Parametros
+                    Header
+                        X-Session-Id
+                    Retorno
+                        Si funciona bien
+                            carrito' => [],
+                            'msg' => 'Carrito vacío'
+                            |
+                            'carrito' => $items_carrito,
+                            'msg' => 'Ver carrito'
+                        No funciona bien
+                            'error' => $e->getMessage()
+    Middleware Sanctum
+        api/perfil
+            Descripcion
+                Devuelve la informacion del usuario loginado
+            get
+                Parametros / Request:
+                    token -> el token del usuario
+                Retorno
+                    Si funciona bien:
+                        Te devolvera un json
+                            "user": {
+                                "id": 1,
+                                "name": "Adrian",
+                                "email": "adrian@test.com",
+                                "email_verified_at": "2026-01-27T18:51:50.000000Z",
+                                "created_at": "2026-01-27T18:51:50.000000Z",
+                                "updated_at": "2026-01-27T18:51:50.000000Z"
+                            }
+                            'status' => 200
+                    Si da error
+                        Te devolvera un json
+                            "error": "Error al devolver el usuario"
+                            'status' => 401
+        api/cerrar_session
+            Descripcion
+                Cierra la session del usuario
+            Parametros
+                ninguno
+            Retorno
+                Si funciona bien
+                    'msg' => 'Session Cerrada'
+                Si no funciona bien
+                    'error' => 'Error no existe el usuario'
