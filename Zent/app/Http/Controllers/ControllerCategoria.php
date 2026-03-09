@@ -18,6 +18,7 @@ class ControllerCategoria extends Controller
         }
 
         return response()->json([
+            'msg' => 'Categorias encontradas',
             'categorias' => $cats
         ]);
     }
@@ -32,6 +33,7 @@ class ControllerCategoria extends Controller
         }
 
         return response()->json([
+            'msg' => 'Categoria encontrada',
             'categoria' => $cat
         ]);
     }
