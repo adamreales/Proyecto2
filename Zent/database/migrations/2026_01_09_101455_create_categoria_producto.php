@@ -21,6 +21,7 @@ return new class extends Migration
                 ->constrained('categoria')
                 ->cascadeOnDelete();
             $table->primary(['id_producto','id_categoria']);
+            $table->softDeletes();
         });
     }
 

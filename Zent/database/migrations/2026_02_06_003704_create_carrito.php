@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('activo_unico')->storedAs("estado = 'Activo'");
             $table->unique(['id_usuario','activo_unico']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

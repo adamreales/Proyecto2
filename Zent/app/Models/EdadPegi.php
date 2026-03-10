@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\DescripcionPegi;
 use App\Models\Juego;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EdadPegi extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = "edad_pegi";
 

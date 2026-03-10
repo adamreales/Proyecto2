@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Producto;
 use App\Models\EdadPegi;
 use App\Models\Plataforma;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Juego extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = "juego";
 

@@ -20,6 +20,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->string("url",255);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -19,6 +19,7 @@ return new class extends Migration
                 ->constrained('producto')
                 ->cascadeOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
