@@ -35,7 +35,9 @@ const TarjetaPago = ({ total }) => {
 
       window.location.href = data.url;
 
-    }catch{
+    }catch(error){
+      console.error("Error al procesar el pago:", error);
+      console.log("total" + total);
       setError('Error al procesar el pago');
       setLoading(false);
     }
@@ -47,6 +49,7 @@ const TarjetaPago = ({ total }) => {
            <div className='box-price'>
              <p className="precio">Total: </p>
              <p className="precio">{total} €</p>
+             
            </div>
 
             <button className="btn-Pagar" onClick={handlePagar} disabled={loading}>
