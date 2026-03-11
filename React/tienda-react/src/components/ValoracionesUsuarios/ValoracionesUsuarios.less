@@ -1,0 +1,153 @@
+/*VARIABLES */
+
+/*COLORES */
+@neon-azul: #00eaff;
+@neon-magenta: #ff2fd0;
+
+
+/*MIDAS DE LETRA*/
+@mida-letra-botones : 15px;
+@mida-letra-p:20px;
+
+/*TIPOS DE LETRAS*/
+@tipo-letra-btn:'Inter', sans-serif;
+@tipo-letra-gaming:'Orbitron', sans-serif;
+@tipo-letra-p:'Inter',sans-serif;
+
+/*padding*/
+@padding-pantalla:20px;
+
+.valoraciones-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 20px;
+
+    .valoraciones-list{
+        display: grid; 
+        grid-template-columns: repeat(3,1fr);
+        width: 100%;
+        gap:20px;
+        color:white;
+      .valoracion-box{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 0px;
+            margin: 0px;
+            border-radius: 10px;
+            background-color:rgb(55, 52, 52);
+        .valoracion-datos{
+                display:flex;
+                justify-content: space-around;
+                width: 100%;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            p{
+                font-family: @tipo-letra-p;
+                font-size: @mida-letra-p;
+                padding: 10px;
+            }
+        }
+    }
+
+    .valoraciones-header{
+        width: 100%;
+        display:flex;
+        justify-content:space-between;
+    }
+    .valoraciones-botones{
+    display: flex;
+    gap: 10px;
+  }
+
+  button{
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    .mario{
+      width: 90px;
+      transition: transform 0.25s ease;
+      animation: idle 2s infinite ease-in-out;
+    }
+  }button:focus,
+  button:active{
+    outline: none;
+    box-shadow: none;
+  }
+
+  /* Hover derecha (corre hacia la derecha) */
+  .btn-next-val:hover .mario{
+    transform: translateX(15px);
+    animation: none;
+  }
+
+  .btn-prev-val:hover .mario{
+    transform: translateX(-15px);
+    animation: none;
+  }
+
+  /* Sprint al hacer click */
+  .btn-next-val:active .mario{
+    transform: translateX(30px) scale(1.05);
+  }
+
+  .btn-prev-val:active .mario{
+    transform: translateX(30px) scale(1.05);
+  }
+
+  /* Estado desactivado */
+  button:disabled{
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    .mario{
+      opacity: 0.4;
+      transform: scale(0.9);
+      animation: none;
+    }
+  }
+}
+
+/* Animación suave cuando está quieto */
+@keyframes idle{
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+.box-seccion{
+  width: 100%;
+
+  .MasVendidos{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:20px;
+  }
+}
+
+@media(max-width:1200px){
+  .box-seccion{
+    .MasVendidos{
+      grid-template-columns: repeat(2,1fr);
+      gap:20px;
+    }
+  }
+}
+
+@media(max-width:768px){
+  .box-seccion{
+    .MasVendidos{
+      grid-template-columns: 1fr;
+    }
+  }
+}

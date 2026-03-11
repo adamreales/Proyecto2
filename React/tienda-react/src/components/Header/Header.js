@@ -62,9 +62,9 @@ export function useHeaderCart() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-Session-Id": sessionId,
           Authorization: token ? `Bearer ${token}` : "",
-        },
-        body: JSON.stringify({ session_id: sessionId }),
+        }
       });
 
       const data = await parseJsonSafe(res);
@@ -111,11 +111,10 @@ export function useHeaderCart() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: token ? `Bearer ${token}` : "",
+          "X-Session-Id": sessionId
         },
         body: JSON.stringify({
-          id_producto: id,
-          session_id: sessionId,
+          id_producto: id
         }),
       });
 

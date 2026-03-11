@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const TarjetaPago = ({ total }) => {
 
-  const [loading,setLoadiong] = useState(false);
+  const [loading,setLoading] = useState(false);
   const [error,setError] = useState('');
 
   const handlePagar = async () => {
@@ -16,13 +16,22 @@ const TarjetaPago = ({ total }) => {
     setLoading(true);
 
     try{
-      const res = await fetch('http://localhost:8000/create-checkout-session',{
+      const res = await fetch('http://localhost:8000/api/preparar_pago',{
         method : 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          "Content-Type": "application/json",
+          "X-Session-Id": localStorage.getItem("sessionId")
+        },
         body: JSON.stringify({ amount: total * 100 })
       });
-
       const data = await res.json();
+
+      if (!data.url) {
+        console.error("Stripe no devolvió URL:", data);
+        setError("No se pudo iniciar el pago");
+        setLoading(false);
+        return;
+      }
 
       window.location.href = data.url;
 

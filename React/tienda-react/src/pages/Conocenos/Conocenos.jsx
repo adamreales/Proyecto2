@@ -49,9 +49,6 @@ function Conocenos() {
           </div>
         </article>
 
-        
-        <Mapa/>
-
         <article className="Fundadores">
            <div className="Co-fundador">
              <div className="Imagen">
@@ -82,7 +79,7 @@ function Conocenos() {
               </div>
            </div>
         </article>
-
+        <Mapa/>
         
       </main>
     </>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Caracteristicas from "../../components/Caracteristicas/Caracteristicas";
 import Recomendaciones from "../../components/Recomendaciones/Recomendaciones";
 import SeccionProductos from "../../components/SeccionProductos/SeccionProductos";
+import ValoracionesUsuarios from "../../components/ValoracionesUsuarios/ValoracionesUsuarios";
 
 function Producto() {
   const { id } = useParams();
@@ -33,19 +34,19 @@ function Producto() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ session_id: sessionId }),
+          "X-Session-Id" : sessionId
+        }
       });
 
       const res = await fetch("http://localhost:8000/api/anadir_carrito", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-Session-Id" : sessionId
         },
         body: JSON.stringify({
           id_producto: producto.id,
-          cantidad: 1,
-          session_id: sessionId,
+          cantidad: 1
         }),
       });
 
@@ -150,6 +151,7 @@ function Producto() {
       <div className="Descripciones">
           <Caracteristicas producto={producto} />
       </div>
+      <ValoracionesUsuarios producto={producto}/>
       <Recomendaciones producto={producto} />
 
       <SeccionProductos titulo="Lo Mas Vendidos" productos={masVendidosFiltrados} reload={true} />
