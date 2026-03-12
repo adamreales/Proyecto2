@@ -29,68 +29,58 @@
     }
     //do_plataformas.nombre
     .box-datos{
-        border-radius: 10px;
         width: 100%;
         height: 350px;
-        padding-top: 50px;
-        //background: radial-gradient(circle,rgba(255, 252, 252, 1) 29%, rgba(70, 252, 231, 1) 100%);
-       
+        padding-top: 50px;   
         display: flex;
         justify-content: center;
         flex-direction: column;
         align-items: center;
         gap:30px;
+
         h1{
             font-family: @tipo-letra-gaming;
             color: black;
             font-size: 40px;
             margin-top: 20px;
         }
-
-        .Stream{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;              // separación icono-texto
-            padding: 5px 18px;      // da forma de cápsula
-            border-radius: 999px;
-            background-color: black;
-            color: white;
-            width:300px;
-           
-        }
-
-        .precio
-        {  
-            display: flex;
-            width: 100%;
-            margin:10px; 
-            justify-content: left;
-            align-items: center;
-
-            .final{
-                width: 300px;
-                font-family: @tipo-letra-p;
-                color: black;
-                font-size: 30px;
+       
+        .contenedorpegiplataformas{
+            display: grid;
+            grid-template-columns: 0.2fr 1fr;
+            gap:40px;
+            
+            .pegi{
+                display: flex;
+                align-items: end;       
+                width: 100px;
+                img{
+                    width: 75px;
+                    height: 90px;
+                }
             }
-
-            p{
-                font-family: @tipo-letra-p; 
-                font-size: 20px;
-                padding-right: 40px;
-            }
-         
+            .scriptplataformas
+            {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                gap:20px;
+                span{
+                    font-size: 35px;
+                    font-weight: bold;
+                }
+                .plataformas{
+                    width: 200px;
+                    height: auto;
+                    border-radius: 10px;
+                    padding: 10px;            
+                }
+            }          
         }
-        
-
-        .plataformas{
-            width: 200px;
-            height: auto;
-            border-radius: 10px;
-            padding: 10px;            
+        .valoracion-estrellas{
+            font-size: 20px;
         }
-
         .btn-box{
             display: flex;
             gap:10px;

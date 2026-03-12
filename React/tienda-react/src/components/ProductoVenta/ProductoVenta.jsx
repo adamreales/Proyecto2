@@ -8,7 +8,7 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
                     ) : (
                         <ul>
                             {cartItems.map((item) => {
-                                const stockMaximo = Math.max(1, Number(item.stock) || Number(item.cantidad) || 1);
+                                const stockMaximo = Math.max(1, Number(item.stock) || 1);
                                 const cantidadSeleccionada = Math.min(Number(item.cantidad) || 1, stockMaximo);
 
                                 return (

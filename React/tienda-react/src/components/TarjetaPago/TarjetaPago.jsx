@@ -16,24 +16,41 @@ const TarjetaPago = ({ total }) => {
     setLoading(true);
 
     try{
-      const res = await fetch('http://localhost:8000/api/preparar_pago',{
+      // Paso 1: crear el pedido
+      const resPedido = await fetch('http://localhost:8000/api/preparar_pago',{
         method : 'POST',
         headers: {
           "Content-Type": "application/json",
           "X-Session-Id": localStorage.getItem("sessionId")
-        },
-        body: JSON.stringify({ amount: total * 100 })
+        }
       });
-      const data = await res.json();
+      const dataPedido = await resPedido.json();
 
-      if (!data.url) {
-        console.error("Stripe no devolvió URL:", data);
-        setError("No se pudo iniciar el pago");
+      if (!resPedido.ok || !dataPedido.pedido_id) {
+        console.error("Error al crear pedido:", dataPedido);
+        setError(dataPedido.error || "No se pudo crear el pedido");
         setLoading(false);
         return;
       }
 
-      window.location.href = data.url;
+      // Paso 2: crear sesión de Stripe y obtener URL de pago
+      const resPago = await fetch(`http://localhost:8000/api/pagar_pedido/${dataPedido.pedido_id}`,{
+        method : 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "X-Session-Id": localStorage.getItem("sessionId")
+        }
+      });
+      const dataPago = await resPago.json();
+
+      if (!resPago.ok || !dataPago.checkout_url) {
+        console.error("Stripe no devolvió URL:", dataPago);
+        setError(dataPago.error || "No se pudo iniciar el pago");
+        setLoading(false);
+        return;
+      }
+
+      window.location.href = dataPago.checkout_url;
 
     }catch(error){
       console.error("Error al procesar el pago:", error);

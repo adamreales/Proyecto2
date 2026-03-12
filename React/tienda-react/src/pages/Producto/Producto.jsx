@@ -77,6 +77,20 @@ function Producto() {
         .catch(err => console.error(err));
   }, []);
 
+  function escollirpegi() {
+    if(producto?.do_juego?.do_pegi?.[0]?.edad === 3){
+      return "pegi3.jpg";
+    }
+    else if(producto?.do_juego?.do_pegi?.[0]?.edad === 7){
+      return "pegi7.jpg";
+    }else if(producto?.do_juego?.do_pegi?.[0]?.edad === 12){
+      return "pegi12.png";
+    }else if(producto?.do_juego?.do_pegi?.[0]?.edad === 16){
+      return "pegi16.png";
+    }else{
+      return "pegi18.png";
+    }
+  }
   if (!producto) {
     return <div>Cargando...</div>;
   }
@@ -97,35 +111,36 @@ function Producto() {
           <div>
             <h1>{producto?.titulo}</h1>
             <p>{producto?.descripcion}</p>
+            
           </div>
 
-          <div className="Stream">
-            <p>Steam | En stock | Descarga digital</p>
+          <div className="contenedorpegiplataformas">
+              <div className="pegi">
+                  <img src={`http://zent.es/imagenes_producto/${escollirpegi()}`}/>
+              </div>
+              <div className="scriptplataformas">
+                <span className="final">{producto?.precio} € </span>
+                <select className="plataformas">
+                  {producto?.do_juego?.do_plataformas?.map(plataforma => (
+                    <option key={plataforma.id} value={plataforma.id}>
+                      {plataforma.nombre}
+                    </option>
+                  ))}
+                </select>
+              </div>
           </div>
-
-          <select className="plataformas">
-            {producto?.do_juego?.do_plataformas?.map(plataforma => (
-              <option key={plataforma.id} value={plataforma.id}>
-                {plataforma.nombre}
-              </option>
+          <p className="valoracion-estrellas">
+            Valoraciones :
+            {Array.from({ length: valoracion }, (_, index) => (
+              <span
+                key={index}
+                className="estrella llena"
+                aria-hidden="true"
+              >
+                ⭐ 
+              </span>
             ))}
-          </select>
-
-          <div className="precio">
-            <span className="final">{producto?.precio} € </span>
-            <p className="valoracion-estrellas">
-              Valoraciones :
-              {Array.from({ length: 5 }, (_, index) => (
-                <span
-                  key={index}
-                  className={`estrella ${index < valoracion ? "llena" : "vacia"}`}
-                  aria-hidden="true"
-                >
-                  ⭐
-                </span>
-              ))}
-            </p>
-          </div>
+          </p>
 
           <div className="btn-box">
             <button className="btn-favoritos">❤️</button>
