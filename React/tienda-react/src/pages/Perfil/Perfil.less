@@ -7,86 +7,53 @@
 @tipo-letra-gaming: 'Orbitron', sans-serif;
 @tipo-letra-p: 'Inter', sans-serif;
 
-.Perfil-page{
-    margin: 0;
-    width:100%;
+.Perfil-page
+{
     display: flex;
-    justify-content: center;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url('http://zent.es/imagenes_producto/FondoPerfil.jpeg');
-        .Perfil
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap:20px;
+    .Cabezera
+    {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        h2
         {
-            margin:0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-
-            .Perfil-card{
-                border-radius: 10px;
-                border: 2px solid @neon-azul;
-                padding: 60px;
-                width:400px;
-                height: 500px;
-                box-sizing: border-box;
-
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-
-                .perfil{
-                    text-align: center;
-                    margin-bottom: 20px;
-                    h1{
-                        font-family: @tipo-letra-gaming;
-                        font-size: 60px;
-                        color: black;
-                        margin: 0;
-                    }
-                }
-
-                .datos{
-                    width: 100%;
-                    margin-top: 60px;
-                    text-align: left;
-                    margin-bottom: 20px;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    
-                    p{
-                        font-family: @tipo-letra-p;
-                        font-size: 15px;
-                        color: black;
-                        margin: 6px 0;
-                    }
-
-                }
-                button
-                {
-                    background: transparent;
-                    font-family: @tipo-letra-btn;
-                    font-size: 15px;
-                    padding: 10px 20px;
-                    border: none;
-                    border-radius: 5px;
-                    border: 1px solid @neon-azul;
-                    cursor: pointer;
-                    transition: background-color 0.3s ease;
-                    margin-top: 60px;
-
-                    &:hover {
-                        background: @neon-azul;
-                        color: black;
-                        box-shadow: 0 0 10px fade(@neon-azul, 70%);
-                    }
-                }
-            }
-
-            
+            font-family: @tipo-letra-gaming;
+            font-size: 25px;
         }
+
+        .btn-volver
+        {
+            background-color: transparent;
+            border: 2px solid @neon-magenta;
+            color: @neon-magenta;
+            padding: 10px 20px;
+            font-family: @tipo-letra-btn;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover
+            {
+                background-color: @neon-magenta;
+                color: #fff;
+            }
+        }
+    }
+
+    .Configuracion{
+        display: flex;
+        justify-content:space-around;
+        width: 100%;
+        
+            button{
+                background-color: transparent;
+                border: none;
+                width: 200px;
+            }
+    }
 }

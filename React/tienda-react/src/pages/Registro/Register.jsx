@@ -10,6 +10,8 @@ function Register() {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+  const [capsLock, setCapsLock] = useState(false);
+  const [capsLockConfirm, setCapsLockConfirm] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,38 +39,60 @@ function Register() {
    
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email : " />
 
-          <div className="password-row">
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Contraseña : "
-            />
-            <button
-              type="button"
-              className="btn-ojo"
-              onClick={() => setShowPassword(!showPassword)}
-              aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
-            >
-              {showPassword ? "🙈" : "👁️"}
-            </button>
+          <div className="password-wrapper">
+            <div className="password-row">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyUp={(e) => setCapsLock(e.getModifierState("CapsLock"))}
+                onFocus={(e) => setCapsLock(e.getModifierState("CapsLock"))}
+                onBlur={() => setCapsLock(false)}
+                placeholder="Contraseña : "
+              />
+              <button
+                type="button"
+                className="btn-ojo"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+              >
+                <span className="material-symbols-outlined">{showPassword ? "visibility_off" : "visibility"}</span>
+              </button>
+            </div>
+            {capsLock && (
+              <p className="aviso-capslock">
+                <span className="material-symbols-outlined aviso-icon">keyboard_capslock</span>
+                Mayúsculas activadas
+              </p>
+            )}
           </div>
 
-          <div className="password-row">
-            <input
-              type={showPasswordConfirm ? "text" : "password"}
-              value={passwordConfirm}
-              onChange={(e) => setPasswordConfirm(e.target.value)}
-              placeholder="Confirmar contraseña : "
-            />
-            <button
-              type="button"
-              className="btn-ojo"
-              onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
-              aria-label={showPasswordConfirm ? "Ocultar confirmación" : "Mostrar confirmación"}
-            >
-              {showPasswordConfirm ? "🙈" : "👁️"}
-            </button>
+          <div className="password-wrapper">
+            <div className="password-row">
+              <input
+                type={showPasswordConfirm ? "text" : "password"}
+                value={passwordConfirm}
+                onChange={(e) => setPasswordConfirm(e.target.value)}
+                onKeyUp={(e) => setCapsLockConfirm(e.getModifierState("CapsLock"))}
+                onFocus={(e) => setCapsLockConfirm(e.getModifierState("CapsLock"))}
+                onBlur={() => setCapsLockConfirm(false)}
+                placeholder="Confirmar contraseña : "
+              />
+              <button
+                type="button"
+                className="btn-ojo"
+                onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+                aria-label={showPasswordConfirm ? "Ocultar confirmación" : "Mostrar confirmación"}
+              >
+                <span className="material-symbols-outlined">{showPasswordConfirm ? "visibility_off" : "visibility"}</span>
+              </button>
+            </div>
+            {capsLockConfirm && (
+              <p className="aviso-capslock">
+                <span className="material-symbols-outlined aviso-icon">keyboard_capslock</span>
+                Mayúsculas activadas
+              </p>
+            )}
           </div>
 
           <div className="Botones">
