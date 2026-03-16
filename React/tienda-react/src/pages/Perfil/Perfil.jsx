@@ -51,24 +51,37 @@ function Perfil()
 
     if(!user) return <p>Cargando el perfil....</p>;
     return (
-       <div className="Perfil-page">
-            <div className="Perfil">
-                <div className="Perfil-card">
-                        <div className="perfil">
-                            <h1>Mi Perfil</h1>
-                        </div>
-                        <div className="datos">
-                            <p><b>Nombre:  </b> {user.name}</p>
-                            <p><b>Email:  </b> {user.email}</p>
-                            <p><b>Te uniste a Zent el :   </b> {" "} 
-                            { new Date(user.created_at).toLocaleDateString("es-ES")}</p>
-                        </div> 
-                        <Link to="/"><button type="submit"className="btn-volver">Volver</button></Link>
-                        <button className="btn-volver"onClick={cerrarSession}> Cerrar sesión</button>
-                        
+        <>
+            <h1>Mi Perfil</h1>
+            <div className="Perfil-page">            
+                <div className="Cabezera">
+                    <h2>Hola,<b> {user.name}</b></h2> 
+                    <button className="btn-volver"onClick={cerrarSession}> Cerrar sesión</button>
+                </div>
+
+                <div className="Configuracion">
+                        <button className="btn-config">MIS DATOS</button>
+                        <button className="btn-config">MIS TARJETAS</button>
+                
+                        <button className="btn-config">LIBRETA DE DIRECCIONES</button>
+                        <button className="btn-config">MIS PEDIDOS</button>
+                </div>
+                <h2>Tus Últimos Pedidos Realizados</h2>
+                <div className="box-pedidos">
+                    <div>
+                         <p>aqui iran los pedidos</p>
+                    </div>
+                </div>
+                <h2>Libreta de direcciones</h2>
+                <div className="box-direcciones">
+                    <a>Holaaa</a>
+                </div>
+                <h2>Mis Opiniones de Productos</h2>
+                <div className="box-opiniones">
+                    <a>Holaaa</a>
                 </div>
             </div>
-       </div>
+       </>
     );
 }
 export default Perfil;

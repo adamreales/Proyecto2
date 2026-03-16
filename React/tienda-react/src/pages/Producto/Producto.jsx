@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Caracteristicas from "../../components/Caracteristicas/Caracteristicas";
 import Recomendaciones from "../../components/Recomendaciones/Recomendaciones";
 import SeccionProductos from "../../components/SeccionProductos/SeccionProductos";
+import ValoracionesUsuarios from "../../components/ValoracionesUsuarios/ValoracionesUsuarios";
 
 function Producto() {
   const { id } = useParams();
@@ -33,19 +34,19 @@ function Producto() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ session_id: sessionId }),
+          "X-Session-Id" : sessionId
+        }
       });
 
       const res = await fetch("http://localhost:8000/api/anadir_carrito", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-Session-Id" : sessionId
         },
         body: JSON.stringify({
           id_producto: producto.id,
-          cantidad: 1,
-          session_id: sessionId,
+          cantidad: 1
         }),
       });
 
@@ -76,6 +77,20 @@ function Producto() {
         .catch(err => console.error(err));
   }, []);
 
+  function escollirpegi() {
+    if(producto?.do_juego?.do_pegi?.[0]?.edad === 3){
+      return "pegi3.jpg";
+    }
+    else if(producto?.do_juego?.do_pegi?.[0]?.edad === 7){
+      return "pegi7.jpg";
+    }else if(producto?.do_juego?.do_pegi?.[0]?.edad === 12){
+      return "pegi12.png";
+    }else if(producto?.do_juego?.do_pegi?.[0]?.edad === 16){
+      return "pegi16.png";
+    }else{
+      return "pegi18.png";
+    }
+  }
   if (!producto) {
     return <div>Cargando...</div>;
   }
@@ -96,35 +111,36 @@ function Producto() {
           <div>
             <h1>{producto?.titulo}</h1>
             <p>{producto?.descripcion}</p>
+            
           </div>
 
-          <div className="Stream">
-            <p>Steam | En stock | Descarga digital</p>
+          <div className="contenedorpegiplataformas">
+              <div className="pegi">
+                  <img src={`http://zent.es/imagenes_producto/${escollirpegi()}`}/>
+              </div>
+              <div className="scriptplataformas">
+                <span className="final">{producto?.precio} € </span>
+                <select className="plataformas">
+                  {producto?.do_juego?.do_plataformas?.map(plataforma => (
+                    <option key={plataforma.id} value={plataforma.id}>
+                      {plataforma.nombre}
+                    </option>
+                  ))}
+                </select>
+              </div>
           </div>
-
-          <select className="plataformas">
-            {producto?.do_juego?.do_plataformas?.map(plataforma => (
-              <option key={plataforma.id} value={plataforma.id}>
-                {plataforma.nombre}
-              </option>
+          <p className="valoracion-estrellas">
+            Valoraciones :
+            {Array.from({ length: valoracion }, (_, index) => (
+              <span
+                key={index}
+                className="estrella llena"
+                aria-hidden="true"
+              >
+                ⭐ 
+              </span>
             ))}
-          </select>
-
-          <div className="precio">
-            <span className="final">{producto?.precio} € </span>
-            <p className="valoracion-estrellas">
-              Valoraciones :
-              {Array.from({ length: 5 }, (_, index) => (
-                <span
-                  key={index}
-                  className={`estrella ${index < valoracion ? "llena" : "vacia"}`}
-                  aria-hidden="true"
-                >
-                  ⭐
-                </span>
-              ))}
-            </p>
-          </div>
+          </p>
 
           <div className="btn-box">
             <button className="btn-favoritos">❤️</button>
@@ -150,6 +166,7 @@ function Producto() {
       <div className="Descripciones">
           <Caracteristicas producto={producto} />
       </div>
+      <ValoracionesUsuarios producto={producto}/>
       <Recomendaciones producto={producto} />
 
       <SeccionProductos titulo="Lo Mas Vendidos" productos={masVendidosFiltrados} reload={true} />

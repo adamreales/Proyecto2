@@ -1,7 +1,9 @@
 import "./Conocenos.css";
-
+import 'leaflet/dist/leaflet.css';
+import Mapa from "../../components/Mapa/Mapa";
 
 function Conocenos() {
+  
   return (
     <>
       <div className="Titulo">
@@ -77,7 +79,7 @@ function Conocenos() {
               </div>
            </div>
         </article>
-
+        <Mapa/>
         
       </main>
     </>

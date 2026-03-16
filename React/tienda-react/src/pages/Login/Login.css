@@ -1,5 +1,5 @@
-/* COLORES */
-/* TIPOGRAFÍA */
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0");
+
 /* PANTALLA */
 .login-page {
   min-height: 100vh;
@@ -7,118 +7,224 @@
   justify-content: center;
   align-items: center;
   background: white;
-}
-/* TARJETA LOGIN */
-.login-container {
-  width: 360px;
-  padding: 40px;
-  background: white;
-  border-radius: 15px;
-  border: 1px solid #00eaff;
-  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
-}
-.login-container .btn-volver {
-  display: flex;
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-.login-container .btn-volver img {
-  width: 100px;
-  height: auto;
-}
-/* TÍTULO */
-.titulo-login {
-  font-family: 'Orbitron', sans-serif;
-  color: black;
-  text-align: center;
-  margin: 0;
-}
-/* FORMULARIO */
-.formulario {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center;
-}
-.formulario input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-family: 'Inter', sans-serif;
-}
-.formulario input:focus {
-  outline: none;
-  border-color: #00eaff;
-  box-shadow: 0 0 5px rgba(0, 234, 255, 0.6);
-}
-.password-row {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.password-row input {
-  flex: 1;
-}
-.password-row .btn-ojo {
-  border:none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 18px;
-}
-.password-row .btn-ojo:hover {
-  border-color: #00eaff;
-}
-.formulario .Botones {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
-  width: 100%;
+
+  /* TARJETA LOGIN */
+  .login-container {
+    width: 360px;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    border: 1px solid #00eaff;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+
+    .btn-volver {
+      display: flex;
+      justify-content: center;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+
+      img {
+        width: 100px;
+        height: auto;
+      }
+    }
+
+    /* TÍTULO */
+    .titulo-login {
+      font-family: 'Orbitron', sans-serif;
+      color: black;
+      text-align: center;
+      margin: 0;
+    }
+
+    /* FORMULARIO */
+    .formulario {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+
+      > input,
+      .password-row,
+      .password-row > input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      > input,
+      .password-row > input {
+        height: 44px;
+        padding: 10px 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-family: 'Inter', sans-serif;
+      }
+
+      > input:focus,
+      .password-row > input:focus {
+        outline: none;
+        border-color: #00eaff;
+        box-shadow: 0 0 5px rgba(0, 234, 255, 0.6);
+      }
+
+      .password-wrapper {
+        width: 100%;
+      }
+
+      .password-row {
+        position: relative;
+      }
+
+      .password-row > input {
+        padding-right: 44px;
+      }
+
+      .password-row .btn-ojo {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        border: none;
+        background: transparent;
+        color: #5f6368;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .password-row .btn-ojo .material-symbols-outlined {
+        font-size: 20px;
+        line-height: 1;
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+
+      .password-row .btn-ojo:hover {
+        color: #00a8bb;
+      }
+
+      .aviso-capslock {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin: 4px 0 0 2px;
+        color: #e0001b;
+        font-size: 12px;
+        font-family: 'Inter', sans-serif;
+      }
+
+      .aviso-capslock .aviso-icon {
+        font-size: 15px;
+        line-height: 1;
+      }
+
+      .input-group {
+        width: 90%;
+        position: relative;
+
+        .input-login {
+          width: 100%;
+          height: 44px;
+          padding: 10px 10px;
+          border-radius: 8px;
+          border: 1px solid #ccc;
+          font-family: 'Inter', sans-serif;
+          box-sizing: border-box;
+
+          &:focus {
+            outline: none;
+            border-color: #00eaff;
+            box-shadow: 0 0 5px rgba(0, 234, 255, 0.6);
+          }
+        }
+
+        &.input-password {   
+          width: 90%;
+          .btn-ojo {
+            position: relative;
+            z-index:2;
+            top: 50%;
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            color: #5f6368;      
+
+            &:hover {
+              color: #00a8bb;
+            }
+
+            &:active {
+              transform: translateY(-50%) scale(0.9);
+            }
+
+            .material-symbols-outlined {
+              font-size: 20px;
+              line-height: 1;
+            }
+          }
+        }
+      }
+
+      .Botones {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 25px;
+        width: 100%;
+
+        a {
+          flex: 1;
+
+          .btn-registro {
+            width: 100%;
+          }
+        }
+
+        .btn-login,
+        .btn-registro {
+          margin-top: 20px;
+          align-self: center;
+          width: 100%;
+          padding: 10px 25px;
+          border-radius: 8px;
+          background: transparent;
+          color: black;
+          font-family: 'Inter', sans-serif;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .btn-login {
+          border: 1px solid #00eaff;
+          flex: 1;
+
+          &:hover {
+            background: #00eaff;
+            color: white;
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.7);
+          }
+        }
+
+        .btn-registro {
+          border: 1px solid #ff2fd0;
+
+          &:hover {
+            background: #ff2fd0;
+            color: white;
+            box-shadow: 0 0 10px rgba(255, 47, 208, 0.7);
+          }
+        }
+      }
+    }
+  }
 }
 
-.formulario .Botones a {
-  flex: 1;
-}
-
-.formulario .Botones a .btn-registro {
-  width: 100%;
-}
-
-.formulario .Botones .btn-login,
-.formulario .Botones .btn-registro {
-  margin-top: 20px;
-  align-self: center;
-  width: 100%;
-  padding: 10px 25px;
-  border-radius: 8px;
-  background: transparent;
-  color: black;
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.formulario .Botones .btn-login {
-  border: 1px solid #00eaff;
-  flex: 1;
-}
-.formulario .Botones .btn-login:hover {
-  background: #00eaff;
-  color: white;
-  box-shadow: 0 0 10px rgba(0, 234, 255, 0.7);
-}
-.formulario .Botones .btn-registro {
-  border: 1px solid #ff2fd0;
-}
-.formulario .Botones .btn-registro:hover {
-  background: #ff2fd0;
-  color: white;
-  box-shadow: 0 0 10px rgba(255, 47, 208, 0.7);
-}
+/* GLOBAL */
 button:focus,
 button:focus-visible {
   outline: none !important;

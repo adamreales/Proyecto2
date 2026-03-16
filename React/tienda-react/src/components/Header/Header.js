@@ -35,7 +35,7 @@ export function useHeaderCart() {
           item.stock ??
           0
       );
-      const stock = stockValue > 0 ? stockValue : Number(item.cantidad) || 1;
+      const stock = stockValue > 0 ? stockValue : 1;
 
       return {
         id: item.id_producto,
@@ -62,9 +62,9 @@ export function useHeaderCart() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-Session-Id": sessionId,
           Authorization: token ? `Bearer ${token}` : "",
-        },
-        body: JSON.stringify({ session_id: sessionId }),
+        }
       });
 
       const data = await parseJsonSafe(res);
@@ -111,11 +111,10 @@ export function useHeaderCart() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: token ? `Bearer ${token}` : "",
+          "X-Session-Id": sessionId
         },
         body: JSON.stringify({
-          id_producto: id,
-          session_id: sessionId,
+          id_producto: id
         }),
       });
 
@@ -133,26 +132,62 @@ export function useHeaderCart() {
     }
   };
 
-  const actualizarCantidad = (id, nuevaCantidad) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) => {
-        if (item.id !== id) {
-          return item;
-        }
+  const actualizarCantidad = useCallback(async (id, nuevaCantidad) => {
+    const item = cartItems.find(i => i.id === id);
+    if (!item) return;
 
-        const stockMaximo = Math.max(1, Number(item.stock) || 1);
-        const cantidadClampeada = Math.max(
-          1,
-          Math.min(Number(nuevaCantidad) || 1, stockMaximo)
-        );
+    const stockMaximo = Math.max(1, Number(item.stock) || 1);
+    const cantidadClampeada = Math.max(1, Math.min(Number(nuevaCantidad) || 1, stockMaximo));
 
-        return {
-          ...item,
-          cantidad: cantidadClampeada,
-        };
-      })
-    );
-  };
+    if (cantidadClampeada === item.cantidad) return;
+
+    // Actualización optimista para UI fluida
+    setCartItems(prev => prev.map(i => i.id === id ? { ...i, cantidad: cantidadClampeada } : i));
+
+    try {
+      const token = localStorage.getItem("token");
+      const sessionId = getSessionId();
+      const headers = {
+        "Content-Type": "application/json",
+        "X-Session-Id": sessionId,
+        ...(token ? { Authorization: `Bearer ${token}` } : {})
+      };
+      const delta = cantidadClampeada - item.cantidad;
+
+      if (delta > 0) {
+        // Aumentar: enviar solo el delta
+        const res = await fetch("http://localhost:8000/api/anadir_carrito", {
+          method: "POST",
+          headers,
+          body: JSON.stringify({ id_producto: id, cantidad: delta }),
+        });
+        const data = await parseJsonSafe(res);
+        if (!res.ok) throw new Error(data.error || "No se pudo actualizar");
+      } else {
+        // Reducir: borrar ítem y volver a añadir con la cantidad nueva
+        const resQuitar = await fetch("http://localhost:8000/api/quitar_carrito", {
+          method: "POST",
+          headers,
+          body: JSON.stringify({ id_producto: id }),
+        });
+        const dataQuitar = await parseJsonSafe(resQuitar);
+        if (!resQuitar.ok) throw new Error(dataQuitar.error || "No se pudo quitar");
+
+        const resAnadir = await fetch("http://localhost:8000/api/anadir_carrito", {
+          method: "POST",
+          headers,
+          body: JSON.stringify({ id_producto: id, cantidad: cantidadClampeada }),
+        });
+        const dataAnadir = await parseJsonSafe(resAnadir);
+        if (!resAnadir.ok) throw new Error(dataAnadir.error || "No se pudo actualizar");
+      }
+
+      await loadCart();
+    } catch (error) {
+      console.error("Error al actualizar cantidad:", error);
+      await loadCart(); // Revertir recargando desde el backend
+    }
+  }, [cartItems, loadCart]);
 
   const totalItems = cartItems.reduce(
     (total, item) => total + (item.cantidad || 0),

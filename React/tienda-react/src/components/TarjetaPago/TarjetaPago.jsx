@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const TarjetaPago = ({ total }) => {
 
-  const [loading,setLoadiong] = useState(false);
+  const [loading,setLoading] = useState(false);
   const [error,setError] = useState('');
 
   const handlePagar = async () => {
@@ -16,17 +16,45 @@ const TarjetaPago = ({ total }) => {
     setLoading(true);
 
     try{
-      const res = await fetch('http://localhost:8000/create-checkout-session',{
+      // Paso 1: crear el pedido
+      const resPedido = await fetch('http://localhost:8000/api/preparar_pago',{
         method : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: total * 100 })
+        headers: {
+          "Content-Type": "application/json",
+          "X-Session-Id": localStorage.getItem("sessionId")
+        }
       });
+      const dataPedido = await resPedido.json();
 
-      const data = await res.json();
+      if (!resPedido.ok || !dataPedido.pedido_id) {
+        console.error("Error al crear pedido:", dataPedido);
+        setError(dataPedido.error || "No se pudo crear el pedido");
+        setLoading(false);
+        return;
+      }
 
-      window.location.href = data.url;
+      // Paso 2: crear sesión de Stripe y obtener URL de pago
+      const resPago = await fetch(`http://localhost:8000/api/pagar_pedido/${dataPedido.pedido_id}`,{
+        method : 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "X-Session-Id": localStorage.getItem("sessionId")
+        }
+      });
+      const dataPago = await resPago.json();
 
-    }catch{
+      if (!resPago.ok || !dataPago.checkout_url) {
+        console.error("Stripe no devolvió URL:", dataPago);
+        setError(dataPago.error || "No se pudo iniciar el pago");
+        setLoading(false);
+        return;
+      }
+
+      window.location.href = dataPago.checkout_url;
+
+    }catch(error){
+      console.error("Error al procesar el pago:", error);
+      console.log("total" + total);
       setError('Error al procesar el pago');
       setLoading(false);
     }
@@ -38,6 +66,7 @@ const TarjetaPago = ({ total }) => {
            <div className='box-price'>
              <p className="precio">Total: </p>
              <p className="precio">{total} €</p>
+             
            </div>
 
             <button className="btn-Pagar" onClick={handlePagar} disabled={loading}>

@@ -1,74 +1,42 @@
 /* COLORES */
 /* TIPOGRAFÍA */
 .Perfil-page {
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url('http://zent.es/imagenes_producto/FondoPerfil.jpeg');
+  gap: 20px;
 }
-.Perfil-page .Perfil {
-  margin: 0;
-  height: 100vh;
+.Perfil-page .Cabezera {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  width: 100%;
 }
-.Perfil-page .Perfil .Perfil-card {
-  border-radius: 10px;
-  border: 2px solid #00eaff;
-  padding: 60px;
-  width: 400px;
-  height: 500px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.Perfil-page .Perfil .Perfil-card .perfil {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.Perfil-page .Perfil .Perfil-card .perfil h1 {
+.Perfil-page .Cabezera h2 {
   font-family: 'Orbitron', sans-serif;
-  font-size: 60px;
-  color: black;
-  margin: 0;
+  font-size: 25px;
 }
-.Perfil-page .Perfil .Perfil-card .datos {
-  width: 100%;
-  margin-top: 60px;
-  text-align: left;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.Perfil-page .Perfil .Perfil-card .datos p {
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  color: black;
-  margin: 6px 0;
-}
-.Perfil-page .Perfil .Perfil-card button {
-  background: transparent;
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
+.Perfil-page .Cabezera .btn-volver {
+  background-color: transparent;
+  border: 2px solid #ff2fd0;
+  color: #ff2fd0;
   padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  border: 1px solid #00eaff;
+  font-family: 'Inter', sans-serif;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 60px;
+  transition: all 0.3s ease;
 }
-.Perfil-page .Perfil .Perfil-card button:hover {
-  background: #00eaff;
-  color: black;
-  box-shadow: 0 0 10px rgba(0, 234, 255, 0.7);
+.Perfil-page .Cabezera .btn-volver:hover {
+  background-color: #ff2fd0;
+  color: #fff;
+}
+.Perfil-page .Configuracion {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.Perfil-page .Configuracion button {
+  background-color: transparent;
+  border: none;
+  width: 200px;
 }

@@ -69,7 +69,7 @@ function Home() {
     }, []);
 
     useEffect(() => {
-        fetchJson("http://127.0.0.1:8000/api/productos_mas_actuales")
+        fetchJson("http://127.0.0.1:8000/api/productos_mas_baratos")
         .then(data => setOfertas(data.productos || []))
         .catch(err => console.error("Home ofertas:", err));
     },[]);
@@ -118,6 +118,7 @@ function Home() {
                 <SeccionProductos titulo="Añadidos Recientemente" productos={recientes} />
                 {animalcrossing && (<AnuncioVideojuego imageSrc="http://zent.es/imagenes_producto/AnuncioJuego.jpg" producto={raiders} />)}
                 <SeccionProductos titulo="Weekly deals" productos={ofertas} />
+
             </main>
         </>
     );

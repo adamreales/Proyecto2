@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 
 import PublicLayout from "./layouts/PublicLayout/PublicLayout";
 import AuthLayout from "./layouts/AuthLayout/AuthLayout";
-
 import Home from "./pages/Home/Home";
 import Conocenos from "./pages/Conocenos/Conocenos";
 import Login from "./pages/Login/Login";

@@ -1,0 +1,126 @@
+/*VARIABLES */
+/*COLORES */
+/*MIDAS DE LETRA*/
+/*TIPOS DE LETRAS*/
+/*padding*/
+.valoraciones-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 20px;
+  /* Hover derecha (corre hacia la derecha) */
+  /* Sprint al hacer click */
+  /* Estado desactivado */
+}
+.valoraciones-container .valoraciones-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  gap: 20px;
+  color: white;
+}
+.valoraciones-container .valoraciones-list .valoracion-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  border-radius: 10px;
+  background-color: #373434;
+}
+.valoraciones-container .valoraciones-list .valoracion-box .valoracion-datos {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+.valoraciones-container .valoraciones-list .valoracion-box p {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  padding: 10px;
+}
+.valoraciones-container .valoraciones-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.valoraciones-container .valoraciones-botones {
+  display: flex;
+  gap: 10px;
+}
+.valoraciones-container button {
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+.valoraciones-container button .mario {
+  width: 90px;
+  transition: transform 0.25s ease;
+  animation: idle 2s infinite ease-in-out;
+}
+.valoraciones-container button:focus,
+.valoraciones-container button:active {
+  outline: none;
+  box-shadow: none;
+}
+.valoraciones-container .btn-next-val:hover .mario {
+  transform: translateX(15px);
+  animation: none;
+}
+.valoraciones-container .btn-prev-val:hover .mario {
+  transform: translateX(-15px);
+  animation: none;
+}
+.valoraciones-container .btn-next-val:active .mario {
+  transform: translateX(30px) scale(1.05);
+}
+.valoraciones-container .btn-prev-val:active .mario {
+  transform: translateX(30px) scale(1.05);
+}
+.valoraciones-container button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.valoraciones-container button:disabled .mario {
+  opacity: 0.4;
+  transform: scale(0.9);
+  animation: none;
+}
+/* Animación suave cuando está quieto */
+@keyframes idle {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.box-seccion {
+  width: 100%;
+}
+.box-seccion .MasVendidos {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 1200px) {
+  .box-seccion .MasVendidos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .box-seccion .MasVendidos {
+    grid-template-columns: 1fr;
+  }
+}
