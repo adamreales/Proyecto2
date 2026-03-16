@@ -94,19 +94,26 @@ class ControllerStripe extends Controller
         $secret = env('STRIPE_WEBHOOK_SECRET');
 
         try {
-            $event = \Stripe\Webhook::constructEvent($payload, $signature, $secret);
+            $event = Webhook::constructEvent(
+                $payload,
+                $signature,
+                $secret
+            );
         } catch (\Exception $e) {
-            return response('Webhook error', 400);
+            return response()->json([
+                'error' => 'Webhook signature invalid'
+            ], 400);
         }
 
         if ($event->type === 'checkout.session.completed') {
 
-            DB::transaction(function () use ($event) {
+            $session = $event->data->object;
 
-                $session = $event->data->object;
+            DB::transaction(function () use ($session) {
+
                 $pedidoId = $session->metadata->pedido_id;
 
-                $pedido = \App\Models\Pedido::lockForUpdate()->find($pedidoId);
+                $pedido = Pedido::lockForUpdate()->find($pedidoId);
 
                 if (!$pedido || $pedido->estado !== 'pendiente') {
                     return;
@@ -121,7 +128,7 @@ class ControllerStripe extends Controller
                     $producto = Producto::lockForUpdate()->find($detalle->id_producto);
 
                     if ($producto->stock < $detalle->cantidad) {
-                        throw new \Exception("Stock inconsistente en webhook");
+                        throw new \Exception("Stock inconsistente");
                     }
 
                     $producto->ventas += $detalle->cantidad;
@@ -133,13 +140,15 @@ class ControllerStripe extends Controller
                 $pedido->stripe_payment_intent = $session->payment_intent;
                 $pedido->save();
 
-                Carrito::where('id',$pedido->id_carrito)->where('estado','Activo')->update(['estado'=>'Cerrado']);
+                Carrito::where('id', $pedido->id_carrito)
+                    ->where('estado', 'Activo')
+                    ->update(['estado' => 'Cerrado']);
             });
         }
 
-        return response([
-            'msg' => 'Webhook completado'
-        ], 200);
+        return response()->json([
+            'status' => 'ok'
+        ]);
     }
 
 }
