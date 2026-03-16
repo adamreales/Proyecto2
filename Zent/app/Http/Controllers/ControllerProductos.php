@@ -53,6 +53,7 @@ class ControllerProductos extends Controller
         }
 
         return response()->json([
+            'msg' => 'Productos mas vendidos',
             'productos' => $productos
         ]);
 
@@ -74,6 +75,7 @@ class ControllerProductos extends Controller
         }
 
         return response()->json([
+            'msg' => 'Productos mas populares',
             'productos' => $productos
         ]);
 
@@ -95,6 +97,7 @@ class ControllerProductos extends Controller
         }
 
         return response()->json([
+            'msg' => 'Productos mas actuales',
             'productos' => $productos
         ]);
 
@@ -116,6 +119,7 @@ class ControllerProductos extends Controller
         }
 
         return response()->json([
+            'msg' => 'Productos mas baratos',
             'productos' => $productos
         ]);
 
