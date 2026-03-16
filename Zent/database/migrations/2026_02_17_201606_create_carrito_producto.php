@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('cantidad');
             $table->unique(['id_carrito','id_producto']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

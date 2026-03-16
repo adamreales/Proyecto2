@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('juego_id');
 
             $table->primary(['plataforma_id', 'juego_id']);
+            $table->softDeletes();
         });
     }
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('edad_pegi_id');
 
             $table->primary(['juego_id', 'edad_pegi_id']);
+            $table->softDeletes();
         });
     }
 

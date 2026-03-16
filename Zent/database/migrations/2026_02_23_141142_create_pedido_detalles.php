@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('cantidad');
             $table->decimal('subtotal',10,2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

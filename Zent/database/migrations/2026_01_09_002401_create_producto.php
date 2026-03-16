@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedInteger("ventas")->default(0);
             $table->unsignedInteger("stock");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

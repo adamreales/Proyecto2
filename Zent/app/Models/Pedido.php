@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pedido extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'pedidos';
 
@@ -18,7 +19,7 @@ class Pedido extends Model
     }
 
     public function doUsuario(){
-        return $this->belongsTo(User::class,'id_usuario');
+        return $this->belongsTo(User::class,'id_usuario','id');
     }
 
 }

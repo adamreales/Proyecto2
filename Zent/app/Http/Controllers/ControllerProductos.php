@@ -128,6 +128,7 @@ class ControllerProductos extends Controller
     public function producto($id){
         $producto = Producto::with([
             'doValoraciones',
+            'doValoraciones.doUsuario',
             'doImagenes',
             'doCategorias',
             'doJuego.doPlataformas',
