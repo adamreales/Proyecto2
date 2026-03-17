@@ -66,8 +66,8 @@ class ControllerStripe extends Controller
                 'mode' => 'payment',
                 'payment_method_types' => ['card'],
                 'line_items' => $productos,
-                'success_url' => env('FRONT_URL').'/', //pago-exito?session_id={CHECKOUT_SESSION_ID}
-                'cancel_url' => env('FRONT_URL').'/', //carrito
+                'success_url' => env('FRONT_URL').'/aceptada', //pago-exito?session_id={CHECKOUT_SESSION_ID}
+                'cancel_url' => env('FRONT_URL').'/denegada', //carrito
                 'metadata' => [
                     'pedido_id' => $pedido->id
                 ]

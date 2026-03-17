@@ -50,6 +50,9 @@ const TarjetaPago = ({ total }) => {
         return;
       }
 
+      // Conserva el último pedido para mostrarlo al volver de Stripe.
+      localStorage.setItem("ultimoPedidoId", String(dataPedido.pedido_id));
+
       window.location.href = dataPago.checkout_url;
 
     }catch(error){
