@@ -14,6 +14,8 @@ import Oulet from "./pages/Oulet/Oulet";
 import Blog from "./pages/Blog/Blog";
 import Merchan from "./pages/Merchan/Merchan";
 import Carrito from "./pages/Carrito/Carrito";
+import Denegada from "./pages/Denegada/Denegada";
+import Aceptada from "./pages/Aceptada/Aceptada";
 import "./App.css";
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/merchan" element={<Merchan />} />
         <Route path="/carrito" element={<Carrito />} />
+        <Route path="/denegada" element={<Denegada />} />
+        <Route path="/aceptada" element={<Aceptada />} />
       </Route>
 
       {/* RUTAS DE AUTENTICACIÓN */}
