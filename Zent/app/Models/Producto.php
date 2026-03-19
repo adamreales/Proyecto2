@@ -29,6 +29,10 @@ class Producto extends Model
         return $this->hasOne(Juego::class,'id_producto');
     }
 
+    public function doPegi(){
+        return $this->belongsTo(EdadPegi::class,'pegi_id');
+    }
+
     public function doValoraciones(){
         return $this->hasMany(Valoracion::class,'id_producto');
     }
@@ -46,5 +50,14 @@ class Producto extends Model
         );
     }
 
+    public function doPlataformas()
+    {
+        return $this->belongsToMany(
+            Plataforma::class,
+            'plataforma_juego',
+            'juego_id',
+            'plataforma_id'
+        );
+    }
 
 }

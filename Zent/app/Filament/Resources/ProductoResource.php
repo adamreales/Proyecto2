@@ -6,7 +6,11 @@ use App\Filament\Resources\ProductoResource\Pages;
 use App\Filament\Resources\ProductoResource\RelationManagers\DoCategoriasRelationManager;
 use App\Filament\Resources\ProductoResource\RelationManagers\ImagenesRelationManager;
 use App\Models\Producto;
+use Dom\Text;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Resources\Form;
@@ -57,6 +61,8 @@ class ProductoResource extends Resource
 
             TextInput::make('stock')
                 ->numeric()
+                ->minValue(1)
+                ->default(1)
                 ->prefix('u')
                 ->required(),
 
@@ -64,6 +70,31 @@ class ProductoResource extends Resource
                 ->numeric()
                 ->default(0)
                 ->disabled(),
+
+            Select::make('doPegi.id')
+                ->relationship('doPegi', 'edad')
+                ->required(),
+
+            Select::make('doPlataformas')
+                ->relationship('doPlataformas', 'nombre')
+                ->multiple()
+                ->preload()
+                ->required(),
+
+            Select::make('doCategorias')
+                ->relationship('doCategorias', 'nombre')
+                ->multiple()
+                ->preload()
+                ->required(),
+
+            Repeater::make('doImagenes')
+                ->relationship('doImagenes')
+                ->schema([
+                    TextInput::make('url')
+                        ->label('URL Imagen')
+                ])
+                ->columnSpanFull()
+
 
         ]);
     }
