@@ -124,6 +124,38 @@ header{
         font-weight: bold;
     }
 
+    .idiomas {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        margin-left: 6px;
+
+        .btn-idioma {
+            margin: 0;
+            padding: 4px 6px;
+            min-width: 34px;
+            border: 1px solid #c9c9c9;
+            border-radius: 6px;
+            background-color: #fff;
+            color: black;
+            font-family: @tipo-letra-btn;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1;
+            cursor: pointer;
+
+            &[aria-pressed=true] {
+                border-color: black;
+                background-color: black;
+                color: #fff;
+            }
+
+            &:hover {
+                border-color: black;
+            }
+        }
+    }
+
     /* MINI CARRITO */
     .mini-cart {
         position: absolute;

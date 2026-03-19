@@ -1,0 +1,225 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "notAvailable": "Not available"
+  },
+  "header": {
+    "nav": {
+      "home": "HOME",
+      "videogames": "VIDEOGAMES",
+      "blog": "BLOG",
+      "about": "ABOUT US",
+      "outlet": "OUTLET"
+    },
+    "login": "Log in",
+    "register": "Sign up",
+    "cart": "Cart",
+    "myCart": "My cart",
+    "emptyCart": "Your cart is empty",
+    "quantity": "Quantity",
+    "total": "Total",
+    "goToCart": "Go to cart",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language"
+  },
+  "home": {
+    "bestSellers": "Best sellers",
+    "topRated": "Top rated",
+    "reservations": "Pre-orders",
+    "recentAdditions": "Recently added",
+    "weeklyDeals": "Weekly deals",
+    "reviews": "Reviews"
+  },
+  "footer": {
+    "whoWeAre": "WHO WE ARE",
+    "aboutUs": "About us",
+    "careers": "Careers",
+    "tour": "Tour",
+    "support": "SUPPORT",
+    "affiliatePrograms": "Affiliate programs",
+    "advertise": "Advertise",
+    "faq": "FAQ",
+    "partners": "PARTNERS",
+    "knowledgeBase": "Knowledge base",
+    "videoGuides": "Video guides",
+    "reportBug": "Report a bug",
+    "legal": "LEGAL",
+    "privacyPolicy": "Privacy policy",
+    "termsConditions": "Terms & conditions",
+    "cookiePolicy": "Cookie policy",
+    "newsletter": "NEWSLETTER",
+    "emailPlaceholder": "Enter your email",
+    "copyright": "Copyright © 2026 Zent"
+  },
+  "login": {
+    "title": "Log in",
+    "email": "Email:",
+    "password": "Password:",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "capsLock": "Caps Lock is on",
+    "submit": "Log in",
+    "register": "Sign up",
+    "invalid": "Invalid login"
+  },
+  "register": {
+    "title": "Sign up",
+    "name": "Name:",
+    "email": "Email:",
+    "password": "Password:",
+    "confirmPassword": "Confirm password:",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "showConfirmation": "Show confirmation",
+    "hideConfirmation": "Hide confirmation",
+    "capsLock": "Caps Lock is on",
+    "submit": "Create account",
+    "success": "User registered successfully",
+    "error": "Registration failed"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "continueShopping": "Continue shopping",
+    "delete": "Delete"
+  },
+  "payment": {
+    "total": "Total",
+    "pay": "Pay",
+    "redirecting": "Redirecting...",
+    "totalMustBeGreaterThanZero": "Total must be greater than 0",
+    "createOrderError": "Could not create the order",
+    "paymentStartError": "Could not start the payment",
+    "processPaymentError": "Error while processing the payment"
+  },
+  "normas": {
+    "privacyTitle": "Privacy Policy",
+    "privacy1": "On this website we collect and process personal information to improve the user experience.",
+    "privacy2": "The data may include name, email address, or any other information voluntarily provided.",
+    "privacy3": "The information is only used to manage requests and improve the service.",
+    "privacy4": "Data will not be shared with third parties unless legally required.",
+    "termsTitle": "Terms & Conditions",
+    "terms1": "Accessing this site implies acceptance of these terms.",
+    "terms2": "The user agrees to make proper use of the content.",
+    "terms3": "The company is not responsible for misuse of the site.",
+    "cookiesTitle": "Cookie Policy",
+    "cookies1": "This site uses cookies to improve browsing.",
+    "cookies2": "Users can configure their browser to block them.",
+    "legalTitle": "Legal Notice",
+    "legal1": "Informational content. We are not responsible for external links.",
+    "legal2": "All content is protected by copyright."
+  },
+  "about": {
+    "title": "WHO ARE WE?",
+    "foundation1": "We are Zent, a company founded by two young developers with a strong passion for technology, gaming, and digital performance. We created Zent to offer computer products and tech accessories designed for users who want to improve their day-to-day experience and productivity. We are inspired by top gaming players, their mindset of constant improvement, and the importance of having the right equipment to perform at the highest level.",
+    "foundation2": "That is why we carefully select each product, prioritizing quality, functionality, and modern design. At Zent we do not just sell technology: we build an experience focused on performance, comfort, and optimization of the digital environment, whether for playing or working. We believe a good setup makes the difference, and our mission is to help you create yours.",
+    "adamRole": "Adam Reales — Co-founder and Lead Frontend Engineer",
+    "adamBio": "Adam Reales is co-founder of ZENT, a platform specialized in digital video game commerce and gaming industry content, conceived to integrate online store, news, and community into one ecosystem. As a Web Applications Developer, he has led the entire technical and strategic conception of the platform frontend. From the earliest stages of the project, Adam has been responsible for defining the brand naming, the interface architecture, the user experience design (UX/UI), and the web client implementation using React, betting on a modern component-based architecture focused on performance and scalability. In addition to the visual layer of the platform, he has also managed the initial project infrastructure, including acquiring and configuring hosting, optimizing deployment, and planning the digital presence and social media growth strategy. His approach combines development, product, and strategic vision, driving ZENT's digital identity from the start.",
+    "adrianRole": "Adrián — Co-founder and Backend Engineer",
+    "adrianBio": "Adrián, also co-founder of ZENT, is responsible for the backend architecture and business logic that support the platform. As a Web Applications Developer, he has designed and developed the system infrastructure with a focus on robustness, security, and scalability. The platform backend has been implemented using PHP with the Laravel framework, integrating Filament to build an advanced admin panel that enables efficient management of products, users, content, and internal operations. His responsibilities include data model design, database creation and optimization, API and internal services implementation, as well as structuring the business logic that connects the online store, management system, and content platform."
+  },
+  "map": {
+    "aria": "Location map",
+    "title": "Visit our physical store",
+    "description": "To enjoy a unique shopping experience, we invite you to visit our physical store in the heart of Barcelona. We are located in the Splau Shopping Center, 50 meters from Barcelona's best stadium and just a short walk from the city's main attractions. Come and discover our wide catalog of products, get personalized advice, and enjoy a welcoming atmosphere designed for you. We are waiting for you with open arms.",
+    "storeName": "Zent Store",
+    "storeAddress": "Splau Shopping Center, Unit 21",
+    "storeCity": "Barcelona, Spain"
+  },
+  "blog": {
+    "title": "BLOG",
+    "post1": {
+      "title": "Grand Theft Auto VI (GTA 6)",
+      "p1": "Grand Theft Auto VI (GTA 6) is the upcoming title in Rockstar Games' popular action-adventure video game series. Set in an open world, the game promises an engaging narrative, cutting-edge graphics, and an immersive gameplay experience.",
+      "p2": "Since its announcement, it has received very positive reactions from both the community and the specialized press, positioning itself as one of the most promising emerging titles of the year. GTA 6 showcases the creative and technical potential of the video game industry."
+    },
+    "post2": {
+      "title": "CRISOL, the new Spanish game",
+      "p1": "Crisol is the new Spanish video game attracting international attention thanks to its innovative proposal and strong visual identity. Developed by an independent local studio, it combines action, immersive storytelling, and unique art direction that sets it apart in today's landscape.",
+      "p2": "Since its reveal, it has received very positive reviews from both the community and the specialized press, positioning itself as one of the most promising emerging titles of the year. Crisol demonstrates the creative and technical potential of the Spanish video game industry."
+    },
+    "post3": {
+      "title": "Pokémon FireRed / LeafGreen Editions",
+      "p1": "Pokémon FireRed and LeafGreen are remakes released in 2004 for Game Boy Advance, developed by Game Freak and published by Nintendo. They are updated versions of the original 1996 Pokémon Red and Pokémon Green titles from the first generation of the franchise.",
+      "p2": "Set in the Kanto region, the player begins their adventure by choosing Bulbasaur, Charmander, or Squirtle as their starter Pokémon, with the goal of becoming Pokémon League Champion and completing the Pokédex. These editions introduced graphical improvements, new mechanics inherited from the third generation, and additional content such as the Sevii Islands, expanding the original experience.",
+      "p3": "FireRed and LeafGreen marked a new stage for the franchise on Game Boy Advance, consolidating the series' international success and bringing the first generation closer to a new generation of players."
+    },
+    "post4": {
+      "title": "Super Mario Odyssey",
+      "p1": "Super Mario Odyssey is a 3D platform video game developed and published by Nintendo for Nintendo Switch in 2017. It is one of the most ambitious entries in the Super Mario series, bringing back the free exploration style seen in games like Super Mario 64 and Super Mario Sunshine.",
+      "p2": "In this adventure, Mario travels through different kingdoms around the world to rescue Princess Peach from Bowser. The main new feature of the game is Cappy, a living hat that allows Mario to capture and control enemies, objects, and even creatures from the environment, adding an innovative and strategic gameplay mechanic.",
+      "p3": "The game was acclaimed by critics for its level design, creativity, and freedom of exploration, becoming one of the most successful and highly rated titles in the Nintendo Switch catalog."
+    },
+    "post5": {
+      "title": "Kirby and the Forgotten Land",
+      "p1": "Kirby and the Forgotten Land is a 3D platform game developed by HAL Laboratory and published by Nintendo for Nintendo Switch in 2022. It is the character's first fully three-dimensional adventure, marking a turning point in the evolution of the series.",
+      "p2": "In this entry, Kirby awakens in a mysterious world with settings that resemble an abandoned civilization. Throughout the adventure, he must rescue the kidnapped Waddle Dees while exploring open levels, defeating enemies, and using his classic copy abilities by absorbing powers such as fire, sword, or ice.",
+      "p3": "One of the biggest new features is Mouthful Mode, which allows Kirby to transform into environmental objects such as cars, vending machines, or traffic cones, expanding gameplay possibilities and creating fun, original situations.",
+      "p4": "The title was very well received by critics thanks to its accessible design, colorful art direction, and balance between challenge and entertainment, consolidating Kirby as one of Nintendo's strongest franchises."
+    }
+  },
+  "videogames": {
+    "title": "VIDEOGAMES",
+    "priceAsc": "Price ↑",
+    "priceDesc": "Price ↓",
+    "alphaAsc": "Alphabetically A-Z",
+    "alphaDesc": "Alphabetically Z-A",
+    "categories": "Categories",
+    "platforms": "Platforms",
+    "page": "Page"
+  },
+  "outlet": {
+    "title": "OUTLET"
+  },
+  "product": {
+    "loading": "Loading...",
+    "ratings": "Ratings",
+    "addToCart": "Add to cart",
+    "bestSellers": "Best sellers"
+  },
+  "features": {
+    "title": "Features",
+    "genre": "Genre",
+    "mode": "Mode",
+    "platforms": "Platforms",
+    "rating": "Rating",
+    "languages": "Languages",
+    "defaultGenre": "Action",
+    "modeValue": "Single player / Online",
+    "languagesValue": "Spanish, English"
+  },
+  "reviews": {
+    "title": "Reviews",
+    "summary": "ZENT is an incredible platform to buy PC, PlayStation, Xbox, and Switch games at lower prices, with instant delivery 24 hours a day.",
+    "feedbacks": "1,568,884 user feedbacks",
+    "userTitle": "User reviews",
+    "name": "Name"
+  },
+  "recommendations": {
+    "title": "Recommendations",
+    "text": "If you have any questions, problems, or need recommendations about a game, our team is always ready to help you. At Zent we are available 24 hours a day to offer advice, solve incidents, and support you at all times, whether it is to choose your next gaming experience, fix an error, or receive personalized assistance. We want you to enjoy everything without worries, so we provide constant, close, and fast support, making sure there is always someone on the other side when you need it."
+  },
+  "profile": {
+    "loading": "Loading profile...",
+    "title": "My profile",
+    "hello": "Hello",
+    "logout": "Log out",
+    "myData": "My data",
+    "addressBook": "Address book",
+    "myOrders": "My orders",
+    "recentOrders": "Your latest orders",
+    "noOrdersYet": "Your orders will appear here",
+    "addressBookTitle": "Address book",
+    "productOpinions": "My product reviews",
+    "emptySection": "No content yet"
+  },
+  "checkout": {
+    "successTitle": "Purchase completed successfully.",
+    "successMessage": "Your payment has been processed correctly. Thank you for your purchase.",
+    "orderNumber": "Your order number is {{orderNumber}}. The invoice has been sent to your email address.",
+    "downloadHere": "You can also download it here",
+    "unavailable": "not available",
+    "errorMessage": "The purchase could not be completed. A problem occurred while processing the payment. Please try again or use another payment method."
+  }
+}

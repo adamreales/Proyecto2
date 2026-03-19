@@ -1,16 +1,47 @@
 import "./Caracteristicas.css";
+import { useTranslation } from "react-i18next";
 
 function Caracteristicas({ producto }) {
+  const { t } = useTranslation();
+
   return (
     <div className="card-info">
-      <h2>Características</h2>
+      <h2>{t("features.title")}</h2>
 
       <div className="Especificado">
-        <div className="box-informacion"><img src="http://zent.es/imagenes_producto/modo.png"/><strong>Género: </strong> {producto.do_juego?.genero || "Acción"}</div>
-        <div className="box-informacion"><img src="http://zent.es/imagenes_producto/genero.png"/><strong>Modo:</strong> Single Player / Online</div>
-        <div className="box-informacion"><img src="http://zent.es/imagenes_producto/plataformas.png"/><strong>Plataformas:</strong> {producto.do_juego.do_plataformas?.map(p => p.nombre).join(", ")}</div>
-        <div className="box-informacion"><img src="http://zent.es/imagenes_producto/Lanzamiento.png"/><strong>Valoracion:</strong> {producto.valoracion || "No disponible"} / 5</div>
-        <div className="box-informacion"><img src="http://zent.es/imagenes_producto/Idiomas.jpg"/><strong>Idiomas:</strong> Español, Inglés</div>
+
+        <div className="box-informacion">
+          <img src="http://zent.es/imagenes_producto/modo.png"/>
+          <strong>{t("features.genre")}:</strong>{" "}
+          {producto.do_juego?.genero || t("features.defaultGenre")}
+        </div>
+
+        <div className="box-informacion">
+          <img src="http://zent.es/imagenes_producto/genero.png"/>
+          <strong>{t("features.mode")}:</strong>{" "}
+          {t("features.modeValue")}
+        </div>
+
+        <div className="box-informacion">
+          <img src="http://zent.es/imagenes_producto/plataformas.png"/>
+          <strong>{t("features.platforms")}:</strong>{" "}
+          {producto.do_juego?.do_plataformas
+            ?.map((p) => p.nombre)
+            .join(", ")}
+        </div>
+
+        <div className="box-informacion">
+          <img src="http://zent.es/imagenes_producto/Lanzamiento.png"/>
+          <strong>{t("features.rating")}:</strong>{" "}
+          {producto.valoracion || t("common.notAvailable")} / 5
+        </div>
+
+        <div className="box-informacion">
+          <img src="http://zent.es/imagenes_producto/Idiomas.jpg"/>
+          <strong>{t("features.languages")}:</strong>{" "}
+          {t("features.languagesValue")}
+        </div>
+
       </div>
     </div>
   );

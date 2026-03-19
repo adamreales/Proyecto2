@@ -12,7 +12,6 @@ import Videojuegos from "./pages/Videojuegos/Videojuegos";
 import Producto from "./pages/Producto/Producto";
 import Oulet from "./pages/Oulet/Oulet";
 import Blog from "./pages/Blog/Blog";
-import Merchan from "./pages/Merchan/Merchan";
 import Carrito from "./pages/Carrito/Carrito";
 import Denegada from "./pages/Denegada/Denegada";
 import Aceptada from "./pages/Aceptada/Aceptada";
@@ -33,7 +32,6 @@ function App() {
         <Route path="/producto/:id" element={<Producto />} />
         <Route path="/oulet" element={<Oulet />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/merchan" element={<Merchan />} />
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/denegada" element={<Denegada />} />
         <Route path="/aceptada" element={<Aceptada />} />

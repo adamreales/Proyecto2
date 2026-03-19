@@ -1,11 +1,13 @@
 import "./Home.less";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Valoraciones from "../../components/Valoraciones/Valoraciones";
 import SeccionProductos from "../../components/SeccionProductos/SeccionProductos";
 import AnuncioVideojuego from "../../components/AnuncioVideoJuego/AnuncioVideojuego";
 
 function Home() {
+    const { t } = useTranslation();
     const [masVendidos, setMasvendidos] = useState([]);
     const [masValorados, setMasvalorados] = useState([]);
     const [productos, setProductos] = useState([]);
@@ -105,19 +107,19 @@ function Home() {
             </article>
 
             <main>
-                <SeccionProductos titulo="Los Mas Vendidos" productos={masVendidos} />
-                <SeccionProductos titulo="Los Mas Valorados" productos={masValorados} />
+                <SeccionProductos titulo={t("home.bestSellers")} productos={masVendidos} />
+                <SeccionProductos titulo={t("home.topRated")} productos={masValorados} />
              
                 {animalcrossing && (<AnuncioVideojuego imageSrc="http://zent.es/imagenes_producto/AnimalCrosin.jpg" producto={animalcrossing} />
 )}
 
-                <SeccionProductos titulo="Reservas" productos={productos} />
+                <SeccionProductos titulo={t("home.reservations")} productos={productos} />
 
                 <Valoraciones />
 
-                <SeccionProductos titulo="Añadidos Recientemente" productos={recientes} />
+                <SeccionProductos titulo={t("home.recentAdditions")} productos={recientes} />
                 {animalcrossing && (<AnuncioVideojuego imageSrc="http://zent.es/imagenes_producto/AnuncioJuego.jpg" producto={raiders} />)}
-                <SeccionProductos titulo="Weekly deals" productos={ofertas} />
+                <SeccionProductos titulo={t("home.weeklyDeals")} productos={ofertas} />
 
             </main>
         </>

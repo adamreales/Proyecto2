@@ -1,0 +1,225 @@
+{
+  "common": {
+    "loading": "Carregant...",
+    "notAvailable": "No disponible"
+  },
+  "header": {
+    "nav": {
+      "home": "INICI",
+      "videogames": "VIDEOJOCS",
+      "blog": "BLOG",
+      "about": "CONEIX-NOS",
+      "outlet": "OUTLET"
+    },
+    "login": "Inicia sessió",
+    "register": "Registra't",
+    "cart": "Carret",
+    "myCart": "El meu carret",
+    "emptyCart": "El teu carret està buit",
+    "quantity": "Quantitat",
+    "total": "Total",
+    "goToCart": "Anar al carret",
+    "openMenu": "Obrir menú",
+    "closeMenu": "Tancar menú",
+    "language": "Idioma"
+  },
+  "home": {
+    "bestSellers": "Els més venuts",
+    "topRated": "Els més valorats",
+    "reservations": "Reserves",
+    "recentAdditions": "Afegits recentment",
+    "weeklyDeals": "Ofertes setmanals",
+    "reviews": "Valoracions"
+  },
+  "footer": {
+    "whoWeAre": "QUI SOM",
+    "aboutUs": "Sobre nosaltres",
+    "careers": "Carreres",
+    "tour": "Tour",
+    "support": "SUPORT",
+    "affiliatePrograms": "Programes d'afiliació",
+    "advertise": "Publicitat",
+    "faq": "Preguntes freqüents",
+    "partners": "SOCIS",
+    "knowledgeBase": "Base de coneixement",
+    "videoGuides": "Guies en vídeo",
+    "reportBug": "Informar d'un error",
+    "legal": "LEGAL",
+    "privacyPolicy": "Política de privacitat",
+    "termsConditions": "Termes i condicions",
+    "cookiePolicy": "Política de galetes",
+    "newsletter": "BUTLLETÍ",
+    "emailPlaceholder": "Introdueix el teu correu",
+    "copyright": "Copyright © 2026 Zent"
+  },
+  "login": {
+    "title": "Inicia sessió",
+    "email": "Email:",
+    "password": "Contrasenya:",
+    "showPassword": "Mostrar contrasenya",
+    "hidePassword": "Amagar contrasenya",
+    "capsLock": "Majúscules activades",
+    "submit": "Inicia sessió",
+    "register": "Registra't",
+    "invalid": "Inici de sessió incorrecte"
+  },
+  "register": {
+    "title": "Registra't",
+    "name": "Nom:",
+    "email": "Email:",
+    "password": "Contrasenya:",
+    "confirmPassword": "Confirma la contrasenya:",
+    "showPassword": "Mostrar contrasenya",
+    "hidePassword": "Amagar contrasenya",
+    "showConfirmation": "Mostrar confirmació",
+    "hideConfirmation": "Amagar confirmació",
+    "capsLock": "Majúscules activades",
+    "submit": "Registrar-se",
+    "success": "Usuari registrat correctament",
+    "error": "Error en registrar-se"
+  },
+  "cart": {
+    "title": "Carret",
+    "empty": "El teu carret està buit.",
+    "continueShopping": "Continuar comprant",
+    "delete": "Eliminar"
+  },
+  "payment": {
+    "total": "Total",
+    "pay": "Pagar",
+    "redirecting": "Redirigint...",
+    "totalMustBeGreaterThanZero": "El total ha de ser superior a 0",
+    "createOrderError": "No s'ha pogut crear la comanda",
+    "paymentStartError": "No s'ha pogut iniciar el pagament",
+    "processPaymentError": "Error en processar el pagament"
+  },
+  "normas": {
+    "privacyTitle": "Política de privacitat",
+    "privacy1": "En aquest web recopilem i tractem informació personal per millorar l'experiència de l'usuari.",
+    "privacy2": "Les dades poden incloure nom, correu electrònic o una altra informació facilitada voluntàriament.",
+    "privacy3": "La informació s'utilitza únicament per gestionar sol·licituds i millorar el servei.",
+    "privacy4": "No se cediran dades a tercers excepte per obligació legal.",
+    "termsTitle": "Termes i condicions",
+    "terms1": "L'accés a aquest lloc implica l'acceptació d'aquests termes.",
+    "terms2": "L'usuari es compromet a fer un ús adequat del contingut.",
+    "terms3": "L'empresa no es responsabilitza del mal ús del lloc.",
+    "cookiesTitle": "Política de galetes",
+    "cookies1": "Aquest lloc utilitza galetes per millorar la navegació.",
+    "cookies2": "L'usuari pot configurar el seu navegador per bloquejar-les.",
+    "legalTitle": "Avís legal",
+    "legal1": "Contingut informatiu. No ens responsabilitzem dels enllaços externs.",
+    "legal2": "Tots els continguts estan protegits per drets d'autor."
+  },
+  "about": {
+    "title": "QUI SOM?",
+    "foundation1": "Som Zent, una empresa fundada per dos joves programadors amb una forta passió per la tecnologia, el món del gaming i el rendiment digital. Vam crear Zent amb l'objectiu d'oferir productes d'ordinador i accessoris tecnològics pensats per a usuaris que volen millorar la seva experiència i productivitat en el dia a dia. Ens inspirem en els millors jugadors de gaming, en la seva mentalitat de millora constant i en la importància de comptar amb l'equip adequat per rendir al màxim.",
+    "foundation2": "Per això seleccionem acuradament cada producte, prioritzant qualitat, funcionalitat i disseny modern. A Zent no només venem tecnologia: construïm una experiència enfocada en el rendiment, la comoditat i l'optimització de l'entorn digital, tant per jugar com per treballar. Creiem que un bon setup marca la diferència, i la nostra missió és ajudar-te a crear el teu.",
+    "adamRole": "Adam Reales — Cofundador i Lead Frontend Engineer",
+    "adamBio": "Adam Reales és cofundador de ZENT, una plataforma especialitzada en comerç digital de videojocs i contingut informatiu del sector gaming, concebuda per integrar botiga online, actualitat i comunitat en un mateix ecosistema. Com a Desenvolupador d'Aplicacions Web, ha liderat tota la concepció tècnica i estratègica del frontend de la plataforma. Des de les fases inicials del projecte, Adam ha estat responsable de la definició del naming de la marca, l'arquitectura de la interfície, el disseny d'experiència d'usuari (UX/UI) i la implementació del client web utilitzant React, apostant per una arquitectura moderna basada en components i orientada al rendiment i l'escalabilitat. A més de la capa visual de la plataforma, també ha gestionat la infraestructura inicial del projecte, incloent-hi l'adquisició i configuració del hosting, l'optimització del desplegament de l'aplicació i la planificació de l'estratègia de presència digital i creixement a les xarxes socials. El seu enfocament combina desenvolupament, producte i visió estratègica, impulsant la identitat digital de ZENT des del seu origen.",
+    "adrianRole": "Adrián — Cofundador i Backend Engineer",
+    "adrianBio": "Adrián, també cofundador de ZENT, és el responsable de l'arquitectura backend i la lògica de negoci que sustenten la plataforma. Com a Desenvolupador d'Aplicacions Web, ha dissenyat i desenvolupat la infraestructura del sistema amb un enfocament en robustesa, seguretat i escalabilitat. El backend de la plataforma s'ha implementat utilitzant PHP amb el framework Laravel, integrant Filament per a la construcció d'un panell administratiu avançat que permet la gestió eficient de productes, usuaris, contingut i operacions internes. Entre les seves responsabilitats destaquen el disseny del model de dades, la creació i optimització de la base de dades, la implementació d'APIs i serveis interns, així com l'estructuració de la lògica de negoci que connecta la botiga online, el sistema de gestió i la plataforma de continguts."
+  },
+  "map": {
+    "aria": "Mapa de localització",
+    "title": "Visita'ns a la nostra botiga física",
+    "description": "Per gaudir d'una experiència de compra única, et convidem a visitar la nostra botiga física al cor de Barcelona. Estem ubicats al Centre Comercial Splau, a 50 metres del millor estadi de Barcelona i a pocs passos de les principals atraccions de la ciutat. Vine i descobreix el nostre ampli catàleg de productes, rep assessorament personalitzat i gaudeix d'un ambient acollidor dissenyat per a tu. T'hi esperem amb els braços oberts.",
+    "storeName": "Botiga Zent",
+    "storeAddress": "Centre Comercial Splau Local 21",
+    "storeCity": "Barcelona, Espanya"
+  },
+  "blog": {
+    "title": "BLOG",
+    "post1": {
+      "title": "Grand Theft Auto VI (GTA 6)",
+      "p1": "Grand Theft Auto VI (GTA 6) és el proper títol de la popular sèrie de videojocs d'acció i aventura desenvolupada per Rockstar Games. Ambientat en un món obert, el joc promet una narrativa envolvent, gràfics d'última generació i una experiència de joc immersiva.",
+      "p2": "Des del seu anunci, ha rebut crítiques molt positives tant per part de la comunitat com de la premsa especialitzada, posicionant-se com un dels títols emergents més prometedors de l'any. GTA 6 demostra el potencial creatiu i tècnic de la indústria del videojoc."
+    },
+    "post2": {
+      "title": "CRISOL, el nou joc espanyol",
+      "p1": "Crisol és el nou videojoc espanyol que està captant l'atenció internacional per la seva proposta innovadora i la seva potent identitat visual. Desenvolupat per un estudi independent nacional, combina acció, narrativa envolvent i una direcció artística única que el distingeix dins del panorama actual.",
+      "p2": "Des de la seva presentació, ha rebut crítiques molt positives tant per part de la comunitat com de la premsa especialitzada, posicionant-se com un dels títols emergents més prometedors de l'any. Crisol demostra el potencial creatiu i tècnic de la indústria espanyola del videojoc."
+    },
+    "post3": {
+      "title": "Pokémon Edicions Roig Foc / Verd Fulla",
+      "p1": "Pokémon Edicions Roig Foc i Verd Fulla són remakes llançats el 2004 per a Game Boy Advance, desenvolupats per Game Freak i publicats per Nintendo. Es tracta de versions actualitzades dels títols originals Pokémon Roig i Pokémon Verd de 1996, pertanyents a la primera generació de la saga.",
+      "p2": "Ambientats a la regió de Kanto, el jugador inicia la seva aventura escollint entre Bulbasaur, Charmander o Squirtle com a Pokémon inicial, amb l'objectiu de convertir-se en Campió de la Lliga Pokémon i completar la Pokédex. Aquestes edicions van incorporar millores gràfiques, noves mecàniques heretades de la tercera generació i contingut addicional com les Illes Sete, ampliant l'experiència original.",
+      "p3": "Roig Foc i Verd Fulla van marcar una nova etapa per a la franquícia a Game Boy Advance, consolidant l'èxit internacional de la saga i apropant la primera generació a una nova generació de jugadors."
+    },
+    "post4": {
+      "title": "Super Mario Odyssey",
+      "p1": "Super Mario Odyssey és un videojoc de plataformes en 3D desenvolupat i publicat per Nintendo per a Nintendo Switch el 2017. Es tracta d'una de les entregues més ambicioses de la saga Super Mario, recuperant l'estil d'exploració lliure vist en títols com Super Mario 64 i Super Mario Sunshine.",
+      "p2": "En aquesta aventura, Mario viatja per diferents regnes d'arreu del món amb l'objectiu de rescatar la princesa Peach de Bowser. La principal novetat del joc és Cappy, un barret amb vida pròpia que permet a Mario capturar i controlar enemics, objectes i fins i tot criatures de l'entorn, aportant una mecànica innovadora i estratègica al gameplay.",
+      "p3": "El joc va ser aclamat per la crítica pel seu disseny de nivells, creativitat i llibertat d'exploració, convertint-se en un dels títols més exitosos i valorats del catàleg de Nintendo Switch."
+    },
+    "post5": {
+      "title": "Kirby i la terra oblidada",
+      "p1": "Kirby i la terra oblidada és un videojoc de plataformes en 3D desenvolupat per HAL Laboratory i publicat per Nintendo per a Nintendo Switch el 2022. Es tracta de la primera aventura completament tridimensional del personatge, marcant un punt d'inflexió en l'evolució de la saga.",
+      "p2": "En aquesta entrega, Kirby es desperta en un món misteriós amb escenaris que recorden una civilització abandonada. Al llarg de l'aventura haurà de rescatar els Waddle Dee segrestats mentre explora nivells oberts, derrota enemics i utilitza les seves clàssiques habilitats de còpia, absorbint poders com foc, espasa o gel.",
+      "p3": "Una de les grans novetats és el mode bocamode, que permet a Kirby transformar-se en objectes de l'entorn com cotxes, màquines expenedores o cons de trànsit, ampliant les possibilitats jugables i aportant situacions originals i divertides.",
+      "p4": "El títol va ser molt ben rebut per la crítica gràcies al seu disseny accessible, el seu apartat artístic acolorit i el seu equilibri entre repte i entreteniment, consolidant Kirby com una de les franquícies més sòlides de Nintendo."
+    }
+  },
+  "videogames": {
+    "title": "VIDEOJOCS",
+    "priceAsc": "Preu ↑",
+    "priceDesc": "Preu ↓",
+    "alphaAsc": "Alfabèticament A-Z",
+    "alphaDesc": "Alfabèticament Z-A",
+    "categories": "Categories",
+    "platforms": "Plataformes",
+    "page": "Pàgina"
+  },
+  "outlet": {
+    "title": "OUTLET"
+  },
+  "product": {
+    "loading": "Carregant...",
+    "ratings": "Valoracions",
+    "addToCart": "Afegir al carret",
+    "bestSellers": "Els més venuts"
+  },
+  "features": {
+    "title": "Característiques",
+    "genre": "Gènere",
+    "mode": "Mode",
+    "platforms": "Plataformes",
+    "rating": "Valoració",
+    "languages": "Idiomes",
+    "defaultGenre": "Acció",
+    "modeValue": "Un jugador / Online",
+    "languagesValue": "Espanyol, Anglès"
+  },
+  "reviews": {
+    "title": "Valoracions",
+    "summary": "ZENT és una plataforma increïble per comprar jocs de PC, PlayStation, Xbox i Switch a preus més baixos, amb lliurament instantani les 24 hores del dia.",
+    "feedbacks": "1,568,884 valoracions d'usuaris",
+    "userTitle": "Valoracions d'usuaris",
+    "name": "Nom"
+  },
+  "recommendations": {
+    "title": "Recomanacions",
+    "text": "Si tens qualsevol dubte, problema o necessites recomanacions sobre un joc, el nostre equip està sempre preparat per ajudar-te. A Zent estem disponibles les 24 hores del dia per oferir-te assessorament, resoldre incidències i acompanyar-te en tot moment, ja sigui per escollir la teva pròxima experiència de joc, solucionar un error o rebre suport personalitzat. Volem que gaudeixis sense preocupacions, per això mantenim una atenció constant, propera i ràpida, assegurant-nos que sempre hi hagi algú a l'altra banda quan ho necessitis."
+  },
+  "profile": {
+    "loading": "Carregant el perfil...",
+    "title": "El meu perfil",
+    "hello": "Hola",
+    "logout": "Tancar sessió",
+    "myData": "Les meves dades",
+    "addressBook": "Llibreta d'adreces",
+    "myOrders": "Les meves comandes",
+    "recentOrders": "Les teves últimes comandes",
+    "noOrdersYet": "Aquí apareixeran les comandes",
+    "addressBookTitle": "Llibreta d'adreces",
+    "productOpinions": "Les meves opinions de productes",
+    "emptySection": "Encara no hi ha contingut"
+  },
+  "checkout": {
+    "successTitle": "Compra completada amb èxit.",
+    "successMessage": "El teu pagament s'ha processat correctament. Gràcies per la teva compra.",
+    "orderNumber": "El teu número de comanda és {{orderNumber}}. S'ha enviat la factura a la teva adreça de correu electrònic.",
+    "downloadHere": "També la pots descarregar aquí",
+    "unavailable": "no disponible",
+    "errorMessage": "No s'ha pogut completar la compra. Hi ha hagut un problema en processar el pagament. Si us plau, torna-ho a provar o utilitza un altre mètode de pagament."
+  }
+}

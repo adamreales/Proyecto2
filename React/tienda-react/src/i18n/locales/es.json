@@ -1,0 +1,225 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "notAvailable": "No disponible"
+  },
+  "header": {
+    "nav": {
+      "home": "HOME",
+      "videogames": "VIDEOJUEGOS",
+      "blog": "BLOG",
+      "about": "CONÓCENOS",
+      "outlet": "OUTLET"
+    },
+    "login": "Iniciar sesión",
+    "register": "Regístrate",
+    "cart": "Carrito",
+    "myCart": "Mi carrito",
+    "emptyCart": "Tu carrito está vacío",
+    "quantity": "Cantidad",
+    "total": "Total",
+    "goToCart": "Ir al carrito",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "language": "Idioma"
+  },
+  "home": {
+    "bestSellers": "Los más vendidos",
+    "topRated": "Los más valorados",
+    "reservations": "Reservas",
+    "recentAdditions": "Añadidos recientemente",
+    "weeklyDeals": "Ofertas semanales",
+    "reviews": "Valoraciones"
+  },
+  "footer": {
+    "whoWeAre": "QUIÉNES SOMOS",
+    "aboutUs": "Sobre nosotros",
+    "careers": "Carreras",
+    "tour": "Tour",
+    "support": "SOPORTE",
+    "affiliatePrograms": "Programas de afiliados",
+    "advertise": "Publicidad",
+    "faq": "Preguntas frecuentes",
+    "partners": "SOCIOS",
+    "knowledgeBase": "Base de conocimiento",
+    "videoGuides": "Guías en vídeo",
+    "reportBug": "Reportar un error",
+    "legal": "LEGAL",
+    "privacyPolicy": "Política de privacidad",
+    "termsConditions": "Términos y condiciones",
+    "cookiePolicy": "Política de cookies",
+    "newsletter": "NEWSLETTER",
+    "emailPlaceholder": "Introduce tu correo",
+    "copyright": "Copyright © 2026 Zent"
+  },
+  "login": {
+    "title": "Inicia sesión",
+    "email": "Email:",
+    "password": "Contraseña:",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "capsLock": "Mayúsculas activadas",
+    "submit": "Iniciar sesión",
+    "register": "Regístrate",
+    "invalid": "Login incorrecto"
+  },
+  "register": {
+    "title": "Regístrate",
+    "name": "Nombre:",
+    "email": "Email:",
+    "password": "Contraseña:",
+    "confirmPassword": "Confirmar contraseña:",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "showConfirmation": "Mostrar confirmación",
+    "hideConfirmation": "Ocultar confirmación",
+    "capsLock": "Mayúsculas activadas",
+    "submit": "Registrarse",
+    "success": "Usuario registrado correctamente",
+    "error": "Error al registrarse"
+  },
+  "cart": {
+    "title": "Carrito",
+    "empty": "Tu carrito está vacío.",
+    "continueShopping": "Seguir comprando",
+    "delete": "Eliminar"
+  },
+  "payment": {
+    "total": "Total",
+    "pay": "Pagar",
+    "redirecting": "Redirigiendo...",
+    "totalMustBeGreaterThanZero": "El total debe ser mayor que 0",
+    "createOrderError": "No se pudo crear el pedido",
+    "paymentStartError": "No se pudo iniciar el pago",
+    "processPaymentError": "Error al procesar el pago"
+  },
+  "normas": {
+    "privacyTitle": "Política de privacidad",
+    "privacy1": "En esta web recopilamos y tratamos información personal para mejorar la experiencia del usuario.",
+    "privacy2": "Los datos pueden incluir nombre, correo electrónico u otra información facilitada voluntariamente.",
+    "privacy3": "La información se usa únicamente para gestionar solicitudes y mejorar el servicio.",
+    "privacy4": "No se cederán datos a terceros salvo obligación legal.",
+    "termsTitle": "Términos y condiciones",
+    "terms1": "El acceso a este sitio implica la aceptación de estos términos.",
+    "terms2": "El usuario se compromete a hacer un uso adecuado del contenido.",
+    "terms3": "La empresa no se responsabiliza del mal uso del sitio.",
+    "cookiesTitle": "Política de cookies",
+    "cookies1": "Este sitio utiliza cookies para mejorar la navegación.",
+    "cookies2": "El usuario puede configurar su navegador para bloquearlas.",
+    "legalTitle": "Aviso legal",
+    "legal1": "Contenido informativo. No nos responsabilizamos de enlaces externos.",
+    "legal2": "Todos los contenidos están protegidos por derechos de autor."
+  },
+  "about": {
+    "title": "¿QUIÉNES SOMOS?",
+    "foundation1": "Somos Zent, una empresa fundada por dos jóvenes programadores con una fuerte pasión por la tecnología, el mundo del gaming y el rendimiento digital. Creamos Zent con el objetivo de ofrecer productos de ordenador y accesorios tecnológicos pensados para usuarios que buscan mejorar su experiencia y su productividad en el día a día. Nos inspiramos en los mejores jugadores gaming, en su mentalidad de mejora constante y en la importancia de contar con el equipo adecuado para rendir al máximo.",
+    "foundation2": "Por eso seleccionamos cuidadosamente cada producto, priorizando calidad, funcionalidad y diseño moderno. En Zent no solo vendemos tecnología: construimos una experiencia enfocada en el rendimiento, la comodidad y la optimización del entorno digital, tanto para jugar como para trabajar. Creemos que un buen setup marca la diferencia, y nuestra misión es ayudarte a crear el tuyo.",
+    "adamRole": "Adam Reales — Cofundador y Lead Frontend Engineer",
+    "adamBio": "Adam Reales es cofundador de ZENT, una plataforma especializada en comercio digital de videojuegos y contenido informativo del sector gaming, concebida para integrar tienda online, actualidad y comunidad en un mismo ecosistema. Como Desarrollador de Aplicaciones Web, ha liderado toda la concepción técnica y estratégica del frontend de la plataforma. Desde las fases iniciales del proyecto, Adam ha sido responsable de la definición del naming de la marca, la arquitectura de la interfaz, el diseño de experiencia de usuario (UX/UI) y la implementación del cliente web utilizando React, apostando por una arquitectura moderna basada en componentes y orientada al rendimiento y la escalabilidad. Además de la capa visual de la plataforma, también ha gestionado la infraestructura inicial del proyecto, incluyendo la adquisición y configuración del hosting, la optimización del despliegue de la aplicación y la planificación de la estrategia de presencia digital y crecimiento en redes sociales. Su enfoque combina desarrollo, producto y visión estratégica, impulsando la identidad digital de ZENT desde su origen.",
+    "adrianRole": "Adrián — Cofundador y Backend Engineer",
+    "adrianBio": "Adrián, también cofundador de ZENT, es el responsable de la arquitectura backend y la lógica de negocio que sustenta la plataforma. Como Desarrollador de Aplicaciones Web, ha diseñado y desarrollado la infraestructura del sistema con un enfoque en robustez, seguridad y escalabilidad. El backend de la plataforma ha sido implementado utilizando PHP con el framework Laravel, integrando Filament para la construcción de un panel administrativo avanzado que permite la gestión eficiente de productos, usuarios, contenido y operaciones internas de la plataforma. Entre sus responsabilidades destacan el diseño del modelo de datos, la creación y optimización de la base de datos, la implementación de APIs y servicios internos, así como la estructuración de la lógica de negocio que conecta la tienda online, el sistema de gestión y la plataforma de contenidos."
+  },
+  "map": {
+    "aria": "Mapa de localización",
+    "title": "Visítanos en nuestra tienda física",
+    "description": "Para disfrutar una experiencia de compra única, te invitamos a visitar nuestra tienda física en el corazón de Barcelona. Estamos ubicados en el Centro Comercial Splau, a 50 metros del mejor estadio de Barcelona, a pocos pasos de las principales atracciones de la ciudad. Ven y descubre nuestro amplio catálogo de productos, recibe asesoramiento personalizado y disfruta de un ambiente acogedor diseñado para ti. Te esperamos con los brazos abiertos.",
+    "storeName": "Tienda Zent",
+    "storeAddress": "Centro Comercial Splau Local 21",
+    "storeCity": "Barcelona, España"
+  },
+  "blog": {
+    "title": "BLOG",
+    "post1": {
+      "title": "Grand Theft Auto VI (GTA 6)",
+      "p1": "Grand Theft Auto VI (GTA 6) es el próximo título de la popular serie de videojuegos de acción y aventura desarrollada por Rockstar Games. Ambientado en un mundo abierto, el juego promete una narrativa envolvente, gráficos de última generación y una experiencia de juego inmersiva.",
+      "p2": "Desde su anuncio, ha recibido críticas muy positivas tanto por parte de la comunidad como de la prensa especializada, posicionándose como uno de los títulos emergentes más prometedores del año. GTA 6 demuestra el potencial creativo y técnico de la industria del videojuego."
+    },
+    "post2": {
+      "title": "CRISOL, el nuevo juego español",
+      "p1": "Crisol es el nuevo videojuego español que está captando la atención internacional por su innovadora propuesta y su potente identidad visual. Desarrollado por un estudio independiente nacional, combina acción, narrativa envolvente y una dirección artística única que lo distingue dentro del panorama actual.",
+      "p2": "Desde su presentación, ha recibido críticas muy positivas tanto por parte de la comunidad como de la prensa especializada, posicionándose como uno de los títulos emergentes más prometedores del año. Crisol demuestra el potencial creativo y técnico de la industria española del videojuego."
+    },
+    "post3": {
+      "title": "Pokémon Ediciones Rojo Fuego / Verde Hoja",
+      "p1": "Pokémon Ediciones Rojo Fuego y Verde Hoja son remakes lanzados en 2004 para Game Boy Advance, desarrollados por Game Freak y publicados por Nintendo. Se trata de versiones actualizadas de los títulos originales Pokémon Rojo y Pokémon Verde de 1996, pertenecientes a la primera generación de la saga.",
+      "p2": "Ambientados en la región de Kanto, el jugador inicia su aventura eligiendo entre Bulbasaur, Charmander o Squirtle como Pokémon inicial, con el objetivo de convertirse en Campeón de la Liga Pokémon y completar la Pokédex. Estas ediciones incorporaron mejoras gráficas, nuevas mecánicas heredadas de la tercera generación y contenido adicional como las Islas Sete, ampliando la experiencia original.",
+      "p3": "Rojo Fuego y Verde Hoja marcaron una nueva etapa para la franquicia en Game Boy Advance, consolidando el éxito internacional de la saga y acercando la primera generación a una nueva generación de jugadores."
+    },
+    "post4": {
+      "title": "Super Mario Odyssey",
+      "p1": "Super Mario Odyssey es un videojuego de plataformas en 3D desarrollado y publicado por Nintendo para Nintendo Switch en 2017. Se trata de una de las entregas más ambiciosas de la saga Super Mario, recuperando el estilo de exploración libre visto en títulos como Super Mario 64 y Super Mario Sunshine.",
+      "p2": "En esta aventura, Mario viaja por distintos reinos alrededor del mundo con el objetivo de rescatar a la princesa Peach de Bowser. La principal novedad del juego es Cappy, un sombrero con vida propia que permite a Mario capturar y controlar enemigos, objetos e incluso criaturas del entorno, aportando una mecánica innovadora y estratégica al gameplay.",
+      "p3": "El juego fue aclamado por la crítica por su diseño de niveles, creatividad y libertad de exploración, convirtiéndose en uno de los títulos más exitosos y valorados del catálogo de Nintendo Switch."
+    },
+    "post5": {
+      "title": "Kirby y la tierra olvidada",
+      "p1": "Kirby y la tierra olvidada es un videojuego de plataformas en 3D desarrollado por HAL Laboratory y publicado por Nintendo para Nintendo Switch en 2022. Se trata de la primera aventura completamente tridimensional del personaje, marcando un punto de inflexión en la evolución de la saga.",
+      "p2": "En esta entrega, Kirby despierta en un mundo misterioso con escenarios que recuerdan a una civilización abandonada. A lo largo de la aventura deberá rescatar a los Waddle Dee secuestrados mientras explora niveles abiertos, derrota enemigos y utiliza sus clásicas habilidades de copia, absorbiendo poderes como fuego, espada o hielo.",
+      "p3": "Una de las grandes novedades es el modo bocamodo, que permite a Kirby transformarse en objetos del entorno como coches, máquinas expendedoras o conos de tráfico, ampliando las posibilidades jugables y aportando situaciones originales y divertidas.",
+      "p4": "El título fue muy bien recibido por la crítica gracias a su diseño accesible, su apartado artístico colorido y su equilibrio entre desafío y entretenimiento, consolidando a Kirby como una de las franquicias más sólidas de Nintendo."
+    }
+  },
+  "videogames": {
+    "title": "VIDEOJUEGOS",
+    "priceAsc": "Precio ↑",
+    "priceDesc": "Precio ↓",
+    "alphaAsc": "Alfabéticamente A-Z",
+    "alphaDesc": "Alfabéticamente Z-A",
+    "categories": "Categorías",
+    "platforms": "Plataformas",
+    "page": "Página"
+  },
+  "outlet": {
+    "title": "OUTLET"
+  },
+  "product": {
+    "loading": "Cargando...",
+    "ratings": "Valoraciones",
+    "addToCart": "Añadir al carrito",
+    "bestSellers": "Los más vendidos"
+  },
+  "features": {
+    "title": "Características",
+    "genre": "Género",
+    "mode": "Modo",
+    "platforms": "Plataformas",
+    "rating": "Valoración",
+    "languages": "Idiomas",
+    "defaultGenre": "Acción",
+    "modeValue": "Un jugador / Online",
+    "languagesValue": "Español, Inglés"
+  },
+  "reviews": {
+    "title": "Valoraciones",
+    "summary": "ZENT es una plataforma increíble para comprar juegos de PC, PlayStation, Xbox y Switch a precios más bajos, con entrega instantánea las 24 horas del día.",
+    "feedbacks": "1,568,884 valoraciones de usuarios",
+    "userTitle": "Valoraciones de usuarios",
+    "name": "Nombre"
+  },
+  "recommendations": {
+    "title": "Recomendaciones",
+    "text": "Si tienes cualquier duda, problema o necesitas recomendaciones sobre un juego, nuestro equipo está siempre preparado para ayudarte. En Zent estamos disponibles las 24 horas del día para ofrecerte asesoramiento, resolver incidencias y acompañarte en todo momento, ya sea para elegir tu próxima experiencia de juego, solucionar un error o recibir soporte personalizado. Queremos que disfrutes sin preocupaciones, por eso mantenemos una atención constante, cercana y rápida, asegurándonos de que siempre haya alguien al otro lado cuando lo necesites."
+  },
+  "profile": {
+    "loading": "Cargando el perfil...",
+    "title": "Mi perfil",
+    "hello": "Hola",
+    "logout": "Cerrar sesión",
+    "myData": "Mis datos",
+    "addressBook": "Libreta de direcciones",
+    "myOrders": "Mis pedidos",
+    "recentOrders": "Tus últimos pedidos realizados",
+    "noOrdersYet": "Aquí irán los pedidos",
+    "addressBookTitle": "Libreta de direcciones",
+    "productOpinions": "Mis opiniones de productos",
+    "emptySection": "Sin contenido todavía"
+  },
+  "checkout": {
+    "successTitle": "Compra completada con éxito.",
+    "successMessage": "Tu pago ha sido procesado correctamente. Gracias por tu compra.",
+    "orderNumber": "Tu número de pedido es {{orderNumber}}. Se ha enviado a tu dirección de correo electrónico la factura.",
+    "downloadHere": "También la puedes descargar aquí",
+    "unavailable": "no disponible",
+    "errorMessage": "No se ha podido completar la compra. Ha ocurrido un problema al procesar el pago. Por favor, inténtalo de nuevo o utiliza otro método de pago."
+  }
+}

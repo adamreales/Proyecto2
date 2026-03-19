@@ -1,6 +1,8 @@
 import "./Producto.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import Caracteristicas from "../../components/Caracteristicas/Caracteristicas";
 import Recomendaciones from "../../components/Recomendaciones/Recomendaciones";
 import SeccionProductos from "../../components/SeccionProductos/SeccionProductos";
@@ -8,10 +10,15 @@ import ValoracionesUsuarios from "../../components/ValoracionesUsuarios/Valoraci
 
 function Producto() {
   const { id } = useParams();
+  const { t } = useTranslation();
+
   const [producto, setProducto] = useState(null);
   const [imgPrincipal, setImgPrincipal] = useState(null);
-  const [masVendidos,setMasVendidos] = useState([]);
-  const masVendidosFiltrados = masVendidos.filter((p) => p.id !== producto?.id);
+  const [masVendidos, setMasVendidos] = useState([]);
+
+  const masVendidosFiltrados = masVendidos.filter(
+    (p) => p.id !== producto?.id
+  );
 
   const getSessionId = () => {
     let sessionId = localStorage.getItem("sessionId");
@@ -23,9 +30,7 @@ function Producto() {
   };
 
   const handleAddToCart = async () => {
-    if (!producto) {
-      return;
-    }
+    if (!producto) return;
 
     const sessionId = getSessionId();
 
@@ -34,26 +39,29 @@ function Producto() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Session-Id" : sessionId
-        }
+          "X-Session-Id": sessionId,
+        },
       });
 
-      const res = await fetch("http://localhost:8000/api/anadir_carrito", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Session-Id" : sessionId
-        },
-        body: JSON.stringify({
-          id_producto: producto.id,
-          cantidad: 1
-        }),
-      });
+      const res = await fetch(
+        "http://localhost:8000/api/anadir_carrito",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Session-Id": sessionId,
+          },
+          body: JSON.stringify({
+            id_producto: producto.id,
+            cantidad: 1,
+          }),
+        }
+      );
 
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "No se pudo añadir al carrito");
+        throw new Error(data.error || "Error");
       }
 
       window.dispatchEvent(new Event("carritoActualizado"));
@@ -61,10 +69,11 @@ function Producto() {
       console.error("Error al añadir al carrito:", error);
     }
   };
+
   useEffect(() => {
     fetch(`http://127.0.0.1:8000/api/producto/${id}?token=TU_TOKEN`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setProducto(data.producto);
         setImgPrincipal(data.producto.do_imagenes?.[0]?.url);
       });
@@ -72,31 +81,30 @@ function Producto() {
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/productos_mas_vendidos")
-        .then(res => res.json())
-        .then(data => setMasVendidos(data.productos))
-        .catch(err => console.error(err));
+      .then((res) => res.json())
+      .then((data) => setMasVendidos(data.productos))
+      .catch((err) => console.error(err));
   }, []);
 
   function escollirpegi() {
-    if(producto?.do_juego?.do_pegi?.[0]?.edad === 3){
-      return "pegi3.jpg";
-    }
-    else if(producto?.do_juego?.do_pegi?.[0]?.edad === 7){
-      return "pegi7.jpg";
-    }else if(producto?.do_juego?.do_pegi?.[0]?.edad === 12){
-      return "pegi12.png";
-    }else if(producto?.do_juego?.do_pegi?.[0]?.edad === 16){
-      return "pegi16.png";
-    }else{
-      return "pegi18.png";
-    }
-  }
-  if (!producto) {
-    return <div>Cargando...</div>;
+    const edad = producto?.do_juego?.do_pegi?.[0]?.edad;
+
+    if (edad === 3) return "pegi3.jpg";
+    if (edad === 7) return "pegi7.jpg";
+    if (edad === 12) return "pegi12.png";
+    if (edad === 16) return "pegi16.png";
+    return "pegi18.png";
   }
 
-  const valoracion = Math.max(0, Math.min(5, Math.round(producto?.valoracion || 0)));
-    
+  if (!producto) {
+    return <div>{t("product.loading")}</div>;
+  }
+
+  const valoracion = Math.max(
+    0,
+    Math.min(5, Math.round(producto?.valoracion || 0))
+  );
+
   return (
     <>
       <div className="box">
@@ -111,41 +119,40 @@ function Producto() {
           <div>
             <h1>{producto?.titulo}</h1>
             <p>{producto?.descripcion}</p>
-            
           </div>
 
           <div className="contenedorpegiplataformas">
-              <div className="pegi">
-                  <img src={`http://zent.es/imagenes_producto/${escollirpegi()}`}/>
-              </div>
-              <div className="scriptplataformas">
-                <span className="final">{producto?.precio} € </span>
-                <select className="plataformas">
-                  {producto?.do_juego?.do_plataformas?.map(plataforma => (
-                    <option key={plataforma.id} value={plataforma.id}>
-                      {plataforma.nombre}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            <div className="pegi">
+              <img
+                src={`http://zent.es/imagenes_producto/${escollirpegi()}`}
+              />
+            </div>
+
+            <div className="scriptplataformas">
+              <span className="final">{producto?.precio} €</span>
+
+              <select className="plataformas">
+                {producto?.do_juego?.do_plataformas?.map((plataforma) => (
+                  <option key={plataforma.id} value={plataforma.id}>
+                    {plataforma.nombre}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
+
           <p className="valoracion-estrellas">
-            Valoraciones :
+            {t("product.ratings")} :
             {Array.from({ length: valoracion }, (_, index) => (
-              <span
-                key={index}
-                className="estrella llena"
-                aria-hidden="true"
-              >
-                ⭐ 
-              </span>
+              <span key={index} className="estrella llena">⭐</span>
             ))}
           </p>
 
           <div className="btn-box">
             <button className="btn-favoritos">❤️</button>
+
             <button className="btn-cesta" onClick={handleAddToCart}>
-              Añadir al Carrito
+              {t("product.addToCart")}
             </button>
           </div>
         </div>
@@ -163,13 +170,20 @@ function Producto() {
           </div>
         ))}
       </div>
+
       <div className="Descripciones">
-          <Caracteristicas producto={producto} />
+        <Caracteristicas producto={producto} />
       </div>
-      <ValoracionesUsuarios producto={producto}/>
+
+      <ValoracionesUsuarios producto={producto} />
+
       <Recomendaciones producto={producto} />
 
-      <SeccionProductos titulo="Lo Mas Vendidos" productos={masVendidosFiltrados} reload={true} />
+      <SeccionProductos
+        titulo={t("product.bestSellers")}
+        productos={masVendidosFiltrados}
+        reload={true}
+      />
     </>
   );
 }

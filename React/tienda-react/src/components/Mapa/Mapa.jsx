@@ -3,6 +3,7 @@ import { Icon } from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Mapa.css";
+import { useTranslation } from "react-i18next";
 
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
@@ -21,13 +22,17 @@ const iconoTienda = new Icon({
 });
 
 export default function Mapa() {
+  const { t } = useTranslation();
+
   return (
-    <section className="mapa-localizacion" aria-label="Mapa de localizacion">
+    <section
+      className="mapa-localizacion"
+      aria-label={t("map.aria")}
+    >
+
       <div className="mapa-localizacion__encabezado">
-        <h2>Visítanos en nuestra tienda física</h2>
-        <p>
-          Para disfrutar una experiencia de compra unica, te invitamos a visitar nuestra tienda física en el corazón de Barcelona. Estamos ubicados en el Centro Comercial Splau, a 50 metros del mejor estadio de Barcelona, a pocos pasos de las principales atracciones de la ciudad. Ven y descubre nuestro amplio catálogo de productos, recibe asesoramiento personalizado y disfruta de un ambiente acogedor diseñado para ti. ¡Te esperamos con los brazos abiertos!
-        </p>
+        <h2>{t("map.title")}</h2>
+        <p>{t("map.description")}</p>
       </div>
 
       <MapContainer
@@ -43,12 +48,13 @@ export default function Mapa() {
 
         <Marker position={posicionTienda} icon={iconoTienda}>
           <Popup>
-            <strong>Tienda React</strong>
+            <strong>{t("map.storeName")}</strong>
             <br />
-            <p>Centro Comercial Splau Local 21</p>
-            <p>Barcelona, España  </p>
+            <p>{t("map.storeAddress")}</p>
+            <p>{t("map.storeCity")}</p>
           </Popup>
         </Marker>
+
       </MapContainer>
     </section>
   );

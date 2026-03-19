@@ -1,6 +1,7 @@
 import "./Header.css"
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useHeaderCart } from "./Header.js";
 
 function Header() {
@@ -8,6 +9,7 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const cartRef = useRef(null);
+  const { t, i18n } = useTranslation();
   const { cartItems, totalItems, totalPrecio, eliminarProducto } = useHeaderCart();
 
   // Cerrar menú cuando la pantalla sea mayor a 768px
@@ -38,12 +40,7 @@ function Header() {
     <header>
 
       {/* HAMBURGUESA MOBILE */}
-      <button 
-        className="hamburger"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        ☰
-      </button>
+      <button   className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>  ☰</button>
 
       {/* LOGO */}
       <div className="Logo">
@@ -57,28 +54,28 @@ function Header() {
       {/* MENÚ MOBILE */}
       <div className={`Barra-menu ${menuOpen ? "active" : ""}`}>
         <button className="cerrar-btn" onClick={() => setMenuOpen(false)}>✕</button>
-        <Link to="/"><button className="menu-btn">HOME</button></Link>
-        <Link to="/videojuegos"><button className="menu-btn">VIDEOJUEGOS</button></Link>
-        <Link to="/blog"><button className="menu-btn">BLOG</button></Link>
-        <Link to="/conocenos"><button className="menu-btn">CONOCENOS</button></Link>
-        <Link to="/oulet"><button className="menu-btn">OUTLET</button></Link>  
+        <Link to="/"><button className="menu-btn">{t("header.nav.home")}</button></Link>
+        <Link to="/videojuegos"><button className="menu-btn">{t("header.nav.videogames")}</button></Link>
+        <Link to="/blog"><button className="menu-btn">{t("header.nav.blog")}</button></Link>
+        <Link to="/conocenos"><button className="menu-btn">{t("header.nav.about")}</button></Link>
+        <Link to="/oulet"><button className="menu-btn">{t("header.nav.outlet")}</button></Link>
       </div>
 
       {/* MENÚ DESKTOP */}
       <div className="Barra-menu-desktop">
-        <Link to="/"><button className="menu-btn">HOME</button></Link>
-        <Link to="/videojuegos"><button className="menu-btn">VIDEOJUEGOS</button></Link>
-        <Link to="/blog"><button className="menu-btn">BLOG</button></Link>
-        <Link to="/conocenos"><button className="menu-btn">CONOCENOS</button></Link>
-        <Link to="/oulet"><button className="menu-btn">OUTLET</button></Link>
+        <Link to="/"><button className="menu-btn">{t("header.nav.home")}</button></Link>
+        <Link to="/videojuegos"><button className="menu-btn">{t("header.nav.videogames")}</button></Link>
+        <Link to="/blog"><button className="menu-btn">{t("header.nav.blog")}</button></Link>
+        <Link to="/conocenos"><button className="menu-btn">{t("header.nav.about")}</button></Link>
+        <Link to="/oulet"><button className="menu-btn">{t("header.nav.outlet")}</button></Link>
       </div>
 
       {/* LOGIN + CARRITO */}
       <div className="Login">
         {!token && (
           <>
-            <Link to="/login"><button className="Log">Login</button></Link>
-            <Link to="/register"><button className="Reg">Registrate</button></Link>
+            <Link to="/login"><button className="Log">{t("header.login")}</button></Link>
+            <Link to="/register"><button className="Reg">{t("header.register")}</button></Link>
           </>
         )}
 
@@ -92,14 +89,19 @@ function Header() {
               <span className="cart-badge">{totalItems}</span>
             )}
           </button>
+          <div className="idiomas">
+                    <button className="btn-idioma" type="button" onClick={() => i18n.changeLanguage("es")}>ES</button>
+                    <button className="btn-idioma" type="button" onClick={() => i18n.changeLanguage("en")}>EN</button>
+                    <button className="btn-idioma" type="button" onClick={() => i18n.changeLanguage("cat")}>CAT</button>
+          </div>
 
           {/* MINI CARRITO */}
           {cartOpen && (
             <div className="mini-cart">
-              <h3>Mi Carrito</h3>
+              <h3>{t("header.myCart")}</h3>
 
               {cartItems.length === 0 ? (
-                <p className="empty-cart">Tu carrito está vacío</p>
+                <p className="empty-cart">{t("header.emptyCart")}</p>
               ) : (
                 <>
                   <div className="cart-items">
@@ -109,7 +111,7 @@ function Header() {
 
                         <div className="item-info">
                           <p className="item-nombre">{item.nombre}</p>
-                          <p className="item-cantidad">Cantidad: {item.cantidad}</p>
+                          <p className="item-cantidad">{t("header.quantity")}: {item.cantidad}</p>
                           <p className="item-precio">{item.precio}€</p>
                         </div>
 
@@ -123,12 +125,10 @@ function Header() {
                     ))}
                   </div>
 
-                  <p className="total">
-                    Total : {cartItems.reduce((total, item) => total + item.precio * item.cantidad, 0)}€
-                  </p>
-
+                  <p className="total">   {t("header.total")} : {cartItems.reduce((total, item) => total + item.precio * item.cantidad, 0)}€      </p>
+  
                   <Link to="/carrito">
-                    <button className="btn-ir-carrito">Ir al Carrito</button>
+                    <button className="btn-ir-carrito">{t("header.goToCart")}</button>
                   </Link>
                 </>
               )}
