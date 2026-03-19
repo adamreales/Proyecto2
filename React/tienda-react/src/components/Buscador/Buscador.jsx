@@ -50,7 +50,9 @@ function Buscador() {
         <input
           type="text"
           className="buscador-input"
-          placeholder={t("search.placeholder")}
+          placeholder={t("search.placeholder", {
+            defaultValue: "Buscar productos...",
+          })}
           value={texto}
           onChange={(e) => setTexto(e.target.value)}
         />
@@ -101,7 +103,9 @@ function Buscador() {
       )}
       {texto && productos.length === 0 && (
         <div className="no-resultados">
-          {t("search.noResults")}
+          {t("search.noResults", {
+            defaultValue: "No se encontraron productos",
+          })}
         </div>
       )}
 

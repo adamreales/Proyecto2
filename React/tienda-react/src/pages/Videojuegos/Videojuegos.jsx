@@ -1,8 +1,11 @@
 import "./Videojuegos.css";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import SeccionProductosVideojuegos from "../../components/SeccionProductosVideojuegos/SeccionProductosVideojuegos";
 
 function Videojuegos() {
+  const { t } = useTranslation();
+
   const [productos, setProductos] = useState([]);
   const [pagina, setPagina] = useState(1);
   const [categoria, setCategoria] = useState("");
@@ -10,6 +13,7 @@ function Videojuegos() {
   const [orden, setOrden] = useState("");
   const [categorias, setCategorias] = useState([]);
   const [plataformas, setPlataformas] = useState([]);
+
   const ordenEspecial =
     orden === "productos_mas_baratos" ||
     orden === "productos_mas_alfabeticamente" ||
@@ -39,16 +43,16 @@ function Videojuegos() {
       url = `http://127.0.0.1:8000/api/${orden}`;
     }
 
-    if(orden && !ordenEspecial)
+    if (orden && !ordenEspecial) {
       url += `&orden=${orden}`;
+    }
 
-      fetch(url)
+    fetch(url)
       .then((res) => res.json())
       .then((data) => setProductos(data.productos || data.producto || []))
       .catch((err) => console.error(err));
   }, [pagina, categoria, plataforma, orden]);
 
-  //Cargo las categorias para el filtro
   useEffect(() => {
     fetch(`http://127.0.0.1:8000/api/categorias`)
       .then((res) => res.json())
@@ -56,7 +60,6 @@ function Videojuegos() {
       .catch((err) => console.error(err));
   }, []);
 
-  //Cargo las plataformas para el filtro
   useEffect(() => {
     fetch(`http://127.0.0.1:8000/api/plataformas`)
       .then((res) => res.json())
@@ -65,51 +68,125 @@ function Videojuegos() {
   }, []);
 
   return (
-    <>   
-    <div className="VideoJuegos">
-          <h2>VIDEOJUEGOS</h2>
-          <div className="Filtros">
-              <button className="btn-filtros" onClick={() => { setOrden("productos_mas_caros"); setPagina(1); }}>Precio ↑</button>
-              <button className="btn-filtros" onClick={() => { setOrden("productos_mas_baratos"); setPagina(1); }}>Precio ↓</button>
-              <button className="btn-filtros" onClick={() => { setOrden("productos_mas_alfabeticamente"); setPagina(1); }}>Alfabeticamente A-Z</button>
-              <button className="btn-filtros" onClick={() => { setOrden("productos_menos_alfabeticamente"); setPagina(1); }}>Alfabeticamente Z-A</button>
+    <>
+      <div className="VideoJuegos">
 
-                <select className="select" onChange={(e) => {
-                  setCategoria(e.target.value);
-                  setPlataforma("");
-                  setPagina(1);}}>
-                  <option value="">Categorias</option>
-                  {categorias.map((cat) => (
-                    <option key={cat.id} value={cat.id}>{cat.nombre}</option>
-                  ))}
-                </select>
+        <h2>{t("videogames.title")}</h2>
 
-                <select className="select" onChange={(e) => {
-                  setPlataforma(e.target.value);
-                  setCategoria("");
-                  setPagina(1);
-                }}>
-                  <option value="">Plataformas</option>
-                  {plataformas.map((plataforma) => (
-                    <option key={plataforma.id} value={plataforma.id}>{plataforma.nombre}</option>
-                  ))}
-                </select>
+        <div className="Filtros">
 
-              <button className="btn-filtros" onClick={() => { setCategoria(""); setPlataforma(""); setOrden(""); setPagina(1); }}>⟲</button>
-          </div>
-          <div className="Productos">
-            <SeccionProductosVideojuegos productos={productos} />
-          </div>
-           <div className="cabezera">
-            <h3 className="pagina-actual">Pagina {pagina}</h3>
-           <div className="botones">
-              <button className="btn-prev" onClick={prev} disabled={pagina === 1 || ordenEspecial}><img src="http://zent.es/imagenes_producto/correrizq.png" className="mario" /></button>
-              <button className="btn-next" onClick={next} disabled={productos.length < 20 || ordenEspecial}><img src="http://zent.es/imagenes_producto/correr.png" className="mario mario-right" /></button>
-            </div>
+          <button
+            className="btn-filtros"
+            onClick={() => { setOrden("productos_mas_caros"); setPagina(1); }}
+          >
+            {t("videogames.priceAsc")}
+          </button>
+
+          <button
+            className="btn-filtros"
+            onClick={() => { setOrden("productos_mas_baratos"); setPagina(1); }}
+          >
+            {t("videogames.priceDesc")}
+          </button>
+
+          <button
+            className="btn-filtros"
+            onClick={() => { setOrden("productos_mas_alfabeticamente"); setPagina(1); }}
+          >
+            {t("videogames.alphaAsc")}
+          </button>
+
+          <button
+            className="btn-filtros"
+            onClick={() => { setOrden("productos_menos_alfabeticamente"); setPagina(1); }}
+          >
+            {t("videogames.alphaDesc")}
+          </button>
+
+          <select
+            className="select"
+            onChange={(e) => {
+              setCategoria(e.target.value);
+              setPlataforma("");
+              setPagina(1);
+            }}
+          >
+            <option value="">{t("videogames.categories")}</option>
+            {categorias.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.nombre}
+              </option>
+            ))}
+          </select>
+
+          <select
+            className="select"
+            onChange={(e) => {
+              setPlataforma(e.target.value);
+              setCategoria("");
+              setPagina(1);
+            }}
+          >
+            <option value="">{t("videogames.platforms")}</option>
+            {plataformas.map((plataforma) => (
+              <option key={plataforma.id} value={plataforma.id}>
+                {plataforma.nombre}
+              </option>
+            ))}
+          </select>
+
+          <button
+            className="btn-filtros"
+            onClick={() => {
+              setCategoria("");
+              setPlataforma("");
+              setOrden("");
+              setPagina(1);
+            }}
+          >
+            ⟲
+          </button>
+
         </div>
-    </div>
-    </>
 
+        <div className="Productos">
+          <SeccionProductosVideojuegos productos={productos} />
+        </div>
+
+        <div className="cabezera">
+          <h3 className="pagina-actual">
+            {t("videogames.page")} {pagina}
+          </h3>
+
+          <div className="botones">
+            <button
+              className="btn-prev"
+              onClick={prev}
+              disabled={pagina === 1 || ordenEspecial}
+            >
+              <img
+                src="http://zent.es/imagenes_producto/correrizq.png"
+                className="mario"
+                alt={t("common.previous")}
+              />
+            </button>
+
+            <button
+              className="btn-next"
+              onClick={next}
+              disabled={productos.length < 20 || ordenEspecial}
+            >
+              <img
+                src="http://zent.es/imagenes_producto/correr.png"
+                className="mario mario-right"
+                alt={t("common.next")}
+              />
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </>
   );
 }
 

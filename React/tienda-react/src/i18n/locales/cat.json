@@ -9,6 +9,7 @@
       "videogames": "VIDEOJOCS",
       "blog": "BLOG",
       "about": "CONEIX-NOS",
+      "favorites": "FAVORITS",
       "outlet": "OUTLET"
     },
     "login": "Inicia sessió",
@@ -172,11 +173,16 @@
   "outlet": {
     "title": "OUTLET"
   },
+  "favorites": {
+    "title": "FAVORITS",
+    "empty": "Encara no tens productes a favorits"
+  },
   "product": {
     "loading": "Carregant...",
     "ratings": "Valoracions",
     "addToCart": "Afegir al carret",
-    "bestSellers": "Els més venuts"
+    "bestSellers": "Els més venuts",
+    "translatingDescription": "Traduïnt descripció..."
   },
   "features": {
     "title": "Característiques",

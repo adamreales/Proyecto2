@@ -10,11 +10,13 @@ import ValoracionesUsuarios from "../../components/ValoracionesUsuarios/Valoraci
 
 function Producto() {
   const { id } = useParams();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [producto, setProducto] = useState(null);
   const [imgPrincipal, setImgPrincipal] = useState(null);
   const [masVendidos, setMasVendidos] = useState([]);
+  const [descripcionTraducida, setDescripcionTraducida] = useState("");
+  const [traduciendoDescripcion, setTraduciendoDescripcion] = useState(false);
 
   const masVendidosFiltrados = masVendidos.filter(
     (p) => p.id !== producto?.id
@@ -86,6 +88,43 @@ function Producto() {
       .catch((err) => console.error(err));
   }, []);
 
+  useEffect(() => {
+    const traducirDescripcion = async () => {
+      const descripcion = producto?.descripcion?.trim();
+
+      if (!descripcion) {
+        setDescripcionTraducida("");
+        return;
+      }
+
+      if (i18n.language === "es") {
+        setDescripcionTraducida(descripcion);
+        return;
+      }
+
+      const targetLanguage = i18n.language === "cat" ? "ca" : i18n.language;
+      setTraduciendoDescripcion(true);
+
+      try {
+        const response = await fetch(
+          `https://api.mymemory.translated.net/get?q=${encodeURIComponent(descripcion)}&langpair=es|${targetLanguage}`
+        );
+
+        const data = await response.json();
+        const textoTraducido = data?.responseData?.translatedText;
+
+        setDescripcionTraducida(textoTraducido || descripcion);
+      } catch (error) {
+        console.error("Error al traducir descripción:", error);
+        setDescripcionTraducida(descripcion);
+      } finally {
+        setTraduciendoDescripcion(false);
+      }
+    };
+
+    traducirDescripcion();
+  }, [producto?.descripcion, i18n.language]);
+
   function escollirpegi() {
     const edad = producto?.do_juego?.do_pegi?.[0]?.edad;
 
@@ -118,7 +157,11 @@ function Producto() {
         <div className="box-datos">
           <div>
             <h1>{producto?.titulo}</h1>
-            <p>{producto?.descripcion}</p>
+            <p>
+              {traduciendoDescripcion
+                ? t("product.translatingDescription")
+                : descripcionTraducida || producto?.descripcion}
+            </p>
           </div>
 
           <div className="contenedorpegiplataformas">

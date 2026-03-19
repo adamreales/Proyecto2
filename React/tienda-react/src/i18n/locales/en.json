@@ -9,6 +9,7 @@
       "videogames": "VIDEOGAMES",
       "blog": "BLOG",
       "about": "ABOUT US",
+      "favorites": "FAVORITES",
       "outlet": "OUTLET"
     },
     "login": "Log in",
@@ -172,11 +173,16 @@
   "outlet": {
     "title": "OUTLET"
   },
+  "favorites": {
+    "title": "FAVORITES",
+    "empty": "You do not have favorite products yet"
+  },
   "product": {
     "loading": "Loading...",
     "ratings": "Ratings",
     "addToCart": "Add to cart",
-    "bestSellers": "Best sellers"
+    "bestSellers": "Best sellers",
+    "translatingDescription": "Translating description..."
   },
   "features": {
     "title": "Features",

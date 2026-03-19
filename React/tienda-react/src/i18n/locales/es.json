@@ -9,6 +9,7 @@
       "videogames": "VIDEOJUEGOS",
       "blog": "BLOG",
       "about": "CONÓCENOS",
+      "favorites": "FAVORITOS",
       "outlet": "OUTLET"
     },
     "login": "Iniciar sesión",
@@ -172,11 +173,16 @@
   "outlet": {
     "title": "OUTLET"
   },
+  "favorites": {
+    "title": "FAVORITOS",
+    "empty": "Aún no tienes productos en favoritos"
+  },
   "product": {
     "loading": "Cargando...",
     "ratings": "Valoraciones",
     "addToCart": "Añadir al carrito",
-    "bestSellers": "Los más vendidos"
+    "bestSellers": "Los más vendidos",
+    "translatingDescription": "Traduciendo descripción..."
   },
   "features": {
     "title": "Características",
