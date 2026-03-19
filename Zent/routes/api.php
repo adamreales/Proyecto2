@@ -7,7 +7,7 @@ use App\Http\Controllers\ControllerLogin;
 use App\Http\Controllers\ControllerRegistro;
 use App\Http\Controllers\ControllerProductos;
 use App\Http\Controllers\ControllerStripe;
-
+use App\Http\Controllers\ContactoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,6 +39,7 @@ Route::post('/buscador',[ControllerProductos::class,'buscador'])->name('buscador
 Route::get('/categorias',[ControllerCategoria::class,'categorias'])->name('categorias');
 Route::get('/plataformas',[ControllerCategoria::class,'plataformas'])->name('plataformas');
 Route::get('/categoria/{id}',[ControllerCategoria::class,'categoria'])->name('categoria');
+Route::post('/contacto',[ContactoController::class,'enviar'])->name('contacto');
 
 Route::post('/webhook', [ControllerStripe::class, 'webhook']);
 
