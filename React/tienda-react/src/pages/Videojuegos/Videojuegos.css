@@ -5,6 +5,8 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 .VideoJuegos h2 {
   font-family: 'Orbitron', sans-serif;
@@ -12,100 +14,34 @@
   color: black;
   margin-bottom: 25px;
 }
-.VideoJuegos .menu-genero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  gap: 15px;
-}
-.VideoJuegos .menu-genero button {
-  background-color: transparent;
-  border: 2px solid #00eaff;
-  font-size: 18px;
-  font-family: 'Inter', sans-serif;
-}
 .VideoJuegos .Filtros {
-  width: min(1200px, 100%);
-  padding: 0 20px;
-}
-.VideoJuegos .cabezera {
+  width: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  width: min(1200px, 100%);
-  padding: 10px 20px 0;
+  gap: 30px;
 }
-.VideoJuegos .pagina-actual {
-  margin: 0;
-  font-size: 18px;
-  font-family: 'Inter', sans-serif;
-}
-.VideoJuegos .cabezera .botones {
-  display: flex;
-  gap: 10px;
-}
-.VideoJuegos .cabezera button {
-  background: transparent;
-  padding: 0;
+.VideoJuegos .Filtros .select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
   cursor: pointer;
-  outline: none;
-  border: none;
+  border-color: black;
+  align-items: center;
 }
-.VideoJuegos .cabezera button .mario {
-  width: 90px;
-  transition: transform 0.25s ease;
-  animation: idle 2s infinite ease-in-out;
-}
-.VideoJuegos .cabezera button:focus,
-.VideoJuegos .cabezera button:active {
-  outline: none;
-  box-shadow: none;
-}
-.VideoJuegos .cabezera .btn-next:hover .mario {
-  transform: translateX(15px);
-  animation: none;
-}
-.VideoJuegos .cabezera .btn-prev:hover .mario {
-  transform: translateX(-15px);
-  animation: none;
-}
-.VideoJuegos .cabezera .btn-next:active .mario {
-  transform: translateX(30px) scale(1.05);
-}
-.VideoJuegos .cabezera .btn-prev:active .mario {
-  transform: translateX(-30px) scale(1.05);
-}
-.VideoJuegos .cabezera button:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-.VideoJuegos .cabezera button:disabled .mario {
-  opacity: 0.4;
-  transform: scale(0.9);
-  animation: none;
-}
-@keyframes idle {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
 @media (max-width: 768px) {
-  .VideoJuegos .Filtros,
-  .VideoJuegos .cabezera {
-    padding-left: 10px;
-    padding-right: 10px;
+  .VideoJuegos h2 {
+    font-size: 24px;
+    margin-bottom: 18px;
   }
-
-  .VideoJuegos .cabezera .mario {
-    width: 72px;
+}
+@media (max-width: 480px) {
+  .VideoJuegos {
+    padding: 0 8px;
+  }
+  .VideoJuegos h2 {
+    font-size: 20px;
   }
 }

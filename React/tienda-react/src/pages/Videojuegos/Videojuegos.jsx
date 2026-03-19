@@ -69,31 +69,33 @@ function Videojuegos() {
     <div className="VideoJuegos">
           <h2>VIDEOJUEGOS</h2>
           <div className="Filtros">
-              <button className="btn-filtros" onClick={() => { setOrden("productos_mas_caros"); setPagina(1); }}>Ordenar Mayor precio</button>
-              <button className="btn-filtros" onClick={() => { setOrden("productos_mas_baratos"); setPagina(1); }}>Ordenar Menor precio</button>
+              <button className="btn-filtros" onClick={() => { setOrden("productos_mas_caros"); setPagina(1); }}>Precio ↑</button>
+              <button className="btn-filtros" onClick={() => { setOrden("productos_mas_baratos"); setPagina(1); }}>Precio ↓</button>
               <button className="btn-filtros" onClick={() => { setOrden("productos_mas_alfabeticamente"); setPagina(1); }}>Alfabeticamente A-Z</button>
               <button className="btn-filtros" onClick={() => { setOrden("productos_menos_alfabeticamente"); setPagina(1); }}>Alfabeticamente Z-A</button>
-              <select className="btn-filtros" onChange={(e) => {
-                setCategoria(e.target.value);
-                setPlataforma("");
-                setPagina(1);}}>
-                <option value="">Filtrar por categoría</option>
-                {categorias.map((cat) => (
-                  <option key={cat.id} value={cat.id}>{cat.nombre}</option>
-                ))}
-              </select>
 
-              <select className="btn-filtros" onChange={(e) => {
-                setPlataforma(e.target.value);
-                setCategoria("");
-                setPagina(1);
-              }}>
-                <option value="">Filtrar por plataforma</option>
-                {plataformas.map((plataforma) => (
-                  <option key={plataforma.id} value={plataforma.id}>{plataforma.nombre}</option>
-                ))}
-              </select>
-              <button className="btn-filtros" onClick={() => { setCategoria(""); setPlataforma(""); setOrden(""); setPagina(1); }}>X</button>
+                <select className="select" onChange={(e) => {
+                  setCategoria(e.target.value);
+                  setPlataforma("");
+                  setPagina(1);}}>
+                  <option value="">Categorias</option>
+                  {categorias.map((cat) => (
+                    <option key={cat.id} value={cat.id}>{cat.nombre}</option>
+                  ))}
+                </select>
+
+                <select className="select" onChange={(e) => {
+                  setPlataforma(e.target.value);
+                  setCategoria("");
+                  setPagina(1);
+                }}>
+                  <option value="">Plataformas</option>
+                  {plataformas.map((plataforma) => (
+                    <option key={plataforma.id} value={plataforma.id}>{plataforma.nombre}</option>
+                  ))}
+                </select>
+
+              <button className="btn-filtros" onClick={() => { setCategoria(""); setPlataforma(""); setOrden(""); setPagina(1); }}>⟲</button>
           </div>
           <div className="Productos">
             <SeccionProductosVideojuegos productos={productos} />
