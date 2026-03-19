@@ -124,6 +124,117 @@ class ControllerProductos extends Controller
         ]);
 
     }
+    public function productos_mas_caros(){
+        $productos = Producto::with([
+            'doValoraciones',
+            'doImagenes',
+            'doCategorias',
+            'doJuego.doPlataformas',
+            'doJuego.doPegi'
+        ])->orderByDesc('precio')->get();
+
+        if($productos === null){
+            return response()->json([
+                'error' => 'Error al cargar productos o no hay ninguno'
+            ],404);
+        }
+
+        return response()->json([
+            'msg' => 'Productos mas caros',
+            'productos' => $productos
+        ]);
+
+    }
+    public function productos_mas_alfabeticamente(){
+        $productos = Producto::with([
+            'doValoraciones',
+            'doImagenes',
+            'doCategorias',
+            'doJuego.doPlataformas',
+            'doJuego.doPegi'
+        ])->orderBy('titulo')->get();
+
+        if($productos === null){
+            return response()->json([
+                'error' => 'Error al cargar productos o no hay ninguno'
+            ],404);
+        }
+
+        return response()->json([
+            'msg' => 'Productos ordenados alfabeticamente',
+            'productos' => $productos
+        ]);
+
+    }
+     public function productos_menos_alfabeticamente(){
+        $productos = Producto::with([
+            'doValoraciones',
+            'doImagenes',
+            'doCategorias',
+            'doJuego.doPlataformas',
+            'doJuego.doPegi'
+        ])->orderByDesc('titulo')->get();
+
+        if($productos === null){
+            return response()->json([
+                'error' => 'Error al cargar productos o no hay ninguno'
+            ],404);
+        }
+
+        return response()->json([
+            'msg' => 'Productos ordenados alfabeticamente al reves',
+            'productos' => $productos
+        ]);
+
+    }
+    public function producto_categoria($categoria_id){
+         $categoria = Categoria::find($categoria_id);
+        $producto = Producto::with([
+            'doValoraciones',
+            'doValoraciones.doUsuario',
+            'doImagenes',
+            'doCategorias',
+            'doJuego.doPlataformas',
+            'doJuego.doPegi'
+        ])->whereHas('doCategorias', function($query) use ($categoria_id) {
+            $query->where('id', $categoria_id);
+        })->get();
+
+        if($producto === null || $producto->isEmpty()){
+            return response()->json([
+                'error' => 'Producto no encontrado'
+            ],404);
+        }
+
+        return response()->json([
+            'producto' => $producto,
+        ]);
+
+    }
+
+    public function producto_plataforma($plataforma_id){
+        $producto = Producto::with([
+            'doValoraciones',
+            'doValoraciones.doUsuario',
+            'doImagenes',
+            'doCategorias',
+            'doJuego.doPlataformas',
+            'doJuego.doPegi'
+        ])->whereHas('doJuego.doPlataformas', function($query) use ($plataforma_id) {
+            $query->where('plataforma.id', $plataforma_id);
+        })->get();
+
+        if($producto === null || $producto->isEmpty()){
+            return response()->json([
+                'error' => 'Producto no encontrado'
+            ],404);
+        }
+
+        return response()->json([
+            'producto' => $producto,
+        ]);
+
+    }
 
     public function producto($id){
         $producto = Producto::with([
@@ -137,7 +248,7 @@ class ControllerProductos extends Controller
 
         if($producto === null){
             return response()->json([
-                'error' => 'Producto no encontrado' 
+                'error' => 'Producto no encontrado'
             ],404);
         }
 
@@ -205,7 +316,7 @@ class ControllerProductos extends Controller
             }
 
             $p->doCategorias()->sync($r->categorias_producto);
-            
+
 
             //Imagenes
             if(!empty($r->imagenes)){
@@ -289,11 +400,11 @@ class ControllerProductos extends Controller
                 'error' => $e->getMessage()
             ],500);
         }
-        
+
     }
 
     public function buscador(Request $r){
-        
+
         if(!$r->filled('producto_nombre')){
             return response()->json([
                 'error' => 'No se ha enviado producto_nombre'

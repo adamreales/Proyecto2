@@ -61,8 +61,6 @@ function Perfil()
 
                 <div className="Configuracion">
                         <button className="btn-config">MIS DATOS</button>
-                        <button className="btn-config">MIS TARJETAS</button>
-                
                         <button className="btn-config">LIBRETA DE DIRECCIONES</button>
                         <button className="btn-config">MIS PEDIDOS</button>
                 </div>

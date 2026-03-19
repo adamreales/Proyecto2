@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use App\Models\Plataforma;
 
 class ControllerCategoria extends Controller
 {
@@ -20,6 +21,21 @@ class ControllerCategoria extends Controller
         return response()->json([
             'msg' => 'Categorias encontradas',
             'categorias' => $cats
+        ]);
+    }
+
+    public function plataformas(){
+        $cats = Plataforma::with('doJuegos')->get();
+
+        if($cats === null){
+            return response()->json([
+                'error' => 'Error al encontrar las plataformas'
+            ],404);
+        }
+
+        return response()->json([
+            'msg' => 'Plataformas encontradas',
+            'plataformas' => $cats
         ]);
     }
 

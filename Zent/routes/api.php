@@ -29,8 +29,15 @@ Route::get('/productos_mas_vendidos', [ControllerProductos::class,'productos_mas
 Route::get('/productos_mas_populares', [ControllerProductos::class,'productos_mas_populares'])->name('productos_mas_populares');
 Route::get('/productos_mas_actuales',[ControllerProductos::class,'productos_mas_actuales'])->name('productos_mas_actuales');
 Route::get('/productos_mas_baratos', [ControllerProductos::class,'productos_mas_baratos'])->name('productos_mas_baratos');
+Route::get('/productos_mas_alfabeticamente', [ControllerProductos::class,'productos_mas_alfabeticamente'])->name('productos_mas_alfabeticamente');
+Route::get('/productos_mas_caros', [ControllerProductos::class,'productos_mas_caros'])->name('productos_mas_caros');
+Route::get('/productos_menos_alfabeticamente', [ControllerProductos::class,'productos_menos_alfabeticamente'])->name('productos_menos_alfabeticamente');
+Route::get('/productos_categoria/{categoria}', [ControllerProductos::class,'producto_categoria'])->name('productos_categoria');
+Route::get('/productos_plataforma/{plataforma}', [ControllerProductos::class,'producto_plataforma'])->name('productos_plataforma');
+Route::get('/productos_pegi/{pegi}', [ControllerProductos::class,'producto_pegi'])->name('productos_pegi');
 Route::post('/buscador',[ControllerProductos::class,'buscador'])->name('buscador');
 Route::get('/categorias',[ControllerCategoria::class,'categorias'])->name('categorias');
+Route::get('/plataformas',[ControllerCategoria::class,'plataformas'])->name('plataformas');
 Route::get('/categoria/{id}',[ControllerCategoria::class,'categoria'])->name('categoria');
 
 Route::post('/webhook', [ControllerStripe::class, 'webhook']);
@@ -48,7 +55,7 @@ Route::middleware('optional.auth')->group(function(){
 Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('/perfil', [ControllerLogin::class,'perfil'])->name('perfil');
-    
+
     Route::post('/anadir_producto', [ControllerProductos::class,'anadir_producto'])->name('anadir_producto');
     Route::post('/eliminar_producto', [ControllerProductos::class,'eliminar_producto'])->name('eliminar_producto');
 
