@@ -15,13 +15,13 @@ class Plataforma extends Model
 
     protected $fillable = ["nombre"];
 
-    public function doJuegos()
+    public function doProductos()
     {
         return $this->belongsToMany(
-            Juego::class,
-            'plataforma_juego',
+            Producto::class,
+            'plataforma_producto',
             'plataforma_id',
-            'juego_id'
+            'producto_id'
         );
     }
 

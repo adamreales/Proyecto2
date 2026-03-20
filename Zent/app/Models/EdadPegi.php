@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\DescripcionPegi;
-use App\Models\Juego;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EdadPegi extends Model
@@ -16,14 +15,9 @@ class EdadPegi extends Model
 
     protected $fillable = ["edad","color","descripcion"];
 
-    public function doJuegos()
+    public function doProductos()
     {
-        return $this->belongsToMany(
-            Juego::class,
-            'juego_pegi',
-            'edad_pegi_id',
-            'juego_id'
-        );
+        return $this->hasMany(Producto::class, 'pegi_id','id');
     }
 
     public function doDescripciones()

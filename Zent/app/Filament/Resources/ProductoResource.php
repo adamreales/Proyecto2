@@ -4,15 +4,16 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductoResource\Pages;
 use App\Filament\Resources\ProductoResource\RelationManagers\DoCategoriasRelationManager;
-use App\Filament\Resources\ProductoResource\RelationManagers\ImagenesRelationManager;
+use App\Models\DescripcionPegi;
 use App\Models\Producto;
-use Dom\Text;
+use App\Models\EdadPegi;
 use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\ViewField;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -28,7 +29,7 @@ class ProductoResource extends Resource
     protected static ?string $pluralModelLabel = 'Productos';
 
     /* =======================
-       FORMULARIO CREAR/EDITAR
+       FORMULARIO
        =======================*/
     public static function form(Form $form): Form
     {
@@ -54,8 +55,6 @@ class ProductoResource extends Resource
 
             TextInput::make('valoracion')
                 ->numeric()
-                ->minValue(0)
-                ->maxValue(5)
                 ->default(0)
                 ->disabled(),
 
@@ -63,7 +62,6 @@ class ProductoResource extends Resource
                 ->numeric()
                 ->minValue(1)
                 ->default(1)
-                ->prefix('u')
                 ->required(),
 
             TextInput::make('ventas')
@@ -71,44 +69,68 @@ class ProductoResource extends Resource
                 ->default(0)
                 ->disabled(),
 
-            Select::make('doPegi.id')
+            /* 🔥 PEGI */
+            Select::make('pegi_id')
+                ->label('PEGI')
                 ->relationship('doPegi', 'edad')
+                ->reactive()
                 ->required(),
 
+            /* 🔥 DESCRIPCIONES PEGI DINÁMICAS */
+            Placeholder::make('pegi_descripciones')
+                ->label('Contenido PEGI')
+                ->content(function () {
+
+                $descripciones = DescripcionPegi::all();
+
+                if ($descripciones->isEmpty()) {
+                    return 'Sin descripciones disponibles';
+                }
+
+                return $descripciones
+                    ->map(fn ($d) => "• " . ($d->nombre ?? 'Sin nombre'))
+                    ->join("\n");
+            }),
+
+            /* 🔥 PLATAFORMAS */
             Select::make('doPlataformas')
                 ->relationship('doPlataformas', 'nombre')
                 ->multiple()
                 ->preload()
                 ->required(),
 
+            /* 🔥 CATEGORÍAS */
             Select::make('doCategorias')
                 ->relationship('doCategorias', 'nombre')
                 ->multiple()
                 ->preload()
                 ->required(),
-
+           
             Repeater::make('doImagenes')
                 ->relationship('doImagenes')
                 ->schema([
                     TextInput::make('url')
                         ->label('URL Imagen')
+                        ->url()
+                        ->required()
                 ])
+                ->defaultItems(1)
+                ->maxItems(4)
+                ->collapsible()
                 ->columnSpanFull()
-
 
         ]);
     }
 
     /* =======================
-       TABLA LISTADO
+       TABLA
        =======================*/
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
 
-                TextColumn::make('id')
-                    ->sortable(),
+                TextColumn::make('id')->sortable(),
 
                 TextColumn::make('titulo')
                     ->searchable()
@@ -118,14 +140,11 @@ class ProductoResource extends Resource
                     ->money('EUR')
                     ->sortable(),
 
-                TextColumn::make('stock')
-                    ->sortable(),
+                TextColumn::make('stock')->sortable(),
 
-                TextColumn::make('valoracion')
-                    ->sortable(),
+                TextColumn::make('valoracion')->sortable(),
 
-                TextColumn::make('ventas')
-                    ->sortable(),
+                TextColumn::make('ventas')->sortable(),
 
             ])
             ->actions([
@@ -151,9 +170,8 @@ class ProductoResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ImagenesRelationManager::class,
             DoCategoriasRelationManager::class,
+            // ❌ quitamos imágenes duplicadas
         ];
     }
-
 }

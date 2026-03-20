@@ -13,12 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('juego_pegi', function (Blueprint $table) {
+        Schema::create('plataforma_producto', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->unsignedBigInteger('juego_id');
-            $table->unsignedBigInteger('edad_pegi_id');
+            
+            $table->foreignId('producto_id')
+                ->constrained('producto')
+                ->cascadeOnDelete();
 
-            $table->primary(['juego_id', 'edad_pegi_id']);
+            $table->foreignId('plataforma_id')
+                ->constrained('plataforma')
+                ->cascadeOnDelete();
+
+            $table->primary(['producto_id', 'plataforma_id']);
             $table->softDeletes();
         });
     }
@@ -30,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('juego_pegi');
+        Schema::dropIfExists('plataforma_producto');
     }
 };

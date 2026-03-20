@@ -24,6 +24,7 @@ class ProductoSeeder extends Seeder
                 'valoracion' => 5,
                 'ventas' => 5000,
                 'stock' => 20,
+                'pegi_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now() 
             ],
@@ -35,11 +36,13 @@ class ProductoSeeder extends Seeder
                 'valoracion' => 4.9,
                 'ventas' => 7000,
                 'stock' => 15,
+                'pegi_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'titulo' => 'Elden Ring',
+                'pegi_id' => 4,
                 'subtitulo' => 'Levántate, Sinluz',
                 'descripcion' => 'Un RPG de acción desafiante en un mundo creado por FromSoftware',
                 'precio' => 49,
@@ -57,6 +60,7 @@ class ProductoSeeder extends Seeder
                 'valoracion' => 3,
                 'ventas' => 700,
                 'stock' => 30,
+                'pegi_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -68,6 +72,7 @@ class ProductoSeeder extends Seeder
                 'valoracion' => 4.5,
                 'ventas' => 2000,
                 'stock' => 25,
+                'pegi_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -79,6 +84,7 @@ class ProductoSeeder extends Seeder
                 'valoracion' => 5,
                 'ventas' => 100000,
                 'stock' => 50,
+                'pegi_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -90,6 +96,7 @@ class ProductoSeeder extends Seeder
                 'valoracion' => 4,
                 'ventas' => 60000,
                 'stock' => 30,
+                'pegi_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -101,6 +108,7 @@ class ProductoSeeder extends Seeder
                 'valoracion' => 5,
                 'ventas' => 90000,
                 'stock' => 25,
+                'pegi_id' => 3,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -112,6 +120,7 @@ class ProductoSeeder extends Seeder
                 'valoracion' => 5,
                 'ventas' => 70000,
                 'stock' => 40,
+                'pegi_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -123,6 +132,7 @@ class ProductoSeeder extends Seeder
                 'valoracion' => 5,
                 'ventas' => 45000,
                 'stock' => 20,
+                'pegi_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -134,6 +144,7 @@ class ProductoSeeder extends Seeder
                 'valoracion' => 5,
                 'ventas' => 15000,
                 'stock' => 20,
+                'pegi_id' => 3,
                 'created_at' => now(),
                 'updated_at' => now()
             ],

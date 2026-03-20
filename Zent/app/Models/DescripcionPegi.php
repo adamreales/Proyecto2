@@ -13,5 +13,5 @@ class DescripcionPegi extends Model
     protected $table = "descripcion_pegi";
 
     protected $fillable = ["nombre","descripcion"];
-    
+
 }

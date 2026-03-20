@@ -21,12 +21,10 @@ class DatabaseSeeder extends Seeder
             // Productos y juegos
             ProductoSeeder::class,
             ImagenProductoSeeder::class,
-            JuegoSeeder::class,
 
             // Tablas pivote
             CategoriaProductoSeeder::class,
-            PlataformaJuegoSeeder::class,
-            JuegoPegiSeeder::class,
+            PlataformaProductoSeeder::class,
 
             // Valoraciones (al final)
             ValoracionSeeder::class,

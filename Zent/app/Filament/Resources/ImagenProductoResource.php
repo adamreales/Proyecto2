@@ -30,6 +30,8 @@ class ImagenProductoResource extends Resource
             ->schema([
                 Select::make('id_producto')
                 ->relationship('doProducto', 'titulo')
+                ->searchable()
+                ->preload()
                 ->required(),
                 TextInput::make('url')->required()->maxLength(255)
             ]);

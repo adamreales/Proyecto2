@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Juego;
 use App\Models\Valoracion;
 use App\Models\ImagenProducto;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +14,7 @@ class Producto extends Model
 
     protected $table = "producto";
 
-    protected $fillable = ["titulo","subtitulo","descripcion","precio","valoracion","stock","ventas"];
+    protected $fillable = ["titulo","subtitulo","descripcion","precio","valoracion","stock","ventas","pegi_id"];
     protected $guarded = [];
 
     protected $casts = [
@@ -25,12 +24,8 @@ class Producto extends Model
         'ventas' => 'integer',
     ];
 
-    public function doJuego(){
-        return $this->hasOne(Juego::class,'id_producto');
-    }
-
     public function doPegi(){
-        return $this->belongsTo(EdadPegi::class,'pegi_id');
+        return $this->belongsTo(EdadPegi::class,'pegi_id','id');
     }
 
     public function doValoraciones(){
@@ -54,8 +49,8 @@ class Producto extends Model
     {
         return $this->belongsToMany(
             Plataforma::class,
-            'plataforma_juego',
-            'juego_id',
+            'plataforma_producto',
+            'producto_id',
             'plataforma_id'
         );
     }
