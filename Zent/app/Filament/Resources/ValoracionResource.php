@@ -47,10 +47,7 @@ class ValoracionResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
-                Tables\Actions\ForceDeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -71,5 +68,16 @@ class ValoracionResource extends Resource
             'create' => Pages\CreateValoracion::route('/create'),
             'edit' => Pages\EditValoracion::route('/{record}/edit'),
         ];
-    }    
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canEdit($record): bool
+    {
+        return false;
+    }
+
 }

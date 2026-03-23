@@ -69,37 +69,19 @@ class ProductoResource extends Resource
                 ->default(0)
                 ->disabled(),
 
-            /* 🔥 PEGI */
             Select::make('pegi_id')
                 ->label('PEGI')
                 ->relationship('doPegi', 'edad')
                 ->reactive()
                 ->required(),
+            
 
-            /* 🔥 DESCRIPCIONES PEGI DINÁMICAS */
-            Placeholder::make('pegi_descripciones')
-                ->label('Contenido PEGI')
-                ->content(function () {
-
-                $descripciones = DescripcionPegi::all();
-
-                if ($descripciones->isEmpty()) {
-                    return 'Sin descripciones disponibles';
-                }
-
-                return $descripciones
-                    ->map(fn ($d) => "• " . ($d->nombre ?? 'Sin nombre'))
-                    ->join("\n");
-            }),
-
-            /* 🔥 PLATAFORMAS */
             Select::make('doPlataformas')
                 ->relationship('doPlataformas', 'nombre')
                 ->multiple()
                 ->preload()
                 ->required(),
 
-            /* 🔥 CATEGORÍAS */
             Select::make('doCategorias')
                 ->relationship('doCategorias', 'nombre')
                 ->multiple()
@@ -170,8 +152,6 @@ class ProductoResource extends Resource
     public static function getRelations(): array
     {
         return [
-            DoCategoriasRelationManager::class,
-            // ❌ quitamos imágenes duplicadas
         ];
     }
 }

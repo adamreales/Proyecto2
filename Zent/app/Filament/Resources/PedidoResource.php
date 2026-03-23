@@ -58,7 +58,7 @@ class PedidoResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\DetallesRelationManager::class,
         ];
     }
     

@@ -15,6 +15,8 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserResource extends Resource
 {
@@ -28,7 +30,11 @@ class UserResource extends Resource
             ->schema([
                 TextInput::make('name')->required()->maxLength(50),
                 TextInput::make('email')->required()->email(),
-                TextInput::make('password')->required()
+                TextInput::make('password')
+                    ->password()
+                    ->required(fn ($context) => $context === 'create')
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
             ]);
     }
 
@@ -39,7 +45,6 @@ class UserResource extends Resource
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->searchable()->sortable(),
                 TextColumn::make('email')->searchable()->sortable(),
-                TextColumn::make('password')
             ])
             ->filters([
                 //

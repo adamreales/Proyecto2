@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // Datos base
             EdadPegiSeeder::class,
-            DescripcionPegiSeeder::class,
             PlataformaSeeder::class,
             CategoriaSeeder::class,
 
