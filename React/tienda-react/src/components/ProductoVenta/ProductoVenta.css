@@ -87,6 +87,10 @@
   width: 35px;
   height: 35px;
 }
+.targeta-carrito ul li .item-info .blq-acciones .Gestiones .btn-favoritos img {
+  width: 35px;
+  height: 35px;
+}
 @media (max-width: 1024px) {
   .targeta-carrito ul {
     padding: 0;

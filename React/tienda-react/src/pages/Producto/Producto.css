@@ -69,16 +69,6 @@
 .box .box-datos .valoracion-estrellas {
   font-size: 20px;
 }
-.box .box-datos .valoracion-estrellas .estrella {
-  font-size: 24px;
-  margin-left: 4px;
-}
-.box .box-datos .valoracion-estrellas .estrella.llena {
-  color: #f5b301;
-}
-.box .box-datos .valoracion-estrellas .estrella.vacia {
-  color: #b8b8b8;
-}
 .box .box-datos .btn-box {
   display: flex;
   gap: 10px;
@@ -92,6 +82,7 @@
   font-size: 20px;
   background-color: black;
   color: white;
+  height: 50px;
 }
 .box .box-datos .btn-box .btn-favoritos:hover {
   background-color: white;
@@ -101,6 +92,7 @@
   width: 350px;
   background-color: black;
   color: white;
+  height: 50px;
 }
 .box .box-datos .btn-box .btn-cesta:hover {
   background-color: white;

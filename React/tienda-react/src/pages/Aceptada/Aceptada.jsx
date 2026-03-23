@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 function Aceptada() {
 
   const { t } = useTranslation();
+  const successTitle = t("checkout.successTitle", { defaultValue: "Compra realizada exitosamente." });
 
   const orderNumber = useMemo(() => {
     const params = new URLSearchParams(window.location.search);
@@ -24,7 +25,7 @@ function Aceptada() {
     <>
       <div className="Acceptada">
 
-        <h1>{t("checkout.successTitle")}</h1>
+        <h1>{successTitle === "checkout.successTitle" ? "Compra realizada exitosamente." : successTitle}</h1>
 
         <p>{t("checkout.successMessage")}</p>
 
