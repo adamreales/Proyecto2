@@ -76,11 +76,28 @@ class ProductoResource extends Resource
                 ->required(),
             
 
-            Select::make('doPlataformas')
-                ->relationship('doPlataformas', 'nombre')
-                ->multiple()
-                ->preload()
-                ->required(),
+            Repeater::make('doPlataformaProductos')
+                ->relationship('doPlataformaProductos')
+                ->label('Plataformas')
+                ->schema([
+
+                    Select::make('plataforma_id')
+                        ->label('Plataforma')
+                        ->relationship('doPlataforma', 'nombre')
+                        ->required()
+                        ->preload(),
+
+                    TextInput::make('stock')
+                        ->numeric()
+                        ->minValue(0)
+                        ->required()
+                        ->default(0),
+
+                ])
+                ->columns(2)
+                ->defaultItems(1)
+                ->collapsible()
+                ->columnSpanFull(),
 
             Select::make('doCategorias')
                 ->relationship('doCategorias', 'nombre')
@@ -122,7 +139,11 @@ class ProductoResource extends Resource
                     ->money('EUR')
                     ->sortable(),
 
-                TextColumn::make('stock')->sortable(),
+                TextColumn::make('stock_total')
+                    ->label('Stock Total')
+                    ->getStateUsing(fn ($record) => 
+                        $record->doPlataformaProductos->sum('stock')
+                ),
 
                 TextColumn::make('valoracion')->sortable(),
 

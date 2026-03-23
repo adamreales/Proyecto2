@@ -54,4 +54,8 @@ class Producto extends Model
         );
     }
 
+    public function doPlataformaProductos(){
+        return $this->hasMany(PlataformaProducto::class, 'producto_id');
+    }
+
 }
