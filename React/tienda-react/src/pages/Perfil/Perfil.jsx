@@ -60,9 +60,8 @@ function Perfil()
                 </div>
 
                 <div className="Configuracion">
-                        <button className="btn-config">MIS DATOS</button>
-                        <button className="btn-config">LIBRETA DE DIRECCIONES</button>
-                        <button className="btn-config">MIS PEDIDOS</button>
+                        <Link to="/mis-datos"><button className="btn-config">MIS DATOS</button></Link>
+                        <Link to="/mis-pedidos"><button className="btn-config">MIS PEDIDOS</button></Link>
                 </div>
                 <h2>Tus Últimos Pedidos Realizados</h2>
                 <div className="box-pedidos">
@@ -70,13 +69,9 @@ function Perfil()
                          <p>aqui iran los pedidos</p>
                     </div>
                 </div>
-                <h2>Libreta de direcciones</h2>
-                <div className="box-direcciones">
-                    <a>Holaaa</a>
-                </div>
                 <h2>Mis Opiniones de Productos</h2>
                 <div className="box-opiniones">
-                    <a>Holaaa</a>
+                    <Link to="/mis-opiniones"><button className="btn-config">MIS OPINIONES</button></Link>
                 </div>
             </div>
        </>

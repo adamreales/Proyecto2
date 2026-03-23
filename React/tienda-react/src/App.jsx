@@ -7,6 +7,7 @@ import Conocenos from "./pages/Conocenos/Conocenos";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Registro/Register";
 import Perfil from "./pages/Perfil/Perfil";
+import MisDatos from "./pages/MisDatos/MisDatos";
 import Normas from "./pages/Normas/Normas";
 import Videojuegos from "./pages/Videojuegos/Videojuegos";
 import Producto from "./pages/Producto/Producto";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/conocenos" element={<Conocenos />} />
         <Route path="/normas" element={<Normas />} />
         <Route path="/profile" element={<Perfil />} />
+        <Route path="/mis-datos" element={<MisDatos />} />
         <Route path="/videojuegos" element={<Videojuegos />} />
         <Route path="/producto/:id" element={<Producto />} />
         <Route path="/favoritos" element={<Favoritos />} />
@@ -35,6 +37,7 @@ function App() {
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/denegada" element={<Denegada />} />
         <Route path="/aceptada" element={<Aceptada />} />
+        <Route path="/misdatos" element={<MisDatos />} />
       </Route>
 
       {/* RUTAS DE AUTENTICACIÓN */}

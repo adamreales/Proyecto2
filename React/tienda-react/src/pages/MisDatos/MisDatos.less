@@ -1,0 +1,80 @@
+@tipo-letra-gaming: 'Orbitron', sans-serif;
+@tipo-letra-p: 'Inter', sans-serif;
+
+.MisDatos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    h1 {
+        margin-bottom: 20px;
+        color: black;
+        font-family: @tipo-letra-gaming;
+        font-size: 30px;
+        text-align: center;
+    }
+}
+
+.MisDatos-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    input {
+        width: 350px;
+        padding: 12px 14px;
+        border: 1px solid #2f3f70;
+        border-radius: 8px;
+        font-family: @tipo-letra-p;
+        color: black;
+        
+    }
+
+    input::placeholder {
+        color: #b6bed7;
+    }
+}
+
+.btn-guardar {
+    margin-top: 8px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-family: @tipo-letra-p;
+    font-weight: 700;
+    color: #0f1528;
+    background: #7df9ff;
+    cursor: pointer;
+}
+
+.btn-guardar:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.ok-msg,
+.error-msg {
+    margin-top: 12px;
+    font-family: @tipo-letra-p;
+    text-align: center;
+}
+
+.ok-msg {
+    color: #7dffb2;
+}
+
+.error-msg {
+    color: #ff8f8f;
+}
+
+@media (max-width: 768px) {
+    .MisDatos {
+        margin: 22px 14px;
+        padding: 20px;
+
+        h1 {
+            font-size: 24px;
+        }
+    }
+}

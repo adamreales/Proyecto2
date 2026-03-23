@@ -56,6 +56,7 @@ Route::middleware('optional.auth')->group(function(){
 Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('/perfil', [ControllerLogin::class,'perfil'])->name('perfil');
+    Route::post('/perfil/actualizar', [ControllerLogin::class,'actualizar_perfil'])->name('perfil.actualizar');
 
     Route::post('/anadir_producto', [ControllerProductos::class,'anadir_producto'])->name('anadir_producto');
     Route::post('/eliminar_producto', [ControllerProductos::class,'eliminar_producto'])->name('eliminar_producto');
