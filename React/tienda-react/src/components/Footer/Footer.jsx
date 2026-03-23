@@ -6,21 +6,51 @@ import { useTranslation } from "react-i18next";
 function Footer() {
   const { t } = useTranslation();
   const [email, setEmail] = useState("");
+  const [mensaje, setMensaje] = useState("");
+  const [error, setError] = useState("");
+  const [enviando, setEnviando] = useState(false);
 
   const enviarFormulario = async (e) => {
     e.preventDefault();
+    setMensaje("");
+    setError("");
 
-    let res = await fetch("http://127.0.0.1:8000/api/contacto", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email }),
-    });
+    const emailLimpio = email.trim();
+    if (!emailLimpio) {
+      setError("Introduce un email");
+      return;
+    }
 
-    let data = await res.json();
-    console.log(data);
-    setEmail("");
+    setEnviando(true);
+
+    try {
+      const res = await fetch("http://127.0.0.1:8000/api/contacto", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: emailLimpio }),
+      });
+
+      let data = null;
+      try {
+        data = await res.json();
+      } catch {
+        data = null;
+      }
+
+      if (!res.ok) {
+        setError(data?.error || "No se pudo enviar el correo");
+        return;
+      }
+
+      setMensaje(data?.msg || "Correo enviado correctamente");
+      setEmail("");
+    } catch {
+      setError("Error de conexión con el servidor");
+    } finally {
+      setEnviando(false);
+    }
   };
 
   return (
@@ -71,9 +101,13 @@ function Footer() {
               placeholder={t("footer.emailPlaceholder")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={enviando}
             />
-            <button type="submit">→</button>
+            <button type="submit" disabled={enviando}>{enviando ? "..." : "→"}</button>
           </form>
+          {mensaje && <p>{mensaje}</p>}
+          {error && <p>{error}</p>}
         </div>
 
       </div>

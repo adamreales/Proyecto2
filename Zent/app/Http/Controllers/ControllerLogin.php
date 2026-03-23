@@ -108,7 +108,7 @@ class ControllerLogin extends Controller
             ],401);
         }
 
-        $r->user()->currentAccessToken()->delete();
+        $r->user()->tokens()->delete();
         return response()->json([
             'msg' => 'Session Cerrada'
         ],200);

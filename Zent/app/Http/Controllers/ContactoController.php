@@ -12,7 +12,13 @@ class ContactoController extends Controller
             'email' => 'required|email'
         ]);
 
-        Mail::to($request->email)->send(new ContactoMail($request->email));
+        try {
+            Mail::to($request->email)->send(new ContactoMail($request->email));
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'No se pudo enviar el correo: ' . $e->getMessage()
+            ], 500);
+        }
 
         return response()->json([
             'msg' => 'Correo enviado correctamente'
