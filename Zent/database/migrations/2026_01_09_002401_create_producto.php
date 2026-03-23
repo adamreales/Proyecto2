@@ -21,7 +21,6 @@ return new class extends Migration
             $table->unsignedFloat("precio",8,2);
             $table->unsignedInteger("valoracion");
             $table->unsignedInteger("ventas")->default(0);
-            $table->unsignedInteger("stock");
             $table->foreignId('pegi_id')->nullable()->constrained('edad_pegi')->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();

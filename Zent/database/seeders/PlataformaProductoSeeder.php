@@ -16,53 +16,39 @@ class PlataformaProductoSeeder extends Seeder
     public function run()
     {
         DB::table('plataforma_producto')->insert([
-            // Hollow Knight
-            ['plataforma_id' => 1, 'producto_id' => 1], // PC
-            ['plataforma_id' => 4, 'producto_id' => 1], // Nintendo Switch
 
-            // Zelda BOTW
-            ['plataforma_id' => 4, 'producto_id' => 2], // Nintendo Switch
+            ['plataforma_id'=>1,'producto_id'=>1,'stock'=>10],
+            ['plataforma_id'=>4,'producto_id'=>1,'stock'=>5],
 
-            // Elden Ring
-            ['plataforma_id' => 1, 'producto_id' => 3], // PC
-            ['plataforma_id' => 2, 'producto_id' => 3], // PS5
-            ['plataforma_id' => 3, 'producto_id' => 3], // Xbox
+            ['plataforma_id'=>4,'producto_id'=>2,'stock'=>8],
 
-            // FIFA 25
-            ['plataforma_id' => 1, 'producto_id' => 4], // PC
-            ['plataforma_id' => 2, 'producto_id' => 4], // PS5
-            ['plataforma_id' => 3, 'producto_id' => 4], // Xbox
+            ['plataforma_id'=>1,'producto_id'=>3,'stock'=>7],
+            ['plataforma_id'=>2,'producto_id'=>3,'stock'=>6],
+            ['plataforma_id'=>3,'producto_id'=>3,'stock'=>9],
 
-            // Mario Kart 8
-            ['plataforma_id' => 4, 'producto_id' => 5], // Nintendo Switch
+            ['plataforma_id'=>1,'producto_id'=>4,'stock'=>15],
+            ['plataforma_id'=>2,'producto_id'=>4,'stock'=>10],
+            ['plataforma_id'=>3,'producto_id'=>4,'stock'=>12],
 
-            // Minecraft
-            ['plataforma_id' => 1, 'producto_id' => 6],
-            ['plataforma_id' => 2, 'producto_id' => 6],
-            ['plataforma_id' => 3, 'producto_id' => 6],
-            ['plataforma_id' => 4, 'producto_id' => 6],
+            ['plataforma_id'=>4,'producto_id'=>5,'stock'=>20],
 
-            // Animal Crossing
-            ['plataforma_id' => 4, 'producto_id' => 7],
+            ['plataforma_id'=>1,'producto_id'=>6,'stock'=>25],
+            ['plataforma_id'=>2,'producto_id'=>6,'stock'=>20],
+            ['plataforma_id'=>3,'producto_id'=>6,'stock'=>30],
+            ['plataforma_id'=>4,'producto_id'=>6,'stock'=>15],
 
-            // The Witcher 3
-            ['plataforma_id' => 1, 'producto_id' => 8],
-            ['plataforma_id' => 2, 'producto_id' => 8],
-            ['plataforma_id' => 3, 'producto_id' => 8],
+            ['plataforma_id'=>1,'producto_id'=>12,'stock'=>20],
+            ['plataforma_id'=>2,'producto_id'=>12,'stock'=>15],
 
-            // Stardew Valley
-            ['plataforma_id' => 1, 'producto_id' => 9],
-            ['plataforma_id' => 4, 'producto_id' => 9],
+            ['plataforma_id'=>1,'producto_id'=>13,'stock'=>18],
+            ['plataforma_id'=>2,'producto_id'=>13,'stock'=>12],
 
-            // Celeste
-            ['plataforma_id' => 1, 'producto_id' => 10],
-            ['plataforma_id' => 4, 'producto_id' => 10],
+            ['plataforma_id'=>1,'producto_id'=>14,'stock'=>25],
+            ['plataforma_id'=>4,'producto_id'=>14,'stock'=>10],
 
-            // Arc Raiders
-            ['plataforma_id' => 1, 'producto_id' => 11],
-            ['plataforma_id' => 2, 'producto_id' => 11],
-            ['plataforma_id' => 3, 'producto_id' => 11],
+            ['plataforma_id'=>2,'producto_id'=>15,'stock'=>14],
 
+            ['plataforma_id'=>3,'producto_id'=>16,'stock'=>22],
         ]);
     }
 }

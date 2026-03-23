@@ -14,13 +14,12 @@ class Producto extends Model
 
     protected $table = "producto";
 
-    protected $fillable = ["titulo","subtitulo","descripcion","precio","valoracion","stock","ventas","pegi_id"];
+    protected $fillable = ["titulo","subtitulo","descripcion","precio","valoracion","ventas","pegi_id"];
     protected $guarded = [];
 
     protected $casts = [
         'precio' => 'decimal:2',
         'valoracion' => 'float',
-        'stock' => 'integer',
         'ventas' => 'integer',
     ];
 

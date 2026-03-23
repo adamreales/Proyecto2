@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('plataforma_producto', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            
+
+            $table->id();
+
             $table->foreignId('producto_id')
                 ->constrained('producto')
                 ->cascadeOnDelete();
@@ -24,7 +26,9 @@ return new class extends Migration
                 ->constrained('plataforma')
                 ->cascadeOnDelete();
 
-            $table->primary(['producto_id', 'plataforma_id']);
+            $table->integer('stock')->default(0);
+
+            $table->unique(['producto_id', 'plataforma_id']);
             $table->softDeletes();
         });
     }
