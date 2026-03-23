@@ -31,26 +31,17 @@ function Login() {
           <input  type="email"value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email : " />
           <div className="password-wrapper">
             <div className="password-row">
-              <input
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                onKeyUp={(e) => setCapsLock(e.getModifierState("CapsLock"))}
-                onFocus={(e) => setCapsLock(e.getModifierState("CapsLock"))}
-                onBlur={() => setCapsLock(false)}
-                placeholder="Contraseña : "
-              />
+              <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} onKeyUp={(e) => setCapsLock(e.getModifierState("CapsLock"))} onFocus={(e) => setCapsLock(e.getModifierState("CapsLock"))} onBlur={() => setCapsLock(false)}placeholder="Contraseña : "/>
+
               <button type="button" className="btn-ojo" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}>
                 <span className="material-symbols-outlined">{showPassword ? "visibility_off" : "visibility"}</span>
               </button>
             </div>
             {capsLock && (
-              <p className="aviso-capslock">
-                <span className="material-symbols-outlined aviso-icon">keyboard_capslock</span>
-                Mayúsculas activadas
-              </p>
+              <p className="aviso-capslock"><span className="material-symbols-outlined aviso-icon">keyboard_capslock</span>   Mayúsculas activadas</p>
             )}
           </div>
+          <Link to="/forgot-password"><a href="#" style={{textDecoration: "none"}}>¿Olvidaste tu contraseña?</a></Link>
           <div className="Botones">
             <button type="submit" className="btn-login"> Iniciar sesión </button>
              <Link to="/register"> <button type="submit" className="btn-registro">Registrate</button></Link>

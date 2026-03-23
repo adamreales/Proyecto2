@@ -22,6 +22,8 @@ use App\Http\Controllers\ContactoController;
 
 Route::post('/login', [ControllerLogin::class,'login'])->name('login');
 Route::post('/registro',[ControllerRegistro::class,'registro'])->name('registro');
+Route::post('/solicitar_recuperacion_contraseña', [ControllerLogin::class,'solicitar_recuperacion_contraseña'])->name('solicitar_recuperacion_contraseña');
+Route::post('/validar_y_reset_contraseña', [ControllerLogin::class,'validar_y_reset_contraseña'])->name('validar_y_reset_contraseña');
 
 Route::get('/productos', [ControllerProductos::class,'productos'])->name('productos');
 Route::get('/producto/{id}', [ControllerProductos::class,'producto'])->name('producto');
@@ -62,4 +64,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/eliminar_producto', [ControllerProductos::class,'eliminar_producto'])->name('eliminar_producto');
 
     Route::post('/cerrar_session',[ControllerLogin::class,'cerrar_session'])->name('cerrar_session');
+    Route::post('/cambiar_contraseña', [ControllerLogin::class,'cambiar_contraseña'])->name('cambiar_contraseña');
 });

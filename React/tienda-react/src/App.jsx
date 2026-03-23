@@ -16,6 +16,9 @@ import Blog from "./pages/Blog/Blog";
 import Carrito from "./pages/Carrito/Carrito";
 import Denegada from "./pages/Denegada/Denegada";
 import Aceptada from "./pages/Aceptada/Aceptada";
+import ForgotPassword from "./pages/OlvidarContraseña/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import ChangePassword from "./pages/CanvioContraseña/ChangePassword";
 import "./App.css";
 
 function App() {
@@ -44,7 +47,9 @@ function App() {
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/cambiar-contraseña" element={<ChangePassword />} />
       </Route>
 
     </Routes>

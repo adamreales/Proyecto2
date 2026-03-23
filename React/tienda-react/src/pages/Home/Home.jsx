@@ -85,9 +85,7 @@ function Home() {
         <>
             <article className="portada">
                 <div className="box1">
-                    <Link to="/videojuegos"><video id="video-portada" autoPlay muted playsInline preload="auto">
-                        <source src="http://zent.es/imagenes_producto/Tienda.mp4" type="video/mp4" />
-                    </video></Link>
+                    <Link to="/videojuegos"><video id="video-portada" autoPlay muted playsInline preload="auto"> <source src="http://zent.es/imagenes_producto/Tienda.mp4" type="video/mp4" /></video></Link>
                 </div>
 
                 <div className="box2">
@@ -95,11 +93,7 @@ function Home() {
                           <Link to="/videojuegos"><img src={imagenes[currentSlide]} alt="Slide" /></Link>
                         <div className="carousel-dots">
                             {imagenes.map((_, index) => (
-                                <span
-                                    key={index}
-                                    className={`dot ${index === currentSlide ? "active" : ""}`}
-                                    onClick={() => goToSlide(index)}
-                                ></span>
+                                <span key={index}className={`dot ${index === currentSlide ? "active" : ""}`} onClick={() => goToSlide(index)}></span>
                             ))}
                         </div>
                     </div>

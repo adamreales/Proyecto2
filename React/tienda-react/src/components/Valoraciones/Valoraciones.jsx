@@ -25,7 +25,7 @@ function Valoraciones() {
             <p>{t("reviews.summary")}</p>
           </div>
 
-          <Link to="/conocenos"><button className="BotonValoraciones"> {t("reviews.feedbacks")}</button></Link>
+          <Link to="/conocenos"><button className="BotonValoraciones">1,568,884 user feedbacks</button></Link>
 
         </div>
 
