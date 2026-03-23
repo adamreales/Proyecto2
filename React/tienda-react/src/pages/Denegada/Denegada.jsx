@@ -1,19 +1,26 @@
-import "./Denegada.css"
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import "./Denegada.css";
+import { useTranslation } from "react-i18next";
 
-function Denegada() 
-{
-    
-    return (
-        <>
-         
-            <h1>No se ha podido completar la compra.
-            Ha ocurrido un problema al procesar el pago. 
-            Por favor, inténtalo de nuevo o utiliza otro método de pago.</h1>
-           
-       </>
-    );
+function Denegada() {
+
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <div className="Denegada">
+
+        <h1>{t("checkout.errorTitle")}</h1>
+
+        <p>{t("checkout.errorMessage")}</p>
+
+        <img
+          src="http://zent.es/imagenes_producto/compradenegada.png"
+          alt="error"
+        />
+
+      </div>
+    </>
+  );
 }
+
 export default Denegada;

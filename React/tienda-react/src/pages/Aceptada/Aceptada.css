@@ -1,6 +1,21 @@
 /* COLORES */
 /* TIPOGRAFÍA */
-h1 {
+.Acceptada {
+  width: 100%;
+}
+.Acceptada h1 {
   font-family: 'Orbitron', sans-serif;
-  font-size: 25px;
+  font-size: 55px;
+}
+.Acceptada img {
+  width: 400px;
+  margin-top: 20px;
+}
+@media (max-width: 768px) {
+  .Acceptada h1 {
+    font-size: 30px;
+  }
+  .Acceptada img {
+    width: 300px;
+  }
 }

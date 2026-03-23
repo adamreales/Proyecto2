@@ -1,6 +1,21 @@
 /* COLORES */
 /* TIPOGRAFÍA */
-h1 {
+.Denegada {
+  width: 100%;
+}
+.Denegada h1 {
   font-family: 'Orbitron', sans-serif;
-  font-size: 25px;
+  font-size: 55px;
+}
+.Denegada img {
+  width: 400px;
+  margin-top: 20px;
+}
+@media (max-width: 768px) {
+  .Denegada h1 {
+    font-size: 30px;
+  }
+  .Denegada img {
+    width: 300px;
+  }
 }

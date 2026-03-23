@@ -1,33 +1,53 @@
-import "./Aceptada.css"
+import "./Aceptada.css";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-function Aceptada() 
-{
-    const orderNumber = useMemo(() => {
-        const params = new URLSearchParams(window.location.search);
-        const fromQuery = params.get("pedido") || params.get("pedido_id") || params.get("order") || params.get("orderNumber");
-        const fromStorage = localStorage.getItem("ultimoPedidoId");
+function Aceptada() {
 
-        return fromQuery || fromStorage || "no disponible";
-    }, []);
+  const { t } = useTranslation();
 
-    return (
-        <>
-         
-            <h1>Compra completada con éxito.</h1>
-            <p>Tu pago ha sido procesado correctamente. Gracias por tu compra.</p>
-            <p>
-                Tu número de pedido es {orderNumber}. Se ha enviado a tu dirección de correo electrónico la factura.
-                {orderNumber !== "no disponible" && (
-                    <>
-                        {" "}
-                        También la puedes descargar aquí <Link to={`/factura/${orderNumber}`}>aquí</Link>.
-                    </>
-                )}
-            </p>
-           
-       </>
-    );
+  const orderNumber = useMemo(() => {
+    const params = new URLSearchParams(window.location.search);
+    const fromQuery =
+      params.get("pedido") ||
+      params.get("pedido_id") ||
+      params.get("order") ||
+      params.get("orderNumber");
+
+    const fromStorage = localStorage.getItem("ultimoPedidoId");
+
+    return fromQuery || fromStorage || t("checkout.unavailable");
+  }, [t]);
+
+  return (
+    <>
+      <div className="Acceptada">
+
+        <h1>{t("checkout.successTitle")}</h1>
+
+        <p>{t("checkout.successMessage")}</p>
+
+        <p>
+          {t("checkout.orderNumber", { orderNumber })}
+
+          {orderNumber !== t("checkout.unavailable") && (
+            <>
+              {" "}
+              {t("checkout.downloadHere")}{" "}
+              <Link to={`/factura/${orderNumber}`}>
+                {t("checkout.downloadHere")}
+              </Link>
+              .
+            </>
+          )}
+        </p>
+
+        <img src="http://zent.es/imagenes_producto/compraaceptada.jpg" alt="success" />
+
+      </div>
+    </>
+  );
 }
+
 export default Aceptada;
