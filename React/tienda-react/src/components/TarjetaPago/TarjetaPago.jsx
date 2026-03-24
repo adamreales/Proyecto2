@@ -9,6 +9,15 @@ const TarjetaPago = ({ total }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const getSessionId = () => {
+    let sessionId = localStorage.getItem("sessionId");
+    if (!sessionId) {
+      sessionId = crypto.randomUUID();
+      localStorage.setItem("sessionId", sessionId);
+    }
+    return sessionId;
+  };
+
   // ✅ Formateador de moneda
   const formatPrice = (precio) =>
     new Intl.NumberFormat(i18n.language, {
@@ -27,13 +36,18 @@ const TarjetaPago = ({ total }) => {
     setLoading(true);
 
     try {
+      const token = localStorage.getItem("token");
+      const sessionId = getSessionId();
+      const headers = {
+        "Content-Type": "application/json",
+        "X-Session-Id": sessionId,
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      };
+
       // Paso 1: crear pedido
       const resPedido = await fetch('http://localhost:8000/api/preparar_pago', {
         method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          "X-Session-Id": localStorage.getItem("sessionId")
-        }
+        headers
       });
 
       const dataPedido = await resPedido.json();
@@ -48,10 +62,7 @@ const TarjetaPago = ({ total }) => {
       // Paso 2: Stripe
       const resPago = await fetch(`http://localhost:8000/api/pagar_pedido/${dataPedido.pedido_id}`, {
         method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          "X-Session-Id": localStorage.getItem("sessionId")
-        }
+        headers
       });
 
       const dataPago = await resPago.json();
@@ -83,13 +94,7 @@ const TarjetaPago = ({ total }) => {
           <p className="precio">{formatPrice(total)}</p>
         </div>
 
-        <button
-          className="btn-Pagar"
-          onClick={handlePagar}
-          disabled={loading}
-        >
-          {loading ? t("payment.redirecting") : t("payment.pay")}
-        </button>
+        <button  className="btn-Pagar"onClick={handlePagar}  disabled={loading}>{loading ? t("payment.redirecting") : t("payment.pay")}</button>
 
         {error && <p className='error-pago'>{error}</p>}
 
@@ -97,9 +102,7 @@ const TarjetaPago = ({ total }) => {
 
       <hr />
 
-      <a href="/home" className="url">
-        {t("cart.continueShopping")}
-      </a>
+      <a href="/home" className="url">{t("cart.continueShopping")} </a>
     </>
   );
 };

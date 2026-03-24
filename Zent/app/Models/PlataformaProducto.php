@@ -18,10 +18,10 @@ class PlataformaProducto extends Model
     ];
 
     public function doProducto(){
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo(Producto::class, 'producto_id', 'id')->withTrashed();
     }
 
     public function doPlataforma(){
-        return $this->belongsTo(Plataforma::class);
+        return $this->belongsTo(Plataforma::class, 'plataforma_id', 'id')->withTrashed();
     }
 }

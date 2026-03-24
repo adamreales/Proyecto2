@@ -48,7 +48,7 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
                         <button
                           type="button"
                           onClick={() =>
-                            actualizarCantidad(item.id, cantidadSeleccionada - 1)
+                            actualizarCantidad(item, cantidadSeleccionada - 1)
                           }
                         >
                           -
@@ -60,14 +60,14 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
                           min="1"
                           max={stockMaximo}
                           onChange={(e) =>
-                            actualizarCantidad(item.id, Number(e.target.value))
+                            actualizarCantidad(item, Number(e.target.value))
                           }
                         />
 
                         <button
                           type="button"
                           onClick={() =>
-                            actualizarCantidad(item.id, cantidadSeleccionada + 1)
+                            actualizarCantidad(item, cantidadSeleccionada + 1)
                           }
                         >
                           +
@@ -78,7 +78,7 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
                     <hr />
 
                     <div className="Gestiones">
-                      <button className="btn-eliminar" onClick={() => eliminarProducto(item.id)} > <img src="http://zent.es/imagenes_producto/basura.png" /> </button>
+                      <button className="btn-eliminar" onClick={() => eliminarProducto(item)} > <img src="http://zent.es/imagenes_producto/basura.png" /> </button>
 
                       <button className="btn-favoritos"><img src="http://zent.es/imagenes_producto/corazon.avif" /></button>
                     </div>

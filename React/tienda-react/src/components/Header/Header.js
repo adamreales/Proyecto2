@@ -23,12 +23,29 @@ export function useHeaderCart() {
 
   const mapCartItems = (items = []) => {
     return items.map((item) => {
-      const producto = item.do_producto || item.doProducto || {};
+      const plataformaProducto =
+        item.do_plataforma_producto || item.doPlataformaProducto || {};
+      const producto =
+        item.producto ||
+        plataformaProducto.do_producto ||
+        plataformaProducto.doProducto ||
+        item.do_producto ||
+        item.doProducto ||
+        {};
+      const plataforma =
+        item.plataforma_relacion ||
+        plataformaProducto.do_plataforma ||
+        plataformaProducto.doPlataforma ||
+        item.do_plataforma ||
+        item.doPlataforma ||
+        {};
       const imagenes = producto.do_imagenes || producto.doImagenes || [];
-      const imagenUrl = imagenes[0]?.url
-        ? `http://zent.es/${imagenes[0].url}`
+      const imagenRaw = item.imagen || imagenes[0]?.url || "";
+      const imagenUrl = imagenRaw
+        ? `http://zent.es/${String(imagenRaw).replace(/^\/+/, "")}`
         : "";
       const stockValue = Number(
+        plataformaProducto.stock ??
         producto.stock ??
           producto.cantidad_stock ??
           producto.unidades ??
@@ -36,16 +53,42 @@ export function useHeaderCart() {
           0
       );
       const stock = stockValue > 0 ? stockValue : 1;
+      const idProducto = Number(item.id_producto ?? producto.id ?? 0);
+      const plataformaId = Number(
+        item.id_plataforma ??
+          item.plataforma_id ??
+          plataformaProducto.plataforma_id ??
+          plataforma.id ??
+          0
+      ) || null;
+      const plataformaProductoId = Number(
+        item.plataforma_producto_id ??
+          item.producto_plataforma_id ??
+          plataformaProducto.id ??
+          item.relacion_id ??
+          plataforma.pivot?.plataforma_producto_id ??
+          plataforma.pivot?.id ??
+          item.pivot?.plataforma_producto_id ??
+          item.pivot?.id ??
+          0
+      ) || null;
+      const lineaId = String(
+        item.id ?? `${idProducto}-${plataformaProductoId ?? plataformaId ?? "base"}`
+      );
 
       return {
-        id: item.id_producto,
-        nombre: producto.titulo || "Producto",
-        precio: Number(producto.precio) || 0,
+        id: lineaId,
+        idProducto,
+        plataformaId,
+        plataformaProductoId,
+        plataforma: item.plataforma || plataforma.nombre || "PC",
+        nombre: item.nombre || producto.titulo || "Producto",
+        precio: Number(item.precio ?? producto.precio) || 0,
         cantidad: Number(item.cantidad) || 0,
         imagen: imagenUrl,
         stock,
       };
-    });
+    }).filter((item) => item.idProducto && item.plataformaId);
   };
 
   /*
@@ -104,18 +147,35 @@ export function useHeaderCart() {
   */
   const eliminarProducto = async (id) => {
     try {
+      const producto = typeof id === "object" ? id : { id: id };
       const token = localStorage.getItem("token");
       const sessionId = getSessionId();
+      const body = {};
+
+      if (producto.id) {
+        body.id_item = producto.id;
+      }
+
+      if (producto.idProducto) {
+        body.id_producto = producto.idProducto;
+      }
+
+      if (producto.plataformaId) {
+        body.id_plataforma = producto.plataformaId;
+      }
+
+      if (producto.plataformaProductoId) {
+        body.plataforma_producto_id = producto.plataformaProductoId;
+      }
 
       const res = await fetch("http://localhost:8000/api/quitar_carrito", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Session-Id": sessionId
+          "X-Session-Id": sessionId,
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        body: JSON.stringify({
-          id_producto: id
-        }),
+        body: JSON.stringify(body),
       });
 
       const data = await parseJsonSafe(res);
@@ -132,8 +192,8 @@ export function useHeaderCart() {
     }
   };
 
-  const actualizarCantidad = useCallback(async (id, nuevaCantidad) => {
-    const item = cartItems.find(i => i.id === id);
+  const actualizarCantidad = useCallback(async (producto, nuevaCantidad) => {
+    const item = cartItems.find(i => i.id === producto.id);
     if (!item) return;
 
     const stockMaximo = Math.max(1, Number(item.stock) || 1);
@@ -142,7 +202,7 @@ export function useHeaderCart() {
     if (cantidadClampeada === item.cantidad) return;
 
     // Actualización optimista para UI fluida
-    setCartItems(prev => prev.map(i => i.id === id ? { ...i, cantidad: cantidadClampeada } : i));
+    setCartItems(prev => prev.map(i => i.id === item.id ? { ...i, cantidad: cantidadClampeada } : i));
 
     try {
       const token = localStorage.getItem("token");
@@ -152,6 +212,19 @@ export function useHeaderCart() {
         "X-Session-Id": sessionId,
         ...(token ? { Authorization: `Bearer ${token}` } : {})
       };
+      const payloadBase = {
+        id_item: item.id,
+        id_producto: item.idProducto,
+      };
+
+      if (item.plataformaId) {
+        payloadBase.id_plataforma = item.plataformaId;
+      }
+
+      if (item.plataformaProductoId) {
+        payloadBase.plataforma_producto_id = item.plataformaProductoId;
+      }
+
       const delta = cantidadClampeada - item.cantidad;
 
       if (delta > 0) {
@@ -159,7 +232,7 @@ export function useHeaderCart() {
         const res = await fetch("http://localhost:8000/api/anadir_carrito", {
           method: "POST",
           headers,
-          body: JSON.stringify({ id_producto: id, cantidad: delta }),
+          body: JSON.stringify({ ...payloadBase, cantidad: delta }),
         });
         const data = await parseJsonSafe(res);
         if (!res.ok) throw new Error(data.error || "No se pudo actualizar");
@@ -168,7 +241,7 @@ export function useHeaderCart() {
         const resQuitar = await fetch("http://localhost:8000/api/quitar_carrito", {
           method: "POST",
           headers,
-          body: JSON.stringify({ id_producto: id }),
+          body: JSON.stringify(payloadBase),
         });
         const dataQuitar = await parseJsonSafe(resQuitar);
         if (!resQuitar.ok) throw new Error(dataQuitar.error || "No se pudo quitar");
@@ -176,7 +249,7 @@ export function useHeaderCart() {
         const resAnadir = await fetch("http://localhost:8000/api/anadir_carrito", {
           method: "POST",
           headers,
-          body: JSON.stringify({ id_producto: id, cantidad: cantidadClampeada }),
+          body: JSON.stringify({ ...payloadBase, cantidad: cantidadClampeada }),
         });
         const dataAnadir = await parseJsonSafe(resAnadir);
         if (!resAnadir.ok) throw new Error(dataAnadir.error || "No se pudo actualizar");

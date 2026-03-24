@@ -35,7 +35,7 @@ class ControllerCarrito extends Controller
             );
 
             return response()->json([
-                'id_carrito' => $carrito->id, 
+                'id_carrito' => $carrito->id,
                 'carrito' => 'Carrito activo'
             ],201);
 
@@ -83,13 +83,18 @@ class ControllerCarrito extends Controller
             );
 
             // 🔥 Bloqueamos también el item del carrito
-            $item_carrito = CarritoProducto::where('id_carrito', $c->id)
+            $item_carrito = CarritoProducto::withTrashed()->where('id_carrito', $c->id)
                 ->where('plataforma_producto_id', $pp->id)
                 ->lockForUpdate()
                 ->first();
 
             // 🔥 Cantidad total que habrá en carrito
             $cantidad_total = $r->cantidad;
+
+            if($item_carrito && $item_carrito->trashed()){
+                $item_carrito->restore();
+                $item_carrito->cantidad = 0;
+            }
 
             if($item_carrito){
                 $cantidad_total += $item_carrito->cantidad;
@@ -130,21 +135,7 @@ class ControllerCarrito extends Controller
         DB::beginTransaction();
 
         try{
-
-            if(!$r->has(['id_producto','id_plataforma'])){
-                throw new \Exception("Error Faltan campos de envio");
-            }
-
             $dueno = DuenoCarrito::get();
-
-            // 🔥 buscamos el pivote real
-            $pp = PlataformaProducto::where('producto_id', $r->id_producto)
-                ->where('plataforma_id', $r->id_plataforma)
-                ->first();
-
-            if(!$pp){
-                throw new \Exception("Error producto-plataforma no encontrado");
-            }
 
             $carrito = Carrito::where($dueno['campo'], $dueno['valor'])
                 ->where('estado','Activo')
@@ -155,10 +146,45 @@ class ControllerCarrito extends Controller
                 throw new \Exception("Error carrito no encontrado");
             }
 
-            $item_carrito = CarritoProducto::where('id_carrito',$carrito->id)
-                ->where('plataforma_producto_id',$pp->id)
-                ->lockForUpdate()
-                ->first();
+            $item_carrito = null;
+
+            if($r->filled('id_item')){
+                $item_carrito = CarritoProducto::where('id_carrito', $carrito->id)
+                    ->where('id', $r->id_item)
+                    ->lockForUpdate()
+                    ->first();
+            }
+
+            if($item_carrito === null && $r->filled('plataforma_producto_id')){
+                $item_carrito = CarritoProducto::where('id_carrito', $carrito->id)
+                    ->where('plataforma_producto_id', $r->plataforma_producto_id)
+                    ->lockForUpdate()
+                    ->first();
+            }
+
+            if($item_carrito === null && $r->filled('id_producto') && $r->filled('id_plataforma')){
+                $pp = PlataformaProducto::where('producto_id', $r->id_producto)
+                    ->where('plataforma_id', $r->id_plataforma)
+                    ->first();
+
+                if(!$pp){
+                    throw new \Exception("Error producto-plataforma no encontrado");
+                }
+
+                $item_carrito = CarritoProducto::where('id_carrito',$carrito->id)
+                    ->where('plataforma_producto_id',$pp->id)
+                    ->lockForUpdate()
+                    ->first();
+            }
+
+            if(
+                $item_carrito === null &&
+                !$r->filled('id_item') &&
+                !$r->filled('plataforma_producto_id') &&
+                !($r->filled('id_producto') && $r->filled('id_plataforma'))
+            ){
+                throw new \Exception("Error faltan campos de envio");
+            }
 
             if($item_carrito === null){
                 throw new \Exception("Error producto no encontrado en el carrito");
@@ -202,6 +228,28 @@ class ControllerCarrito extends Controller
                     'doPlataformaProducto.doPlataforma'
                 ])
                 ->get();
+
+            $items_carrito = $items_carrito->map(function ($item) {
+                $plataformaProducto = $item->doPlataformaProducto;
+                $producto = $plataformaProducto?->doProducto;
+                $plataforma = $plataformaProducto?->doPlataforma;
+                $imagen = $producto?->doImagenes?->first();
+
+                return [
+                    'id' => $item->id,
+                    'cantidad' => $item->cantidad,
+                    'id_producto' => $producto?->id,
+                    'id_plataforma' => $plataforma?->id,
+                    'plataforma_producto_id' => $plataformaProducto?->id,
+                    'nombre' => $producto?->titulo,
+                    'precio' => $producto?->precio,
+                    'plataforma' => $plataforma?->nombre,
+                    'stock' => $plataformaProducto?->stock,
+                    'imagen' => $imagen?->url,
+                    'producto' => $producto,
+                    'plataforma_relacion' => $plataforma,
+                ];
+            });
 
             return response()->json([
                 'carrito' => $items_carrito,

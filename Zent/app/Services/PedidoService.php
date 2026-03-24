@@ -23,8 +23,11 @@ class PedidoService{
                 throw new Exception("No existe carrito");
             }
 
-            $items = CarritoProducto::with('doProducto')->where('id_carrito',$carrito->id)->lockForUpdate()->get();
-        
+            $items = CarritoProducto::with('doPlataformaProducto.doProducto')
+                ->where('id_carrito', $carrito->id)
+                ->lockForUpdate()
+                ->get();
+
             if($items->isEmpty()){
                 throw new Exception("El carrito esta vacio");
             }
@@ -42,13 +45,18 @@ class PedidoService{
             $total = 0;
 
             foreach($items as $item){
-                $producto = $item->doProducto;
+                $plataformaProducto = $item->doPlataformaProducto;
+                $producto = $plataformaProducto?->doProducto;
 
                 if($producto === null){
                     throw new Exception("Producto no existe");
                 }
 
-                if($producto->stock < $item->cantidad){
+                if($plataformaProducto === null){
+                    throw new Exception("Relación producto-plataforma no existe");
+                }
+
+                if($plataformaProducto->stock < $item->cantidad){
                     throw new Exception("Stock insuficiente para {$producto->titulo}");
                 }
 
@@ -74,7 +82,7 @@ class PedidoService{
             ]);
 
             return $pedido;
-        
+
         });
 
     }

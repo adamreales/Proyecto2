@@ -117,7 +117,7 @@ function Header() {
 
                         <button 
                           className="btn-delete"
-                          onClick={() => eliminarProducto(item.id)}
+                          onClick={() => eliminarProducto(item)}
                         >
                           ✕
                         </button>

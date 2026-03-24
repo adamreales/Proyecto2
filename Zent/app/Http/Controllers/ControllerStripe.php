@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Carrito;
+use App\Models\CarritoProducto;
 use App\Models\Pedido;
 use App\Models\PedidoDetalle;
 use App\Models\Producto;
@@ -18,10 +19,10 @@ use Stripe\Webhook;
 class ControllerStripe extends Controller
 {
 
-    public function preparar_pago(PedidoService $pedidoSercicio){
+    public function preparar_pago(PedidoService $pedidoService){
 
         try{
-            $pedido = $pedidoSercicio->crearPedidoCarrito();
+            $pedido = $pedidoService->crearPedidoCarrito();
             return response()->json([
                 'pedido_id' => $pedido->id,
                 'total' => $pedido->total
@@ -123,17 +124,32 @@ class ControllerStripe extends Controller
                     ->lockForUpdate()
                     ->get();
 
-                foreach ($detalles as $detalle) {
+                $itemsCarrito = CarritoProducto::with('doPlataformaProducto.doProducto')
+                    ->where('id_carrito', $pedido->id_carrito)
+                    ->lockForUpdate()
+                    ->get();
 
-                    $producto = Producto::lockForUpdate()->find($detalle->id_producto);
+                if ($itemsCarrito->isEmpty()) {
+                    throw new \Exception("No hay items de carrito para descontar stock");
+                }
 
-                    if ($producto->stock < $detalle->cantidad) {
+                foreach ($itemsCarrito as $itemCarrito) {
+                    $plataformaProducto = $itemCarrito->doPlataformaProducto;
+                    $producto = $plataformaProducto?->doProducto;
+
+                    if (!$plataformaProducto || !$producto) {
+                        throw new \Exception("Producto/plataforma no válido en carrito");
+                    }
+
+                    if ($plataformaProducto->stock < $itemCarrito->cantidad) {
                         throw new \Exception("Stock inconsistente");
                     }
 
-                    $producto->ventas += $detalle->cantidad;
-                    $producto->stock -= $detalle->cantidad;
+                    $producto->ventas += $itemCarrito->cantidad;
                     $producto->save();
+
+                    $plataformaProducto->stock -= $itemCarrito->cantidad;
+                    $plataformaProducto->save();
                 }
 
                 $pedido->estado = 'pagado';

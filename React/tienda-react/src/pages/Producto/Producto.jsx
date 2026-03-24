@@ -17,6 +17,7 @@ function Producto() {
   const [masVendidos, setMasVendidos] = useState([]);
   const [descripcionTraducida, setDescripcionTraducida] = useState("");
   const [traduciendoDescripcion, setTraduciendoDescripcion] = useState(false);
+  const [plataformaSeleccionada, setPlataformaSeleccionada] = useState(null);
 
   const masVendidosFiltrados = masVendidos.filter(
     (p) => p.id !== producto?.id
@@ -32,30 +33,31 @@ function Producto() {
   };
 
   const handleAddToCart = async () => {
-    if (!producto) return;
+    if (!producto || !plataformaSeleccionada) return;
 
     const sessionId = getSessionId();
+    const token = localStorage.getItem("token");
+    const headers = {
+      "Content-Type": "application/json",
+      "X-Session-Id": sessionId,
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    };
 
     try {
       await fetch("http://localhost:8000/api/crear_carrito", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Session-Id": sessionId,
-        },
+        headers,
       });
 
       const res = await fetch(
         "http://localhost:8000/api/anadir_carrito",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Session-Id": sessionId,
-          },
+          headers,
           body: JSON.stringify({
             id_producto: producto.id,
             cantidad: 1,
+            id_plataforma: plataformaSeleccionada,
           }),
         }
       );
@@ -80,6 +82,14 @@ function Producto() {
         setImgPrincipal(data.producto.do_imagenes?.[0]?.url);
       });
   }, [id]);
+
+  useEffect(() => {
+    if (producto?.do_plataformas?.length > 0) {
+      setPlataformaSeleccionada(Number(producto.do_plataformas[0].id));
+    } else {
+      setPlataformaSeleccionada(null);
+    }
+  }, [producto]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/productos_mas_vendidos")
@@ -127,7 +137,6 @@ function Producto() {
 
   function escollirpegi() {
     const edad = producto?.do_pegi?.edad;
-    console.log(producto);
     if (edad === 3) return "pegi3.jpg";
     if (edad === 7) return "pegi7.jpg";
     if (edad === 12) return "pegi12.png";
@@ -174,7 +183,11 @@ function Producto() {
             <div className="scriptplataformas">
               <span className="final">{producto?.precio} €</span>
 
-              <select className="plataformas">
+              <select
+                className="plataformas"
+                value={plataformaSeleccionada ?? ""}
+                onChange={(e) => setPlataformaSeleccionada(Number(e.target.value))}
+              >
                 {producto?.do_plataformas?.map((plataforma) => (
                   <option key={plataforma.id} value={plataforma.id}>
                     {plataforma.nombre}
