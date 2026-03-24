@@ -25,7 +25,7 @@ class ControllerCategoria extends Controller
     }
 
     public function plataformas(){
-        $cats = Plataforma::with('doJuegos')->get();
+        $cats = Plataforma::with('doProductos')->get();
 
         if($cats === null){
             return response()->json([

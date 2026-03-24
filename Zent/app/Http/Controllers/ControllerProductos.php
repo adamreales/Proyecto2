@@ -247,7 +247,7 @@ class ControllerProductos extends Controller
             'doPlataformas',
             'doPegi'
         ])->whereHas('doPlataformas', function($query) use ($plataforma_id) {
-            $query->where('id', $plataforma_id);
+            $query->where('plataforma.id', $plataforma_id);
         })->get();
 
         if($producto === null || $producto->isEmpty()){
