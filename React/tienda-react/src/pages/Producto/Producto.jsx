@@ -153,14 +153,21 @@ function Producto() {
     Math.min(5, Math.round(producto?.valoracion || 0))
   );
 
+  function fav(productoId){
+    fetch(`http://127.0.0.1:8000/api/favorito`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ producto_id: productoId }),
+    });
+  }
+
   return (
     <>
       <div className="box">
         <div className="box-img">
-          <img
-            src={`http://zent.es/${imgPrincipal}`}
-            alt={producto?.titulo || "Producto"}
-          />
+          <img src={`http://zent.es/${imgPrincipal}`}alt={producto?.titulo || "Producto"}/>
         </div>
 
         <div className="box-datos">
@@ -175,9 +182,7 @@ function Producto() {
 
           <div className="contenedorpegiplataformas">
             <div className="pegi">
-              <img
-                src={`http://zent.es/imagenes_producto/${escollirpegi()}`}
-              />
+              <img src={`http://zent.es/imagenes_producto/${escollirpegi()}`}/>
             </div>
 
             <div className="scriptplataformas">
@@ -205,7 +210,7 @@ function Producto() {
           </p>
 
           <div className="btn-box">
-            <button className="btn-favoritos">❤️</button>
+            <button className="btn-favoritos" onClick={() => fav(producto?.id)}>❤️</button>
 
             <button className="btn-cesta" onClick={handleAddToCart}>
               {t("product.addToCart")}
@@ -217,12 +222,7 @@ function Producto() {
       <div className="imagenes">
         {producto?.do_imagenes?.map((img, index) => (
           <div className="caja-imagen" key={index}>
-            <img
-              src={`http://zent.es/${img.url}`}
-              alt={producto?.titulo || "Producto"}
-              onClick={() => setImgPrincipal(img.url)}
-              className={imgPrincipal === img.url ? "activa" : ""}
-            />
+            <img src={`http://zent.es/${img.url}`}     alt={producto?.titulo || "Producto"} onClick={() => setImgPrincipal(img.url)}   className={imgPrincipal === img.url ? "activa" : ""}  />
           </div>
         ))}
       </div>
@@ -235,11 +235,7 @@ function Producto() {
 
       <Recomendaciones producto={producto} />
 
-      <SeccionProductos
-        titulo={t("product.bestSellers")}
-        productos={masVendidosFiltrados}
-        reload={true}
-      />
+      <SeccionProductos titulo={t("product.bestSellers")}  productos={masVendidosFiltrados}  reload={true} />
     </>
   );
 }

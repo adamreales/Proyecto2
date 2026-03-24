@@ -11,7 +11,7 @@ import MisDatos from "./pages/MisDatos/MisDatos";
 import Normas from "./pages/Normas/Normas";
 import Videojuegos from "./pages/Videojuegos/Videojuegos";
 import Producto from "./pages/Producto/Producto";
-import Favoritos from "./pages/Oulet/Favoritos";
+import Favoritos from "./pages/Favoritos/Favoritos";
 import Blog from "./pages/Blog/Blog";
 import Carrito from "./pages/Carrito/Carrito";
 import Denegada from "./pages/Denegada/Denegada";

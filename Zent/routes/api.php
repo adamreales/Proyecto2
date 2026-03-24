@@ -8,7 +8,8 @@ use App\Http\Controllers\ControllerRegistro;
 use App\Http\Controllers\ControllerProductos;
 use App\Http\Controllers\ControllerStripe;
 use App\Http\Controllers\ContactoController;
-
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\ControllerFavorito;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,6 +33,7 @@ Route::get('/productos_mas_vendidos', [ControllerProductos::class,'productos_mas
 Route::get('/productos_mas_populares', [ControllerProductos::class,'productos_mas_populares'])->name('productos_mas_populares');
 Route::get('/productos_mas_actuales',[ControllerProductos::class,'productos_mas_actuales'])->name('productos_mas_actuales');
 Route::get('/productos_mas_baratos', [ControllerProductos::class,'productos_mas_baratos'])->name('productos_mas_baratos');
+Route::get('/productos_favoritos',[ControllerProductos::class,'productos_favoritos'])->name('productos_favoritos');
 Route::get('/productos_mas_alfabeticamente', [ControllerProductos::class,'productos_mas_alfabeticamente'])->name('productos_mas_alfabeticamente');
 Route::get('/productos_mas_caros', [ControllerProductos::class,'productos_mas_caros'])->name('productos_mas_caros');
 Route::get('/productos_menos_alfabeticamente', [ControllerProductos::class,'productos_menos_alfabeticamente'])->name('productos_menos_alfabeticamente');
@@ -45,6 +47,8 @@ Route::get('/categoria/{id}',[ControllerCategoria::class,'categoria'])->name('ca
 Route::post('/contacto',[ContactoController::class,'enviar'])->name('contacto');
 
 Route::post('/webhook', [ControllerStripe::class, 'webhook']);
+
+Route::post('/favorito', [ControllerFavorito::class,'anadir_favorito'])->name('anadir_favorito');
 
 Route::middleware('optional.auth')->group(function(){
     Route::post('/crear_carrito',[ControllerCarrito::class,'crear_carrito'])->name('crear_carrito');

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
 use App\Models\CategoriaProducto;
+use App\Models\Favorito;
 use App\Models\Juego;
 use App\Models\JuegoPegi;
 use App\Models\ImagenProducto;
@@ -211,6 +212,31 @@ class ControllerProductos extends Controller
         ]);
 
     }
+    public function productos_favoritos(Request $request) {
+        $user_id = auth()->id();
+        $session_id = $request->header('X-Session-ID');
+
+        $productos = Favorito::with([
+            'doProducto',
+            'doProducto.doValoraciones',
+            'doProducto.doImagenes',
+            'doProducto.doCategorias',
+            'doProducto.doPlataformas',
+            'doProducto.doPegi'
+        ])->where('session_id', $session_id)->where('user_id', $user_id)->get();
+
+        if($productos === null || $productos->isEmpty()){
+            return response()->json([
+                'error' => 'No tienes ningun producto favorito'
+            ],404);
+        }
+
+        return response()->json([
+            'productos' => $productos,
+        ]);
+
+    }
+
 
     public function producto_plataforma($plataforma_id){
         $producto = Producto::with([

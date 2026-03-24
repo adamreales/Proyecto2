@@ -1,7 +1,4 @@
 import "./Carrito.css";
-import {useParams} from "react-router-dom";
-import { useEffect, useState } from "react";
-import Producto from "../Producto/Producto";
 import ProductoVenta from "../../components/ProductoVenta/ProductoVenta";
 import { useHeaderCart } from "../../components/Header/Header";
 import TarjetaPago from "../../components/TarjetaPago/TarjetaPago";
@@ -16,11 +13,7 @@ function Carrito(){
             </div>
             <div className="Carrito">
                 <div className="targeta-carrito">
-                    <ProductoVenta
-                        cartItems={cartItems}
-                        eliminarProducto={eliminarProducto}
-                        actualizarCantidad={actualizarCantidad}
-                    />
+                    <ProductoVenta cartItems={cartItems} eliminarProducto={eliminarProducto} actualizarCantidad={actualizarCantidad}/>
                 </div>
                
                 <div className="target-payment"> 

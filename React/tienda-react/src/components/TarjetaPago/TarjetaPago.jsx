@@ -93,10 +93,6 @@ const TarjetaPago = ({ total }) => {
           <p className="precio">{t("payment.total")}:</p>
           <p className="precio">{formatPrice(total)}</p>
         </div>
-        <div className='Correo'>
-          <p>Direccion de Envio : </p>
-          <input type ="text" placeholder="Escribe tu email para enviar el producto" className='input'></input>
-        </div>
         <button  className="btn-Pagar"onClick={handlePagar}  disabled={loading}>{loading ? t("payment.redirecting") : t("payment.pay")}</button>
 
         {error && <p className='error-pago'>{error}</p>}

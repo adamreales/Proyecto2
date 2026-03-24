@@ -54,15 +54,7 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
                           -
                         </button>
 
-                        <input
-                          type="number"
-                          value={cantidadSeleccionada}
-                          min="1"
-                          max={stockMaximo}
-                          onChange={(e) =>
-                            actualizarCantidad(item, Number(e.target.value))
-                          }
-                        />
+                        <input   type="number" value={cantidadSeleccionada} min="1"max={stockMaximo} onChange={(e) =>  actualizarCantidad(item, Number(e.target.value))  }/>
 
                         <button
                           type="button"
