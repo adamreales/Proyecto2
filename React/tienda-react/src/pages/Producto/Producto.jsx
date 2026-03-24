@@ -126,8 +126,8 @@ function Producto() {
   }, [producto?.descripcion, i18n.language]);
 
   function escollirpegi() {
-    const edad = producto?.do_juego?.do_pegi?.[0]?.edad;
-
+    const edad = producto?.do_pegi?.edad;
+    console.log(producto);
     if (edad === 3) return "pegi3.jpg";
     if (edad === 7) return "pegi7.jpg";
     if (edad === 12) return "pegi12.png";
@@ -175,7 +175,7 @@ function Producto() {
               <span className="final">{producto?.precio} €</span>
 
               <select className="plataformas">
-                {producto?.do_juego?.do_plataformas?.map((plataforma) => (
+                {producto?.do_plataformas?.map((plataforma) => (
                   <option key={plataforma.id} value={plataforma.id}>
                     {plataforma.nombre}
                   </option>

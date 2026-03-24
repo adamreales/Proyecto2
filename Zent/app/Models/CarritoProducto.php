@@ -17,4 +17,9 @@ class CarritoProducto extends Model
     public function doProducto(){
         return $this->belongsTo(Producto::class,'id_producto');
     }
+
+    public function doPlataformaProducto(){
+        return $this->belongsTo(PlataformaProducto::class, 'plataforma_producto_id');
+    }
+
 }

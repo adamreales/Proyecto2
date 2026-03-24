@@ -60,9 +60,6 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/perfil', [ControllerLogin::class,'perfil'])->name('perfil');
     Route::post('/perfil/actualizar', [ControllerLogin::class,'actualizar_perfil'])->name('perfil.actualizar');
 
-    Route::post('/anadir_producto', [ControllerProductos::class,'anadir_producto'])->name('anadir_producto');
-    Route::post('/eliminar_producto', [ControllerProductos::class,'eliminar_producto'])->name('eliminar_producto');
-
     Route::post('/cerrar_session',[ControllerLogin::class,'cerrar_session'])->name('cerrar_session');
     Route::post('/cambiar_contraseña', [ControllerLogin::class,'cambiar_contraseña'])->name('cambiar_contraseña');
 });

@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // Datos base
             EdadPegiSeeder::class,
-            DescripcionPegiSeeder::class,
             PlataformaSeeder::class,
             CategoriaSeeder::class,
 
@@ -21,12 +20,10 @@ class DatabaseSeeder extends Seeder
             // Productos y juegos
             ProductoSeeder::class,
             ImagenProductoSeeder::class,
-            JuegoSeeder::class,
 
             // Tablas pivote
             CategoriaProductoSeeder::class,
-            PlataformaJuegoSeeder::class,
-            JuegoPegiSeeder::class,
+            PlataformaProductoSeeder::class,
 
             // Valoraciones (al final)
             ValoracionSeeder::class,

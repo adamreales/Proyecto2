@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('carrito_producto', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_carrito')->constrained('carrito');
-            $table->foreignId('id_producto')->constrained('producto');
+            $table->foreignId('plataforma_producto_id')->constrained('plataforma_producto')->cascadeOnDelete();
             $table->integer('cantidad');
-            $table->unique(['id_carrito','id_producto']);
+            $table->unique(['id_carrito','plataforma_producto_id']);
             $table->timestamps();
             $table->softDeletes();
         });

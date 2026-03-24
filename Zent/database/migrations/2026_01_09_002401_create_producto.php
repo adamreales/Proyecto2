@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('producto', function (Blueprint $table) {
             $table->id();
-            $table->string("titulo",50);
-            $table->string("subtitulo",50);
-            $table->string("descripcion",255)->nullable();
-            $table->unsignedFloat("precio");
+            $table->string("titulo",100);
+            $table->string("subtitulo",150);
+            $table->string("descripcion")->nullable();
+            $table->unsignedFloat("precio",8,2);
             $table->unsignedInteger("valoracion");
             $table->unsignedInteger("ventas")->default(0);
-            $table->unsignedInteger("stock");
+            $table->foreignId('pegi_id')->nullable()->constrained('edad_pegi')->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

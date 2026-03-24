@@ -8,6 +8,7 @@ use App\Models\Carrito;
 use App\Models\CarritoProducto;
 use App\Models\Producto;
 use App\Models\User;
+use App\Models\PlataformaProducto;
 use Error;
 use Exception;
 use Illuminate\Http\Request;
@@ -50,19 +51,24 @@ class ControllerCarrito extends Controller
         DB::beginTransaction();
 
         try{
-            if(!$r->has(['id_producto','cantidad'])){
+            if(!$r->has(['id_producto','id_plataforma','cantidad'])){
                 throw new \Exception('Error faltan campos en el envio');
+            }
+
+            if($r->cantidad <= 0){
+                throw new \Exception('Error cantidad inválida');
             }
 
             $dueno = DuenoCarrito::get();
 
-            $p = Producto::lockForUpdate()->find($r->id_producto);
-            if($p === null){
-                throw new \Exception('Error Producto no encontrado');
-            }
+            // 🔥 Bloqueamos la fila real (producto en esa plataforma)
+            $pp = PlataformaProducto::where('producto_id', $r->id_producto)
+                ->where('plataforma_id', $r->id_plataforma)
+                ->lockForUpdate()
+                ->first();
 
-            if(!($r->cantidad > 0 && $r->cantidad <= $p->stock)){
-                throw new \Exception("Error Cantidad tiene que ser entre (1-$p->stock)");
+            if(!$pp){
+                throw new \Exception('Error: producto no disponible en esa plataforma');
             }
 
             $c = Carrito::firstOrCreate(
@@ -76,34 +82,44 @@ class ControllerCarrito extends Controller
                 ]
             );
 
-            $item_carrito = CarritoProducto::where('id_carrito',$c->id)->where('id_producto',$r->id_producto)->lockForUpdate()->first();
+            // 🔥 Bloqueamos también el item del carrito
+            $item_carrito = CarritoProducto::where('id_carrito', $c->id)
+                ->where('plataforma_producto_id', $pp->id)
+                ->lockForUpdate()
+                ->first();
 
-            if($item_carrito !== null){
-                $nueva_cantidad = $item_carrito->cantidad + $r->cantidad;;
-                if($nueva_cantidad <= $p->stock){
-                    $item_carrito->cantidad = $nueva_cantidad;
-                    $item_carrito->save();
-                }else{
-                    throw new \Exception("Error Cantidad superior del producto");
-                }
+            // 🔥 Cantidad total que habrá en carrito
+            $cantidad_total = $r->cantidad;
+
+            if($item_carrito){
+                $cantidad_total += $item_carrito->cantidad;
+            }
+
+            // 🔥 VALIDACIÓN REAL DE STOCK (única y centralizada)
+            if($cantidad_total > $pp->stock){
+                throw new \Exception("Stock insuficiente. Disponible: {$pp->stock}");
+            }
+
+            if($item_carrito){
+                $item_carrito->cantidad = $cantidad_total;
+                $item_carrito->save();
             }else{
-                $car = [
+                CarritoProducto::create([
                     'id_carrito' => $c->id,
-                    'id_producto' =>  $r->id_producto,
+                    'plataforma_producto_id' => $pp->id,
                     'cantidad' => $r->cantidad
-                ];
-
-                CarritoProducto::create($car);
+                ]);
             }
 
             DB::commit();
 
             return response()->json([
-                'carrito' => 'Anadido correctamente al carrito'
+                'carrito' => 'Añadido correctamente al carrito'
             ],200);
 
         }catch(\Exception $e){
             DB::rollBack();
+
             return response()->json([
                 'error' => $e->getMessage()
             ],400);
@@ -115,24 +131,34 @@ class ControllerCarrito extends Controller
 
         try{
 
-            if(!$r->filled('id_producto')){
+            if(!$r->has(['id_producto','id_plataforma'])){
                 throw new \Exception("Error Faltan campos de envio");
             }
 
             $dueno = DuenoCarrito::get();
 
-            $p = Producto::find($r->id_producto);
-            if($p === null){
-                throw new \Exception("Error id del producto no encontrado");
+            // 🔥 buscamos el pivote real
+            $pp = PlataformaProducto::where('producto_id', $r->id_producto)
+                ->where('plataforma_id', $r->id_plataforma)
+                ->first();
+
+            if(!$pp){
+                throw new \Exception("Error producto-plataforma no encontrado");
             }
 
-            $carrito = Carrito::where($dueno['campo'], $dueno['valor'])->where('estado','Activo')->lockForUpdate()->first();
+            $carrito = Carrito::where($dueno['campo'], $dueno['valor'])
+                ->where('estado','Activo')
+                ->lockForUpdate()
+                ->first();
 
             if($carrito === null){
                 throw new \Exception("Error carrito no encontrado");
             }
 
-            $item_carrito = CarritoProducto::where('id_carrito',$carrito->id)->where('id_producto',$r->id_producto)->lockForUpdate()->first();
+            $item_carrito = CarritoProducto::where('id_carrito',$carrito->id)
+                ->where('plataforma_producto_id',$pp->id)
+                ->lockForUpdate()
+                ->first();
 
             if($item_carrito === null){
                 throw new \Exception("Error producto no encontrado en el carrito");
@@ -145,6 +171,7 @@ class ControllerCarrito extends Controller
             return response()->json([
                 'carrito' => 'Eliminado el producto del carrito'
             ],200);
+
         }catch(\Exception $e){
             DB::rollBack();
             return response()->json([
@@ -157,7 +184,9 @@ class ControllerCarrito extends Controller
         try{
             $dueno = DuenoCarrito::get();
 
-            $carrito = Carrito::where($dueno['campo'],$dueno['valor'])->where('estado','Activo')->first();
+            $carrito = Carrito::where($dueno['campo'],$dueno['valor'])
+                ->where('estado','Activo')
+                ->first();
 
             if($carrito === null){
                 return response()->json([
@@ -166,7 +195,13 @@ class ControllerCarrito extends Controller
                 ], 200);
             }
 
-            $items_carrito = CarritoProducto::where('id_carrito',$carrito->id)->whereHas('doProducto')->with(['doProducto','doProducto.doImagenes'])->get();
+            $items_carrito = CarritoProducto::where('id_carrito',$carrito->id)
+                ->with([
+                    'doPlataformaProducto.doProducto',
+                    'doPlataformaProducto.doProducto.doImagenes',
+                    'doPlataformaProducto.doPlataforma'
+                ])
+                ->get();
 
             return response()->json([
                 'carrito' => $items_carrito,
