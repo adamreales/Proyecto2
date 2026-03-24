@@ -16,6 +16,7 @@ import Blog from "./pages/Blog/Blog";
 import Carrito from "./pages/Carrito/Carrito";
 import Denegada from "./pages/Denegada/Denegada";
 import Aceptada from "./pages/Aceptada/Aceptada";
+import Factura from "./pages/Factura/Factura";
 import ForgotPassword from "./pages/OlvidarContraseña/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import ChangePassword from "./pages/CanvioContraseña/ChangePassword";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/denegada" element={<Denegada />} />
         <Route path="/aceptada" element={<Aceptada />} />
+        <Route path="/factura/:pedidoId" element={<Factura />} />
         <Route path="/misdatos" element={<MisDatos />} />
       </Route>
 

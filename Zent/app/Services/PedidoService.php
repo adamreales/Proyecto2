@@ -10,7 +10,6 @@ use App\Models\CarritoProducto;
 use Error;
 use Illuminate\Support\Facades\DB;
 use Exception;
-
 class PedidoService{
     public function crearPedidoCarrito(){
         return DB::transaction(function () {
@@ -85,5 +84,9 @@ class PedidoService{
 
         });
 
+    }
+
+    public function generarFactura($pedido){
+        return app(FacturaService::class)->generar($pedido);
     }
 }

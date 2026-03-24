@@ -22,4 +22,8 @@ class Pedido extends Model
         return $this->belongsTo(User::class,'id_usuario','id');
     }
 
+    public function doFactura(){
+        return $this->hasOne(Factura::class,'id_pedido');
+    }
+
 }

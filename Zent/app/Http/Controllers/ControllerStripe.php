@@ -13,8 +13,10 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use App\Services\PedidoService;
+//use FFI;
 use Illuminate\Support\Facades\DB;
 use Stripe\Webhook;
+//use App\Services\FacturaService;
 
 class ControllerStripe extends Controller
 {
@@ -155,6 +157,8 @@ class ControllerStripe extends Controller
                 $pedido->estado = 'pagado';
                 $pedido->stripe_payment_intent = $session->payment_intent;
                 $pedido->save();
+
+                //app(FacturaService::class)->generar($pedido);
 
                 Carrito::where('id', $pedido->id_carrito)
                     ->where('estado', 'Activo')
