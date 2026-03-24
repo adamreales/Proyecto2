@@ -6,18 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Carrito;
 use App\Models\CarritoProducto;
 use App\Models\Pedido;
-use App\Models\PedidoDetalle;
-use App\Models\Producto;
 use Exception;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use App\Services\PedidoService;
-//use FFI;
 use Illuminate\Support\Facades\DB;
-use Stripe\Webhook;
-//use App\Services\FacturaService;
-
+use Illuminate\Support\Facades\Log;
 class ControllerStripe extends Controller
 {
 
@@ -29,7 +24,7 @@ class ControllerStripe extends Controller
                 'pedido_id' => $pedido->id,
                 'total' => $pedido->total
             ],200);
-        }catch(\Exception $e){
+        }catch(Exception $e){
             return response()->json([
                 'error' => $e->getMessage()
             ],400);
@@ -43,11 +38,11 @@ class ControllerStripe extends Controller
             $pedido = Pedido::with('doDetalles.doProducto')->find($pedidoId);
 
             if($pedido === null){
-                throw new \Exception("Pedido no existe");
+                throw new Exception("Pedido no existe");
             }
 
             if($pedido->estado !== 'pendiente'){
-                throw new \Exception("Pedido ya pagado o cancelado");
+                throw new Exception("Pedido ya pagado o cancelado");
             }
 
             $productos = [];
@@ -83,7 +78,7 @@ class ControllerStripe extends Controller
                 'checkout_url' => $session->url
             ]);
 
-        }catch(\Exception $e){
+        }catch(Exception $e){
             return response()->json([
                 'error' => $e->getMessage()
             ],400);
@@ -97,79 +92,91 @@ class ControllerStripe extends Controller
         $secret = env('STRIPE_WEBHOOK_SECRET');
 
         try {
-            $event = Webhook::constructEvent(
+            $event = \Stripe\Webhook::constructEvent(
                 $payload,
                 $signature,
                 $secret
             );
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Webhook signature invalid'
-            ], 400);
+        } catch (Exception $e) {
+            Log::error('Stripe signature error: ' . $e->getMessage());
+
+            return response()->json(['error' => 'Invalid signature'], 200);
+            // 👈 IMPORTANTE: 200 SIEMPRE
         }
 
         if ($event->type === 'checkout.session.completed') {
 
             $session = $event->data->object;
 
-            DB::transaction(function () use ($session) {
+            try {
+
+                // 🔴 VALIDAR METADATA
+                if (!isset($session->metadata->pedido_id)) {
+                    Log::error('Pedido ID no encontrado en metadata');
+                    return response()->json(['status' => 'ok'], 200);
+                }
 
                 $pedidoId = $session->metadata->pedido_id;
 
-                $pedido = Pedido::lockForUpdate()->find($pedidoId);
+                DB::transaction(function () use ($session, $pedidoId) {
 
-                if (!$pedido || $pedido->estado !== 'pendiente') {
-                    return;
-                }
+                    $pedido = Pedido::lockForUpdate()->find($pedidoId);
 
-                $detalles = PedidoDetalle::where('id_pedido', $pedido->id)
-                    ->lockForUpdate()
-                    ->get();
-
-                $itemsCarrito = CarritoProducto::with('doPlataformaProducto.doProducto')
-                    ->where('id_carrito', $pedido->id_carrito)
-                    ->lockForUpdate()
-                    ->get();
-
-                if ($itemsCarrito->isEmpty()) {
-                    throw new \Exception("No hay items de carrito para descontar stock");
-                }
-
-                foreach ($itemsCarrito as $itemCarrito) {
-                    $plataformaProducto = $itemCarrito->doPlataformaProducto;
-                    $producto = $plataformaProducto?->doProducto;
-
-                    if (!$plataformaProducto || !$producto) {
-                        throw new \Exception("Producto/plataforma no válido en carrito");
+                    // 🔴 SI NO EXISTE O YA PAGADO → SALIR LIMPIO
+                    if (!$pedido || $pedido->estado !== 'pendiente') {
+                        return;
                     }
 
-                    if ($plataformaProducto->stock < $itemCarrito->cantidad) {
-                        throw new \Exception("Stock inconsistente");
+                    $itemsCarrito = CarritoProducto::with('doPlataformaProducto.doProducto')
+                        ->where('id_carrito', $pedido->id_carrito)
+                        ->lockForUpdate()
+                        ->get();
+
+                    // 🔴 NO ROMPER → SOLO LOG
+                    if ($itemsCarrito->isEmpty()) {
+                        Log::error("Carrito vacío para pedido {$pedido->id}");
+                        return;
                     }
 
-                    $producto->ventas += $itemCarrito->cantidad;
-                    $producto->save();
+                    foreach ($itemsCarrito as $itemCarrito) {
 
-                    $plataformaProducto->stock -= $itemCarrito->cantidad;
-                    $plataformaProducto->save();
-                }
+                        $plataformaProducto = $itemCarrito->doPlataformaProducto;
+                        $producto = $plataformaProducto?->doProducto;
 
-                $pedido->estado = 'pagado';
-                $pedido->stripe_payment_intent = $session->payment_intent;
-                $pedido->save();
+                        if (!$plataformaProducto || !$producto) {
+                            Log::error("Producto inválido en carrito ID {$itemCarrito->id}");
+                            continue; // 👈 NO PETAR
+                        }
 
-                //app(FacturaService::class)->generar($pedido);
+                        if ($plataformaProducto->stock < $itemCarrito->cantidad) {
+                            Log::error("Stock insuficiente producto {$producto->id}");
+                            continue; // 👈 NO PETAR
+                        }
 
-                Carrito::where('id', $pedido->id_carrito)
-                    ->where('estado', 'Activo')
-                    ->update(['estado' => 'Cerrado']);
-            });
+                        $producto->increment('ventas', $itemCarrito->cantidad);
+                        $plataformaProducto->decrement('stock', $itemCarrito->cantidad);
+                    }
 
+                    // ✅ MARCAR COMO PAGADO
+                    $pedido->estado = 'pagado';
+                    $pedido->stripe_payment_intent = $session->payment_intent;
+                    $pedido->save();
+
+                    // ✅ CERRAR CARRITO
+                    Carrito::where('id', $pedido->id_carrito)
+                        ->where('estado', 'Activo')
+                        ->update(['estado' => 'Cerrado']);
+                });
+
+            } catch (Exception $e) {
+
+                Log::error('Stripe webhook error: ' . $e->getMessage());
+
+                // 👈 CRÍTICO: Stripe NO debe recibir 500
+                return response()->json(['status' => 'ok'], 200);
+            }
         }
 
-        return response()->json([
-            'status' => 'ok'
-        ]);
+        return response()->json(['status' => 'ok'], 200);
     }
-
 }

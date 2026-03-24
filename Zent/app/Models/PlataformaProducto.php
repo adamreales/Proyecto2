@@ -10,6 +10,7 @@ class PlataformaProducto extends Model
     use SoftDeletes;
 
     protected $table = 'plataforma_producto';
+    public $timestamps = false;
 
     protected $fillable = [
         'producto_id',

@@ -223,8 +223,7 @@
   "checkout": {
     "successTitle": "Purchase made successfully.",
     "successMessage": "Your payment has been processed correctly. Thank you for your purchase.",
-    "orderNumber": "Your order number is {{orderNumber}}. The invoice has been sent to your email address.",
-    "downloadHere": "You can also download it here",
+    "orderNumber": "Your order number is {{orderNumber}}.",
     "unavailable": "not available",
     "errorTitle": "Purchase denied",
     "errorMessage": "The purchase could not be completed. A problem occurred while processing the payment. Please try again or use another payment method."

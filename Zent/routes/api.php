@@ -2,13 +2,13 @@
 
 use App\Http\Controllers\ControllerCarrito;
 use App\Http\Controllers\ControllerCategoria;
-use App\Http\Controllers\ControllerFactura;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerLogin;
 use App\Http\Controllers\ControllerRegistro;
 use App\Http\Controllers\ControllerProductos;
 use App\Http\Controllers\ControllerStripe;
 use App\Http\Controllers\ContactoController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -51,7 +51,6 @@ Route::middleware('optional.auth')->group(function(){
     Route::post('/anadir_carrito',[ControllerCarrito::class,'anadir_carrito'])->name('anadir_carrito');
     Route::post('/quitar_carrito',[ControllerCarrito::class,'quitar_carrito'])->name('quitar_carrito');
     Route::post('/ver_carrito',[ControllerCarrito::class,'ver_carrito'])->name('ver_carrito');
-    Route::get('/factura/{pedido}', [ControllerFactura::class, 'verFacturaPedido'])->name('factura.ver');
 
     Route::post('/preparar_pago', [ControllerStripe::class, 'preparar_pago'])->name('preparar_pago');
     Route::post('/pagar_pedido/{pedido}',[ControllerStripe::class,'pagar_pedido'])->name('pagar_pedido');

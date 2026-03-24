@@ -1,6 +1,5 @@
 import "./Aceptada.css";
 import { useMemo } from "react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 function Aceptada() {
@@ -31,17 +30,6 @@ function Aceptada() {
 
         <p>
           {t("checkout.orderNumber", { orderNumber })}
-
-          {orderNumber !== t("checkout.unavailable") && (
-            <>
-              {" "}
-              {t("checkout.downloadHere")}{" "}
-              <Link to={`/factura/${orderNumber}`}>
-                {t("checkout.downloadHere")}
-              </Link>
-              .
-            </>
-          )}
         </p>
 
         <img src="http://zent.es/imagenes_producto/compraaceptada.jpg" alt="success" />

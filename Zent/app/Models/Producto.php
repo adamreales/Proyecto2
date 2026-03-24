@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Valoracion;
 use App\Models\ImagenProducto;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use App\Models\Categoria;
+use App\Models\PlataformaProducto;
 class Producto extends Model
 {
     use HasFactory, SoftDeletes;

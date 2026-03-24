@@ -223,8 +223,7 @@
   "checkout": {
     "successTitle": "Compra realitzada amb èxit.",
     "successMessage": "El teu pagament s'ha processat correctament. Gràcies per la teva compra.",
-    "orderNumber": "El teu número de comanda és {{orderNumber}}. S'ha enviat la factura a la teva adreça de correu electrònic.",
-    "downloadHere": "També la pots descarregar aquí",
+    "orderNumber": "El teu número de comanda és {{orderNumber}}.",
     "unavailable": "no disponible",
     "errorTitle": "Compra denegada",
     "errorMessage": "No s'ha pogut completar la compra. Hi ha hagut un problema en processar el pagament. Si us plau, torna-ho a provar o utilitza un altre mètode de pagament."

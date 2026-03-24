@@ -86,7 +86,4 @@ class PedidoService{
 
     }
 
-    public function generarFactura($pedido){
-        return app(FacturaService::class)->generar($pedido);
-    }
 }

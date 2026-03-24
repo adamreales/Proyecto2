@@ -223,8 +223,7 @@
   "checkout": {
     "successTitle": "Compra realizada exitosamente.",
     "successMessage": "Tu pago ha sido procesado correctamente. Gracias por tu compra.",
-    "orderNumber": "Tu número de pedido es {{orderNumber}}. Se ha enviado a tu dirección de correo electrónico la factura.",
-    "downloadHere": "También la puedes descargar aquí",
+    "orderNumber": "Tu número de pedido es {{orderNumber}}.",
     "unavailable": "no disponible",
     "errorTitle": "Compra denegada",
     "errorMessage": "No se ha podido completar la compra. Ha ocurrido un problema al procesar el pago. Por favor, inténtalo de nuevo o utiliza otro método de pago."

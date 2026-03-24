@@ -13,12 +13,23 @@
   display: flex;
   justify-content: space-between;
   width: 90%;
-  padding: 15px;
+  padding: 10px;
 }
 .tarjeta-pago .box-price .precio {
   font-size: 25px;
   font-family: 'Orbitron', sans-serif;
   color: black;
+}
+.tarjeta-pago .Correo {
+  display: flex;
+  width: 90%;
+  justify-content: left;
+  align-items: center;
+  gap: 15px;
+}
+.tarjeta-pago .Correo input {
+  width: 300px;
+  height: 25px;
 }
 .tarjeta-pago .btn-Pagar {
   width: 90%;
