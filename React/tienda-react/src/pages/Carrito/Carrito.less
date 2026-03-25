@@ -17,14 +17,25 @@
 @padding-pantalla: 20px;
 .Titulos{
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     width: 100%;
+    padding-inline: 20px;
+    box-sizing: border-box;
 }
 .Carrito{
     display:grid;
-    grid-template-columns: 2fr 1fr;
-    gap:40px;
-
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+    gap: 20px;
+    width: 100%;
+    align-items: start;
+    box-sizing: border-box;
+    padding-inline: 20px;
+    .targeta-carrito
+    {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+    }
     .target-payment{
         display: flex;
         flex-direction: column;
@@ -33,7 +44,29 @@
         border: 1px solid black;
         border-radius: 10px;
         padding-bottom: 25px;
-        height: 250px;
+        min-height: 250px;
+        height: auto;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 1024px) {
+    .Carrito {
+        grid-template-columns: minmax(0, 1.4fr) minmax(260px, 1fr);
+        gap: 16px;
+    }
+}
+
+@media (max-width: 900px) {
+    .Carrito {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .Titulos,
+    .Carrito {
+        padding-inline: 12px;
     }
 }
 
