@@ -27,7 +27,12 @@ const TarjetaPago = ({ total }) => {
 
   const handlePagar = async () => {
     setError('');
-
+    const token = localStorage.getItem("token");
+    if(!token)
+    {
+      window.location.href = "/login";
+      return;
+    }
     if (total <= 0 || !total) {
       setError(t("payment.totalMustBeGreaterThanZero"));
       return;
