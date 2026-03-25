@@ -28,10 +28,10 @@ function Login() {
         <h1 className="titulo-login">Inicia sesión</h1>
         <Link to="/home"><button className="btn-volver"><img src="http://zent.es/imagenes_producto/Logo.png" alt="Logo" /></button></Link>
         <form className="formulario" onSubmit={handleSubmit}>
-          <input  type="email"value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email : " />
+          <input className="caixa"  type="email"value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email : " />
           <div className="password-wrapper">
             <div className="password-row">
-              <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} onKeyUp={(e) => setCapsLock(e.getModifierState("CapsLock"))} onFocus={(e) => setCapsLock(e.getModifierState("CapsLock"))} onBlur={() => setCapsLock(false)}placeholder="Contraseña : "/>
+              <input className="caixa" type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} onKeyUp={(e) => setCapsLock(e.getModifierState("CapsLock"))} onFocus={(e) => setCapsLock(e.getModifierState("CapsLock"))} onBlur={() => setCapsLock(false)}placeholder="Contraseña : "/>
 
               <button type="button" className="btn-ojo" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}>
                 <span className="material-symbols-outlined">{showPassword ? "visibility_off" : "visibility"}</span>

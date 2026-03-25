@@ -34,15 +34,15 @@ function Register() {
 
         <form className="formulario" onSubmit={handleSubmit}>
          
-          <input type="text" value={name}onChange={(e) => setName(e.target.value)} placeholder="Nombre :"/>
+          <input type="text" className="caixa" value={name}onChange={(e) => setName(e.target.value)} placeholder="Nombre :"/>
           
    
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email : " />
+          <input type="email" className="caixa" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email : " />
 
           <div className="password-wrapper">
             <div className="password-row">
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? "text" : "password"} className="caixa"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyUp={(e) => setCapsLock(e.getModifierState("CapsLock"))}
@@ -70,7 +70,7 @@ function Register() {
           <div className="password-wrapper">
             <div className="password-row">
               <input
-                type={showPasswordConfirm ? "text" : "password"}
+                type={showPasswordConfirm ? "text" : "password"} className="caixa"
                 value={passwordConfirm}
                 onChange={(e) => setPasswordConfirm(e.target.value)}
                 onKeyUp={(e) => setCapsLockConfirm(e.getModifierState("CapsLock"))}

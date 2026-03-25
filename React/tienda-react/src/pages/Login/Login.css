@@ -43,14 +43,14 @@
   gap: 30px;
   align-items: center;
 }
-.formulario input {
-  width: 100%;
+.formulario .caixa {
+  width: 340px;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-family: 'Inter', sans-serif;
 }
-.formulario input:focus {
+.formulario .caixa:focus {
   outline: none;
   border-color: #00eaff;
   box-shadow: 0 0 5px rgba(0, 234, 255, 0.6);

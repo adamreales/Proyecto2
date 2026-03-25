@@ -174,14 +174,14 @@ header .mini-cart .cart-items {
 }
 header .mini-cart .cart-item {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   border-bottom: 1px solid #eee;
-  padding-bottom: 12px;
-  align-items: flex-start;
+  padding-bottom: 15px;
+  align-items: center ;
 }
 header .mini-cart .cart-item img {
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 80px;
   object-fit: cover;
   border-radius: 4px;
 }
