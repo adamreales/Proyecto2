@@ -223,17 +223,24 @@ class ControllerProductos extends Controller
         ], 400);
     }
 
-    $productos = Favorito::with([
+    $query = Favorito::with([
         'doProducto',
         'doProducto.doValoraciones',
         'doProducto.doImagenes',
         'doProducto.doCategorias',
         'doProducto.doPlataformas',
         'doProducto.doPegi'
-    ])
-    ->where('session_id', $session_id)
-    ->where('user_id', $user_id)
-    ->get();
+    ]);
+
+    if ($session_id) {
+        $query->where('session_id', $session_id);
+    }
+
+    if ($user_id) {
+        $query->where('user_id', $user_id);
+    }
+
+    $productos = $query->get();
 
     if ($productos->isEmpty()) {
         return response()->json([
@@ -305,8 +312,8 @@ class ControllerProductos extends Controller
                 'doValoraciones',
                 'doImagenes',
                 'doCategorias',
-                'doJuego.doPlataformas',
-                'doJuego.doPegi')
+                'doPlataformas',
+                'doPegi')
                 ->whereRaw('LOWER(titulo) LIKE ?', ['%'.strtolower($r->producto_nombre).'%'])->get();
 
         return response()->json([
