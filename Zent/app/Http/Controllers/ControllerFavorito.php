@@ -14,15 +14,25 @@ class ControllerFavorito extends Controller
         if($request->has('producto_id')) {
             $producto_id = $request->input('producto_id');
             $user_id = auth()->id();
-            $session_id = session()->getId();
+              $session_id = $request->header('X-Session-Id');
 
-            $favorito = Favorito::firstOrCreate(
-                [
-                    'user_id' => $user_id,
-                    'session_id' => $session_id,
-                    'producto_id' => $producto_id,
-                ]
-            );
+            $favorito = Favorito::where([
+                'user_id' => $user_id,
+                'session_id' => $session_id,
+                'producto_id' => $producto_id,
+            ])->first();
+                if ($favorito) {
+                $favorito->delete();
+                return response()->json([
+                    'message' => 'Producto eliminado de favoritos'
+                ]);
+            }
+
+            Favorito::create([
+                'user_id' => $user_id,
+                'session_id' => $session_id,
+                'producto_id' => $producto_id,
+            ]);
 
             if ($favorito->wasRecentlyCreated) {
                 return response()->json(['message' => 'Producto añadido a favoritos']);

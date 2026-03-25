@@ -16,6 +16,7 @@ function Favoritos() {
 
     fetch('http://127.0.0.1:8000/api/productos_favoritos', {
       headers: {
+        "Content-Type": "application/json",
         "X-Session-Id": sessionId,
       },
     })

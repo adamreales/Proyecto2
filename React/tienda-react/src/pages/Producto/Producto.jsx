@@ -154,10 +154,15 @@ function Producto() {
   );
 
   function fav(productoId){
+    const sessionId = getSessionId();
+    const token = localStorage.getItem("token");
+
     fetch(`http://127.0.0.1:8000/api/favorito`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-Session-Id": sessionId,
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
       body: JSON.stringify({ producto_id: productoId }),
     });
