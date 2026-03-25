@@ -302,11 +302,11 @@ class ControllerProductos extends Controller
         }
 
         $productos_buscador = Producto::with(
-                'doValoraciones',
-                'doImagenes',
-                'doCategorias',
-                'doJuego.doPlataformas',
-                'doJuego.doPegi')
+            'doValoraciones',
+            'doImagenes',
+            'doCategorias',
+            'doPlataformas',
+            'doPegi')
                 ->whereRaw('LOWER(titulo) LIKE ?', ['%'.strtolower($r->producto_nombre).'%'])->get();
 
         return response()->json([
