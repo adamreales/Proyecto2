@@ -58,7 +58,9 @@ function Header() {
         <Link to="/videojuegos"><button className="menu-btn">{t("header.nav.videogames")}</button></Link>
         <Link to="/blog"><button className="menu-btn">{t("header.nav.blog")}</button></Link>
         <Link to="/conocenos"><button className="menu-btn">{t("header.nav.about")}</button></Link>
-        <Link to="/favoritos"><button className="menu-btn">{t("header.nav.favorites")}</button></Link>
+        {token && (
+          <Link to="/favoritos"><button className="menu-btn">{t("header.nav.favorites")}</button></Link>
+        )}
       </div>
 
       {/* MENÚ DESKTOP */}
@@ -67,7 +69,9 @@ function Header() {
         <Link to="/videojuegos"><button className="menu-btn">{t("header.nav.videogames")}</button></Link>
         <Link to="/blog"><button className="menu-btn">{t("header.nav.blog")}</button></Link>
         <Link to="/conocenos"><button className="menu-btn">{t("header.nav.about")}</button></Link>
-        <Link to="/favoritos"><button className="menu-btn">{t("header.nav.favorites")}</button></Link>
+        {token && (
+          <Link to="/favoritos"><button className="menu-btn">{t("header.nav.favorites")}</button></Link>
+        )}
       </div>
 
       {/* LOGIN + CARRITO */}

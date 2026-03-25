@@ -213,45 +213,45 @@ class ControllerProductos extends Controller
 
     }
     public function productos_favoritos(Request $request)
-{
-    $user_id = auth()->id();
-    $session_id = $request->header('X-Session-Id');
+    {
+        $user_id = auth()->id();
+        $session_id = $request->header('X-Session-Id');
 
-    if (!$session_id) {
+        if (!$session_id) {
+            return response()->json([
+                'error' => 'Session ID no proporcionado'
+            ], 400);
+        }
+
+        $query = Favorito::with([
+            'doProducto',
+            'doProducto.doValoraciones',
+            'doProducto.doImagenes',
+            'doProducto.doCategorias',
+            'doProducto.doPlataformas',
+            'doProducto.doPegi'
+        ]);
+
+        if ($session_id) {
+            $query->where('session_id', $session_id);
+        }
+
+        if ($user_id) {
+            $query->where('user_id', $user_id);
+        }
+
+        $productos = $query->get();
+
+        if ($productos->isEmpty()) {
+            return response()->json([
+                'error' => 'No tienes ningun producto favorito'
+            ], 404);
+        }
+
         return response()->json([
-            'error' => 'Session ID no proporcionado'
-        ], 400);
+            'productos' => $productos,
+        ]);
     }
-
-    $query = Favorito::with([
-        'doProducto',
-        'doProducto.doValoraciones',
-        'doProducto.doImagenes',
-        'doProducto.doCategorias',
-        'doProducto.doPlataformas',
-        'doProducto.doPegi'
-    ]);
-
-    if ($session_id) {
-        $query->where('session_id', $session_id);
-    }
-
-    if ($user_id) {
-        $query->where('user_id', $user_id);
-    }
-
-    $productos = $query->get();
-
-    if ($productos->isEmpty()) {
-        return response()->json([
-            'error' => 'No tienes ningun producto favorito'
-        ], 404);
-    }
-
-    return response()->json([
-        'productos' => $productos,
-    ]);
-}
 
 
     public function producto_plataforma($plataforma_id){
@@ -309,19 +309,11 @@ class ControllerProductos extends Controller
         }
 
         $productos_buscador = Producto::with(
-<<<<<<< HEAD
             'doValoraciones',
             'doImagenes',
             'doCategorias',
             'doPlataformas',
             'doPegi')
-=======
-                'doValoraciones',
-                'doImagenes',
-                'doCategorias',
-                'doPlataformas',
-                'doPegi')
->>>>>>> programacionFactura
                 ->whereRaw('LOWER(titulo) LIKE ?', ['%'.strtolower($r->producto_nombre).'%'])->get();
 
         return response()->json([

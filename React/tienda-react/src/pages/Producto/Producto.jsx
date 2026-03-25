@@ -154,6 +154,7 @@ function Producto() {
   );
 
   function fav(productoId){
+    if(loginRedirect()) return;
     const sessionId = getSessionId();
     const token = localStorage.getItem("token");
 
@@ -166,6 +167,18 @@ function Producto() {
       },
       body: JSON.stringify({ producto_id: productoId }),
     });
+  }
+
+  function loginRedirect() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href="/login";
+      return;
+    }else
+    {
+        console.lof("Usuario ya logueado");
+    }
+
   }
 
   return (

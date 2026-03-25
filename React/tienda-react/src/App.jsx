@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import PublicLayout from "./layouts/PublicLayout/PublicLayout";
 import AuthLayout from "./layouts/AuthLayout/AuthLayout";
@@ -22,6 +22,8 @@ import ChangePassword from "./pages/CanvioContraseña/ChangePassword";
 import "./App.css";
 
 function App() {
+  const isLoggedIn = Boolean(localStorage.getItem("token"));
+
   return (
     <Routes>
 
@@ -35,7 +37,10 @@ function App() {
         <Route path="/mis-datos" element={<MisDatos />} />
         <Route path="/videojuegos" element={<Videojuegos />} />
         <Route path="/producto/:id" element={<Producto />} />
-        <Route path="/favoritos" element={<Favoritos />} />
+        <Route
+          path="/favoritos"
+          element={isLoggedIn ? <Favoritos /> : <Navigate to="/login" replace />}
+        />
         <Route path="/blog" element={<Blog />} />
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/denegada" element={<Denegada />} />
