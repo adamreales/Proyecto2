@@ -56,7 +56,7 @@ function Perfil()
             <div className="Perfil-page">            
                 <div className="Cabezera">
                     <h2>Hola,<b> {user.name}</b></h2> 
-                    <button className="btn-volver"onClick={cerrarSession}> Cerrar sesión</button>
+                    <button className="btn-cerrar"onClick={cerrarSession}> Cerrar sesión</button>
                 </div>
 
                 <div className="Configuracion">

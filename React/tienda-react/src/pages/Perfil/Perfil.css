@@ -12,22 +12,24 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  gap: 20px;
 }
 .Perfil-page .Cabezera h2 {
   font-family: 'Orbitron', sans-serif;
   font-size: 25px;
 }
-.Perfil-page .Cabezera .btn-volver {
+.Perfil-page .Cabezera .btn-cerrar {
+  width: auto;
   background-color: transparent;
-  border: 2px solid #ff2fd0;
-  color: #ff2fd0;
+  border: 2px solid black;
+  color: black;
   padding: 10px 20px;
   font-family: 'Inter', sans-serif;
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.Perfil-page .Cabezera .btn-volver:hover {
-  background-color: #ff2fd0;
+.Perfil-page .Cabezera .btn-cerrar:hover {
+  background-color: black;
   color: #fff;
 }
 .Perfil-page .Configuracion {
