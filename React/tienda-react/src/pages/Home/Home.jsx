@@ -35,7 +35,11 @@ function Home() {
     };
 
     const fetchJson = async (url) => {
-        const res = await fetch(url);
+        const res = await fetch(url, {
+            headers: {
+                Accept: "application/json",
+            },
+        });
         const raw = await res.text();
 
         let data;
