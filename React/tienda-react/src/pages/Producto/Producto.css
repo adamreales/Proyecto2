@@ -66,6 +66,13 @@
   border-radius: 10px;
   padding: 10px;
 }
+.box .box-datos .contenedorpegiplataformas .scriptplataformas .sin-plataformas {
+  color: #888;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
+  font-style: italic;
+}
 .box .box-datos .valoracion-estrellas {
   font-size: 20px;
 }
@@ -98,6 +105,15 @@
   background-color: white;
   color: black;
 }
+.box .box-datos .btn-box .btn-cesta:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+.box .box-datos .btn-box .btn-cesta:disabled:hover {
+  background-color: #ccc;
+  color: #666;
+}
 .imagenes {
   display: flex;
   gap: 30px;
@@ -122,6 +138,15 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+.estrella {
+  font-size: 20px;
+}
+.estrella.llena {
+  color: gold;
+}
+.estrella.vacia {
+  color: #ccc;
 }
 @media (max-width: 1024px) {
   .box {

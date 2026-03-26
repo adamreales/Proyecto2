@@ -25,9 +25,9 @@ function Caracteristicas({ producto }) {
         <div className="box-informacion">
           <img src="http://zent.es/imagenes_producto/plataformas.png"/>
           <strong>{t("features.platforms")}:</strong>{" "}
-          {producto.do_juego?.do_plataformas
-            ?.map((p) => p.nombre)
-            .join(", ")}
+          {producto.do_plataformas?.length > 0
+            ? producto.do_plataformas.map((p) => p.nombre).join(", ")
+            : t("common.notAvailable")}
         </div>
 
         <div className="box-informacion">

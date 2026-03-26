@@ -8,6 +8,12 @@
   align-items: center;
   background: white;
 }
+.aviso {
+  color: red;
+  font-family: 'Inter', sans-serif;
+  margin-top: 10px;
+  text-align: center;
+}
 /* TARJETA LOGIN */
 .login-container {
   width: 360px;

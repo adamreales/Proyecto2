@@ -200,31 +200,41 @@ function Producto() {
             <div className="scriptplataformas">
               <span className="final">{producto?.precio} €</span>
 
-              <select
-                className="plataformas"
-                value={plataformaSeleccionada ?? ""}
-                onChange={(e) => setPlataformaSeleccionada(Number(e.target.value))}
-              >
-                {producto?.do_plataformas?.map((plataforma) => (
-                  <option key={plataforma.id} value={plataforma.id}>
-                    {plataforma.nombre}
-                  </option>
-                ))}
-              </select>
+              {producto?.do_plataformas?.length > 0 ? (
+                <select
+                  className="plataformas"
+                  value={plataformaSeleccionada ?? ""}
+                  onChange={(e) => setPlataformaSeleccionada(Number(e.target.value))}
+                >
+                  {producto?.do_plataformas?.map((plataforma) => (
+                    <option key={plataforma.id} value={plataforma.id}>
+                      {plataforma.nombre}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <span className="sin-plataformas">
+                  {t("product.noPlatforms", { defaultValue: "Sin plataformas disponibles" })}
+                </span>
+              )}
             </div>
           </div>
 
           <p className="valoracion-estrellas">
-            {t("product.ratings")} :
-            {Array.from({ length: valoracion }, (_, index) => (
-              <span key={index} className="estrella llena">⭐</span>
-            ))}
+              {t("product.ratings")} :
+              {Array.from({ length: 5 }, (_, index) => (
+                <span key={index}className="estrella">{index < valoracion ? "⭐" : "☆"}   </span>
+              ))}
           </p>
 
           <div className="btn-box">
             <button className="btn-favoritos" onClick={() => fav(producto?.id)}>❤️</button>
 
-            <button className="btn-cesta" onClick={handleAddToCart}>
+            <button 
+              className="btn-cesta" 
+              onClick={handleAddToCart}
+              disabled={!plataformaSeleccionada}
+            >
               {t("product.addToCart")}
             </button>
           </div>

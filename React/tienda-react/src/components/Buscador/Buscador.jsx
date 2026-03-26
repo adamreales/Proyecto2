@@ -95,43 +95,46 @@ function Buscador() {
         </button>
       </div>
 
-      {abierto && productos.length > 0 && (
+      {abierto && (
         <div className="Resultados">
-          {productos.map((p) => (
-            <div
-              className="elemento"
-              key={p.id}
-              onClick={() => {
-                setAbierto(false);
-                navigate(`/producto/${p.id}`);
-              }}
-            >
-              <img
-                src={`http://zent.es/${p.do_imagenes?.[0]?.url}`}
-                alt={p.titulo}
-              />
+          {productos.length > 0 ? (
+            productos.map((p) => (
+              <div
+                className="elemento"
+                key={p.id}
+                onClick={() => {
+                  setAbierto(false);
+                  navigate(`/producto/${p.id}`);
+                }}
+              >
+                <img
+                  src={`http://zent.es/${p.do_imagenes?.[0]?.url}`}
+                  alt={p.titulo}
+                />
 
-              <div className="elemento-info">
-                <h3>{p.titulo}</h3>
-                <p>
-                  {p.do_plataformas
-                    ?.map((e) => e.nombre)
-                    .join(" | ")}
-                </p>
+                <div className="elemento-info">
+                  <h3>{p.titulo}</h3>
+                  <p>
+                    {p.do_plataformas
+                      ?.map((e) => e.nombre)
+                      .join(" | ")}
+                  </p>
+                </div>
+
+                <span className="elemento-precio">
+                  {Number(p.precio).toFixed(2)} €
+                </span>
               </div>
-
-              <span className="elemento-precio">
-                {Number(p.precio).toFixed(2)} €
-              </span>
+            ))
+          ) : texto ? (
+            <div className="elemento no-resultados-elemento">
+              <div className="elemento-info elemento-info-full">
+                <h3>{t("search.noResults", {
+                  defaultValue: "No se encontraron productos",
+                })}</h3>
+              </div>
             </div>
-          ))}
-        </div>
-      )}
-      {abierto && texto && productos.length === 0 && (
-        <div className="no-resultados">
-          {t("search.noResults", {
-            defaultValue: "No se encontraron productos",
-          })}
+          ) : null}
         </div>
       )}
 

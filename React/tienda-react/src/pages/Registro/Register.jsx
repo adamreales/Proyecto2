@@ -1,6 +1,6 @@
 import "./Register.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { register } from "../../services/auth";
 
 function Register() {
@@ -18,7 +18,7 @@ function Register() {
 
     try {
       await register(name,email, password,passwordConfirm);
-      alert("Usuario registrado correctamente");
+      window.location.href = "/login";
     } catch (error) {
       alert("Error al registrarse");
     }

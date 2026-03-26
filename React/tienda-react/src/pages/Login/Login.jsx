@@ -18,7 +18,7 @@ function Login() {
       console.log("Usuario:", data.user);
       navigate("/home");
     } catch (error) {
-      alert("Login incorrecto: " + error);
+      document.getElementById("aviso").textContent = "Password o email incorrecto";
     }
   };
 
@@ -40,6 +40,7 @@ function Login() {
             {capsLock && (
               <p className="aviso-capslock"><span className="material-symbols-outlined aviso-icon">keyboard_capslock</span>   Mayúsculas activadas</p>
             )}
+            <span id="aviso" className="aviso"></span>
           </div>
           <Link to="/forgot-password"><a href="#" style={{textDecoration: "none"}}>¿Olvidaste tu contraseña?</a></Link>
           <div className="Botones">
@@ -47,9 +48,6 @@ function Login() {
              <Link to="/register"> <button type="submit" className="btn-registro">Registrate</button></Link>
           </div>
         </form>
-      </div>
-      <div className="Avisos">
-        <span className="aviso"></span>
       </div>
     </div>
   );

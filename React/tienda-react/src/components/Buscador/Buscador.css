@@ -163,3 +163,24 @@
     margin-left: 4px;
   }
 }
+
+.Resultados .elemento.no-resultados-elemento {
+  justify-content: center;
+  padding: 20px 14px;
+  cursor: default;
+}
+
+.Resultados .elemento.no-resultados-elemento:hover {
+  background: inherit;
+}
+
+.Resultados .elemento.no-resultados-elemento .elemento-info-full {
+  text-align: center;
+  margin: 0;
+}
+
+.Resultados .elemento.no-resultados-elemento .elemento-info-full h3 {
+  color: #888;
+  white-space: normal;
+  margin: 0;
+}
