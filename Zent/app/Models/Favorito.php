@@ -13,19 +13,18 @@ class Favorito extends Model
 
     protected $fillable = [
         'user_id',
-        'session_id',
         'producto_id',
     ];
 
 
     public function doUser()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
     public function doProducto()
     {
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo(Producto::class,'producto_id');
     }
 
 }

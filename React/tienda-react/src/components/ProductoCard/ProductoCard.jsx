@@ -23,15 +23,8 @@ function ProductoCard({ producto, reload = false }) {
   return (
     <div className="producto-catalogo">
       
-      <div 
-        className="imagen-producto" 
-        onClick={handleClick}
-        style={{ cursor: "pointer" }}
-      >
-        <img
-          src={`http://zent.es/${producto.do_imagenes?.[0]?.url}`}
-          alt={producto.titulo}
-        />
+      <div className="imagen-producto"  onClick={handleClick} style={{ cursor: "pointer" }} >
+        <img src={`http://zent.es/${producto.do_imagenes?.[0]?.url}`}alt={producto.titulo} />
       </div>
 
       <div className="info-producto">

@@ -149,24 +149,22 @@ function Producto() {
   }
 
   const valoracion = Math.max(
-    0,
-    Math.min(5, Math.round(producto?.valoracion || 0))
+    0,Math.min(5, Math.round(producto?.valoracion || 0))
   );
 
   function fav(productoId){
     if(loginRedirect()) return;
-    const sessionId = getSessionId();
     const token = localStorage.getItem("token");
-
-    fetch(`http://127.0.0.1:8000/api/favorito`, {
+    console.log("Añadiendo a favoritos el producto con ID:", productoId);
+    fetch(`http://127.0.0.1:8000/api/anadir_favorito`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Session-Id": sessionId,
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        "Authorization": "Bearer " + token
       },
       body: JSON.stringify({ producto_id: productoId }),
     });
+    console.log("Añadiendo a favoritos el producto con ID:", productoId);
   }
 
   function loginRedirect() {
@@ -174,11 +172,7 @@ function Producto() {
     if (!token) {
       window.location.href="/login";
       return;
-    }else
-    {
-        console.lof("Usuario ya logueado");
     }
-
   }
 
   return (

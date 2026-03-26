@@ -42,12 +42,13 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  flex: 1;
   width: 60%;
   min-width: 0;
 }
 .targeta-carrito ul li .item-info .bloq1 img {
-  width: 200px;
-  height: 150px;
+  width: 250px;
+  height: 180px;
   border-radius: 10px;
 }
 .targeta-carrito ul li .item-info .bloq1 .propeties {
@@ -55,32 +56,53 @@
 }
 .targeta-carrito ul li .item-info .bloq1 .propeties h3 {
   font-family: 'Orbitron', sans-serif;
-  font-size: 25.5px;
+  font-size: 30px;
   color: black;
   font-weight: bold;
   overflow-wrap: anywhere;
+}
+.targeta-carrito ul li .item-info p {
+  font-family: 'Inter', sans-serif;
+  font-size: 30px;
+  color: black;
 }
 .targeta-carrito ul li .item-info .blq-acciones {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 .targeta-carrito ul li .item-info .blq-acciones .precio {
   display: flex;
   align-items: center;
   gap: 10px;
   font-family: 'Inter', sans-serif;
-  font-size: 22.5px;
+  font-size: 30px;
+}
+.targeta-carrito ul li .item-info .blq-acciones .precio .contador {
+  /* Chrome, Safari, Edge (WebKit) */
+  /* Firefox */
 }
 .targeta-carrito ul li .item-info .blq-acciones .precio .contador button {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 19.5px;
+  font-size: 30px;
   font-family: 'Inter', sans-serif;
 }
 .targeta-carrito ul li .item-info .blq-acciones .precio .contador input {
+  height: 50px;
   width: 30px;
+  font-size: 22.5px;
+  border: none;
+}
+.targeta-carrito ul li .item-info .blq-acciones .precio .contador input[type="number"]::-webkit-outer-spin-button,
+.targeta-carrito ul li .item-info .blq-acciones .precio .contador input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.targeta-carrito ul li .item-info .blq-acciones .precio .contador input[type="number"] {
+  -moz-appearance: textfield;
 }
 .targeta-carrito ul li .item-info .blq-acciones hr {
   width: 200px;
@@ -88,15 +110,17 @@
 .targeta-carrito ul li .item-info .blq-acciones .Gestiones {
   display: flex;
   align-items: center;
+  padding-top: 15px;
 }
 .targeta-carrito ul li .item-info .blq-acciones .Gestiones button {
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
-.targeta-carrito ul li .item-info .blq-acciones .Gestiones .btn-eliminar img {
-  width: 35px;
-  height: 35px;
+.targeta-carrito ul li .item-info .blq-acciones .Gestiones .btn-eliminar {
+  background-color: red;
+  border-radius: 10px;
+  color: white;
 }
 .targeta-carrito ul li .item-info .blq-acciones .Gestiones .btn-favoritos img {
   width: 35px;
@@ -115,6 +139,9 @@
   }
   .targeta-carrito ul li .item-info .bloq1 .propeties h3 {
     font-size: 21px;
+  }
+  .targeta-carrito ul li .item-info .bloq1 .propeties p {
+    font-size: 18px;
   }
   .targeta-carrito ul li .item-info .blq-acciones .precio {
     font-size: 18px;

@@ -23,21 +23,23 @@
     box-sizing: border-box;
 }
 .Carrito{
-    display:grid;
-    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+    display: flex;
+    justify-content: center;
     gap: 20px;
     width: 100%;
     align-items: start;
     box-sizing: border-box;
     padding-inline: 20px;
+  
     .targeta-carrito
     {
-        width: 100%;
+        width: 60%;
         max-width: none;
         min-width: 0;
     }
     .target-payment{
         display: flex;
+        width: 28%;
         flex-direction: column;
         gap:20px;
         background-color: transparent;

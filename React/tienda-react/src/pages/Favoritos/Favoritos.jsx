@@ -6,24 +6,24 @@ import { useTranslation } from "react-i18next";
 function Favoritos() {
   const { t } = useTranslation();
   const [productos, SetFavoritos] = useState([]);
-  
+  const productos_nuevos = [  ];
   useEffect(()=> {
-    let sessionId = localStorage.getItem("sessionId");
-    if (!sessionId) {
-      sessionId = crypto.randomUUID();
-      localStorage.setItem("sessionId", sessionId);
-    }
-
+    const token = localStorage.getItem("token");
     fetch('http://127.0.0.1:8000/api/productos_favoritos', {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "X-Session-Id": sessionId,
+        "Authorization": "Bearer " + token
       },
     })
     .then((res)  => res.json())
     .then((data) => SetFavoritos(data.productos || []))
     .catch((err) => console.error(err));
   },[]);
+
+    productos.forEach((e,i) => {
+      productos_nuevos[i] = e.do_producto;
+    });
   return (
     <>
         
@@ -31,7 +31,7 @@ function Favoritos() {
          <h2>{t("favorites.title")}</h2>
 
          <p>{t("favorites.empty")}</p>
-            <SeccionProductosVideojuegos productos={productos}/>
+            <SeccionProductosVideojuegos productos={productos_nuevos}/>
         </div>
 
     </>

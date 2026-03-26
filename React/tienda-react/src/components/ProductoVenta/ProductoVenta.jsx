@@ -33,46 +33,23 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
 
                     <div className="propeties">
                       <h3>{item.nombre}</h3>
-                      <p>
-                        {item.plataforma || "PC"}
-                      </p>
+                      <p> {item.plataforma || "PC"} </p>
                     </div>
                   </div>
-
+                     <p>{formatPrice(item.precio)}</p>
                   <div className="blq-acciones">
 
                     <div className="precio">
-                      <p>{formatPrice(item.precio)}</p>
-
                       <div className="contador">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            actualizarCantidad(item, cantidadSeleccionada - 1)
-                          }
-                        >
-                          -
-                        </button>
+                        <button type="button"  onClick={() => actualizarCantidad(item, cantidadSeleccionada - 1) } >-</button>
 
-                        <input   type="number" value={cantidadSeleccionada} min="1"max={stockMaximo} onChange={(e) =>  actualizarCantidad(item, Number(e.target.value))  }/>
+                        <input type="number" value={cantidadSeleccionada} min="1"max={stockMaximo} onChange={(e) =>  actualizarCantidad(item, Number(e.target.value)) }/>
 
-                        <button
-                          type="button"
-                          onClick={() =>
-                            actualizarCantidad(item, cantidadSeleccionada + 1)
-                          }
-                        >
-                          +
-                        </button>
+                        <button type="button"  onClick={() => actualizarCantidad(item, cantidadSeleccionada + 1)}  >+</button>
                       </div>
                     </div>
-
-                    <hr />
-
                     <div className="Gestiones">
-                      <button className="btn-eliminar" onClick={() => eliminarProducto(item)} > <img src="http://zent.es/imagenes_producto/basura.png" /> </button>
-
-                      <button className="btn-favoritos"><img src="http://zent.es/imagenes_producto/corazon.avif" /></button>
+                      <button className="btn-eliminar" onClick={() => eliminarProducto(item)} >Eliminar </button>
                     </div>
 
                   </div>

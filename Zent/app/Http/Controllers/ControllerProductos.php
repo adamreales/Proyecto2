@@ -212,35 +212,18 @@ class ControllerProductos extends Controller
         ]);
 
     }
-    public function productos_favoritos(Request $request)
+    public function productos_favoritos()
     {
         $user_id = auth()->id();
-        $session_id = $request->header('X-Session-Id');
 
-        if (!$session_id) {
-            return response()->json([
-                'error' => 'Session ID no proporcionado'
-            ], 400);
-        }
-
-        $query = Favorito::with([
+        $productos = Favorito::with([
             'doProducto',
             'doProducto.doValoraciones',
             'doProducto.doImagenes',
             'doProducto.doCategorias',
             'doProducto.doPlataformas',
             'doProducto.doPegi'
-        ]);
-
-        if ($session_id) {
-            $query->where('session_id', $session_id);
-        }
-
-        if ($user_id) {
-            $query->where('user_id', $user_id);
-        }
-
-        $productos = $query->get();
+        ])->where('user_id', $user_id)->get();;
 
         if ($productos->isEmpty()) {
             return response()->json([

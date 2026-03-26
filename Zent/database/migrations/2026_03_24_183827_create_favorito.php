@@ -21,8 +21,6 @@ return new class extends Migration
                 ->constrained('users')
                 ->cascadeOnDelete();
 
-            $table->string('session_id')->nullable();
-
             $table->foreignId('producto_id')
                 ->constrained('producto')
                 ->cascadeOnDelete();
@@ -30,7 +28,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->unique(['user_id', 'producto_id']);
-            $table->unique(['session_id', 'producto_id']);
         });
     }
 
