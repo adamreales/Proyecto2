@@ -91,7 +91,7 @@
                         flex-direction: column;
                         align-items: center;
                         justify-content: center;
-                        //background-color: turquoise;
+                         padding-top: 30px;
                         .precio{
                             display: flex;
                             align-items: center;
@@ -127,28 +127,50 @@
                             }
                         }
 
-                        hr{width: 200px;}
-
                         .Gestiones{
                             display: flex;
                             align-items: center;
-                           padding-top: 15px;
+                            gap: 10px;
+                        
                             button{
                                 background-color: transparent;
                                 border: none;
                                 cursor: pointer;
+                                transition: all 0.3s ease;
                             }
                             .btn-eliminar
                             {    
                                 background-color: red;
-                                border-radius: 10px;
-                                color:white;
+                                border-radius: 8px;
+                                color: white;
+                                padding: 10px 20px;
+                                font-family: @tipo-letra-btn;
+                                font-size: @mida-letra-botones;
+                                font-weight: 600;
+                                border: 2px solid transparent;
+                                transition: all 0.3s ease;
+                                
+                                &:hover {
+                                    background-color: #c0392b;
+                                    transform: translateY(-2px);
+                                    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+                                }
+                                
+                                &:active {
+                                    transform: translateY(0);
+                                    box-shadow: 0 2px 6px rgba(231, 76, 60, 0.3);
+                                }
                             }
                             .btn-favoritos
                             {
                                 img{
                                     width: 35px;
                                     height: 35px;
+                                    transition: transform 0.2s ease;
+                                    
+                                    &:hover {
+                                        transform: scale(1.1);
+                                    }
                                 }
                             }
                         }
@@ -164,13 +186,18 @@
             padding: 0;
 
             li {
+                padding: 15px;
                 .item-info {
+                    height: auto;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    
                     .bloq1 {
-                        width: 55%;
+                        width: 100%;
 
                         img {
-                            width: 160px;
-                            height: 120px;
+                            width: 150px;
+                            height: 100px;
                         }
 
                         .propeties {
@@ -183,13 +210,156 @@
                         }
                     }
 
+                    p {
+                        font-size: @mida-letra-p * 1.5;
+                    }
+
                     .blq-acciones {
+                        width: 100%;
                         .precio {
                             font-size: @mida-letra-p * 1.2;
                         }
 
                         hr {
-                            width: 160px;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .targeta-carrito {
+        ul {
+            gap: 15px;
+            
+            li {
+                padding: 12px;
+                .item-info {
+                    gap: 15px;
+                    
+                    .bloq1 {
+                        img {
+                            width: 120px;
+                            height: 80px;
+                        }
+
+                        .propeties {
+                            h3 {
+                                font-size: @mida-letra-p * 1.2;
+                            }
+                            p {
+                                font-size: @mida-letra-p;
+                            }
+                        }
+                    }
+
+                    p {
+                        font-size: @mida-letra-p * 1.2;
+                    }
+
+                    .blq-acciones {
+                        .precio {
+                            font-size: @mida-letra-p;
+                            .contador {
+                                input {
+                                    height: 40px;
+                                    width: 25px;
+                                    font-size: @mida-letra-p;
+                                }
+                                button {
+                                    font-size: @mida-letra-botones * 1.5;
+                                }
+                            }
+                        }
+
+                        .Gestiones {
+                            .btn-eliminar {
+                                padding: 8px 12px;
+                                font-size: @mida-letra-botones;
+                                
+                                &:hover {
+                                    background-color: #c0392b;
+                                    transform: translateY(-2px);
+                                    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .targeta-carrito {
+        ul {
+            gap: 10px;
+            
+            li {
+                padding: 10px;
+                border-radius: 8px;
+                .item-info {
+                    gap: 10px;
+                    
+                    .bloq1 {
+                        gap: 10px;
+                        img {
+                            width: 80px;
+                            height: 60px;
+                        }
+
+                        .propeties {
+                            h3 {
+                                font-size: @mida-letra-p;
+                            }
+                            p {
+                                font-size: @mida-letra-p * 0.8;
+                            }
+                        }
+                    }
+
+                    p {
+                        font-size: @mida-letra-p;
+                    }
+
+                    .blq-acciones {
+                        gap: 12px;
+                        .precio {
+                            font-size: @mida-letra-p * 0.9;
+                            .contador {
+                                input {
+                                    height: 35px;
+                                    width: 20px;
+                                    font-size: @mida-letra-p * 0.8;
+                                }
+                                button {
+                                    font-size: @mida-letra-botones;
+                                }
+                            }
+                        }
+
+                        hr {
+                            display: none;
+                        }
+
+                        .Gestiones {
+                            width: 100%;
+                            justify-content: center;
+                            .btn-eliminar {
+                                padding: 8px 14px;
+                                font-size: @mida-letra-botones * 0.9;
+                                width: auto;
+                                
+                                &:hover {
+                                    background-color: #c0392b;
+                                    transform: translateY(-2px);
+                                    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+                                }
+                            }
                         }
                     }
                 }

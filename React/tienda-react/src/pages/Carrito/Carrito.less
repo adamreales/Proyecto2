@@ -54,21 +54,117 @@
 
 @media (max-width: 1024px) {
     .Carrito {
-        grid-template-columns: minmax(0, 1.4fr) minmax(260px, 1fr);
         gap: 16px;
+        padding-inline: 16px;
+        
+        .targeta-carrito {
+            width: 65%;
+        }
+        
+        .target-payment {
+            width: 35%;
+        }
     }
 }
 
 @media (max-width: 900px) {
     .Carrito {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        gap: 20px;
+        
+        .targeta-carrito {
+            width: 100%;
+        }
+        
+        .target-payment {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .Titulos {
+        padding-inline: 12px;
+        margin-bottom: 15px;
+        
+        h1 {
+            font-size: 24px;
+        }
+    }
+    
+    .Carrito {
+        padding-inline: 12px;
+        gap: 15px;
+        
+        .targeta-carrito {
+            ul {
+                li {
+                    padding: 12px;
+                }
+            }
+        }
+        
+        .target-payment {
+            padding: 15px;
+            gap: 15px;
+            min-height: auto;
+        }
     }
 }
 
 @media (max-width: 600px) {
     .Titulos,
     .Carrito {
-        padding-inline: 12px;
+        padding-inline: 10px;
+    }
+    
+    .Titulos {
+        h1 {
+            font-size: 20px;
+        }
+    }
+    
+    .Carrito {
+        gap: 12px;
+        
+        .targeta-carrito {
+            ul {
+                gap: 12px;
+                
+                li {
+                    padding: 10px;
+                    border-radius: 8px;
+                }
+            }
+        }
+        
+        .target-payment {
+            padding: 12px;
+            gap: 12px;
+            border-radius: 8px;
+            
+            h2 {
+                font-size: 18px;
+            }
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .Carrito {
+        padding-inline: 8px;
+        gap: 10px;
+        
+        .targeta-carrito {
+            ul {
+                gap: 10px;
+            }
+        }
+        
+        .target-payment {
+            padding: 10px;
+            gap: 10px;
+        }
     }
 }
 
