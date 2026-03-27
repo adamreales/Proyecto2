@@ -8,6 +8,7 @@ use App\Models\CarritoProducto;
 use App\Models\ClaveProducto;
 use App\Models\Pedido;
 use App\Models\PedidoDetalle;
+use App\Mail\PedidoConfirmadoMail;
 use Exception;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
@@ -15,6 +16,9 @@ use Stripe\Checkout\Session;
 use App\Services\PedidoService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Symfony\Component\Mime\Email;
+
 class ControllerStripe extends Controller
 {
 
@@ -211,12 +215,21 @@ class ControllerStripe extends Controller
                     Carrito::where('id', $pedido->id_carrito)
                         ->where('estado', 'Activo')
                         ->update(['estado' => 'Cerrado']);
+
+                    // enviar email al usuario de la clave producto
+
+                    Mail::to($pedido->doUsuario->email)->send(new PedidoConfirmadoMail($pedido));
+
                 });
+
 
             } catch (\Exception $e) {
                 Log::error('Stripe webhook error: ' . $e->getMessage());
                 return response()->json(['error' => 'fail'], 500);
             }
+
+
+
         }
 
         return response()->json(['status' => 'ok'], 200);
