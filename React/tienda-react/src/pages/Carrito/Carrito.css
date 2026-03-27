@@ -7,8 +7,7 @@
   display: flex;
   justify-content: left;
   width: 100%;
-  padding-inline: 20px;
-  box-sizing: border-box;
+  padding-inline: 100px;
 }
 .Carrito {
   display: flex;
