@@ -12,7 +12,7 @@ class PedidoDetalle extends Model
 
     protected $table = 'pedido_detalles';
 
-    protected $fillable = ['id_pedido','id_producto','precio_unitario','cantidad','subtotal'];
+    protected $fillable = ['id_pedido','id_producto','id_clave','precio_unitario','subtotal'];
 
     public function doPedido(){
         return $this->belongsTo(Pedido::class,'id_pedido');

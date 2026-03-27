@@ -44,6 +44,7 @@ class PedidoService{
             $total = 0;
 
             foreach($items as $item){
+
                 $plataformaProducto = $item->doPlataformaProducto;
                 $producto = $plataformaProducto?->doProducto;
 
@@ -62,18 +63,7 @@ class PedidoService{
                 $precio = $producto->precio;
                 $subtotal = $precio * $item->cantidad;
 
-                $pd = [
-                    'id_pedido' => $pedido->id,
-                    'id_producto' => $producto->id,
-                    'precio_unitario' => $precio,
-                    'cantidad' => $item->cantidad,
-                    'subtotal' => $subtotal
-                ];
-
-                PedidoDetalle::create($pd);
-
                 $total += $subtotal;
-
             }
 
             $pedido->update([
