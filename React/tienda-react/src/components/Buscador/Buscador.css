@@ -16,7 +16,7 @@
 }
 .buscador-container .buscador-input {
   flex: 1;
-  padding: 10px 16px;
+  padding: 10px 12px;
   background: white;
   color: black;
   border: 1px solid #555;
@@ -32,7 +32,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 14px;
+  padding: 9.5px 10px;
   background: white;
   color: black;
   border: 1px solid #555;
