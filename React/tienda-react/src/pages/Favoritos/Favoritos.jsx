@@ -30,7 +30,7 @@ function Favoritos() {
        <div className="pagina-favoritos"> 
          <h2>{t("favorites.title")}</h2>
 
-         <p>{t("favorites.empty")}</p>
+         {productos_nuevos.length === 0 && <p>{t("favorites.empty")}</p>}
             <SeccionProductosVideojuegos productos={productos_nuevos}/>
         </div>
 
