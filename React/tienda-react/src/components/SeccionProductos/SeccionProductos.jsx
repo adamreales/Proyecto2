@@ -42,15 +42,9 @@ function SeccionProductos({ titulo, productos = [], reload = false }) {
 
         <div className="botones">
 
-          <button   className="btn-prev"  onClick={prev}disabled={startIndex === 0}  >
-            <img
-              src="http://zent.es/imagenes_producto/correrizq.png"
-              className="mario"
-              alt={t("common.previous")}
-            />
-          </button>
+          <button className="btn-prev"  onClick={prev}disabled={startIndex === 0}  > <img src="http://zent.es/imagenes_producto/correrizq.png"   className="mario"   alt={t("common.previous")}  /></button>
 
-          <button className="btn-next" onClick={next} disabled={startIndex + maxitems >= productos.length}>     <img src="http://zent.es/imagenes_producto/correr.png" alt={t("common.next")}  /> </button>
+          <button className="btn-next" onClick={next} disabled={startIndex + maxitems >= productos.length}>     <img src="http://zent.es/imagenes_producto/correr.png" className="mario" alt={t("common.next")}  /> </button>
 
         </div>
       </div>
