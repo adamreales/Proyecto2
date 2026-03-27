@@ -9,6 +9,8 @@ use App\Models\ImagenProducto;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Categoria;
 use App\Models\PlataformaProducto;
+use Illuminate\Support\Str;
+use App\Models\ClaveProducto;
 class Producto extends Model
 {
     use HasFactory, SoftDeletes;

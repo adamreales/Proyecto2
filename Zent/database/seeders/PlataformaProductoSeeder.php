@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\PlataformaProducto;
 
 class PlataformaProductoSeeder extends Seeder
 {
@@ -15,7 +15,7 @@ class PlataformaProductoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('plataforma_producto')->insert([
+        $datos = [
 
             ['plataforma_id'=>1,'producto_id'=>1,'stock'=>10],
             ['plataforma_id'=>4,'producto_id'=>1,'stock'=>5],
@@ -49,6 +49,11 @@ class PlataformaProductoSeeder extends Seeder
             ['plataforma_id'=>2,'producto_id'=>15,'stock'=>14],
 
             ['plataforma_id'=>3,'producto_id'=>16,'stock'=>22],
-        ]);
+        ];
+
+        foreach ($datos as $item) {
+            PlataformaProducto::create($item);
+        }
+
     }
 }

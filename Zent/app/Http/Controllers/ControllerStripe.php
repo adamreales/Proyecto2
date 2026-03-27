@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Carrito;
 use App\Models\CarritoProducto;
+use App\Models\ClaveProducto;
 use App\Models\Pedido;
+use App\Models\PedidoDetalle;
 use Exception;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
@@ -35,7 +37,8 @@ class ControllerStripe extends Controller
     public function pagar_pedido($pedidoId){
         try{
             Stripe::setApiKey(config('services.stripe.secret'));
-            $pedido = Pedido::with('doDetalles.doProducto')->find($pedidoId);
+
+            $pedido = Pedido::find($pedidoId);
 
             if($pedido === null){
                 throw new Exception("Pedido no existe");
@@ -45,27 +48,43 @@ class ControllerStripe extends Controller
                 throw new Exception("Pedido ya pagado o cancelado");
             }
 
+            // 🔥 coger productos del carrito
+            $items = CarritoProducto::with('doPlataformaProducto.doProducto')
+                ->where('id_carrito', $pedido->id_carrito)
+                ->get();
+
+            if($items->isEmpty()){
+                throw new Exception("Carrito vacío");
+            }
+
             $productos = [];
 
-            foreach($pedido->doDetalles as $detalle){
+            foreach($items as $item){
+
+                $producto = $item->doPlataformaProducto?->doProducto;
+
+                if(!$producto){
+                    throw new Exception("Producto inválido");
+                }
+
                 $productos[] = [
                     'price_data' => [
                         'currency' => 'eur',
                         'product_data' => [
-                            'name' => $detalle->doProducto->titulo,
+                            'name' => $producto->titulo,
                         ],
-                        'unit_amount' => intval($detalle->precio_unitario * 100),
+                        'unit_amount' => intval($producto->precio * 100),
                     ],
-                    'quantity' => $detalle->cantidad,
+                    'quantity' => $item->cantidad,
                 ];
             }
 
             $session = Session::create([
                 'mode' => 'payment',
                 'payment_method_types' => ['card'],
-                'line_items' => $productos,
-                'success_url' => env('FRONT_URL').'/aceptada', //pago-exito?session_id={CHECKOUT_SESSION_ID}
-                'cancel_url' => env('FRONT_URL').'/denegada', //carrito
+                'line_items' => $productos, // 🔥 ahora sí
+                'success_url' => env('FRONT_URL').'/aceptada',
+                'cancel_url' => env('FRONT_URL').'/denegada',
                 'metadata' => [
                     'pedido_id' => $pedido->id
                 ]
@@ -97,11 +116,9 @@ class ControllerStripe extends Controller
                 $signature,
                 $secret
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Log::error('Stripe signature error: ' . $e->getMessage());
-
             return response()->json(['error' => 'Invalid signature'], 200);
-            // 👈 IMPORTANTE: 200 SIEMPRE
         }
 
         if ($event->type === 'checkout.session.completed') {
@@ -110,19 +127,19 @@ class ControllerStripe extends Controller
 
             try {
 
-                // 🔴 VALIDAR METADATA
-                if (!isset($session->metadata->pedido_id)) {
-                    Log::error('Pedido ID no encontrado en metadata');
+                $pedidoId = $session->metadata['pedido_id'] ?? null;
+
+                if (!$pedidoId) {
+                    Log::error('Pedido ID no encontrado en metadata', [
+                        'metadata' => $session->metadata
+                    ]);
                     return response()->json(['status' => 'ok'], 200);
                 }
-
-                $pedidoId = $session->metadata->pedido_id;
 
                 DB::transaction(function () use ($session, $pedidoId) {
 
                     $pedido = Pedido::lockForUpdate()->find($pedidoId);
 
-                    // 🔴 SI NO EXISTE O YA PAGADO → SALIR LIMPIO
                     if (!$pedido || $pedido->estado !== 'pendiente') {
                         return;
                     }
@@ -132,7 +149,6 @@ class ControllerStripe extends Controller
                         ->lockForUpdate()
                         ->get();
 
-                    // 🔴 NO ROMPER → SOLO LOG
                     if ($itemsCarrito->isEmpty()) {
                         Log::error("Carrito vacío para pedido {$pedido->id}");
                         return;
@@ -145,38 +161,65 @@ class ControllerStripe extends Controller
 
                         if (!$plataformaProducto || !$producto) {
                             Log::error("Producto inválido en carrito ID {$itemCarrito->id}");
-                            continue; // 👈 NO PETAR
+                            continue;
                         }
 
                         if ($plataformaProducto->stock < $itemCarrito->cantidad) {
                             Log::error("Stock insuficiente producto {$producto->id}");
-                            continue; // 👈 NO PETAR
+                            continue;
                         }
 
+                        // 🔑 obtener claves disponibles
+                        $claves = ClaveProducto::where('plataforma_producto_id', $plataformaProducto->id)
+                            ->where('vendida', false)
+                            ->lockForUpdate()
+                            ->limit($itemCarrito->cantidad)
+                            ->get();
+
+                        if ($claves->count() < $itemCarrito->cantidad) {
+                            Log::error("No hay suficientes claves para producto {$producto->id}");
+                            throw new \Exception("No hay suficientes claves");
+                        }
+
+                        foreach ($claves as $clave) {
+
+                            // marcar clave como vendida
+                            $clave->update(['vendida' => true]);
+
+                            // crear detalle del pedido (1 por clave)
+                            PedidoDetalle::create([
+                                'id_pedido' => $pedido->id,
+                                'id_producto' => $producto->id,
+                                'id_clave' => $clave->id,
+                                'precio_unitario' => $producto->precio,
+                                'cantidad' => 1,
+                                'subtotal' => $producto->precio
+                            ]);
+                        }
+
+                        // actualizar métricas
                         $producto->increment('ventas', $itemCarrito->cantidad);
                         $plataformaProducto->decrement('stock', $itemCarrito->cantidad);
                     }
 
-                    // ✅ MARCAR COMO PAGADO
+                    // actualizar pedido
                     $pedido->estado = 'pagado';
                     $pedido->stripe_payment_intent = $session->payment_intent;
                     $pedido->save();
 
-                    // ✅ CERRAR CARRITO
+                    // cerrar carrito
                     Carrito::where('id', $pedido->id_carrito)
                         ->where('estado', 'Activo')
                         ->update(['estado' => 'Cerrado']);
                 });
 
-            } catch (Exception $e) {
-
+            } catch (\Exception $e) {
                 Log::error('Stripe webhook error: ' . $e->getMessage());
-
-                // 👈 CRÍTICO: Stripe NO debe recibir 500
-                return response()->json(['status' => 'ok'], 200);
+                return response()->json(['error' => 'fail'], 500);
             }
         }
 
         return response()->json(['status' => 'ok'], 200);
     }
+
 }
