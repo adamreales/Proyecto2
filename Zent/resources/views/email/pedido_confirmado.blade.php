@@ -28,7 +28,7 @@
             <div style="background:#f5ffff; border-left:4px solid #00f7ff; padding:15px; margin:20px 0; border-radius:6px;">
                 <p style="margin:0; font-size:18px;">
                     💰 Total:
-                    <strong style="color:#00c3ff;">
+                    <strong style="color:black;">
                         {{ number_format((float) $pedido->total, 2, ',', '.') }} EUR
                     </strong>
                 </p>
@@ -49,7 +49,7 @@
 
                             <p style="margin:5px 0;">
                                 Precio:
-                                <span style="color:#00c3ff;">
+                                <span style="color:black;">
                                     {{ number_format((float) $detalle->precio_unitario, 2, ',', '.') }} EUR
                                 </span>
                             </p>
@@ -70,6 +70,15 @@
                 Gracias por comprar en
                 <strong style="color:#00c3ff;">Zent</strong> 🚀
             </p>
+
+            <div style="margin-top:20px; text-align:center;">
+                <a href="{{ rtrim(env('FRONT_URL', 'http://localhost:5173'), '/') }}/mis-facturas"
+                   style="display:inline-block; background: linear-gradient(90deg,#00f7ff,#00c3ff);
+                          color:#000; font-weight:bold; padding:12px 28px; border-radius:8px;
+                          text-decoration:none; font-size:15px; letter-spacing:1px;">
+                    📄 Descargar mi factura
+                </a>
+            </div>
 
         </div>
 

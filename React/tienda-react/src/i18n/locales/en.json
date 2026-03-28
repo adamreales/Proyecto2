@@ -225,6 +225,10 @@
     "successMessage": "Your payment has been processed correctly. Thank you for your purchase.",
     "orderNumber": "Your order number is {{orderNumber}}.",
     "unavailable": "not available",
+    "invoiceReady": "Your invoice is available:",
+    "downloadInvoice": "⬇ Download Invoice (PDF)",
+    "downloadingInvoice": "Downloading...",
+    "downloadError": "Could not download the invoice. Please try again.",
     "errorTitle": "Purchase denied",
     "errorMessage": "The purchase could not be completed. A problem occurred while processing the payment. Please try again or use another payment method."
   }

@@ -225,6 +225,10 @@
     "successMessage": "Tu pago ha sido procesado correctamente. Gracias por tu compra.",
     "orderNumber": "Tu número de pedido es {{orderNumber}}.",
     "unavailable": "no disponible",
+    "invoiceReady": "Tu factura está disponible:",
+    "downloadInvoice": "⬇ Descargar factura (PDF)",
+    "downloadingInvoice": "Descargando...",
+    "downloadError": "No se pudo descargar la factura. Inténtalo de nuevo.",
     "errorTitle": "Compra denegada",
     "errorMessage": "No se ha podido completar la compra. Ha ocurrido un problema al procesar el pago. Por favor, inténtalo de nuevo o utiliza otro método de pago."
   }

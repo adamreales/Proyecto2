@@ -11,7 +11,22 @@ class Factura extends Model
 
     protected $table = 'facturas';
 
-    protected $fillable = ['id_pedido', 'total'];
+    protected $fillable = [
+        'id_pedido',
+        'numero_factura',
+        'fecha_emision',
+        'subtotal',
+        'iva_porcentaje',
+        'iva_total',
+        'total',
+        'pdf_path',
+        'enviado_por_email',
+    ];
+
+    protected $casts = [
+        'fecha_emision' => 'datetime',
+        'enviado_por_email' => 'boolean',
+    ];
 
     public function doPedido()
     {

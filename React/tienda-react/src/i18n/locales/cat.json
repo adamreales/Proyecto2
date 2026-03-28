@@ -225,6 +225,10 @@
     "successMessage": "El teu pagament s'ha processat correctament. Gràcies per la teva compra.",
     "orderNumber": "El teu número de comanda és {{orderNumber}}.",
     "unavailable": "no disponible",
+    "invoiceReady": "La teva factura està disponible:",
+    "downloadInvoice": "⬇ Descarregar factura (PDF)",
+    "downloadingInvoice": "Descarregant...",
+    "downloadError": "No s'ha pogut descarregar la factura. Torna-ho a provar.",
     "errorTitle": "Compra denegada",
     "errorMessage": "No s'ha pogut completar la compra. Hi ha hagut un problema en processar el pagament. Si us plau, torna-ho a provar o utilitza un altre mètode de pagament."
   }

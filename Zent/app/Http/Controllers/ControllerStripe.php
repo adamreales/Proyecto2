@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Carrito;
 use App\Models\CarritoProducto;
 use App\Models\ClaveProducto;
+use App\Models\Factura;
+use App\Models\FacturaLinea;
 use App\Models\Pedido;
 use App\Models\PedidoDetalle;
 use App\Mail\PedidoConfirmadoMail;
@@ -14,9 +16,12 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use App\Services\PedidoService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 
 class ControllerStripe extends Controller
 {
@@ -140,8 +145,9 @@ class ControllerStripe extends Controller
                 }
 
                 $correoDestino = null;
+                $facturaId = null;
 
-                DB::transaction(function () use ($session, $pedidoId, &$correoDestino) {
+                DB::transaction(function () use ($session, $pedidoId, &$correoDestino, &$facturaId) {
 
                     $pedido = Pedido::lockForUpdate()->find($pedidoId);
 
@@ -216,7 +222,12 @@ class ControllerStripe extends Controller
                     try {
                         Carrito::where('id', $pedido->id_carrito)
                             ->where('estado', 'Activo')
-                            ->update(['estado' => 'Cerrado']);
+                            ->update([
+                                'estado' => 'Cerrado',
+                                // Evita conflicto con unique(id_usuario, activo_unico)
+                                // cuando ya existe otro carrito cerrado para el usuario.
+                                'id_usuario' => null,
+                            ]);
                     } catch (\Throwable $e) {
                         Log::warning("No se pudo cerrar carrito {$pedido->id_carrito}: {$e->getMessage()}");
 
@@ -227,13 +238,72 @@ class ControllerStripe extends Controller
 
                     $correoDestino = optional($pedido->doUsuario)->email;
 
+                    if (Schema::hasTable('facturas') && Schema::hasTable('factura_lineas')) {
+                        try {
+                            $pedido->loadMissing('doDetalles.doProducto');
+
+                            $factura = Factura::where('id_pedido', $pedido->id)->lockForUpdate()->first();
+
+                            if (!$factura) {
+                                $total = (float) $pedido->total;
+                                $subtotal = round($total / 1.21, 2);
+                                $ivaTotal = round($total - $subtotal, 2);
+
+                                $factura = Factura::create([
+                                    'id_pedido' => $pedido->id,
+                                    'numero_factura' => 'FAC-' . now()->format('Ymd') . '-' . str_pad((string) $pedido->id, 6, '0', STR_PAD_LEFT),
+                                    'fecha_emision' => now(),
+                                    'subtotal' => $subtotal,
+                                    'iva_porcentaje' => 21,
+                                    'iva_total' => $ivaTotal,
+                                    'total' => $total,
+                                ]);
+
+                                foreach ($pedido->doDetalles as $detalle) {
+                                    FacturaLinea::create([
+                                        'id_factura' => $factura->id,
+                                        'nombre_producto' => optional($detalle->doProducto)->titulo ?? 'Producto',
+                                        'plataforma' => null,
+                                        'cantidad' => 1,
+                                        'precio_unitario' => $detalle->precio_unitario,
+                                        'total_linea' => $detalle->subtotal,
+                                    ]);
+                                }
+                            }
+
+                            $facturaId = $factura->id;
+                        } catch (\Throwable $e) {
+                            Log::warning("No se pudo crear factura del pedido {$pedido->id}: {$e->getMessage()}");
+                        }
+                    } else {
+                        Log::warning("Tablas de factura no disponibles para pedido {$pedido->id}. Ejecuta migraciones.");
+                    }
+
                 });
 
                 if ($correoDestino) {
                     try {
-                        $pedidoMail = Pedido::with(['doDetalles.doProducto', 'doDetalles.doClave'])->find($pedidoId);
+                        $pedidoMail = Pedido::with(['doUsuario', 'doDetalles.doProducto', 'doDetalles.doClave'])->find($pedidoId);
                         if ($pedidoMail) {
-                            Mail::to($correoDestino)->send(new PedidoConfirmadoMail($pedidoMail));
+                            $pdfContent = null;
+                            $pdfFilename = null;
+
+                            if ($facturaId) {
+                                $factura = Factura::with(['doPedido.doUsuario', 'doLineas'])->find($facturaId);
+                                if ($factura) {
+                                    $pdf = $this->generarFacturaPdf($factura);
+                                    if ($pdf) {
+                                        $pdfContent = $pdf['content'];
+                                        $pdfFilename = $pdf['filename'];
+                                    }
+                                }
+                            }
+
+                            Mail::to($correoDestino)->send(new PedidoConfirmadoMail($pedidoMail, $pdfContent, $pdfFilename));
+
+                            if ($facturaId) {
+                                Factura::where('id', $facturaId)->update(['enviado_por_email' => true]);
+                            }
                         }
                     } catch (\Throwable $e) {
                         Log::warning("No se pudo enviar mail del pedido {$pedidoId}: {$e->getMessage()}");
@@ -250,6 +320,33 @@ class ControllerStripe extends Controller
         }
 
         return response()->json(['status' => 'ok'], 200);
+    }
+
+    private function generarFacturaPdf(Factura $factura): ?array
+    {
+        try {
+            $pdf = Pdf::loadView('factura', [
+                'factura' => $factura,
+            ]);
+
+            $pdfContent = $pdf->output();
+            $pdfFilename = 'factura-' . $factura->numero_factura . '.pdf';
+            $pdfPath = 'facturas/' . $pdfFilename;
+
+            Storage::disk('public')->put($pdfPath, $pdfContent);
+
+            $factura->update([
+                'pdf_path' => $pdfPath,
+            ]);
+
+            return [
+                'content' => $pdfContent,
+                'filename' => $pdfFilename,
+            ];
+        } catch (\Throwable $e) {
+            Log::warning("No se pudo generar PDF de factura {$factura->id}: {$e->getMessage()}");
+            return null;
+        }
     }
 
 }

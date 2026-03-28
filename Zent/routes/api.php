@@ -10,6 +10,7 @@ use App\Http\Controllers\ControllerStripe;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ControllerFavorito;
+use App\Http\Controllers\ControllerFactura;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -67,4 +68,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::post('/anadir_favorito', [ControllerFavorito::class,'anadir_favorito'])->name('anadir_favorito');
     Route::get('/productos_favoritos',[ControllerProductos::class,'productos_favoritos'])->name('productos_favoritos');
+
+    Route::get('/facturas', [ControllerFactura::class, 'listar'])->name('facturas.listar');
+    Route::get('/facturas/{id}/pdf', [ControllerFactura::class, 'descargar'])->name('facturas.descargar');
 });
