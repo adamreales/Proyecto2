@@ -17,7 +17,6 @@ use App\Services\PedidoService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Symfony\Component\Mime\Email;
 
 class ControllerStripe extends Controller
 {
@@ -140,7 +139,9 @@ class ControllerStripe extends Controller
                     return response()->json(['status' => 'ok'], 200);
                 }
 
-                DB::transaction(function () use ($session, $pedidoId) {
+                $correoDestino = null;
+
+                DB::transaction(function () use ($session, $pedidoId, &$correoDestino) {
 
                     $pedido = Pedido::lockForUpdate()->find($pedidoId);
 
@@ -211,25 +212,37 @@ class ControllerStripe extends Controller
                     $pedido->stripe_payment_intent = $session->payment_intent;
                     $pedido->save();
 
-                    // cerrar carrito
-                    Carrito::where('id', $pedido->id_carrito)
-                        ->where('estado', 'Activo')
-                        ->update(['estado' => 'Cerrado']);
+                    // cerrar carrito: si existe restriccion unica, no bloquea la confirmacion del pedido.
+                    try {
+                        Carrito::where('id', $pedido->id_carrito)
+                            ->where('estado', 'Activo')
+                            ->update(['estado' => 'Cerrado']);
+                    } catch (\Throwable $e) {
+                        Log::warning("No se pudo cerrar carrito {$pedido->id_carrito}: {$e->getMessage()}");
+                    }
 
-                    // enviar email al usuario de la clave producto
-
-                    Mail::to($pedido->doUsuario->email)->send(new PedidoConfirmadoMail($pedido));
+                    $correoDestino = optional($pedido->doUsuario)->email;
 
                 });
+
+                if ($correoDestino) {
+                    try {
+                        $pedidoMail = Pedido::with(['doDetalles.doProducto', 'doDetalles.doClave'])->find($pedidoId);
+                        if ($pedidoMail) {
+                            Mail::to($correoDestino)->send(new PedidoConfirmadoMail($pedidoMail));
+                        }
+                    } catch (\Throwable $e) {
+                        Log::warning("No se pudo enviar mail del pedido {$pedidoId}: {$e->getMessage()}");
+                    }
+                } else {
+                    Log::warning("Pedido {$pedidoId} sin email de usuario. Se omite envio de correo.");
+                }
 
 
             } catch (\Exception $e) {
                 Log::error('Stripe webhook error: ' . $e->getMessage());
                 return response()->json(['error' => 'fail'], 500);
             }
-
-
-
         }
 
         return response()->json(['status' => 'ok'], 200);

@@ -20,4 +20,8 @@ class PedidoDetalle extends Model
     public function doProducto(){
         return $this->belongsTo(Producto::class,'id_producto');
     }
+
+    public function doClave(){
+        return $this->belongsTo(ClaveProducto::class,'id_clave');
+    }
 }
