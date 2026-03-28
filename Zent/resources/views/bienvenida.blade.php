@@ -4,46 +4,59 @@
   <meta charset="UTF-8">
   <title>Bienvenido a Zent</title>
 </head>
-<body style="margin:0; padding:0; background-color:#f4f6f8; font-family:Arial, Helvetica, sans-serif;">
+
+<body style="margin:0; padding:0; background-color:#ffffff; font-family:Arial, Helvetica, sans-serif; color:#000;">
 
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
     <tr>
       <td align="center">
 
-        <!-- Contenedor principal -->
-        <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff; margin:40px 0; border-radius:8px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+        <!-- CONTENEDOR -->
+        <table width="600" cellpadding="0" cellspacing="0" border="0"
+          style="background-color:#ffffff; margin:40px 0; border-radius:12px; overflow:hidden; border:1px solid #00f7ff; box-shadow:0 0 20px rgba(0,255,255,0.15);">
 
-          <!-- Header -->
+          <!-- HEADER -->
           <tr>
-            <td style="background-color:#00f0ff; padding:20px; text-align:center;">
-              <h1 style="margin:0; color:#ffffff; font-size:26px; letter-spacing:1px;">
-                ZENT
+            <td style="background: linear-gradient(90deg, #00f7ff, #00c3ff); padding:22px; text-align:center;">
+              <h1 style="margin:0; color:#000; font-size:28px; letter-spacing:2px;">
+                🎮 ZENT
               </h1>
             </td>
           </tr>
 
-          <!-- Contenido -->
+          <!-- CONTENIDO -->
           <tr>
             <td style="padding:40px 30px; text-align:center;">
-              <h2 style="color:#0a2540; margin-bottom:15px;">
-                Bienvenido a Zent
+
+              <h2 style="color:#000; margin-bottom:15px; font-size:22px;">
+                🚀 Bienvenido a Zent
               </h2>
 
-              <p style="color:#555555; font-size:16px; line-height:1.6; margin:0 0 25px;">
-                Nos alegra tenerte con nosotros. Estás a punto de comenzar una experiencia diseñada para simplificar y potenciar tu día a día.
+              <p style="color:#333; font-size:16px; line-height:1.6; margin:0 0 25px;">
+                Nos alegra tenerte con nosotros. Estás a punto de comenzar una experiencia
+                <strong style="color:#00c3ff;">gaming</strong> diseñada para potenciar tu día a día.
               </p>
 
-              <!-- Botón -->
-              <a href="#" style="display:inline-block; padding:12px 28px; background-color:#00f0ff; color:#ffffff; text-decoration:none; border-radius:25px; font-size:15px; font-weight:bold;">
-                Comenzar
+              <!-- CAJA DESTACADA -->
+              <div style="background:#f5ffff; border-left:4px solid #00f7ff; padding:15px; border-radius:6px; margin-bottom:30px;">
+                <p style="margin:0;">
+                  ⚡ Accede a tus juegos, gestiona tus compras y descubre ofertas exclusivas.
+                </p>
+              </div>
+
+              <!-- BOTÓN -->
+              <a href="#"
+                 style="display:inline-block; padding:14px 30px; background:#000; color:#00f7ff; text-decoration:none; border-radius:8px; font-size:15px; font-weight:bold; border:1px solid #00f7ff; box-shadow:0 0 10px rgba(0,255,255,0.5);">
+                🎯 Comenzar
               </a>
+
             </td>
           </tr>
 
-          <!-- Footer -->
+          <!-- FOOTER -->
           <tr>
-            <td style="background-color:#f4f6f8; padding:20px; text-align:center; font-size:12px; color:#888888;">
-              © 2026 Zent. Todos los derechos reservados.
+            <td style="background:#000; padding:18px; text-align:center; font-size:12px; color:#00f7ff;">
+              © 2026 Zent - Gaming Store
             </td>
           </tr>
 

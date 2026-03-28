@@ -219,6 +219,10 @@ class ControllerStripe extends Controller
                             ->update(['estado' => 'Cerrado']);
                     } catch (\Throwable $e) {
                         Log::warning("No se pudo cerrar carrito {$pedido->id_carrito}: {$e->getMessage()}");
+
+                        // Fallback: si no se puede cerrar por una restriccion de BD,
+                        // vaciamos el carrito para que no siga mostrando productos ya comprados.
+                        CarritoProducto::where('id_carrito', $pedido->id_carrito)->delete();
                     }
 
                     $correoDestino = optional($pedido->doUsuario)->email;
