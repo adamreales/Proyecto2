@@ -11,6 +11,8 @@ use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ControllerFavorito;
 use App\Http\Controllers\ControllerFactura;
+use App\Http\Controllers\ControllerValoracion;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -71,4 +73,6 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::get('/facturas', [ControllerFactura::class, 'listar'])->name('facturas.listar');
     Route::get('/facturas/{id}/pdf', [ControllerFactura::class, 'descargar'])->name('facturas.descargar');
+
+    Route::post('/anadir_valoracion',[ControllerValoracion::class,'anadir_valoracion'])->name('anadir_valoracion');
 });

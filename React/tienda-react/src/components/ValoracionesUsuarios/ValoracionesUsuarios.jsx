@@ -117,7 +117,7 @@ function ValoracionesUsuarios({ producto }) {
 
             <div className="valoracion-datos">
               <p>
-                {t("reviews.name")} : {valoracion.name}
+                {t("reviews.name")} : {valoracion.do_usuario.name}
               </p>
 
               <p>{estrellas(valoracion.estrellas)}</p>

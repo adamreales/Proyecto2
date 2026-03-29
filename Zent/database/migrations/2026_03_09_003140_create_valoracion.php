@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('valoracion', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger("estrellas");
-            $table->string("comentario",255)->nullable();
+            $table->string("comentario",500)->nullable();
             
             $table->foreignId("id_usuario")
                 ->constrained('users')

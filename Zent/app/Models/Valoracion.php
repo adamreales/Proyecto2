@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Producto;
 
 class Valoracion extends Model
 {
@@ -13,6 +14,21 @@ class Valoracion extends Model
     protected $table = "valoracion";
 
     protected $fillable = ["estrellas","comentario","id_usuario","id_producto"];
+
+    protected static function booted()
+    {
+        static::created(function ($valoracion) {
+
+            $producto = $valoracion->doProducto;
+
+            if (!$producto) return;
+
+            $media = $producto->doValoraciones()->avg('estrellas');
+
+            $producto->valoracion = round($media);
+            $producto->save();
+        });
+    }
 
     public function doUsuario(){
         return $this->belongsTo(User::class,"id_usuario");

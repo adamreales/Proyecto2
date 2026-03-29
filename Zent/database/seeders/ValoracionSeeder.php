@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Valoracion;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,37 +16,11 @@ class ValoracionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('valoracion')->insert([
-            [
-                'id_usuario' => 1, // Adrian
-                'id_producto' => 1, // Hollow Knight
-                'estrellas' => 5,
-                'comentario' => 'Obra maestra, ambientación y jugabilidad increíbles',
-            ],
-            [
-                'id_usuario' => 1,
-                'id_producto' => 3, // Elden Ring
-                'estrellas' => 4,
-                'comentario' => 'Muy desafiante, pero extremadamente bueno',
-            ],
-            [
-                'id_usuario' => 1, // Laura
-                'id_producto' => 2, // Zelda BOTW
-                'estrellas' => 5,
-                'comentario' => 'Libertad total y mundo espectacular',
-            ],
-            [
-                'id_usuario' => 1,
-                'id_producto' => 5, // Mario Kart 8
-                'estrellas' => 4,
-                'comentario' => 'Muy divertido para jugar en grupo',
-            ],
-            [
-                'id_usuario' => 1, // Carlos (no validado)
-                'id_producto' => 4, // FIFA 25
-                'estrellas' => 3,
-                'comentario' => 'Está bien, pero podría mejorar',
-            ],
+        Valoracion::create([
+            'id_usuario' => 1,
+            'id_producto' => 1,
+            'estrellas' => 5,
+            'comentario' => 'Desde que juegue este juego me converti en masoquista y amante de sufrir en videojuegos, quitando eso gran historia, jugabilidad, banda sonora (bendita ciudad de lagrimas y mantis), buenos jefes sobre todo markoz. En definitiva juegazo recomendado para todos 10/10'
         ]);
     }
 }
