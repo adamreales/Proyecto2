@@ -104,6 +104,14 @@ class PlataformaProductoSeeder extends Seeder
             // Forza Horizon 5 (Xbox + PC)
             ['plataforma_id'=>1,'producto_id'=>16,'stock'=>22],
             ['plataforma_id'=>3,'producto_id'=>16,'stock'=>22],
+
+            // Hollow Knight: Silksong (multiplataforma)
+            ['plataforma_id'=>1,'producto_id'=>17,'stock'=>20],
+            ['plataforma_id'=>2,'producto_id'=>17,'stock'=>15],
+            ['plataforma_id'=>3,'producto_id'=>17,'stock'=>18],
+            ['plataforma_id'=>4,'producto_id'=>17,'stock'=>12],
+            ['plataforma_id'=>5,'producto_id'=>17,'stock'=>12],
+
         ];
 
         foreach ($datos as $item) {

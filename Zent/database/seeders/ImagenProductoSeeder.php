@@ -270,7 +270,23 @@ class ImagenProductoSeeder extends Seeder
             [
                 'id_producto' => 16,
                 'url' => 'imagenes_producto/forzahorizon5_4.webp'
-            ]
+            ],
+            [
+                'id_producto' => 17,
+                'url' => 'imagenes_producto/hollowknightsilksong_1.webp'
+            ],
+            [
+                'id_producto' => 17,
+                'url' => 'imagenes_producto/hollowknightsilksong_2.avif'
+            ],
+            [
+                'id_producto' => 17,
+                'url' => 'imagenes_producto/hollowknightsilksong_3.jfif'
+            ],
+            [
+                'id_producto' => 17,
+                'url' => 'imagenes_producto/hollowknightsilksong_4.webp'
+            ],
         ]);
     }
 }

@@ -196,6 +196,17 @@ class ProductoSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
+            [
+                'titulo' => 'Hollow Knight: Silksong',
+                'subtitulo' => 'Embárcate en una nueva aventura como Hornet',
+                'descripcion' => 'Secuela de Hollow Knight donde controlas a Hornet en un mundo nuevo lleno de enemigos, habilidades ágiles y combates dinámicos',
+                'precio' => 20,
+                'valoracion' => 5,
+                'ventas' => 95000,
+                'pegi_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
         ]);
     }
 }

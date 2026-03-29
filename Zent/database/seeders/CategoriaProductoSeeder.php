@@ -78,6 +78,11 @@ class CategoriaProductoSeeder extends Seeder
 
             // Forza Horizon 5
             ['id_producto' => 16, 'id_categoria' => 7], // Carreras
+
+            ['id_producto' => 17, 'id_categoria' => 1], // Acción
+            ['id_producto' => 17, 'id_categoria' => 2], // Aventura
+            ['id_producto' => 17, 'id_categoria' => 3], // RPG (metroidvania encaja aquí también)
+
         ]);
     }
 
