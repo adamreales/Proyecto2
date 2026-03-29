@@ -24,4 +24,10 @@ class FacturaLinea extends Model
     {
         return $this->belongsTo(Factura::class, 'id_factura');
     }
+
+    public function doProducto()
+    {
+        return $this->belongsTo(\App\Models\Producto::class, 'id_producto');
+    }
+
 }

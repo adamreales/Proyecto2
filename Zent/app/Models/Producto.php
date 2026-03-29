@@ -57,6 +57,11 @@ class Producto extends Model
         );
     }
 
+    public function doPlataforma()
+    {
+        return $this->belongsTo(\App\Models\Plataforma::class, 'id_plataforma');
+    }
+
     public function doPlataformaProductos(){
         return $this->hasMany(PlataformaProducto::class, 'producto_id');
     }

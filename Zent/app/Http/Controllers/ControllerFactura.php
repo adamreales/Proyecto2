@@ -52,12 +52,15 @@ class ControllerFactura extends Controller
     {
         $usuarioId = auth()->id();
 
-        $factura = Factura::with('doPedido')
-            ->where('id', $id)
-            ->whereHas('doPedido', function ($query) use ($usuarioId) {
-                $query->where('id_usuario', $usuarioId);
-            })
-            ->first();
+        $factura = Factura::with([
+            'doPedido.doUsuario',
+            'doLineas.doProducto.doPlataforma'
+        ])
+        ->where('id', $id)
+        ->whereHas('doPedido', function ($query) use ($usuarioId) {
+            $query->where('id_usuario', $usuarioId);
+        })
+        ->first();
 
         if (!$factura) {
             return response()->json(['error' => 'Factura no encontrada'], 404);
@@ -65,7 +68,6 @@ class ControllerFactura extends Controller
 
         // Generar PDF on-demand si aún no fue guardado
         if (!$factura->pdf_path || !Storage::disk('public')->exists($factura->pdf_path)) {
-            $factura->loadMissing(['doPedido.doUsuario', 'doLineas']);
             $pdf = Pdf::loadView('factura', ['factura' => $factura]);
 
             $pdfFilename = 'factura-' . ($factura->numero_factura ?: $factura->id) . '.pdf';
