@@ -79,7 +79,7 @@ class ControllerStripe extends Controller
                     'price_data' => [
                         'currency' => 'eur',
                         'product_data' => [
-                            'name' => $producto->titulo,
+                            'name' => $producto->titulo . ' ' . $item->doPlataformaProducto?->doPlataforma?->nombre,
                         ],
                         'unit_amount' => intval($producto->precio * 100),
                     ],
@@ -283,7 +283,12 @@ class ControllerStripe extends Controller
 
                 if ($correoDestino) {
                     try {
-                        $pedidoMail = Pedido::with(['doUsuario', 'doDetalles.doProducto', 'doDetalles.doClave'])->find($pedidoId);
+                        $pedidoMail = Pedido::with([
+                            'doUsuario',
+                            'doDetalles.doProducto',
+                            'doDetalles.doClave',
+                            'doDetalles.doPlataformaProducto.doPlataforma'
+                        ])->find($pedidoId);
                         if ($pedidoMail) {
                             $pdfContent = null;
                             $pdfFilename = null;

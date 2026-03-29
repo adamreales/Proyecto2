@@ -114,7 +114,7 @@ function Header() {
                         <img src={item.imagen} alt={item.nombre} />
 
                         <div className="item-info">
-                          <p className="item-nombre">{item.nombre}</p>
+                          <p className="item-nombre">{item.nombre} {item.plataforma}</p>
                           <p className="item-cantidad">{t("header.quantity")}: {item.cantidad}</p>
                           <p className="item-precio">{item.precio}€</p>
                         </div>

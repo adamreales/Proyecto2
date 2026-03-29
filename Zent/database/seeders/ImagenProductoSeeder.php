@@ -191,6 +191,86 @@ class ImagenProductoSeeder extends Seeder
                 'id_producto' => 11, 
                 'url' => 'imagenes_producto/arc_raiders4.jpg'
             ],
+            [
+                'id_producto' => 12,
+                'url' => 'imagenes_producto/cyberpunk2077_1.jpg'
+            ],
+            [
+                'id_producto' => 12,
+                'url' => 'imagenes_producto/cyberpunk2077_2.jpg'
+            ],
+            [
+                'id_producto' => 12,
+                'url' => 'imagenes_producto/cyberpunk2077_3.webp'
+            ],
+            [
+                'id_producto' => 12,
+                'url' => 'imagenes_producto/cyberpunk2077_4.jpg'
+            ],
+            [
+                'id_producto' => 13,
+                'url' => 'imagenes_producto/read_redemption2_1.jpg'
+            ],
+            [
+                'id_producto' => 13,
+                'url' => 'imagenes_producto/read_redemption2_2.jpg'
+            ],
+            [
+                'id_producto' => 13,
+                'url' => 'imagenes_producto/read_redemption2_3.jpg'
+            ],
+            [
+                'id_producto' => 13,
+                'url' => 'imagenes_producto/read_redemption2_4.webp'
+            ],
+            [
+                'id_producto' => 14,
+                'url' => 'imagenes_producto/hades_1.png'
+            ],
+            [
+                'id_producto' => 14,
+                'url' => 'imagenes_producto/hades_2.png'
+            ],
+            [
+                'id_producto' => 14,
+                'url' => 'imagenes_producto/hades_3.webp'
+            ],
+            [
+                'id_producto' => 14,
+                'url' => 'imagenes_producto/hades_4.webp'
+            ],
+            [
+                'id_producto' => 15,
+                'url' => 'imagenes_producto/resident_evil4_1.webp'
+            ],
+            [
+                'id_producto' => 15,
+                'url' => 'imagenes_producto/resident_evil4_2.jfif'
+            ],
+            [
+                'id_producto' => 15,
+                'url' => 'imagenes_producto/resident_evil4_3.webp'
+            ],
+            [
+                'id_producto' => 15,
+                'url' => 'imagenes_producto/resident_evil4_4.webp'
+            ],
+            [
+                'id_producto' => 16,
+                'url' => 'imagenes_producto/forzahorizon5_1.avif'
+            ],
+            [
+                'id_producto' => 16,
+                'url' => 'imagenes_producto/forzahorizon5_2.jpeg'
+            ],
+            [
+                'id_producto' => 16,
+                'url' => 'imagenes_producto/forzahorizon5_3.webp'
+            ],
+            [
+                'id_producto' => 16,
+                'url' => 'imagenes_producto/forzahorizon5_4.webp'
+            ]
         ]);
     }
 }

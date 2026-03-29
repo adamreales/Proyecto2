@@ -44,7 +44,7 @@
                         <li style="margin-bottom:15px; padding:15px; border:1px solid #00eaff; border-radius:8px; background:#f9ffff;">
 
                             <p style="margin:0; font-weight:bold;">
-                                {{ optional($detalle->doProducto)->titulo ?? 'Producto' }}
+                                {{ (optional($detalle->doProducto)->titulo ?? 'Producto') . ' ' . (optional($detalle->doPlataformaProducto?->doPlataforma)->nombre ?? '') }}
                             </p>
 
                             <p style="margin:5px 0;">
