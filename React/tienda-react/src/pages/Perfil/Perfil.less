@@ -75,11 +75,13 @@
             background-color: transparent;
             border: none;
             width: 200px;
+            padding:10px;
+            
             &:hover {
                 background-color: black;
                 color: #fff;
                 border-radius: 10px;
-                padding: 10px 20px;
+                
             }
         }
     }
@@ -112,3 +114,96 @@
     }
 }
 
+/* ========================= */
+/* 📱 TABLET (≤1024px) */
+/* ========================= */
+@media (max-width: 1024px) {
+    .Perfil-page {
+
+        .box-pedidos {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .box-opiniones {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .Configuracion {
+            flex-wrap: wrap;
+            gap: 10px;
+
+            button {
+                width: 45%;
+            }
+        }
+    }
+}
+
+
+/* ========================= */
+/* 📱 MÓVIL (≤768px) */
+/* ========================= */
+@media (max-width: 768px) {
+    .Perfil-page {
+        gap: 15px;
+
+        .Cabezera {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .btn-cerrar {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .box-pedidos {
+            grid-template-columns: 1fr;
+        }
+
+        .box-opiniones {
+            grid-template-columns: 1fr;
+        }
+
+        .Configuracion {
+            flex-direction: column;
+            align-items: stretch;
+
+            button {
+                width: 100%;
+            }
+        }
+
+        .subtitulos {
+            flex-direction: column;
+            gap: 5px;
+        }
+    }
+}
+
+
+/* ========================= */
+/* 📱 MÓVIL PEQUEÑO (≤480px) */
+/* ========================= */
+@media (max-width: 480px) {
+    .Perfil-page {
+
+        .Cabezera h2 {
+            font-size: 18px;
+        }
+
+        .btn-cerrar {
+            padding: 8px 15px;
+        }
+
+        .pedido-item,
+        .valoracion-item {
+            padding: 10px;
+        }
+    }
+}

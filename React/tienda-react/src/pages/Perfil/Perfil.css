@@ -57,12 +57,12 @@
   background-color: transparent;
   border: none;
   width: 200px;
+  padding: 10px;
 }
 .Perfil-page .Configuracion button:hover {
   background-color: black;
   color: #fff;
   border-radius: 10px;
-  padding: 10px 20px;
 }
 .Perfil-page .box-opiniones {
   display: grid;
@@ -84,4 +84,74 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+/* ========================= */
+/* 📱 TABLET (≤1024px) */
+/* ========================= */
+@media (max-width: 1024px) {
+  .Perfil-page .box-pedidos {
+    grid-template-columns: 1fr 1fr;
+  }
+  .Perfil-page .box-opiniones {
+    grid-template-columns: 1fr 1fr;
+  }
+  .Perfil-page .Configuracion {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .Perfil-page .Configuracion button {
+    width: 45%;
+  }
+}
+/* ========================= */
+/* 📱 MÓVIL (≤768px) */
+/* ========================= */
+@media (max-width: 768px) {
+  .Perfil-page {
+    gap: 15px;
+  }
+  .Perfil-page .Cabezera {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .Perfil-page .Cabezera h2 {
+    font-size: 20px;
+  }
+  .Perfil-page .Cabezera .btn-cerrar {
+    width: 100%;
+    text-align: center;
+  }
+  .Perfil-page .box-pedidos {
+    grid-template-columns: 1fr;
+  }
+  .Perfil-page .box-opiniones {
+    grid-template-columns: 1fr;
+  }
+  .Perfil-page .Configuracion {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .Perfil-page .Configuracion button {
+    width: 100%;
+  }
+  .Perfil-page .subtitulos {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+/* ========================= */
+/* 📱 MÓVIL PEQUEÑO (≤480px) */
+/* ========================= */
+@media (max-width: 480px) {
+  .Perfil-page .Cabezera h2 {
+    font-size: 18px;
+  }
+  .Perfil-page .btn-cerrar {
+    padding: 8px 15px;
+  }
+  .Perfil-page .pedido-item,
+  .Perfil-page .valoracion-item {
+    padding: 10px;
+  }
 }
