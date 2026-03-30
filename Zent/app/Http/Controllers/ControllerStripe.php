@@ -260,10 +260,13 @@ class ControllerStripe extends Controller
                                 ]);
 
                                 foreach ($pedido->doDetalles as $detalle) {
+                                    $plataformaNombre = ClaveProducto::with('doPlataformaProducto.doPlataforma')
+                                        ->find($detalle->id_clave)?->doPlataformaProducto?->doPlataforma?->nombre;
+
                                     FacturaLinea::create([
                                         'id_factura' => $factura->id,
                                         'nombre_producto' => optional($detalle->doProducto)->titulo ?? 'Producto',
-                                        'plataforma' => null,
+                                        'plataforma' => $plataformaNombre,
                                         'cantidad' => 1,
                                         'precio_unitario' => $detalle->precio_unitario,
                                         'total_linea' => $detalle->subtotal,
@@ -286,8 +289,7 @@ class ControllerStripe extends Controller
                         $pedidoMail = Pedido::with([
                             'doUsuario',
                             'doDetalles.doProducto',
-                            'doDetalles.doClave',
-                            'doDetalles.doPlataformaProducto.doPlataforma'
+                            'doDetalles.doClave'
                         ])->find($pedidoId);
                         if ($pedidoMail) {
                             $pdfContent = null;

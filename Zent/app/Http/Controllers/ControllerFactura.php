@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Factura;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Storage;
 
 class ControllerFactura extends Controller
 {
@@ -54,7 +53,7 @@ class ControllerFactura extends Controller
 
         $factura = Factura::with([
             'doPedido.doUsuario',
-            'doLineas.doProducto.doPlataforma'
+            'doLineas'
         ])
         ->where('id', $id)
         ->whereHas('doPedido', function ($query) use ($usuarioId) {
@@ -66,22 +65,13 @@ class ControllerFactura extends Controller
             return response()->json(['error' => 'Factura no encontrada'], 404);
         }
 
-        // Generar PDF on-demand si aún no fue guardado
-        if (!$factura->pdf_path || !Storage::disk('public')->exists($factura->pdf_path)) {
-            $pdf = Pdf::loadView('factura', ['factura' => $factura]);
-
-            $pdfFilename = 'factura-' . ($factura->numero_factura ?: $factura->id) . '.pdf';
-            $pdfPath = 'facturas/' . $pdfFilename;
-
-            Storage::disk('public')->put($pdfPath, $pdf->output());
-            $factura->update(['pdf_path' => $pdfPath]);
-        }
-
         $filename = 'factura-' . ($factura->numero_factura ?: $factura->id) . '.pdf';
-        $fullPath = storage_path('app/public/' . $factura->pdf_path);
+        $pdf = Pdf::loadView('factura', ['factura' => $factura]);
+        $pdfContent = $pdf->output();
 
-        return response()->download($fullPath, $filename, [
+        return response($pdfContent, 200, [
             'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
         ]);
     }
 }

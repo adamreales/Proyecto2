@@ -1,0 +1,46 @@
+.mis-pedidos-page {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.mis-pedidos-list {
+  display: grid;
+  gap: 12px;
+}
+
+.mis-pedidos-item {
+  border: 1px solid #dadada;
+  border-radius: 10px;
+  padding: 14px;
+  background: #fff;
+}
+
+.mis-pedidos-item p {
+  margin: 6px 0;
+}
+
+.mis-pedidos-btn {
+  margin-top: 8px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.mis-pedidos-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.mis-pedidos-status,
+.mis-pedidos-error {
+  padding: 8px 0;
+}
+
+.mis-pedidos-error {
+  color: #a12626;
+}

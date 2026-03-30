@@ -1,66 +1,114 @@
 .MisDatos {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.MisDatos h1 {
-  margin-bottom: 20px;
-  color: black;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 30px;
-  text-align: center;
+.MisDatos .MisDatos-card {
+  width: 100%;
+  max-width: 760px;
+  box-sizing: border-box;
 }
-.MisDatos-form {
+.MisDatos .MisDatos-head {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  margin-bottom: 32px;
 }
-.MisDatos-form input {
-  width: 350px;
-  padding: 12px 14px;
-  border: 1px solid #2f3f70;
-  border-radius: 8px;
-  font-family: 'Inter', sans-serif;
-  color: black;
+.MisDatos .MisDatos-eyebrow {
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #666;
 }
-.MisDatos-form input::placeholder {
-  color: #b6bed7;
-}
-.btn-guardar {
-  margin-top: 8px;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-family: 'Inter', sans-serif;
+.MisDatos h1 {
+  margin: 0 0 10px 0;
+  font-size: 40px;
+  line-height: 1.1;
   font-weight: 700;
-  color: #0f1528;
-  background: #7df9ff;
+}
+.MisDatos .MisDatos-subtitle {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #444;
+  max-width: 540px;
+}
+.MisDatos .MisDatos-form {
+  display: grid;
+  gap: 22px;
+}
+.MisDatos .MisDatos-field {
+  display: grid;
+  gap: 10px;
+}
+.MisDatos label {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #222;
+}
+.MisDatos input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #111;
+  background: #fff;
+  color: #111;
+  font-size: 15px;
+  box-sizing: border-box;
+  outline: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.MisDatos input:focus {
+  background: #111;
+  color: #fff;
+}
+.MisDatos input::placeholder {
+  color: #888;
+}
+.MisDatos .btn-guardar {
+  width: fit-content;
+  min-width: 220px;
+  padding: 14px 22px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
   cursor: pointer;
 }
-.btn-guardar:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
+.MisDatos .btn-guardar:disabled {
+  opacity: 0.7;
+  cursor: default;
 }
-.ok-msg,
-.error-msg {
-  margin-top: 12px;
-  font-family: 'Inter', sans-serif;
-  text-align: center;
+.MisDatos .ok-msg,
+.MisDatos .error-msg {
+  margin: 20px 0 0 0;
+  padding-top: 18px;
+  border-top: 1px solid #d8d8d8;
+  font-size: 14px;
+  line-height: 1.6;
 }
-.ok-msg {
-  color: #7dffb2;
+.MisDatos .ok-msg {
+  color: #111;
 }
-.error-msg {
-  color: #ff8f8f;
+.MisDatos .error-msg {
+  color: #7a1f1f;
 }
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .MisDatos {
-    margin: 22px 14px;
-    padding: 20px;
+    padding: 24px 12px;
+  }
+  .MisDatos .MisDatos-card {
+    padding: 24px 20px;
   }
   .MisDatos h1 {
-    font-size: 24px;
+    font-size: 32px;
+  }
+  .MisDatos .btn-guardar {
+    width: 100%;
   }
 }

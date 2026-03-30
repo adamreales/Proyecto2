@@ -45,7 +45,7 @@
             @foreach($factura->doLineas as $linea)
                 <tr>
                     <td>{{ $linea->nombre_producto }}</td>
-                    <td>{{ dd($factura->doLineas->toArray()) }}{{ optional(optional($linea->producto)->plataforma)->nombre ?? '-' }}</td>
+                    <td>{{ $linea->plataforma ?? '-' }}</td>
                     <td class="right">{{ $linea->cantidad }}</td>
                     <td class="right">{{ number_format((float) $linea->precio_unitario, 2, ',', '.') }} EUR</td>
                     <td class="right">{{ number_format((float) $linea->total_linea, 2, ',', '.') }} EUR</td>

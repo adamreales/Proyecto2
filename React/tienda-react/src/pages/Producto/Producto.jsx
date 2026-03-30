@@ -7,6 +7,7 @@ import Caracteristicas from "../../components/Caracteristicas/Caracteristicas";
 import Recomendaciones from "../../components/Recomendaciones/Recomendaciones";
 import SeccionProductos from "../../components/SeccionProductos/SeccionProductos";
 import ValoracionesUsuarios from "../../components/ValoracionesUsuarios/ValoracionesUsuarios";
+import { anadirValoracion, getPuedeValorar } from "../../services/valoraciones";
 
 function Producto() {
   const { id } = useParams();
@@ -18,6 +19,16 @@ function Producto() {
   const [descripcionTraducida, setDescripcionTraducida] = useState("");
   const [traduciendoDescripcion, setTraduciendoDescripcion] = useState(false);
   const [plataformaSeleccionada, setPlataformaSeleccionada] = useState(null);
+  const [estrellasValoracion, setEstrellasValoracion] = useState(5);
+  const [comentarioValoracion, setComentarioValoracion] = useState("");
+  const [enviandoValoracion, setEnviandoValoracion] = useState(false);
+  const [errorValoracion, setErrorValoracion] = useState("");
+  const [okValoracion, setOkValoracion] = useState("");
+  const [estadoValoracion, setEstadoValoracion] = useState({
+    ha_comprado: false,
+    ya_valorado: false,
+    puede_valorar: false,
+  });
 
   const masVendidosFiltrados = masVendidos.filter(
     (p) => p.id !== producto?.id
@@ -74,12 +85,86 @@ function Producto() {
     }
   };
 
+  const recargarProducto = async () => {
+    try {
+      const res = await fetch(`http://127.0.0.1:8000/api/producto/${id}?token=TU_TOKEN`);
+      const data = await res.json();
+      setProducto(data.producto);
+      setImgPrincipal(data.producto.do_imagenes?.[0]?.url);
+    } catch (error) {
+      console.error("Error al recargar producto:", error);
+    }
+  };
+
+  const handleEnviarValoracion = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "/login";
+      return;
+    }
+
+    setErrorValoracion("");
+    setOkValoracion("");
+    setEnviandoValoracion(true);
+
+    try {
+      await anadirValoracion({
+        id_producto: producto.id,
+        estrellas: Number(estrellasValoracion),
+        comentario: comentarioValoracion,
+      });
+
+      setOkValoracion("Valoracion enviada correctamente.");
+      setComentarioValoracion("");
+      setEstrellasValoracion(5);
+      setEstadoValoracion((prev) => ({
+        ...prev,
+        ya_valorado: true,
+        puede_valorar: false,
+      }));
+      await recargarProducto();
+    } catch (error) {
+      setErrorValoracion(error?.response?.data?.error || "No se pudo enviar la valoracion.");
+    } finally {
+      setEnviandoValoracion(false);
+    }
+  };
+
   useEffect(() => {
     fetch(`http://127.0.0.1:8000/api/producto/${id}?token=TU_TOKEN`)
       .then((res) => res.json())
       .then((data) => {
         setProducto(data.producto);
         setImgPrincipal(data.producto.do_imagenes?.[0]?.url);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token || !id) {
+      setEstadoValoracion({
+        ha_comprado: false,
+        ya_valorado: false,
+        puede_valorar: false,
+      });
+      return;
+    }
+
+    getPuedeValorar(id)
+      .then((data) => {
+        setEstadoValoracion({
+          ha_comprado: Boolean(data?.ha_comprado),
+          ya_valorado: Boolean(data?.ya_valorado),
+          puede_valorar: Boolean(data?.puede_valorar),
+        });
+      })
+      .catch(() => {
+        setEstadoValoracion({
+          ha_comprado: false,
+          ya_valorado: false,
+          puede_valorar: false,
+        });
       });
   }, [id]);
 
@@ -148,6 +233,7 @@ function Producto() {
     return <div>{t("product.loading")}</div>;
   }
 
+  const isLoggedIn = Boolean(localStorage.getItem("token"));
   const valoracion = Math.max(
     0,Math.min(5, Math.round(producto?.valoracion || 0))
   );
@@ -254,6 +340,55 @@ function Producto() {
       </div>
 
       <ValoracionesUsuarios producto={producto} />
+
+      {isLoggedIn && estadoValoracion.ha_comprado ? (
+        <section className="box-valorar">
+          <h3>Valorar este producto</h3>
+
+          {estadoValoracion.puede_valorar ? (
+            <>
+              <div className="box-valorar-row">
+                <label htmlFor="estrellas">Estrellas</label>
+                <select
+                  id="estrellas"
+                  value={estrellasValoracion}
+                  onChange={(e) => setEstrellasValoracion(Number(e.target.value))}
+                >
+                  <option value={5}>5</option>
+                  <option value={4}>4</option>
+                  <option value={3}>3</option>
+                  <option value={2}>2</option>
+                  <option value={1}>1</option>
+                </select>
+              </div>
+
+              <textarea
+                className="box-valorar-text"
+                placeholder="Escribe tu opinion sobre el producto"
+                value={comentarioValoracion}
+                onChange={(e) => setComentarioValoracion(e.target.value)}
+                maxLength={500}
+              />
+
+              <button
+                type="button"
+                className="box-valorar-btn"
+                onClick={handleEnviarValoracion}
+                disabled={enviandoValoracion}
+              >
+                {enviandoValoracion ? "Enviando..." : "Enviar valoracion"}
+              </button>
+            </>
+          ) : estadoValoracion.ya_valorado ? (
+            <p>Ya has valorado este producto.</p>
+          ) : (
+            <p>Solo puedes valorar si has comprado previamente este producto.</p>
+          )}
+
+          {errorValoracion ? <p className="box-valorar-error">{errorValoracion}</p> : null}
+          {okValoracion ? <p className="box-valorar-ok">{okValoracion}</p> : null}
+        </section>
+      ) : null}
 
       <Recomendaciones producto={producto} />
 

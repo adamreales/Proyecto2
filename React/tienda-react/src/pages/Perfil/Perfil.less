@@ -45,16 +45,70 @@
             }
         }
     }
+    .box-pedidos{
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap:20px;
+        .pedido-item{
+              border-radius: 10px;
+            border: 1px solid #dadada;
+
+            button {
+                &:hover {
+                    background-color: black;
+                    color: #fff;
+                    border-radius: 10px;
+                    padding: 10px 20px;
+                }
+            }
+        }
+
+    }
 
     .Configuracion{
         display: flex;
         justify-content:space-around;
         width: 100%;
-        
-            button{
-                background-color: transparent;
-                border: none;
-                width: 200px;
+
+        button{
+            background-color: transparent;
+            border: none;
+            width: 200px;
+            &:hover {
+                background-color: black;
+                color: #fff;
+                border-radius: 10px;
+                padding: 10px 20px;
             }
+        }
+    }
+
+    
+    .box-opiniones{
+       display: grid;
+        width: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap:20px;
+        .valoracion-item{
+              border-radius: 10px;
+            border: 1px solid #dadada;
+
+            button {
+                &:hover {
+                    background-color: black;
+                    color: #fff;
+                    border-radius: 10px;
+                    padding: 10px 20px;
+                }
+            }
+        }
+    }
+
+    .subtitulos{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
     }
 }
+

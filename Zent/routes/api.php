@@ -75,4 +75,6 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/facturas/{id}/pdf', [ControllerFactura::class, 'descargar'])->name('facturas.descargar');
 
     Route::post('/anadir_valoracion',[ControllerValoracion::class,'anadir_valoracion'])->name('anadir_valoracion');
+    Route::get('/mis_valoraciones',[ControllerValoracion::class,'mis_valoraciones'])->name('mis_valoraciones');
+    Route::get('/puede_valorar/{producto}',[ControllerValoracion::class,'puede_valorar'])->name('puede_valorar');
 });

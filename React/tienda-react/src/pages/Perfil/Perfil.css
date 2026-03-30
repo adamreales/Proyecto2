@@ -32,6 +32,22 @@
   background-color: black;
   color: #fff;
 }
+.Perfil-page .box-pedidos {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+.Perfil-page .box-pedidos .pedido-item {
+  border-radius: 10px;
+  border: 1px solid #dadada;
+}
+.Perfil-page .box-pedidos .pedido-item button:hover {
+  background-color: black;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
 .Perfil-page .Configuracion {
   display: flex;
   justify-content: space-around;
@@ -41,4 +57,31 @@
   background-color: transparent;
   border: none;
   width: 200px;
+}
+.Perfil-page .Configuracion button:hover {
+  background-color: black;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+.Perfil-page .box-opiniones {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+.Perfil-page .box-opiniones .valoracion-item {
+  border-radius: 10px;
+  border: 1px solid #dadada;
+}
+.Perfil-page .box-opiniones .valoracion-item button:hover {
+  background-color: black;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+.Perfil-page .subtitulos {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
