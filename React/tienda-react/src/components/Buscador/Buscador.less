@@ -19,26 +19,25 @@
   width: 100%;
   padding-top: 10px;
   gap: 8px;
-  
   /* Caja principal (input + botón) */
   .buscador-main {
     display: flex;
     flex: 1;
-    border: 1px solid #000;
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
-    background: white;
   }
 
   .buscador-input {
     flex: 1;
     padding: 10px 12px;
-    background: white;
+
+    background: #f5f5f5;
     color: black;
-    border: none;
+    border-radius: 10px;
+    border-color: transparent;
     font-size: 15px;
     outline: none;
-
+    
     &::placeholder {
       color: #888;
     }
@@ -72,13 +71,12 @@
   /* Botón limpiar */
   .buscador-limpiador {
     display: flex;
-    align-items: center;
+     align-items: center;
     justify-content: center;
-    padding: 10px;
-    background: white;
+    padding: 10px 12px;
+    background: #f5f5f5;
     color: black;
-    border: 1px solid #000;
-    border-radius: 8px;
+    border: none;
     cursor: pointer;
     transition: all 0.2s ease;
 

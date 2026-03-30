@@ -15,6 +15,7 @@ class FacturaLinea extends Model
         'id_factura',
         'nombre_producto',
         'plataforma',
+        'clave_producto',
         'cantidad',
         'precio_unitario',
         'total_linea',

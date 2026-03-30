@@ -240,9 +240,13 @@ class ControllerStripe extends Controller
 
                     if (Schema::hasTable('facturas') && Schema::hasTable('factura_lineas')) {
                         try {
-                            $pedido->loadMissing('doDetalles.doProducto');
+                            $pedido->loadMissing([
+                                'doDetalles.doProducto',
+                                'doDetalles.doClave.doPlataformaProducto.doPlataforma',
+                            ]);
 
                             $factura = Factura::where('id_pedido', $pedido->id)->lockForUpdate()->first();
+                            $facturaLineasTieneClave = Schema::hasColumn('factura_lineas', 'clave_producto');
 
                             if (!$factura) {
                                 $total = (float) $pedido->total;
@@ -260,17 +264,21 @@ class ControllerStripe extends Controller
                                 ]);
 
                                 foreach ($pedido->doDetalles as $detalle) {
-                                    $plataformaNombre = ClaveProducto::with('doPlataformaProducto.doPlataforma')
-                                        ->find($detalle->id_clave)?->doPlataformaProducto?->doPlataforma?->nombre;
-
-                                    FacturaLinea::create([
+                                    $plataformaNombre = $detalle->doClave?->doPlataformaProducto?->doPlataforma?->nombre;
+                                    $lineaFactura = [
                                         'id_factura' => $factura->id,
                                         'nombre_producto' => optional($detalle->doProducto)->titulo ?? 'Producto',
                                         'plataforma' => $plataformaNombre,
                                         'cantidad' => 1,
                                         'precio_unitario' => $detalle->precio_unitario,
                                         'total_linea' => $detalle->subtotal,
-                                    ]);
+                                    ];
+
+                                    if ($facturaLineasTieneClave) {
+                                        $lineaFactura['clave_producto'] = $detalle->doClave?->clave;
+                                    }
+
+                                    FacturaLinea::create($lineaFactura);
                                 }
                             }
 
@@ -289,14 +297,19 @@ class ControllerStripe extends Controller
                         $pedidoMail = Pedido::with([
                             'doUsuario',
                             'doDetalles.doProducto',
-                            'doDetalles.doClave'
+                            'doDetalles.doClave.doPlataformaProducto.doPlataforma'
                         ])->find($pedidoId);
                         if ($pedidoMail) {
                             $pdfContent = null;
                             $pdfFilename = null;
 
                             if ($facturaId) {
-                                $factura = Factura::with(['doPedido.doUsuario', 'doLineas'])->find($facturaId);
+                                $factura = Factura::with([
+                                    'doPedido.doUsuario',
+                                    'doPedido.doDetalles.doProducto',
+                                    'doPedido.doDetalles.doClave.doPlataformaProducto.doPlataforma',
+                                    'doLineas',
+                                ])->find($facturaId);
                                 if ($factura) {
                                     $pdf = $this->generarFacturaPdf($factura);
                                     if ($pdf) {
@@ -334,6 +347,9 @@ class ControllerStripe extends Controller
         try {
             $pdf = Pdf::loadView('factura', [
                 'factura' => $factura,
+            ])->setOption([
+                'isRemoteEnabled' => true,
+                'allowedRemoteHosts' => ['zent.es', 'www.zent.es'],
             ]);
 
             $pdfContent = $pdf->output();

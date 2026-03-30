@@ -35,6 +35,7 @@ class ControllerFactura extends Controller
                             'id' => $linea->id,
                             'nombre_producto' => $linea->nombre_producto,
                             'plataforma' => $linea->plataforma,
+                            'clave_producto' => $linea->clave_producto,
                             'cantidad' => (int) $linea->cantidad,
                             'precio_unitario' => (float) $linea->precio_unitario,
                             'total_linea' => (float) $linea->total_linea,
@@ -53,6 +54,8 @@ class ControllerFactura extends Controller
 
         $factura = Factura::with([
             'doPedido.doUsuario',
+            'doPedido.doDetalles.doProducto',
+            'doPedido.doDetalles.doClave.doPlataformaProducto.doPlataforma',
             'doLineas'
         ])
         ->where('id', $id)
@@ -66,7 +69,11 @@ class ControllerFactura extends Controller
         }
 
         $filename = 'factura-' . ($factura->numero_factura ?: $factura->id) . '.pdf';
-        $pdf = Pdf::loadView('factura', ['factura' => $factura]);
+        $pdf = Pdf::loadView('factura', ['factura' => $factura])
+            ->setOption([
+                'isRemoteEnabled' => true,
+                'allowedRemoteHosts' => ['zent.es', 'www.zent.es'],
+            ]);
         $pdfContent = $pdf->output();
 
         return response($pdfContent, 200, [

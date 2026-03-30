@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class ClaveProducto extends Model
 {
     use HasFactory;
@@ -14,7 +13,7 @@ class ClaveProducto extends Model
     protected $fillable = ['plataforma_producto_id','clave','vendida'];
 
     public function doPlataformaProducto(){
-        return $this->belongsTo(Producto::class,'plataforma_producto_id');
+        return $this->belongsTo(PlataformaProducto::class, 'plataforma_producto_id', 'id')->withTrashed();
     }
 
 }

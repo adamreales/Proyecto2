@@ -101,7 +101,7 @@ function Perfil()
                 </div>
                 <div className="subtitulos">
                     <h2>Tus Últimos Pedidos Realizados</h2>
-                     <Link to="/mis-pedidos"><button className="btn-config">MIS PEDIDOS</button></Link>
+                     <Link to="/mis-pedidos"><button className="btn-config">Mis Pedidos</button></Link>
                 </div>
                 <div className="box-pedidos">
                     {ultimosPedidos.length === 0 ? (
@@ -121,7 +121,7 @@ function Perfil()
                 </div>
                 <div className="subtitulos">
                     <h2>Mis Opiniones de Productos</h2>
-                 <Link to="/mis-opiniones"><button className="btn-config">MIS OPINIONES</button></Link>
+                 <Link to="/mis-opiniones"><button className="btn-config">Mis Opiniones</button></Link>
                 </div>
                 <div className="box-opiniones">
                     {ultimasValoraciones.length === 0 ? (
