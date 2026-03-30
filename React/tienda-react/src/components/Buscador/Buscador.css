@@ -1,3 +1,6 @@
+/* ========================= */
+/* 🔍 CONTENEDOR ROOT */
+/* ========================= */
 .buscador-root {
   position: relative;
   display: flex;
@@ -6,22 +9,32 @@
   width: 100%;
   max-width: 640px;
 }
+/* ========================= */
+/* 🔍 INPUT + BOTÓN */
+/* ========================= */
 .buscador-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0;
   width: 100%;
   padding-top: 10px;
+  gap: 8px;
+  /* Caja principal (input + botón) */
+  /* Botón limpiar */
+}
+.buscador-container .buscador-main {
+  display: flex;
+  flex: 1;
+  border: 1px solid #000;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
 }
 .buscador-container .buscador-input {
   flex: 1;
   padding: 10px 12px;
   background: white;
   color: black;
-  border: 1px solid #555;
-  border-right: none;
-  border-radius: 8px 0 0 8px;
+  border: none;
   font-size: 15px;
   outline: none;
 }
@@ -32,35 +45,45 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 9.5px 10px;
-  background: white;
+  padding: 10px 12px;
+  background: #f5f5f5;
   color: black;
-  border: 1px solid #555;
-  border-left: none;
-  border-radius: 0 8px 8px 0;
+  border: none;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
 }
 .buscador-container .buscador-btn:hover {
-  background: white;
+  background: #3a3a3a;
+  color: white;
+}
+.buscador-container .buscador-btn:active {
+  transform: scale(0.96);
+}
+.buscador-container .buscador-btn:focus {
+  outline: 2px solid #00eaff;
 }
 .buscador-container .buscador-limpiador {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 10px;
-  margin-left: 5px;
+  padding: 10px;
   background: white;
   color: black;
-  border: 1px solid #555;
+  border: 1px solid #000;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
 }
 .buscador-container .buscador-limpiador:hover {
   background: #3a3a3a;
   color: white;
 }
+.buscador-container .buscador-limpiador:active {
+  transform: scale(0.96);
+}
+/* ========================= */
+/* 📦 RESULTADOS */
+/* ========================= */
 .Resultados {
   position: absolute;
   top: calc(100% + 6px);
@@ -71,14 +94,14 @@
   border: 1px solid #444;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
 }
 .Resultados .elemento {
   display: flex;
   align-items: center;
   gap: 14px;
   padding: 10px 14px;
-  border-bottom: 1px solid #3a3a3a;
+  border-bottom: 1px solid #e5e5e5;
   cursor: pointer;
   transition: background 0.15s;
 }
@@ -86,7 +109,7 @@
   border-bottom: none;
 }
 .Resultados .elemento:hover {
-  background: #c6c6c6;
+  background: #f0f0f0;
 }
 .Resultados .elemento img {
   width: 100px;
@@ -111,7 +134,7 @@
 .Resultados .elemento .elemento-info p {
   margin: 3px 0 0;
   font-size: 13px;
-  color: black;
+  color: #555;
 }
 .Resultados .elemento .elemento-precio {
   font-size: 15px;
@@ -120,6 +143,9 @@
   white-space: nowrap;
   margin-left: 8px;
 }
+/* ========================= */
+/* 📱 TABLET (≤768px) */
+/* ========================= */
 @media (max-width: 768px) {
   .buscador-root {
     max-width: 100%;
@@ -136,13 +162,22 @@
     font-size: 13px;
   }
 }
+/* ========================= */
+/* 📱 MÓVIL (≤480px) */
+/* ========================= */
 @media (max-width: 480px) {
+  .buscador-container {
+    gap: 6px;
+  }
   .buscador-container .buscador-input {
     font-size: 13px;
-    padding: 8px 12px;
+    padding: 8px 10px;
   }
   .buscador-container .buscador-btn {
-    padding: 8.5px 10px;
+    padding: 8px 10px;
+  }
+  .buscador-container .buscador-limpiador {
+    padding: 8px;
   }
   .Resultados .elemento {
     gap: 10px;
