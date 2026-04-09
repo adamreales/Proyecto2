@@ -74,80 +74,83 @@ function Videojuegos() {
         <h2>{t("videogames.title")}</h2>
 
         <div className="Filtros">
+            <div className="Filtros_boton">
+                <button
+                className={`btn-filtros ${orden === "productos_mas_caros" ? "activo" : ""}`}
+                onClick={() => { setOrden("productos_mas_caros"); setPagina(1); }}
+                >
+                {t("videogames.priceAsc")}
+                </button>
 
-          <button
-            className="btn-filtros"
-            onClick={() => { setOrden("productos_mas_caros"); setPagina(1); }}
-          >
-            {t("videogames.priceAsc")}
-          </button>
+                <button
+                className={`btn-filtros ${orden === "productos_mas_baratos" ? "activo" : ""}`}
+                onClick={() => { setOrden("productos_mas_baratos"); setPagina(1); }}
+                >
+                {t("videogames.priceDesc")}
+                </button>
 
-          <button
-            className="btn-filtros"
-            onClick={() => { setOrden("productos_mas_baratos"); setPagina(1); }}
-          >
-            {t("videogames.priceDesc")}
-          </button>
+                <button
+                className={`btn-filtros ${orden === "productos_mas_alfabeticamente" ? "activo" : ""}`}
+                onClick={() => { setOrden("productos_mas_alfabeticamente"); setPagina(1); }}
+                >
+                {t("videogames.alphaAsc")}
+                </button>
 
-          <button
-            className="btn-filtros"
-            onClick={() => { setOrden("productos_mas_alfabeticamente"); setPagina(1); }}
-          >
-            {t("videogames.alphaAsc")}
-          </button>
+                <button
+                className={`btn-filtros ${orden === "productos_menos_alfabeticamente" ? "activo" : ""}`}
+                onClick={() => { setOrden("productos_menos_alfabeticamente"); setPagina(1); }}
+                >
+                {t("videogames.alphaDesc")}
+                </button>
+            </div>
 
-          <button
-            className="btn-filtros"
-            onClick={() => { setOrden("productos_menos_alfabeticamente"); setPagina(1); }}
-          >
-            {t("videogames.alphaDesc")}
-          </button>
+            <div className="Filtros_select">
+                <select
+                    className="select"
+                    onChange={(e) => {
+                    setCategoria(e.target.value);
+                    setPlataforma("");
+                    setPagina(1);
+                    }}
+                >
+                    <option value="">{t("videogames.categories")}</option>
+                    {categorias.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                        {cat.nombre}
+                    </option>
+                    ))}
+                </select>
 
-          <select
-            className="select"
-            onChange={(e) => {
-              setCategoria(e.target.value);
-              setPlataforma("");
-              setPagina(1);
-            }}
-          >
-            <option value="">{t("videogames.categories")}</option>
-            {categorias.map((cat) => (
-              <option key={cat.id} value={cat.id}>
-                {cat.nombre}
-              </option>
-            ))}
-          </select>
+                <select
+                    className="select"
+                    onChange={(e) => {
+                    setPlataforma(e.target.value);
+                    setCategoria("");
+                    setPagina(1);
+                    }}
+                >
+                    <option value="">{t("videogames.platforms")}</option>
+                    {plataformas.map((plataforma) => (
+                    <option key={plataforma.id} value={plataforma.id}>
+                        {plataforma.nombre}
+                    </option>
+                    ))}
+                </select>
 
-          <select
-            className="select"
-            onChange={(e) => {
-              setPlataforma(e.target.value);
-              setCategoria("");
-              setPagina(1);
-            }}
-          >
-            <option value="">{t("videogames.platforms")}</option>
-            {plataformas.map((plataforma) => (
-              <option key={plataforma.id} value={plataforma.id}>
-                {plataforma.nombre}
-              </option>
-            ))}
-          </select>
+                <button
+                    className="btn-filtros"
+                    onClick={() => {
+                    setCategoria("");
+                    setPlataforma("");
+                    setOrden("");
+                    setPagina(1);
+                    }}
+                >
+                    Quitar Filtro
+                </button>
 
-          <button
-            className="btn-filtros"
-            onClick={() => {
-              setCategoria("");
-              setPlataforma("");
-              setOrden("");
-              setPagina(1);
-            }}
-          >
-            ⟲
-          </button>
-
-        </div>
+                </div>
+            </div>
 
         <div className="Productos">
           <SeccionProductosVideojuegos productos={productos} />

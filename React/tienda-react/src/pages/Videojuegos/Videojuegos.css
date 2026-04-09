@@ -17,7 +17,6 @@
 .VideoJuegos .Filtros {
   width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 30px;
 }
@@ -30,6 +29,30 @@
   cursor: pointer;
   border-color: black;
   align-items: center;
+}
+.VideoJuegos .Filtros button {
+  transition: all 0.2s ease;
+}
+.VideoJuegos .Filtros button:hover {
+  transform: scale(1.05);
+}
+.VideoJuegos .Filtros button.activo {
+  background-color: #00eaff;
+  color: white;
+  transform: scale(1.05);
+  border: 1px solid #9deaee;
+}
+.VideoJuegos .Filtros .Filtros_boton {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+  margin-left: 30px;
+}
+.VideoJuegos .Filtros .Filtros_select {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  margin-left: auto;
 }
 @media (max-width: 768px) {
   .VideoJuegos h2 {

@@ -21,12 +21,15 @@ import MisOpiniones from "./pages/MisOpiniones/MisOpiniones";
 import ForgotPassword from "./pages/OlvidarContraseña/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import ChangePassword from "./pages/CanvioContraseña/ChangePassword";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import "./App.css";
 
 function App() {
   const isLoggedIn = Boolean(localStorage.getItem("token"));
 
   return (
+    <>
+    <ScrollToTop />
     <Routes>
 
       {/* RUTAS PÚBLICAS */}
@@ -62,6 +65,7 @@ function App() {
       </Route>
 
     </Routes>
+    </>
   );
 }
 

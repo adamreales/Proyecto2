@@ -18,20 +18,49 @@
   .Filtros{
     width: 100%;
     display:flex;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
     gap:30px;
 
-      .select{
-        padding: 8px 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
-        background-color: white;
-        cursor: pointer;
-        border-color: black;
-        align-items: center;
-      }
+    .select{
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    cursor: pointer;
+    border-color: black;
+    align-items: center;
+    }
+
+    button {
+    transition: all 0.2s ease;
+    }
+
+    button:hover {
+    transform: scale(1.05);
+    }
+
+    button.activo {
+    background-color: #00eaff;
+    color: white;
+    transform: scale(1.05);
+    border: 1px solid #9deaee;
+    }
+
+    .Filtros_boton{
+        display: flex;
+        gap: 20px;
+        justify-content: flex-start;
+        margin-left: 30px;
+    }
+
+    .Filtros_select{
+        display: flex;
+        gap: 20px;
+        justify-content: flex-end;
+        margin-left: auto;
+    }
     
   }
 }

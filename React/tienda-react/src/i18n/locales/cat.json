@@ -164,8 +164,8 @@
     "title": "VIDEOJOCS",
     "priceAsc": "Preu ↑",
     "priceDesc": "Preu ↓",
-    "alphaAsc": "Alfabèticament A-Z",
-    "alphaDesc": "Alfabèticament Z-A",
+    "alphaAsc": "Alfabèticament ↑",
+    "alphaDesc": "Alfabèticament ↓",
     "categories": "Categories",
     "platforms": "Plataformes",
     "page": "Pàgina"

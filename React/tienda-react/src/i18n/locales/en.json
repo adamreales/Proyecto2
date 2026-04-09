@@ -164,8 +164,8 @@
     "title": "VIDEOGAMES",
     "priceAsc": "Price ↑",
     "priceDesc": "Price ↓",
-    "alphaAsc": "Alphabetically A-Z",
-    "alphaDesc": "Alphabetically Z-A",
+    "alphaAsc": "Alphabetically ↑",
+    "alphaDesc": "Alphabetically ↓",
     "categories": "Categories",
     "platforms": "Platforms",
     "page": "Page"
