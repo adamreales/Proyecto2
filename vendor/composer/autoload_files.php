@@ -98,4 +98,5 @@ return array(
     '19e6faa27d773988183e0f384143fcad' => $vendorDir . '/illuminate/reflection/helpers.php',
     'f625ee536139dfb962a398b200bdb2bd' => $vendorDir . '/illuminate/support/functions.php',
     '72579e7bd17821bb1321b87411366eae' => $vendorDir . '/illuminate/support/helpers.php',
+    'd92f49fe138fde4e7a3ec6f988960524' => $vendorDir . '/stripe/stripe-php/lib/version_check.php',
 );

@@ -14,6 +14,7 @@ return array(
     'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
     'Symfony\\Component\\Clock\\' => array($vendorDir . '/symfony/clock'),
     'Svg\\' => array($vendorDir . '/dompdf/php-svg-lib/src/Svg'),
+    'Stripe\\' => array($vendorDir . '/stripe/stripe-php/lib'),
     'Sabberworm\\CSS\\' => array($vendorDir . '/sabberworm/php-css-parser/src'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),

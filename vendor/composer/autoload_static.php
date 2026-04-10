@@ -99,6 +99,7 @@ class ComposerStaticInitc8a7642b6a153c0daf69853b801f52e6
         '19e6faa27d773988183e0f384143fcad' => __DIR__ . '/..' . '/illuminate/reflection/helpers.php',
         'f625ee536139dfb962a398b200bdb2bd' => __DIR__ . '/..' . '/illuminate/support/functions.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
+        'd92f49fe138fde4e7a3ec6f988960524' => __DIR__ . '/..' . '/stripe/stripe-php/lib/version_check.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -115,6 +116,7 @@ class ComposerStaticInitc8a7642b6a153c0daf69853b801f52e6
             'Symfony\\Component\\Translation\\' => 30,
             'Symfony\\Component\\Clock\\' => 24,
             'Svg\\' => 4,
+            'Stripe\\' => 7,
             'Sabberworm\\CSS\\' => 15,
         ),
         'P' =>
@@ -184,6 +186,10 @@ class ComposerStaticInitc8a7642b6a153c0daf69853b801f52e6
         'Svg\\' =>
         array (
             0 => __DIR__ . '/..' . '/dompdf/php-svg-lib/src/Svg',
+        ),
+        'Stripe\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
         'Sabberworm\\CSS\\' =>
         array (

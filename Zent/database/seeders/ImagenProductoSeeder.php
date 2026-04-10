@@ -149,7 +149,7 @@ class ImagenProductoSeeder extends Seeder
             ],
             [
                 'id_producto' => 9, 
-                'url' => 'imagenes_producto/stardew_valle2.jpg'
+                'url' => 'imagenes_producto/stardew_valley2.jpg'
             ],
             [
                 'id_producto' => 9, 
@@ -165,7 +165,7 @@ class ImagenProductoSeeder extends Seeder
             ],
             [
                 'id_producto' => 10, 
-                'url' => 'imagenes_producto/celest2.jpg'
+                'url' => 'imagenes_producto/celeste2.jpg'
             ],
             [
                 'id_producto' => 10, 

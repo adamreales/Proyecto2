@@ -58,6 +58,7 @@
   border: none;
   width: 200px;
   padding: 10px;
+  border: 1px solid black;
 }
 .Perfil-page .Configuracion button:hover {
   background-color: black;
@@ -84,20 +85,6 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-}
-.Perfil-page .subtitulos button {
-  width: auto;
-  background-color: transparent;
-  border: 2px solid black;
-  color: black;
-  padding: 10px 20px;
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.Perfil-page .subtitulos button:hover {
-  background-color: black;
-  color: #fff;
 }
 /* ========================= */
 /* 📱 TABLET (≤1024px) */
