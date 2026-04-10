@@ -62,7 +62,7 @@ class ControllerLogin extends Controller
                 foreach ($itemsInvitado as $itemInv) {
 
                     $itemUsuario = CarritoProducto::where('id_carrito', $carritoUsuario->id)
-                        ->where('id_producto', $itemInv->id_producto)
+                        ->where('plataforma_producto_id', $itemInv->plataforma_producto_id)
                         ->first();
 
                     if ($itemUsuario) {

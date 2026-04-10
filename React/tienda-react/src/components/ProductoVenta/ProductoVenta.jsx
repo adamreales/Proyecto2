@@ -41,11 +41,30 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
 
                     <div className="precio">
                       <div className="contador">
-                        <button type="button"  onClick={() => actualizarCantidad(item, cantidadSeleccionada - 1) } >-</button>
+                        <button
+                          type="button"
+                          disabled={cantidadSeleccionada <= 1}
+                          onClick={() => actualizarCantidad(item, cantidadSeleccionada - 1)}
+                        >
+                          -
+                        </button>
 
-                        <input type="number" value={cantidadSeleccionada} min="1"max={stockMaximo} onChange={(e) =>  actualizarCantidad(item, Number(e.target.value)) }/>
+                        <input
+                          type="number"
+                          value={cantidadSeleccionada}
+                          min="1"
+                          max={stockMaximo}
+                          readOnly
+                          aria-label="Cantidad del producto"
+                        />
 
-                        <button type="button"  onClick={() => actualizarCantidad(item, cantidadSeleccionada + 1)}  >+</button>
+                        <button
+                          type="button"
+                          disabled={cantidadSeleccionada >= stockMaximo}
+                          onClick={() => actualizarCantidad(item, cantidadSeleccionada + 1)}
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
                     <div className="Gestiones">
