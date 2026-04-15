@@ -12,7 +12,6 @@ class ControllerFavorito extends Controller
 
     public function anadir_favorito(Request $request)
     {
-        var_dump($request->producto_id);
         if($request->has('producto_id')) {
 
             DB::beginTransaction();
@@ -40,6 +39,10 @@ class ControllerFavorito extends Controller
 
 
             DB::commit();
+
+            return response()->json([
+                'message' => 'Producto anadido a favoritos'
+            ]);
 
         } else {
             return response()->json(['message' => 'ID del producto no proporcionado'], 400);

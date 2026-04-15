@@ -182,7 +182,12 @@
     "ratings": "Valoraciones",
     "addToCart": "Añadir al carrito",
     "bestSellers": "Los más vendidos",
-    "translatingDescription": "Traduciendo descripción..."
+    "translatingDescription": "Traduciendo descripción...",
+    "addedToCartSuccess": "Producto añadido al carrito",
+    "addedToFavoritesSuccess": "Producto añadido a favoritos",
+    "alreadyInFavorites": "Este producto ya está en favoritos",
+    "removedFromFavoritesSuccess": "Producto eliminado de favoritos",
+    "favoriteActionError": "No se pudo actualizar favoritos"
   },
   "features": {
     "title": "Características",
