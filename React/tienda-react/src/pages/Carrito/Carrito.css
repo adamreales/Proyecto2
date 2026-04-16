@@ -5,9 +5,10 @@
 /* PADDING */
 .Titulos {
   display: flex;
-  justify-content: left;
+  justify-content: flex-start;
   width: 100%;
-  padding-inline: 100px;
+  padding-inline: clamp(16px, 6vw, 100px);
+  box-sizing: border-box;
 }
 .Carrito {
   display: flex;

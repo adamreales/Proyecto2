@@ -18,9 +18,9 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
       ) : (
         <ul>
           {cartItems.map((item) => {
-            const stockMaximo = Math.max(1, Number(item.stock) || 1);
+            const stockMaximo = Math.min(10, Math.max(1, Number(item.stock) || 1));
             const cantidadSeleccionada = Math.min(
-              Number(item.cantidad) || 1,
+              Math.max(1, Number(item.cantidad) || 1),
               stockMaximo
             );
 
@@ -41,11 +41,11 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
 
                     <div className="precio">
                       <div className="contador">
-                        <button type="button"  onClick={() => actualizarCantidad(item, cantidadSeleccionada - 1) } >-</button>
+                        <button type="button" onClick={() => actualizarCantidad(item, cantidadSeleccionada - 1)} disabled={cantidadSeleccionada <= 1}>-</button>
 
-                        <input type="number" value={cantidadSeleccionada} min="1"max={stockMaximo} onChange={(e) =>  actualizarCantidad(item, Number(e.target.value)) }/>
+                        <input type="number" value={cantidadSeleccionada} min="1" max={stockMaximo} onChange={(e) => { const val = Math.min(10, Math.max(1, Number(e.target.value) || 1)); actualizarCantidad(item, val); }}/>
 
-                        <button type="button"  onClick={() => actualizarCantidad(item, cantidadSeleccionada + 1)}  >+</button>
+                        <button type="button" onClick={() => actualizarCantidad(item, cantidadSeleccionada + 1)} disabled={cantidadSeleccionada >= stockMaximo}>+</button>
                       </div>
                     </div>
                     <div className="Gestiones">

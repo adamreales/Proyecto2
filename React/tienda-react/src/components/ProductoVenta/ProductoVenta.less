@@ -47,8 +47,8 @@
                     justify-content: space-between;
                     align-items: center;
                     gap:20px;
-                    //padding: 20px;
-                    height:200px;
+                    height: auto;
+                    min-height: 120px;
                     width: 100%;
                     margin:0;
                     min-width: 0;
@@ -72,7 +72,7 @@
                             min-width: 0;
                             h3{
                                 font-family: @tipo-letra-gaming;
-                                font-size: @mida-letra-p * 2;
+                                font-size: clamp(14px, 2vw, 26px);
                                 color: black;
                                 font-weight: bold;
                                 overflow-wrap: anywhere;
@@ -82,7 +82,7 @@
                     }
                     p{
                         font-family: @tipo-letra-p;
-                        font-size: @mida-letra-p * 2;
+                        font-size: clamp(14px, 1.8vw, 24px);
                         color: black;
                     }
 
@@ -97,7 +97,7 @@
                             align-items: center;
                             gap:10px;
                             font-family: @tipo-letra-p;
-                            font-size: @mida-letra-p * 2;
+                            font-size: clamp(14px, 1.8vw, 24px);
                             .contador{
                                 button{
                                     background-color: transparent;
@@ -122,6 +122,7 @@
 
                                 /* Firefox */
                                 input[type="number"] {
+                                appearance: textfield;
                                 -moz-appearance: textfield;
                                 }
                             }
@@ -184,13 +185,12 @@
 
             li {
                 padding: 15px;
+
                 .item-info {
                     height: auto;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    
+
                     .bloq1 {
-                        width: 100%;
+                        width: 60%;
 
                         img {
                             width: 150px;
@@ -198,28 +198,19 @@
                         }
 
                         .propeties {
-                            h3 {
-                                font-size: @mida-letra-p * 1.4;
-                            }
-                            p{
-                                font-size: @mida-letra-p  * 1.2;
-                            }
+                            h3 { font-size: @mida-letra-p * 1.4; }
+                            p  { font-size: @mida-letra-p * 1.2; }
                         }
                     }
 
-                    p {
-                        font-size: @mida-letra-p * 1.5;
-                    }
+                    p { font-size: @mida-letra-p * 1.5; }
 
                     .blq-acciones {
                         width: 100%;
-                        .precio {
-                            font-size: @mida-letra-p * 1.2;
-                        }
 
-                        hr {
-                            width: 100%;
-                        }
+                        .precio { font-size: @mida-letra-p * 1.2; }
+
+                        hr { width: 100%; }
                     }
                 }
             }
@@ -231,140 +222,10 @@
     .targeta-carrito {
         ul {
             gap: 15px;
-            
+
             li {
                 padding: 12px;
-                .item-info {
-                    gap: 15px;
-                    
-                    .bloq1 {
-                        img {
-                            width: 120px;
-                            height: 80px;
-                        }
 
-                        .propeties {
-                            h3 {
-                                font-size: @mida-letra-p * 1.2;
-                            }
-                            p {
-                                font-size: @mida-letra-p;
-                            }
-                        }
-                    }
-
-                    p {
-                        font-size: @mida-letra-p * 1.2;
-                    }
-
-                    .blq-acciones {
-                        .precio {
-                            font-size: @mida-letra-p;
-                            .contador {
-                                input {
-                                    height: 40px;
-                                    width: 25px;
-                                    font-size: @mida-letra-p;
-                                }
-                                button {
-                                    font-size: @mida-letra-botones * 1.5;
-                                }
-                            }
-                        }
-
-                        .Gestiones {
-                            .btn-eliminar {
-                                padding: 8px 12px;
-                                font-size: @mida-letra-botones;
-                                cursor: pointer;
-
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media (max-width: 480px) {
-    .targeta-carrito {
-        ul {
-            gap: 10px;
-            
-            li {
-                padding: 10px;
-                border-radius: 8px;
-                .item-info {
-                    gap: 10px;
-                    
-                    .bloq1 {
-                        gap: 10px;
-                        img {
-                            width: 80px;
-                            height: 60px;
-                        }
-
-                        .propeties {
-                            h3 {
-                                font-size: @mida-letra-p;
-                            }
-                            p {
-                                font-size: @mida-letra-p * 0.8;
-                            }
-                        }
-                    }
-
-                    p {
-                        font-size: @mida-letra-p;
-                    }
-
-                    .blq-acciones {
-                        gap: 12px;
-                        .precio {
-                            font-size: @mida-letra-p * 0.9;
-                            .contador {
-                                input {
-                                    height: 35px;
-                                    width: 20px;
-                                    font-size: @mida-letra-p * 0.8;
-                                }
-                                button {
-                                    font-size: @mida-letra-botones;
-                                }
-                            }
-                        }
-
-                        hr {
-                            display: none;
-                        }
-
-                        .Gestiones {
-                            width: 100%;
-                            justify-content: center;
-                            .btn-eliminar {
-                                padding: 8px 14px;
-                                font-size: @mida-letra-botones * 0.9;
-                                width: auto;
-                                
-                                &:hover {
-                                    background-color: #c0392b;
-                                    transform: translateY(-2px);
-                                    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media (max-width: 768px) {
-    .targeta-carrito {
-        ul {
-            li {
                 .item-info {
                     flex-direction: column;
                     align-items: center;
@@ -379,44 +240,52 @@
                         justify-content: center;
 
                         img {
-                            width: 300px;
-                            height: 200px;
+                            width: 280px;
+                            height: 185px;
                         }
 
                         .propeties {
                             width: 100%;
                             text-align: center;
 
-                            h3 {
-                                font-size: @mida-letra-p * 1.2;
-                            }
+                            h3 { font-size: @mida-letra-p * 1.2; }
+                            p  { font-size: @mida-letra-p; }
                         }
                     }
+
+                    p { font-size: @mida-letra-p * 1.2; }
 
                     .blq-acciones {
                         width: 100%;
                         align-items: center;
 
                         .precio {
+                            font-size: @mida-letra-p;
                             width: 100%;
                             justify-content: center;
                             flex-wrap: wrap;
 
                             .contador {
                                 input {
+                                    height: 40px;
                                     width: 40px;
+                                    font-size: @mida-letra-p;
                                 }
+                                button { font-size: @mida-letra-botones * 1.5; }
                             }
                         }
 
-                        hr {
-                            width: 70%;
-                        }
+                        hr { width: 70%; }
 
                         .Gestiones {
                             width: 100%;
                             justify-content: center;
                             gap: 16px;
+
+                            .btn-eliminar {
+                                padding: 8px 12px;
+                                font-size: @mida-letra-botones;
+                            }
                         }
                     }
                 }
@@ -428,27 +297,58 @@
 @media (max-width: 480px) {
     .targeta-carrito {
         ul {
+            gap: 10px;
+
             li {
+                padding: 10px;
+                border-radius: 8px;
+
                 .item-info {
+                    gap: 10px;
                     margin: 0;
 
                     .bloq1 {
-                        gap: 12px;
+                        gap: 10px;
 
                         img {
-                            width: 105px;
-                            height: 82px;
+                            width: 110px;
+                            height: 85px;
+                        }
+
+                        .propeties {
+                            h3 { font-size: @mida-letra-p; }
+                            p  { font-size: @mida-letra-p * 0.85; }
                         }
                     }
 
+                    p { font-size: @mida-letra-p; }
+
                     .blq-acciones {
+                        gap: 12px;
+
                         .precio {
-                            font-size: @mida-letra-p;
+                            font-size: @mida-letra-p * 0.9;
+
+                            .contador {
+                                input {
+                                    height: 35px;
+                                    width: 28px;
+                                    font-size: @mida-letra-p * 0.85;
+                                }
+                                button { font-size: @mida-letra-botones; }
+                            }
                         }
+
+                        hr { display: none; }
 
                         .Gestiones {
                             width: 100%;
                             justify-content: center;
+
+                            .btn-eliminar {
+                                padding: 8px 14px;
+                                font-size: @mida-letra-botones * 0.9;
+                            }
                         }
                     }
                 }
