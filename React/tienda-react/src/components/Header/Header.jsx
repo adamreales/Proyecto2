@@ -94,9 +94,9 @@ function Header() {
             )}
           </button>
           <div className="idiomas">
-                    <button className="btn-idioma" type="button" onClick={() => i18n.changeLanguage("es")}>ES</button>
-                    <button className="btn-idioma" type="button" onClick={() => i18n.changeLanguage("en")}>EN</button>
-                    <button className="btn-idioma" type="button" onClick={() => i18n.changeLanguage("cat")}>CAT</button>
+                    <button className={i18n.language === "es" ? "btn-idioma activo" : "btn-idioma"} type="button" onClick={() => i18n.changeLanguage("es")}>ES</button>
+                    <button className={i18n.language === "en" ? "btn-idioma activo" : "btn-idioma"} type="button" onClick={() => i18n.changeLanguage("en")}>EN</button>
+                    <button className={i18n.language === "cat" ? "btn-idioma activo" : "btn-idioma"} type="button" onClick={() => i18n.changeLanguage("cat")}>CAT</button>
           </div>
 
           {/* MINI CARRITO */}

@@ -17,10 +17,13 @@ class ValoracionSeeder extends Seeder
     public function run()
     {
         Valoracion::create([
-            'id_usuario' => 1,
+            'id_usuario' => 3,
             'id_producto' => 1,
             'estrellas' => 5,
             'comentario' => 'Desde que juegue este juego me converti en masoquista y amante de sufrir en videojuegos, quitando eso gran historia, jugabilidad, banda sonora (bendita ciudad de lagrimas y mantis), buenos jefes sobre todo markoz. En definitiva juegazo recomendado para todos 10/10'
         ]);
+
+        Valoracion::factory()->count(10)->create();
+
     }
 }

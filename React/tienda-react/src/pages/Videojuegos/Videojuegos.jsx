@@ -107,6 +107,7 @@ function Videojuegos() {
             <div className="Filtros_select">
                 <select
                     className="select"
+                    value={categoria}
                     onChange={(e) => {
                     setCategoria(e.target.value);
                     setPlataforma("");
@@ -123,6 +124,7 @@ function Videojuegos() {
 
                 <select
                     className="select"
+                    value={plataforma}
                     onChange={(e) => {
                     setPlataforma(e.target.value);
                     setCategoria("");

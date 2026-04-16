@@ -166,8 +166,8 @@
     "priceDesc": "Price ↓",
     "alphaAsc": "Alphabetically ↑",
     "alphaDesc": "Alphabetically ↓",
-    "categories": "Categories",
-    "platforms": "Platforms",
+    "categories": "Filter by category",
+    "platforms": "Filter by platform",
     "page": "Page"
   },
   "outlet": {

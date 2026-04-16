@@ -66,54 +66,8 @@
   border-radius: 10px;
   padding: 10px;
 }
-.box .box-datos .contenedorpegiplataformas .scriptplataformas .sin-plataformas {
-  color: #888;
-  font-size: 14px;
-  text-align: center;
-  padding: 10px;
-  font-style: italic;
-}
 .box .box-datos .valoracion-estrellas {
   font-size: 20px;
-}
-.box-valorar {
-  width: min(920px, 100%);
-  margin: 24px auto;
-  padding: 16px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background: #fff;
-}
-.box-valorar-row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.box-valorar-text {
-  width: 100%;
-  min-height: 90px;
-  border: 1px solid #cfcfcf;
-  border-radius: 8px;
-  padding: 10px;
-  resize: vertical;
-}
-.box-valorar-btn {
-  margin-top: 10px;
-  border: 1px solid #111;
-  background: #111;
-  color: #fff;
-  border-radius: 8px;
-  padding: 8px 14px;
-  cursor: pointer;
-}
-.box-valorar-error {
-  color: #a12626;
-  margin-top: 8px;
-}
-.box-valorar-ok {
-  color: #107c10;
-  margin-top: 8px;
 }
 .box .box-datos .btn-box {
   display: flex;
@@ -143,15 +97,6 @@
 .box .box-datos .btn-box .btn-cesta:hover {
   background-color: white;
   color: black;
-}
-.box .box-datos .btn-box .btn-cesta:disabled {
-  background-color: #ccc;
-  color: #666;
-  cursor: not-allowed;
-}
-.box .box-datos .btn-box .btn-cesta:disabled:hover {
-  background-color: #ccc;
-  color: #666;
 }
 .imagenes {
   display: flex;
@@ -186,6 +131,82 @@
 }
 .estrella.vacia {
   color: #ccc;
+}
+.amazon-review {
+  margin: auto;
+  max-width: 100%;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* ⭐ ESTRELLAS */
+  /* TEXTAREA */
+  /* BOTÓN */
+  /* MENSAJES */
+}
+.amazon-review h3 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+.amazon-review .stars {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.amazon-review .stars .star {
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.amazon-review .stars .star:hover,
+.amazon-review .stars .star.active {
+  color: #ffa41c;
+}
+.amazon-review .stars .star:hover {
+  transform: scale(1.2);
+}
+.amazon-review textarea {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 4px;
+  resize: none;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.amazon-review textarea:focus {
+  outline: none;
+  border-color: #b7b7b7;
+}
+.amazon-review button {
+  background: #ffd814;
+  border: 1px solid #e0bb00;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.amazon-review button:hover {
+  background: #f7ca00;
+}
+.amazon-review button:disabled {
+  background: #eee;
+  cursor: not-allowed;
+}
+.amazon-review .error {
+  color: #b12704;
+  font-size: 13px;
+}
+.amazon-review .ok {
+  color: #067d62;
+  font-size: 13px;
+}
+.amazon-review .info {
+  font-size: 13px;
+  color: #555;
 }
 @media (max-width: 1024px) {
   .box {

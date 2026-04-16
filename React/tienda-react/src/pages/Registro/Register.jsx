@@ -12,6 +12,7 @@ function Register() {
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
   const [capsLock, setCapsLock] = useState(false);
   const [capsLockConfirm, setCapsLockConfirm] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +21,7 @@ function Register() {
       await register(name,email, password,passwordConfirm);
       window.location.href = "/login";
     } catch (error) {
-      alert("Error al registrarse");
+      setErrorMsg(error.response?.data?.error || "Error al registrarse");
     }
   };
 
@@ -34,10 +35,10 @@ function Register() {
 
         <form className="formulario" onSubmit={handleSubmit}>
          
-          <input type="text" className="caixa" value={name}onChange={(e) => setName(e.target.value)} placeholder="Nombre :"/>
+          <input type="text" className="caixa" value={name}onChange={(e) => setName(e.target.value)} placeholder="Nombre :" required/>
           
    
-          <input type="email" className="caixa" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email : " />
+          <input type="email" className="caixa" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email : " required />
 
           <div className="password-wrapper">
             <div className="password-row">
@@ -49,6 +50,7 @@ function Register() {
                 onFocus={(e) => setCapsLock(e.getModifierState("CapsLock"))}
                 onBlur={() => setCapsLock(false)}
                 placeholder="Contraseña : "
+                required
               />
               <button
                 type="button"
@@ -77,6 +79,7 @@ function Register() {
                 onFocus={(e) => setCapsLockConfirm(e.getModifierState("CapsLock"))}
                 onBlur={() => setCapsLockConfirm(false)}
                 placeholder="Confirmar contraseña : "
+                required
               />
               <button
                 type="button"
@@ -95,11 +98,13 @@ function Register() {
             )}
           </div>
 
+            {errorMsg && <p className="error">{errorMsg}</p>}
+
           <div className="Botones">
             <button type="submit" className="btn-registro"> Registrarse</button>
           </div>
         </form>
-
+        
       </div>
     </div>
   );

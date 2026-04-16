@@ -136,6 +136,9 @@ header .idiomas .btn-idioma[aria-pressed=true] {
 header .idiomas .btn-idioma:hover {
   border-color: black;
 }
+header .idiomas .activo {
+  background-color: #00eaff;
+}
 header .mini-cart {
   position: absolute;
   top: 100%;

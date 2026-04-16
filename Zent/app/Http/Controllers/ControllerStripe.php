@@ -43,6 +43,7 @@ class ControllerStripe extends Controller
     }
 
     public function pagar_pedido($pedidoId){
+
         try{
             Stripe::setApiKey(config('services.stripe.secret'));
 
@@ -81,15 +82,17 @@ class ControllerStripe extends Controller
                         'product_data' => [
                             'name' => $producto->titulo . ' ' . $item->doPlataformaProducto?->doPlataforma?->nombre,
                         ],
-                        'unit_amount' => intval($producto->precio * 100),
+                        'unit_amount' => (int) intval($producto->precio * 100),
                     ],
                     'quantity' => $item->cantidad,
                 ];
             }
+            
+            Log::info('URL FINAL: ' . env('FRONT_URL').'/aceptada');
 
             $session = Session::create([
                 'mode' => 'payment',
-                'payment_method_types' => ['card'],
+                // 'payment_method_types' => ['card'],
                 'line_items' => $productos, // 🔥 ahora sí
                 'success_url' => env('FRONT_URL').'/aceptada',
                 'cancel_url' => env('FRONT_URL').'/denegada',
@@ -106,6 +109,7 @@ class ControllerStripe extends Controller
             ]);
 
         }catch(Exception $e){
+            Log::error($e->getMessage());
             return response()->json([
                 'error' => $e->getMessage()
             ],400);

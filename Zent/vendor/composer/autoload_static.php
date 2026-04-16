@@ -127,6 +127,7 @@ class ComposerStaticInite8b2c5a8d7e10242d9194b096654f0bf
         'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
+        'd92f49fe138fde4e7a3ec6f988960524' => __DIR__ . '/..' . '/stripe/stripe-php/lib/version_check.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -794,6 +795,7 @@ class ComposerStaticInite8b2c5a8d7e10242d9194b096654f0bf
         'App\\Http\\Controllers\\ControllerProductos' => __DIR__ . '/../..' . '/app/Http/Controllers/ControllerProductos.php',
         'App\\Http\\Controllers\\ControllerRegistro' => __DIR__ . '/../..' . '/app/Http/Controllers/ControllerRegistro.php',
         'App\\Http\\Controllers\\ControllerStripe' => __DIR__ . '/../..' . '/app/Http/Controllers/ControllerStripe.php',
+        'App\\Http\\Controllers\\ControllerValoracion' => __DIR__ . '/../..' . '/app/Http/Controllers/ControllerValoracion.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -6485,6 +6487,9 @@ class ComposerStaticInite8b2c5a8d7e10242d9194b096654f0bf
         'Stripe\\Reporting\\ReportType' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Reporting/ReportType.php',
         'Stripe\\RequestTelemetry' => __DIR__ . '/..' . '/stripe/stripe-php/lib/RequestTelemetry.php',
         'Stripe\\ReserveTransaction' => __DIR__ . '/..' . '/stripe/stripe-php/lib/ReserveTransaction.php',
+        'Stripe\\Reserve\\Hold' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Reserve/Hold.php',
+        'Stripe\\Reserve\\Plan' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Reserve/Plan.php',
+        'Stripe\\Reserve\\Release' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Reserve/Release.php',
         'Stripe\\Review' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Review.php',
         'Stripe\\SearchResult' => __DIR__ . '/..' . '/stripe/stripe-php/lib/SearchResult.php',
         'Stripe\\Service\\AbstractService' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Service/AbstractService.php',
@@ -6706,6 +6711,7 @@ class ComposerStaticInite8b2c5a8d7e10242d9194b096654f0bf
         'Stripe\\Util\\DefaultLogger' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Util/DefaultLogger.php',
         'Stripe\\Util\\EventNotificationTypes' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Util/EventNotificationTypes.php',
         'Stripe\\Util\\EventTypes' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Util/EventTypes.php',
+        'Stripe\\Util\\Int64' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Util/Int64.php',
         'Stripe\\Util\\LoggerInterface' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Util/LoggerInterface.php',
         'Stripe\\Util\\ObjectTypes' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Util/ObjectTypes.php',
         'Stripe\\Util\\RandomGenerator' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Util/RandomGenerator.php',

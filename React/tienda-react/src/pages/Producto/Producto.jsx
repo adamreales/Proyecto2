@@ -341,54 +341,51 @@ function Producto() {
 
       <ValoracionesUsuarios producto={producto} />
 
-      {isLoggedIn && estadoValoracion.ha_comprado ? (
-        <section className="box-valorar">
-          <h3>Valorar este producto</h3>
+{isLoggedIn && estadoValoracion.ha_comprado ? (
+  <section className="amazon-review">
+    <h3>Valorar este producto</h3>
 
-          {estadoValoracion.puede_valorar ? (
-            <>
-              <div className="box-valorar-row">
-                <label htmlFor="estrellas">Estrellas</label>
-                <select
-                  id="estrellas"
-                  value={estrellasValoracion}
-                  onChange={(e) => setEstrellasValoracion(Number(e.target.value))}
-                >
-                  <option value={5}>5</option>
-                  <option value={4}>4</option>
-                  <option value={3}>3</option>
-                  <option value={2}>2</option>
-                  <option value={1}>1</option>
-                </select>
-              </div>
+    {estadoValoracion.puede_valorar ? (
+      <>
+        {/* ESTRELLAS */}
+        <div className="stars">
+          {[1, 2, 3, 4, 5].map((num) => (
+            <span
+              key={num}
+              className={num <= estrellasValoracion ? "star active" : "star"}
+              onClick={() => setEstrellasValoracion(num)}
+            >
+              ★
+            </span>
+          ))}
+        </div>
 
-              <textarea
-                className="box-valorar-text"
-                placeholder="Escribe tu opinion sobre el producto"
-                value={comentarioValoracion}
-                onChange={(e) => setComentarioValoracion(e.target.value)}
-                maxLength={500}
-              />
+        {/* TEXTO */}
+        <textarea
+          placeholder="¿Qué te ha parecido este producto?"
+          value={comentarioValoracion}
+          onChange={(e) => setComentarioValoracion(e.target.value)}
+          maxLength={500}
+        />
 
-              <button
-                type="button"
-                className="box-valorar-btn"
-                onClick={handleEnviarValoracion}
-                disabled={enviandoValoracion}
-              >
-                {enviandoValoracion ? "Enviando..." : "Enviar valoracion"}
-              </button>
-            </>
-          ) : estadoValoracion.ya_valorado ? (
-            <p>Ya has valorado este producto.</p>
-          ) : (
-            <p>Solo puedes valorar si has comprado previamente este producto.</p>
-          )}
+        {/* BOTÓN */}
+        <button
+          onClick={handleEnviarValoracion}
+          disabled={enviandoValoracion}
+        >
+          {enviandoValoracion ? "Enviando..." : "Enviar opinión"}
+        </button>
+      </>
+    ) : estadoValoracion.ya_valorado ? (
+      <p className="info">Ya has enviado tu valoración.</p>
+    ) : (
+      <p className="info">Solo compradores pueden opinar.</p>
+    )}
 
-          {errorValoracion ? <p className="box-valorar-error">{errorValoracion}</p> : null}
-          {okValoracion ? <p className="box-valorar-ok">{okValoracion}</p> : null}
-        </section>
-      ) : null}
+    {errorValoracion && <p className="error">{errorValoracion}</p>}
+    {okValoracion && <p className="ok">{okValoracion}</p>}
+  </section>
+) : null}
 
       <Recomendaciones producto={producto} />
 

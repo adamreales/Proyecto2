@@ -7,6 +7,14 @@
 @tipo-letra-gaming: 'Orbitron', sans-serif;
 @tipo-letra-p: 'Inter', sans-serif;
 
+@amazon-yellow: #ffd814;
+@amazon-yellow-hover: #f7ca00;
+@amazon-star: #ffa41c;
+@border-color: #ddd;
+@text-muted: #555;
+@error-color: #b12704;
+@success-color: #067d62;
+
 .box
 {
     display: grid;
@@ -155,6 +163,99 @@
 
 .estrella.vacia {
   color: #ccc;
+}
+
+.amazon-review {
+    margin: auto;
+    max-width: 100%;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    /* ⭐ ESTRELLAS */
+    .stars {
+        display: flex;
+        gap: 5px;
+        margin-bottom: 10px;
+
+        .star {
+            font-size: 24px;
+            color: #ccc;
+            cursor: pointer;
+            transition: 0.2s;
+
+            &:hover,
+            &.active {
+                color: @amazon-star;
+            }
+        }
+
+        .star {
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+
+    }
+
+    /* TEXTAREA */
+    textarea {
+        width: 100%;
+        min-height: 100px;
+        border: 1px solid @border-color;
+        padding: 10px;
+        border-radius: 4px;
+        resize: none;
+        margin-bottom: 10px;
+        font-size: 14px;
+
+        &:focus {
+        outline: none;
+        border-color: darken(@border-color, 15%);
+        }
+    }
+
+    /* BOTÓN */
+    button {
+        background: @amazon-yellow;
+        border: 1px solid darken(@amazon-yellow, 10%);
+        padding: 8px 12px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 500;
+
+        &:hover {
+        background: @amazon-yellow-hover;
+        }
+
+        &:disabled {
+        background: #eee;
+        cursor: not-allowed;
+        }
+    }
+
+    /* MENSAJES */
+    .error {
+        color: @error-color;
+        font-size: 13px;
+    }
+
+    .ok {
+        color: @success-color;
+        font-size: 13px;
+    }
+
+    .info {
+        font-size: 13px;
+        color: @text-muted;
+    }
 }
 
 @media(max-width: 1024px) {

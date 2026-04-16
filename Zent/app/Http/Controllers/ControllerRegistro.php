@@ -13,20 +13,27 @@ class ControllerRegistro extends Controller
 {
 
     public function registro(Request $r){
+
+        if(strlen($r->name) <= 2){
+            return response()->json([
+                'error' => 'El nombre no tiene mas de 2 caracteres'  
+            ],400);
+        };
+
         $existe = User::where('email',$r->email)->exists();
         if($existe){
             return response()->json([
                 'error' => 'Ya existe este email'
             ],409);
         }
+        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/', $r->password)) {
+            return response()->json([
+                'error' => 'Contraseña incorrecta requisitos minimos: 8 caracteres - 1 minuscula - 1 mayuscula - 1 simbolo'
+            ], 400);
+        }
         if($r->password != $r->conf_password){
             return response()->json([
                 'error' => 'Las contraseñas no coinciden'
-            ],400);
-        }
-        if(strlen($r->name) <= 2){
-            return response()->json([
-                'error' => 'El nombre no tiene mas de 2 caracteres'  
             ],400);
         }
         
