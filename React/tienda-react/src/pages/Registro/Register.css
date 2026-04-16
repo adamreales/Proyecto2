@@ -142,3 +142,8 @@ button:focus,
 button:focus-visible {
   outline: none !important;
 }
+
+.error{
+    color: #e0001b;
+    font-weight: bold;
+}
