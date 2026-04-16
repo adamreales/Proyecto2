@@ -66,21 +66,104 @@
 }
 
 
+@media (max-width: 900px) {
+  .VideoJuegos {
+    .Filtros {
+      flex-wrap: wrap;
+      gap: 15px;
 
+      .Filtros_boton {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-left: 0;
+      }
+
+      .Filtros_select {
+        margin-left: 0;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+    }
+  }
+}
 
 @media (max-width: 768px) {
-  .VideoJuegos h2 {
-    font-size: 24px;
-    margin-bottom: 18px;
+  .VideoJuegos {
+    h2 {
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+
+    .Filtros {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+
+      .Filtros_boton {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-left: 0;
+
+        button {
+          width: 100%;
+          font-size: 13px;
+          padding: 8px 6px;
+          text-align: center;
+        }
+      }
+
+      .Filtros_select {
+        width: 100%;
+        justify-content: flex-start;
+        margin-left: 0;
+        gap: 8px;
+
+        .select {
+          flex: 1;
+          min-width: 0;
+          font-size: 14px;
+        }
+
+        button {
+          font-size: 13px;
+          padding: 8px 10px;
+        }
+      }
+    }
   }
 }
 
 @media (max-width: 480px) {
   .VideoJuegos {
     padding: 0 8px;
-  }
 
-  .VideoJuegos h2 {
-    font-size: 20px;
+    h2 {
+      font-size: 20px;
+    }
+
+    .Filtros {
+      .Filtros_boton {
+        grid-template-columns: repeat(2, 1fr);
+
+        button {
+          font-size: 12px;
+          padding: 7px 4px;
+        }
+      }
+
+      .Filtros_select {
+        flex-direction: column;
+
+        .select {
+          width: 100%;
+        }
+
+        button {
+          width: 100%;
+        }
+      }
+    }
   }
 }

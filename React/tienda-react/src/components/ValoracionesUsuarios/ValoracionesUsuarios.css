@@ -124,3 +124,39 @@
     grid-template-columns: 1fr;
   }
 }
+/* Responsive ValoracionesUsuarios */
+@media (max-width: 1024px) {
+  .valoraciones-container .valoraciones-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .valoraciones-container .valoraciones-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .valoraciones-container .valoraciones-list {
+    grid-template-columns: 1fr;
+  }
+  .valoraciones-container .valoracion-box .valoracion-datos {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .valoraciones-container .valoracion-box p {
+    font-size: 16px;
+  }
+  .valoraciones-container button .mario {
+    width: 70px;
+  }
+}
+@media (max-width: 480px) {
+  .valoraciones-container .valoracion-box p {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .valoraciones-container button .mario {
+    width: 55px;
+  }
+}

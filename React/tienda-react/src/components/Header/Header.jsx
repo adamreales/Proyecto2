@@ -9,6 +9,8 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const cartRef = useRef(null);
+  const menuRef = useRef(null);
+  const hamburgerRef = useRef(null);
   const { t, i18n } = useTranslation();
   const { cartItems, totalItems, totalPrecio, eliminarProducto } = useHeaderCart();
 
@@ -23,6 +25,21 @@ function Header() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [menuOpen]);
+
+  // Cerrar menú cuando se hace clic fuera
+  useEffect(() => {
+    const handleClickOutsideMenu = (e) => {
+      if (
+        menuRef.current && !menuRef.current.contains(e.target) &&
+        hamburgerRef.current && !hamburgerRef.current.contains(e.target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutsideMenu);
+    return () => document.removeEventListener("mousedown", handleClickOutsideMenu);
+  }, []);
 
   // Cerrar carrito cuando se hace clic fuera
   useEffect(() => {
@@ -40,7 +57,7 @@ function Header() {
     <header>
 
       {/* HAMBURGUESA MOBILE */}
-      <button   className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>  ☰</button>
+      <button ref={hamburgerRef} className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>  ☰</button>
 
       {/* LOGO */}
       <div className="Logo">
@@ -52,7 +69,7 @@ function Header() {
       </div>
 
       {/* MENÚ MOBILE */}
-      <div className={`Barra-menu ${menuOpen ? "active" : ""}`}>
+      <div ref={menuRef} className={`Barra-menu ${menuOpen ? "active" : ""}`}>
         <button className="cerrar-btn" onClick={() => setMenuOpen(false)}>✕</button>
         <Link to="/"><button className="menu-btn">{t("header.nav.home")}</button></Link>
         <Link to="/videojuegos"><button className="menu-btn">{t("header.nav.videogames")}</button></Link>
