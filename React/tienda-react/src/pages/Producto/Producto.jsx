@@ -1,6 +1,6 @@
 import "./Producto.css";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import Caracteristicas from "../../components/Caracteristicas/Caracteristicas";
@@ -24,6 +24,12 @@ function Producto() {
   const [enviandoValoracion, setEnviandoValoracion] = useState(false);
   const [errorValoracion, setErrorValoracion] = useState("");
   const [okValoracion, setOkValoracion] = useState("");
+  const [esFavorito, setEsFavorito] = useState(false);
+  const [favoritoRegistroId, setFavoritoRegistroId] = useState(null);
+  const [actualizandoFavorito, setActualizandoFavorito] = useState(false);
+  const [mensajeAccion, setMensajeAccion] = useState("");
+  const [tipoMensajeAccion, setTipoMensajeAccion] = useState("ok");
+  const avisoTimeoutRef = useRef(null);
   const [estadoValoracion, setEstadoValoracion] = useState({
     ha_comprado: false,
     ya_valorado: false,
@@ -41,6 +47,82 @@ function Producto() {
       localStorage.setItem("sessionId", sessionId);
     }
     return sessionId;
+  };
+
+  const mostrarAviso = (mensaje, tipo = "ok") => {
+    setMensajeAccion(mensaje);
+    setTipoMensajeAccion(tipo);
+
+    if (avisoTimeoutRef.current) {
+      clearTimeout(avisoTimeoutRef.current);
+    }
+
+    avisoTimeoutRef.current = setTimeout(() => {
+      setMensajeAccion("");
+      setTipoMensajeAccion("ok");
+    }, 2600);
+  };
+
+  const obtenerHeadersAuth = (token) => ({
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + token,
+  });
+
+  const leerRespuestaApi = async (res) => {
+    const raw = await res.text();
+
+    if (!raw) {
+      return { data: null, raw: "" };
+    }
+
+    try {
+      return { data: JSON.parse(raw), raw };
+    } catch {
+      return { data: null, raw };
+    }
+  };
+
+  const cargarEstadoFavorito = async (productoIdParam = id) => {
+    const token = localStorage.getItem("token");
+
+    if (!token || !productoIdParam) {
+      setEsFavorito(false);
+      setFavoritoRegistroId(null);
+      return false;
+    }
+
+    try {
+      const res = await fetch("http://127.0.0.1:8000/api/productos_favoritos", {
+        method: "GET",
+        headers: obtenerHeadersAuth(token),
+      });
+
+      const data = await res.json();
+      const favoritos = data?.productos || [];
+
+      const favoritoActual = favoritos.find((fav) => {
+        const favoritoProductoId =
+          fav?.producto_id ??
+          fav?.id_producto ??
+          fav?.do_producto?.id ??
+          fav?.producto?.id;
+
+        return Number(favoritoProductoId) === Number(productoIdParam);
+      });
+
+      const existe = Boolean(favoritoActual);
+      const registroId = favoritoActual?.id ?? favoritoActual?.favorito_id ?? null;
+
+      setEsFavorito(existe);
+      setFavoritoRegistroId(registroId);
+
+      return existe;
+    } catch (error) {
+      console.error("Error al consultar favoritos:", error);
+      setEsFavorito(false);
+      setFavoritoRegistroId(null);
+      return false;
+    }
   };
 
   const handleAddToCart = async () => {
@@ -80,6 +162,7 @@ function Producto() {
       }
 
       window.dispatchEvent(new Event("carritoActualizado"));
+      mostrarAviso(t("product.addedToCartSuccess"));
     } catch (error) {
       console.error("Error al añadir al carrito:", error);
     }
@@ -184,6 +267,18 @@ function Producto() {
   }, []);
 
   useEffect(() => {
+    cargarEstadoFavorito(id);
+  }, [id]);
+
+  useEffect(() => {
+    return () => {
+      if (avisoTimeoutRef.current) {
+        clearTimeout(avisoTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     const traducirDescripcion = async () => {
       const descripcion = producto?.descripcion?.trim();
 
@@ -238,19 +333,76 @@ function Producto() {
     0,Math.min(5, Math.round(producto?.valoracion || 0))
   );
 
-  function fav(productoId){
-    if(loginRedirect()) return;
-    const token = localStorage.getItem("token");
-    console.log("Añadiendo a favoritos el producto con ID:", productoId);
-    fetch(`http://127.0.0.1:8000/api/anadir_favorito`, {
+  async function alternarFavorito(productoId, token) {
+    const res = await fetch("http://127.0.0.1:8000/api/anadir_favorito", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
-      },
+      headers: obtenerHeadersAuth(token),
       body: JSON.stringify({ producto_id: productoId }),
     });
-    console.log("Añadiendo a favoritos el producto con ID:", productoId);
+
+    const { data, raw } = await leerRespuestaApi(res);
+
+    if (!res.ok) {
+      throw new Error(data?.error || raw || "Error");
+    }
+  }
+
+  async function fav(productoId) {
+    if (loginRedirect()) return;
+    if (actualizandoFavorito) {
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+    setActualizandoFavorito(true);
+
+    try {
+      if (esFavorito) {
+        const estadoEsperado = false;
+
+        // Actualizamos la UI al instante para que el corazon deje de verse activo.
+        setEsFavorito(false);
+        setFavoritoRegistroId(null);
+
+        await alternarFavorito(productoId, token);
+        const estadoActual = await cargarEstadoFavorito(productoId);
+
+        if (estadoActual !== estadoEsperado) {
+          mostrarAviso(t("product.favoriteActionError"), "error");
+          return;
+        }
+
+        // Evitamos revalidar inmediatamente para no deshacer la UI por latencia de API.
+        window.dispatchEvent(
+          new CustomEvent("favoritosActualizados", {
+            detail: { action: "remove", productoId: Number(productoId) },
+          })
+        );
+        mostrarAviso(t("product.removedFromFavoritesSuccess"), "remove");
+      } else {
+        const estadoEsperado = true;
+
+        await alternarFavorito(productoId, token);
+        const estadoActual = await cargarEstadoFavorito(productoId);
+
+        if (estadoActual !== estadoEsperado) {
+          mostrarAviso(t("product.favoriteActionError"), "error");
+          return;
+        }
+
+        window.dispatchEvent(
+          new CustomEvent("favoritosActualizados", {
+            detail: { action: "add", productoId: Number(productoId) },
+          })
+        );
+        mostrarAviso(t("product.addedToFavoritesSuccess"), "ok");
+      }
+    } catch (error) {
+      console.error("Error al actualizar favoritos:", error);
+      mostrarAviso(t("product.favoriteActionError"), "error");
+    } finally {
+      setActualizandoFavorito(false);
+    }
   }
 
   function loginRedirect() {
@@ -314,7 +466,15 @@ function Producto() {
           </p>
 
           <div className="btn-box">
-            <button className="btn-favoritos" onClick={() => fav(producto?.id)}>❤️</button>
+            <button
+              className={`btn-favoritos ${esFavorito ? "activo" : ""}`}
+              onClick={() => fav(producto?.id)}
+              disabled={actualizandoFavorito}
+              aria-label={t("header.nav.favorites")}
+              title={t("header.nav.favorites")}
+            >
+              {esFavorito ? "❤️" : "♡"}
+            </button>
 
             <button 
               className="btn-cesta" 
@@ -324,6 +484,20 @@ function Producto() {
               {t("product.addToCart")}
             </button>
           </div>
+
+          {mensajeAccion ? (
+            <p
+              className={`mensaje-accion-ok ${
+                tipoMensajeAccion === "remove"
+                  ? "mensaje-accion-remove"
+                  : tipoMensajeAccion === "error"
+                    ? "mensaje-accion-error"
+                    : ""
+              }`}
+            >
+              {mensajeAccion}
+            </p>
+          ) : null}
         </div>
       </div>
 

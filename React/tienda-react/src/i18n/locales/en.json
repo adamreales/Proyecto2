@@ -182,7 +182,12 @@
     "ratings": "Ratings",
     "addToCart": "Add to cart",
     "bestSellers": "Best sellers",
-    "translatingDescription": "Translating description..."
+    "translatingDescription": "Translating description...",
+    "addedToCartSuccess": "Product added to cart",
+    "addedToFavoritesSuccess": "Product added to favorites",
+    "alreadyInFavorites": "This product is already in favorites",
+    "removedFromFavoritesSuccess": "Product removed from favorites",
+    "favoriteActionError": "Could not update favorites"
   },
   "features": {
     "title": "Features",

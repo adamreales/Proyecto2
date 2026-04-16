@@ -182,7 +182,12 @@
     "ratings": "Valoracions",
     "addToCart": "Afegir al carret",
     "bestSellers": "Els més venuts",
-    "translatingDescription": "Traduïnt descripció..."
+    "translatingDescription": "Traduïnt descripció...",
+    "addedToCartSuccess": "Producte afegit al carret",
+    "addedToFavoritesSuccess": "Producte afegit a favorits",
+    "alreadyInFavorites": "Aquest producte ja és a favorits",
+    "removedFromFavoritesSuccess": "Producte eliminat de favorits",
+    "favoriteActionError": "No s'han pogut actualitzar els favorits"
   },
   "features": {
     "title": "Característiques",

@@ -79,14 +79,20 @@
   align-items: center;
   justify-content: center;
   width: 70px;
-  font-size: 20px;
+  font-size: 24px;
   background-color: black;
   color: white;
   height: 50px;
 }
+.box .box-datos .btn-box .btn-favoritos.activo {
+  color: #e11d48;
+}
 .box .box-datos .btn-box .btn-favoritos:hover {
   background-color: white;
   color: black;
+}
+.box .box-datos .btn-box .btn-favoritos.activo:hover {
+  color: #e11d48;
 }
 .box .box-datos .btn-box .btn-cesta {
   width: 350px;
@@ -97,6 +103,15 @@
 .box .box-datos .btn-box .btn-cesta:hover {
   background-color: white;
   color: black;
+}
+.box .box-datos .btn-box .btn-cesta:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+.box .box-datos .btn-box .btn-cesta:disabled:hover {
+  background-color: #ccc;
+  color: #666;
 }
 .imagenes {
   display: flex;
