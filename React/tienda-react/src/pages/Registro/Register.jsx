@@ -1,6 +1,7 @@
 import "./Register.css";
 import { useState } from "react";
 import { register } from "../../services/auth";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [name, setName] = useState("");
@@ -96,7 +97,7 @@ function Register() {
 
         <form className="formulario" onSubmit={handleSubmit}>
          
-          <input type="text" className="caixa" value={name}onChange={(e) => setName(e.target.value)} placeholder="Nombre :"
+          <input type="text" className="caixa" value={name} placeholder="Nombre :"
             onChange={(e) => {
             const value = e.target.value;
             setName(value);

@@ -42,14 +42,11 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
               <li key={item.id}>
                 <div className="item-info">
 
-                  <div className="bloq1">
-                    <img src={item.imagen} alt={item.nombre} width="50" />
-
-                    <div className="propeties">
-                      <h3>{item.nombre}</h3>
-                      <p> {item.plataforma || "PC"} </p>
-                    </div>
-                  </div>
+                <img className="img-producto" src={item.imagen} alt={item.nombre} />
+                <div className="propeties">
+                    <h3>{item.nombre}</h3>
+                    <p>{item.plataforma || "PC"}</p>
+                </div>
                      <p>{formatPrice(item.precio)}</p>
                   <div className="blq-acciones">
 
