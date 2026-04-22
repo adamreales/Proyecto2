@@ -71,12 +71,12 @@ function Header() {
       {/* MENÚ MOBILE */}
       <div ref={menuRef} className={`Barra-menu ${menuOpen ? "active" : ""}`}>
         <button className="cerrar-btn" onClick={() => setMenuOpen(false)}>✕</button>
-        <Link to="/"><button className="menu-btn">{t("header.nav.home")}</button></Link>
-        <Link to="/videojuegos"><button className="menu-btn">{t("header.nav.videogames")}</button></Link>
-        <Link to="/blog"><button className="menu-btn">{t("header.nav.blog")}</button></Link>
-        <Link to="/conocenos"><button className="menu-btn">{t("header.nav.about")}</button></Link>
+        <Link to="/"><button className="menu-btn" onClick={() => setMenuOpen(false)}>{t("header.nav.home")}</button></Link>
+        <Link to="/videojuegos"><button className="menu-btn" onClick={() => setMenuOpen(false)}>{t("header.nav.videogames")}</button></Link>
+        <Link to="/blog"><button className="menu-btn" onClick={() => setMenuOpen(false)}>{t("header.nav.blog")}</button></Link>
+        <Link to="/conocenos"><button className="menu-btn" onClick={() => setMenuOpen(false)}>{t("header.nav.about")}</button></Link>
         {token && (
-          <Link to="/favoritos"><button className="menu-btn">{t("header.nav.favorites")}</button></Link>
+          <Link to="/favoritos"><button className="menu-btn" onClick={() => setMenuOpen(false)}>{t("header.nav.favorites")}</button></Link>
         )}
       </div>
 
