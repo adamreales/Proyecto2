@@ -31,6 +31,7 @@
   align-items: center;
 }
 .VideoJuegos .Filtros button {
+  flex-wrap: nowrap;
   transition: all 0.2s ease;
 }
 .VideoJuegos .Filtros button:hover {
@@ -54,8 +55,9 @@
   justify-content: flex-end;
   margin-left: auto;
 }
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
   .VideoJuegos .Filtros {
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 15px;
   }

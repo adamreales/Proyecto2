@@ -1,8 +1,10 @@
 import "./ProductoVenta.less";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad }) {
   const { t, i18n } = useTranslation();
+    const [loadingIds, setLoadingIds] = useState([]);
 
   // ✅ Formateador de moneda reutilizable
   const formatPrice = (precio) =>
@@ -10,6 +12,18 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
       style: "currency",
       currency: "EUR",
     }).format(precio);
+
+    const handleUpdate = async (item, nuevaCantidad) => {
+    if (loadingIds.includes(item.id)) return; // 🚫 evita spam
+
+    setLoadingIds((prev) => [...prev, item.id]);
+
+    try {
+        await actualizarCantidad(item, nuevaCantidad);
+    } finally {
+        setLoadingIds((prev) => prev.filter((id) => id !== item.id));
+    }
+    };
 
   return (
     <>
@@ -41,11 +55,30 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
 
                     <div className="precio">
                       <div className="contador">
-                        <button type="button" onClick={() => actualizarCantidad(item, cantidadSeleccionada - 1)} disabled={cantidadSeleccionada <= 1}>-</button>
+                        <button
+                        type="button"
+                        onClick={() => handleUpdate(item, cantidadSeleccionada - 1)}
+                        disabled={cantidadSeleccionada <= 1 || loadingIds.includes(item.id)}
+                        >
+                        -
+                        </button>
 
-                        <input type="number" value={cantidadSeleccionada} min="1" max={stockMaximo} onChange={(e) => { const val = Math.min(10, Math.max(1, Number(e.target.value) || 1)); actualizarCantidad(item, val); }}/>
+                        <input
+                        type="number"
+                        value={cantidadSeleccionada}
+                        min="1"
+                        max={stockMaximo}
+                        readOnly
+                        disabled={loadingIds.includes(item.id)}
+                        />
 
-                        <button type="button" onClick={() => actualizarCantidad(item, cantidadSeleccionada + 1)} disabled={cantidadSeleccionada >= stockMaximo}>+</button>
+                        <button
+                        type="button"
+                        onClick={() => handleUpdate(item, cantidadSeleccionada + 1)}
+                        disabled={cantidadSeleccionada >= stockMaximo || loadingIds.includes(item.id)}
+                        >
+                        +
+                        </button>
                       </div>
                     </div>
                     <div className="Gestiones">
