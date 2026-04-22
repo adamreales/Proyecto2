@@ -413,11 +413,21 @@ function Producto() {
     }
   }
 
+
+  
   return (
     <>
       <div className="box">
         <div className="box-img">
           <img src={`http://zent.es/${imgPrincipal}`}alt={producto?.titulo || "Producto"}/>
+        </div>
+
+        <div className="imagenes">
+            {producto?.do_imagenes?.map((img, index) => (
+            <div className="caja-imagen" key={index}>
+                <img src={`http://zent.es/${img.url}`}     alt={producto?.titulo || "Producto"} onClick={() => setImgPrincipal(img.url)}   className={imgPrincipal === img.url ? "activa" : ""}  />
+            </div>
+            ))}
         </div>
 
         <div className="box-datos">
@@ -499,14 +509,6 @@ function Producto() {
             </p>
           ) : null}
         </div>
-      </div>
-
-      <div className="imagenes">
-        {producto?.do_imagenes?.map((img, index) => (
-          <div className="caja-imagen" key={index}>
-            <img src={`http://zent.es/${img.url}`}     alt={producto?.titulo || "Producto"} onClick={() => setImgPrincipal(img.url)}   className={imgPrincipal === img.url ? "activa" : ""}  />
-          </div>
-        ))}
       </div>
 
       <div className="Descripciones">

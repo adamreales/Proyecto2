@@ -25,6 +25,8 @@
     gap:100px;
     margin-left: 40px;
     .box-img{
+        grid-column: 1;
+        grid-row: 1;
         width: 600px;
         height: 350px;
       
@@ -37,6 +39,8 @@
     }
     //do_plataformas.nombre
     .box-datos{
+        grid-column: 2;
+        grid-row: 1;
         width: 100%;
         height: 350px;
         padding-top: 50px;   
@@ -121,28 +125,35 @@
             }
         }
     }
-}
 
-.imagenes{
-    display: flex;
-    gap:30px;
-    width: 650px;
-    height: 150px;
-    padding-left:80px;
-    cursor:pointer;
-    .caja-imagen{
-        border-radius: 10px;
-        width: 150px;
-        height: 130px;
-
-        img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+    .imagenes{
+        grid-column: 1 / -1;
+        grid-row: 2;
+        display: flex;
+        gap:30px;
+        width: 100%;
+        max-width: 600px;
+        height: 150px;
+        padding-left:80px;
+        margin-right: auto;
+        cursor:pointer;
+        .caja-imagen{
             border-radius: 10px;
+            width: 150px;
+            height: 130px;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 10px;
+            }
         }
     }
+
 }
+
+
 
 .Descripciones{
     // display: grid;
@@ -261,23 +272,47 @@
 
 @media(max-width: 1024px) {
     .box {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
         gap: 50px;
         justify-items: center;
         margin: 0 auto;
         padding: 0 20px;
         
         .box-img {
+            grid-column: 1;
+            grid-row: 1;
             width: 100%;
-            height: 300px;
             max-width: 500px;
+            height: auto;
             margin: 0 auto;
+        }
+
+        .imagenes {
+            grid-column: 1;
+            grid-row: 2;
+            justify-content: center;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            gap: 20px;
+            margin: 0 auto;
+            padding-left: 0;
+            
+            .caja-imagen {
+                width: 120px;
+                height: 100px;
+            }
         }
         
         .box-datos {
+            grid-column: 2;
+            grid-row: 1 / 3;
             width: 100%;
             max-width: 500px;
-            margin-top: 30px;
+            margin-top: 10px;
             margin: 0 auto;          
             text-align: center;
             gap: 20px;
@@ -331,44 +366,46 @@
                 }
                 
                 .btn-cesta {
-                    max-width: 350px;
+                    max-width: 300px;
                 }
             }
         }
     }
     
-    .imagenes {
-        justify-content: center;
-        padding-top: 60px;
-        width: 100%;
-        max-width: 550px;
-        height: 120px;
-        gap: 20px;
-        margin: 0 auto;
-        padding-left: 0;
-        
-        .caja-imagen {
-            width: 120px;
-            height: 100px;
-        }
-    }
 }
 
 @media(max-width: 768px) {
     .box {
-        grid-template-columns: 1fr;
+        display: flex;           // 👈 AÑADE ESTO
+        flex-direction: column;
         gap: 20px;
         margin-left: 0;
         padding: 15px;
         
         .box-img {
+            order: 1;
             width: 100%;
             max-width: 450px;
             height: auto;
         }
         
-        .box-datos {
+        .imagenes {
             order: 1;
+            margin-bottom: 15px;
+            width: 100%;
+            height: auto;
+            padding-left: 0;
+            justify-content: center;
+            gap: 10px;
+            
+            .caja-imagen {
+                width: 90px;
+                height: 80px;
+            }
+        }
+
+        .box-datos {
+            order: 3;
             width: 100%;
             height: auto;
             text-align: center;
@@ -427,18 +464,7 @@
         }
     }
     
-    .imagenes {
-        width: 100%;
-        height: auto;
-        padding-left: 0;
-        justify-content: center;
-        gap: 10px;
-        
-        .caja-imagen {
-            width: 90px;
-            height: 80px;
-        }
-    }
+
     
     .Descripciones {
         padding: 10px;
