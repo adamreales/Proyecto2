@@ -1,3 +1,78 @@
-button{
-    background-color: greenyellow;
+.password-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.password-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.error{
+    color: red;
+}
+
+.formulario{
+    .caixa {
+        width: 100%;
+        padding-right: 45px; // espacio para el ojo
+        box-sizing: border-box;
+    }
+
+}
+.btn-ojo {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    font-size: 20px;
+    pointer-events: none; // evita problemas de click
+  }
+}
+
+/* 🔥 Barra de fuerza */
+
+.estado_contra{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .strength-bar {
+    width: 50%;
+    height: 8px;
+    background: #ddd;
+    border-radius: 5px;
+    margin-top: 6px;
+    overflow: hidden;
+
+    .strength-fill {
+        height: 100%;
+        width: 0%;
+        transition: all 0.5s ease;
+    }
+    }
+}
+
+/* ⚠️ Caps Lock aviso */
+.aviso-capslock {
+  font-size: 12px;
+  color: orange;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+
+  .aviso-icon {
+    font-size: 16px;
+  }
 }

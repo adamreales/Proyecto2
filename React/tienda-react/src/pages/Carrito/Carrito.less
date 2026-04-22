@@ -15,134 +15,169 @@
 
 /* PADDING */
 @padding-pantalla: 20px;
-.Titulos{
+
+/* GLOBAL FIX */
+* {
+    box-sizing: border-box;
+}
+
+/* TITULOS */
+.Titulos {
     display: flex;
     justify-content: flex-start;
     width: 100%;
     padding-inline: clamp(16px, 6vw, 100px);
-    box-sizing: border-box;
 }
-.Carrito{
+
+/* CARRITO */
+.Carrito {
     display: flex;
     justify-content: center;
     gap: 20px;
     width: 100%;
-    align-items: start;
-    box-sizing: border-box;
+    align-items: flex-start;
     padding-inline: 20px;
-  
-    .targeta-carrito
-    {
-        width: 60%;
-        max-width: none;
-        min-width: 0;
+
+    .targeta-carrito {
+        flex: 1 1 60%;
+        min-width: 0; // 🔥 clave para evitar overflow
+
+        ul {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 0;
+            list-style: none;
+
+            li {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                flex-wrap: wrap; // 🔥 SOLUCION BUG TEXTO
+                padding: 15px;
+                border-radius: 10px;
+
+                h2, p, span {
+                    word-break: normal;
+                    overflow-wrap: break-word;
+                }
+            }
+        }
     }
-    .target-payment{
+
+    .target-payment {
+        flex: 1 1 28%;
+        min-width: 0;
         display: flex;
-        width: 28%;
         flex-direction: column;
-        gap:20px;
+        gap: 20px;
         background-color: transparent;
         border: 1px solid black;
         border-radius: 10px;
-        padding-bottom: 25px;
-        min-height: 250px;
-        height: auto;
-        min-width: 0;
+        padding: 20px;
     }
 }
 
+/* ========================= */
+/* 1024px */
+/* ========================= */
 @media (max-width: 1024px) {
     .Carrito {
         gap: 16px;
         padding-inline: 16px;
-        
+
+
         .targeta-carrito {
-            width: 65%;
+            
+            .bloq1{
+                flex-direction: row;
+            }
         }
-        
+
+        .targeta-carrito ul li .item-info .bloq1{
+            
+            ul{
+                li{
+                    .item-info{
+                        .bloq1{
+                            flex-direction: column;
+                        }
+                    }
+                }
+            }
+            
+        }
+
         .target-payment {
-            width: 35%;
+            flex: 0 0 35%;
         }
     }
 }
 
+/* ========================= */
+/* 900px */
+/* ========================= */
 @media (max-width: 900px) {
     .Carrito {
         flex-direction: column;
         gap: 20px;
-        
-        .targeta-carrito {
-            width: 100%;
+        align-items: stretch;
+
+        .targeta-carrito ul li .item-info .bloq1{
+
+            ul{
+                li{
+                    .item-info{
+                        .bloq1{
+                            flex-direction: column;
+                        }
+                    }
+                }
+            }
+            
         }
-        
+
+        .targeta-carrito,
         .target-payment {
+            flex: 1 1 100%;
             width: 100%;
+            max-width: 100%;
         }
     }
 }
 
+/* ========================= */
+/* 768px */
+/* ========================= */
 @media (max-width: 768px) {
     .Titulos {
         padding-inline: 12px;
         margin-bottom: 15px;
-        
-        h1 {
-            font-size: 24px;
+
+        h2 {
+            font-size: 22px;
         }
     }
-    
+
     .Carrito {
         padding-inline: 12px;
         gap: 15px;
-        
+
         .targeta-carrito {
             ul {
+                gap: 12px;
+
                 li {
                     padding: 12px;
                 }
             }
         }
-        
+
         .target-payment {
             padding: 15px;
             gap: 15px;
-            min-height: auto;
-        }
-    }
-}
 
-@media (max-width: 600px) {
-    .Titulos,
-    .Carrito {
-        padding-inline: 10px;
-    }
-    
-    .Titulos {
-        h1 {
-            font-size: 20px;
-        }
-    }
-    
-    .Carrito {
-        gap: 12px;
-        
-        .targeta-carrito {
-            ul {
-                gap: 12px;
-                
-                li {
-                    padding: 10px;
-                    border-radius: 8px;
-                }
-            }
-        }
-        
-        .target-payment {
-            padding: 12px;
-            gap: 12px;
-            border-radius: 8px;
-            
             h2 {
                 font-size: 18px;
             }
@@ -150,21 +185,94 @@
     }
 }
 
-@media (max-width: 400px) {
+/* ========================= */
+/* 600px */
+/* ========================= */
+@media (max-width: 600px) {
+    .Titulos,
     .Carrito {
-        padding-inline: 8px;
-        gap: 10px;
-        
+        padding-inline: 10px;
+    }
+
+    .Titulos {
+        h2 {
+            font-size: 20px;
+        }
+    }
+
+    .Carrito {
+        gap: 12px;
+
         .targeta-carrito {
             ul {
-                gap: 10px;
+                gap: 12px;
+
+                li {
+                    padding: 12px;
+                }
             }
         }
-        
+
         .target-payment {
-            padding: 10px;
-            gap: 10px;
+            padding: 14px;
+            gap: 12px;
+
+            h2 {
+                font-size: 17px;
+            }
+
+            button {
+                width: 100%;
+                padding: 12px;
+                font-size: 15px;
+            }
         }
     }
 }
 
+/* ========================= */
+/* 400px */
+/* ========================= */
+@media (max-width: 400px) {
+    .Titulos,
+    .Carrito {
+        padding-inline: 8px;
+    }
+
+    .Titulos {
+        margin-bottom: 10px;
+
+        h2 {
+            font-size: 18px;
+        }
+    }
+
+    .Carrito {
+        gap: 10px;
+
+        .targeta-carrito {
+            ul {
+                gap: 10px;
+
+                li {
+                    padding: 10px;
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .target-payment {
+            padding: 10px;
+            gap: 10px;
+
+            h2 {
+                font-size: 16px;
+            }
+
+            button {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+    }
+}

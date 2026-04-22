@@ -153,17 +153,24 @@
     height: auto;
   }
   .targeta-carrito ul li .item-info .bloq1 {
-    width: 60%;
+    flex-direction: column ;
+    flex: 1;
+    min-width: 0;
   }
   .targeta-carrito ul li .item-info .bloq1 img {
     width: 150px;
     height: 100px;
   }
+  .targeta-carrito ul li .item-info .bloq1 .propeties {
+    min-width: 0;
+  }
   .targeta-carrito ul li .item-info .bloq1 .propeties h3 {
     font-size: 21px;
+    overflow-wrap: break-word;
   }
   .targeta-carrito ul li .item-info .bloq1 .propeties p {
     font-size: 18px;
+    word-break: normal;
   }
   .targeta-carrito ul li .item-info p {
     font-size: 22.5px;

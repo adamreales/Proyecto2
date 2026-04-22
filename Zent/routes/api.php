@@ -25,8 +25,8 @@ use App\Http\Controllers\ControllerValoracion;
 */
 
 
-Route::post('/login', [ControllerLogin::class,'login'])->name('login');
-Route::post('/registro',[ControllerRegistro::class,'registro'])->name('registro');
+Route::post('/login', [ControllerLogin::class,'login'])->middleware('throttle:5,1')->name('login');
+Route::post('/registro',[ControllerRegistro::class,'registro'])->middleware('throttle:5,1')->name('registro');
 Route::post('/solicitar_recuperacion_contraseña', [ControllerLogin::class,'solicitar_recuperacion_contraseña'])->name('solicitar_recuperacion_contraseña');
 Route::post('/validar_y_reset_contraseña', [ControllerLogin::class,'validar_y_reset_contraseña'])->name('validar_y_reset_contraseña');
 

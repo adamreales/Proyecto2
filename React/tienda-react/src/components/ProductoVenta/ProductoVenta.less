@@ -190,7 +190,9 @@
                     height: auto;
 
                     .bloq1 {
-                        width: 60%;
+                        flex-direction: column ;
+                        flex: 1;
+                        min-width: 0;
 
                         img {
                             width: 150px;
@@ -198,8 +200,9 @@
                         }
 
                         .propeties {
-                            h3 { font-size: @mida-letra-p * 1.4; }
-                            p  { font-size: @mida-letra-p * 1.2; }
+                            min-width: 0;
+                            h3 { font-size: @mida-letra-p * 1.4; overflow-wrap: break-word; }
+                            p  { font-size: @mida-letra-p * 1.2; word-break: normal; }
                         }
                     }
 

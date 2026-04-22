@@ -8,6 +8,7 @@ use App\Mail\VerificacionMail;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class ControllerRegistro extends Controller
 {
@@ -26,7 +27,7 @@ class ControllerRegistro extends Controller
                 'error' => 'Ya existe este email'
             ],409);
         }
-        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/', $r->password)) {
+        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $r->password)) {
             return response()->json([
                 'error' => 'Contraseña incorrecta requisitos minimos: 8 caracteres - 1 minuscula - 1 mayuscula - 1 simbolo'
             ], 400);
@@ -38,20 +39,27 @@ class ControllerRegistro extends Controller
         }
         
         $usu = [
-            'name' => $r->name,
-            'email' => $r->email,
+            'name' => trim($r->name),
+            'email' => strtolower(trim($r->email)),
             'password' => Hash::make($r->password),
         ];
 
-        $user = User::create($usu);
-        $token = $user->createToken('usuario_registro')->plainTextToken;
+        try{
+            $user = User::create($usu);
+            $token = $user->createToken('usuario_registro')->plainTextToken;
 
-        Mail::to($r->email)->send(new VerificacionMail($user->name,$user->id));
+            Mail::to($r->email)->send(new VerificacionMail($user->name,$user->id));
 
-        return response()->json([
-            'registro' => 'Registro enviado correctamente. Revisa tu correo',
-            'token' => $token
-        ],201);
+            return response()->json([
+                'registro' => 'Registro enviado correctamente. Revisa tu correo',
+                'token' => $token
+            ],201);
+        }catch(\Exception $e){
+            DB::rollBack();
+            return response()->json([
+                'error' => 'Error en el registro'
+            ],500);
+        }
 
     }
 
