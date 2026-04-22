@@ -113,98 +113,117 @@ body
 /* ========================= */
 /* TABLET */
 /* ========================= */
-@media (max-width: 1024px)
-{
-    body main .Fundacion{
+@media (min-width: 768px) and (max-width: 1150px) {
+
+    /* FUNDACION (lo tuyo, lo dejo bien) */
+    body main .Fundacion {
         grid-template-columns: 1fr;
         text-align: center;
-
-       
+        padding: 30px 20px;
     }
 
-    body main .Fundacion .texto-fundacion{
+    body main .Fundacion .texto-fundacion {
         max-width: 100%;
         font-size: 16px;
     }
 
-    body .Titulo{
+    body .Titulo {
         font-size: 18px;
         justify-content: center;
     }
 
-    body main .Fundadores .Co-fundador{
-        grid-template-columns: 280px 1fr;
-        gap: 20px;
+    /* 🔥 FUNDADORES (CAMBIO IMPORTANTE) */
+    body main .Fundadores .Co-fundador {
+        display: block; /* ❌ quitamos grid */
+        width: 100%;
     }
 
-    body main .Fundadores .Co-fundador.cofundador-adrian{
-        grid-template-columns: 1fr 280px;
+    /* 🖼 Imagen izquierda */
+    body main .Fundadores .Co-fundador .Imagen {
+        float: left;
+        width: 260px;
+        margin-right: 20px;
+        margin-bottom: 10px;
     }
 
-    body main .Fundadores .Co-fundador .descripcion p{
+    body main .Fundadores .Co-fundador .Imagen img {
+        width: 100%;
+        display: block;
+        border-radius: 10px;
+    }
+
+    /* 📝 Texto */
+    body main .Fundadores .Co-fundador .descripcion {
+        display: block;
+    }
+
+    body main .Fundadores .Co-fundador .descripcion p {
         font-size: 18px;
+        line-height: 1.8;
+    }
+
+    /* 🔄 Caso ADRIAN (invertido) */
+    body main .Fundadores .Co-fundador.cofundador-adrian .Imagen {
+        float: right;
+        margin-right: 0;
+        margin-left: 20px;
+    }
+
+    /* 🧹 limpiar float */
+    body main .Fundadores .Co-fundador::after {
+        content: "";
+        display: block;
+        clear: both;
     }
 }
 
 /* ========================= */
 /* MOBILE */
 /* ========================= */
-@media (max-width: 600px)
-{
-    body main .Fundacion{
-        grid-template-columns: 1fr;
-        padding: 25px 15px;
-        gap:15px;
-    }
+@media (max-width: 768px) {
 
-    /* Fuerza que en ambos artículos la imagen quede arriba */
-    body main .Fundacion .Imagenes{
-        order: -1;
-    }
-
-    body main .Fundacion .texto-fundacion{
-        font-size: 15px;
-        line-height: 1.7;
-    }
-
-    body .Titulo{
-        font-size: 16px;
-        padding: 15px;
-        justify-content: center;
-        text-align: center;
-    }
-
-    body main .Fundadores{
+    /* FUNDADORES */
+    body main .Fundadores {
         padding: 0 15px 35px;
     }
 
     body main .Fundadores .Co-fundador,
-    body main .Fundadores .Co-fundador.cofundador-adrian{
-        grid-template-columns: 1fr;
-        gap: 16px;
+    body main .Fundadores .Co-fundador.cofundador-adrian {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
     }
 
-    body main .Fundadores .Co-fundador.cofundador-adrian .descripcion,
-    body main .Fundadores .Co-fundador.cofundador-adrian .Imagen{
-        grid-column: auto;
-        grid-row: auto;
-    }
-
-    body main .Fundadores .Co-fundador .Imagen{
+    /* 🖼 Imagen arriba centrada */
+    body main .Fundadores .Co-fundador .Imagen {
+        width: 100%;
         max-width: 280px;
         margin: 0 auto;
+        float: none; /* 🔥 IMPORTANTE quitar float */
     }
 
-    body main .Fundadores .Co-fundador .descripcion{
+    body main .Fundadores .Co-fundador .Imagen img {
+        width: 100%;
+        border-radius: 10px;
+        display: block;
+    }
+
+    /* 📝 Texto centrado */
+    body main .Fundadores .Co-fundador .descripcion {
+        width: 100%;
         padding: 0;
+        text-align: center;
     }
 
-    body main .Fundadores .Co-fundador .descripcion h2{
-        font-size: 22px;
+    body main .Fundadores .Co-fundador .descripcion h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
     }
 
-    body main .Fundadores .Co-fundador .descripcion p{
-        font-size: 16px;
-        line-height: 1.7;
+    body main .Fundadores .Co-fundador .descripcion p {
+        font-size: 15px;
+        line-height: 1.6;
+        text-align: center;
     }
 }
