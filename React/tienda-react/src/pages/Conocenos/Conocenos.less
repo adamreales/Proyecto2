@@ -115,16 +115,39 @@ body
 /* ========================= */
 @media (min-width: 768px) and (max-width: 1150px) {
 
-    /* FUNDACION (lo tuyo, lo dejo bien) */
+    /* FUNDACION */
     body main .Fundacion {
-        grid-template-columns: 1fr;
-        text-align: center;
+        display: block;
         padding: 30px 20px;
+    }
+
+    body main .Fundacion .Imagenes {
+        float: left;
+        width: 300px;
+        margin-right: 20px;
+        margin-bottom: 10px;
     }
 
     body main .Fundacion .texto-fundacion {
         max-width: 100%;
         font-size: 16px;
+        text-align: left;
+    }
+
+    body main .Fundacion .texto-fundacion p {
+        margin: 0;
+    }
+
+    body main .Fundacion:nth-of-type(even) .Imagenes {
+        float: right;
+        margin-right: 0;
+        margin-left: 20px;
+    }
+
+    body main .Fundacion::after {
+        content: "";
+        display: block;
+        clear: both;
     }
 
     body .Titulo {
@@ -181,6 +204,29 @@ body
 /* MOBILE */
 /* ========================= */
 @media (max-width: 768px) {
+
+    body main .Fundacion {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 25px 15px;
+    }
+
+    body main .Fundacion .Imagenes {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    body main .Fundacion .texto-fundacion {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    body main .Fundacion .texto-fundacion p {
+        margin: 0;
+    }
 
     /* FUNDADORES */
     body main .Fundadores {
