@@ -75,7 +75,12 @@ function ValoracionesUsuarios({ producto }) {
     };
   }, [producto?.do_valoraciones, i18n.language]);
 
+    if (!producto?.do_valoraciones || producto.do_valoraciones.length === 0) {
+    return null;
+    }
+  
   return (
+    
     <div className="valoraciones-container">
 
       <div className="valoraciones-header">

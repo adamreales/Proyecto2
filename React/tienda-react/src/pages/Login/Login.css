@@ -81,6 +81,7 @@
 }
 .formulario .Botones .btn-login {
   border: 1px solid #00eaff;
+  height: 70px;
 }
 .formulario .Botones .btn-login:hover {
   background: #00eaff;
@@ -89,6 +90,7 @@
 }
 .formulario .Botones .btn-registro {
   border: 1px solid #ff2fd0;
+  height: 70px;
 }
 .formulario .Botones .btn-registro:hover {
   background: #ff2fd0;
