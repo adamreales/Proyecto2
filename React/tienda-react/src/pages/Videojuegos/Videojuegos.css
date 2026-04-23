@@ -62,6 +62,7 @@
     gap: 15px;
   }
   .VideoJuegos .Filtros .Filtros_boton {
+    width: 80%;
     flex-wrap: wrap;
     gap: 10px;
     margin-left: 0;

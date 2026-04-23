@@ -66,9 +66,11 @@ header .Login button {
 }
 header .Login .Log {
   border-color: #00eaff;
+  height: 65px;
 }
 header .Login .Reg {
   border-color: #ff2fd0;
+  height: 65px;
 }
 header .btn-carrito,
 header .btn-perfil {
@@ -286,6 +288,12 @@ header .cerrar-btn {
   header .Login button {
     padding: 8px 12px;
     font-size: 13px;
+  }
+  header .Login .Log {
+    height: 45px;
+  }
+  header .Login .Reg {
+    height: 45px;
   }
   header .idiomas {
     gap: 3px;
