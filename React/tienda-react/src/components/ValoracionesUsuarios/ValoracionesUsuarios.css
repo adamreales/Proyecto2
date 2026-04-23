@@ -59,7 +59,7 @@
   border: none;
 }
 .valoraciones-container button .mario {
-  width: 90px;
+  width: 60px;
   transition: transform 0.25s ease;
   animation: idle 2s infinite ease-in-out;
 }

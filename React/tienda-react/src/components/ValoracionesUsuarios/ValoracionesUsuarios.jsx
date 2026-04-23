@@ -94,7 +94,7 @@ function ValoracionesUsuarios({ producto }) {
             disabled={pagina === 0}
           >
             <img
-              src="http://zent.es/imagenes_producto/correrizq.png"
+              src="http://zent.es/imagenes_producto/flecha_izquierda.png"
               className="mario"
               alt={t("common.previous")}
             />
@@ -106,7 +106,7 @@ function ValoracionesUsuarios({ producto }) {
             disabled={fin >= producto.do_valoraciones.length}
           >
             <img
-              src="http://zent.es/imagenes_producto/correr.png"
+              src="http://zent.es/imagenes_producto/flecha_derecha.png"
               className="mario mario-right"
               alt={t("common.next")}
             />
