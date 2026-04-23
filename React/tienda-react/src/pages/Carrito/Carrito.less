@@ -37,10 +37,12 @@
     width: 100%;
     align-items: flex-start;
     padding-inline: 20px;
+    max-width: 1400px;
+    margin-inline: auto;
 
     .targeta-carrito {
         flex: 1 1 60%;
-        min-width: 0; // 🔥 clave para evitar overflow
+        min-width: 0; 
 
         ul {
             width: 100%;
@@ -54,7 +56,7 @@
                 display: flex;
                 gap: 15px;
                 align-items: center;
-                flex-wrap: wrap; // 🔥 SOLUCION BUG TEXTO
+                flex-wrap: wrap; 
                 padding: 15px;
                 border-radius: 10px;
 
@@ -79,38 +81,22 @@
     }
 }
 
+
 /* ========================= */
-/* 1024px */
+/* 1280px */
 /* ========================= */
-@media (max-width: 1024px) {
+@media (max-width: 1280px) {
     .Carrito {
-        gap: 16px;
+        flex-direction: column;
+        gap: 24px;
+        align-items: stretch;
         padding-inline: 16px;
 
-
-        .targeta-carrito {
-            
-            .bloq1{
-                flex-direction: row;
-            }
-        }
-
-        .targeta-carrito ul li .item-info .bloq1{
-            
-            ul{
-                li{
-                    .item-info{
-                        .bloq1{
-                            flex-direction: column;
-                        }
-                    }
-                }
-            }
-            
-        }
-
+        .targeta-carrito,
         .target-payment {
-            flex: 0 0 35%;
+            flex: 1 1 100%;
+            width: 100%;
+            max-width: 100%;
         }
     }
 }
@@ -120,23 +106,7 @@
 /* ========================= */
 @media (max-width: 900px) {
     .Carrito {
-        flex-direction: column;
         gap: 20px;
-        align-items: stretch;
-
-        .targeta-carrito ul li .item-info .bloq1{
-
-            ul{
-                li{
-                    .item-info{
-                        .bloq1{
-                            flex-direction: column;
-                        }
-                    }
-                }
-            }
-            
-        }
 
         .targeta-carrito,
         .target-payment {
