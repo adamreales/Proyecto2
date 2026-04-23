@@ -2,12 +2,13 @@ import "./Perfil.css"
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { descargarFacturaPdf, getFacturas } from "../../services/facturas";
 import { getMisValoraciones } from "../../services/valoraciones";
 
 function Perfil() 
 {
-    
+    const { t } = useTranslation();
     const token = localStorage.getItem("token");
     const [user, setUser] = useState(null);
     const [ultimosPedidos, setUltimosPedidos] = useState([]);
@@ -85,53 +86,53 @@ function Perfil()
         }
     }
 
-    if(!user) return <p>Cargando el perfil....</p>;
+    if(!user) return <p>{t("profile.loading")}</p>;
     return (
         <>
             {/* <h1>Mi Perfil</h1> */}
             <div className="Perfil-page">            
                 <div className="Cabezera">
-                    <h2>Hola,<b> {user.name}</b></h2> 
-                    <button className="btn-cerrar"onClick={cerrarSession}> Cerrar sesión</button>
+                    <h2>{t("profile.hello")},<b> {user.name}</b></h2> 
+                    <button className="btn-cerrar"onClick={cerrarSession}> {t("profile.logout")}</button>
                 </div>
 
                 <div className="Configuracion">
-                        <Link to="/mis-datos"><button className="btn-config">MIS DATOS</button></Link>
-                        <Link to="/mis-pedidos"><button className="btn-config">MIS PEDIDOS</button></Link>
+                        <Link to="/mis-datos"><button className="btn-config">{t("profile.myData")}</button></Link>
+                        <Link to="/mis-pedidos"><button className="btn-config">{t("profile.myOrders")}</button></Link>
                 </div>
                 <div className="subtitulos">
-                    <h2>Tus Últimos Pedidos Realizados</h2>
-                     <Link to="/mis-pedidos"><button className="btn-config">Mis Pedidos</button></Link>
+                    <h2>{t("profile.recentOrders")}</h2>
+                     <Link to="/mis-pedidos"><button className="btn-config">{t("profile.myOrders")}</button></Link>
                 </div>
                 <div className="box-pedidos">
                     {ultimosPedidos.length === 0 ? (
-                        <p>No tienes pedidos todavía.</p>
+                        <p>{t("profile.noOrdersYet")}</p>
                     ) : (
                         ultimosPedidos.slice(0, 3).map((pedido) => (
                             <div className="pedido-item" key={pedido.id}>
-                                <p><b>Pedido:</b> #{pedido.id_pedido ?? pedido.id}</p>
-                                <p><b>Factura:</b> {pedido.numero_factura ?? "Sin numero"}</p>
-                                <p><b>Total:</b> {Number(pedido.total ?? 0).toFixed(2)} EUR</p>
+                                <p><b>{t("profile.orderLabel")}:</b> #{pedido.id_pedido ?? pedido.id}</p>
+                                <p><b>{t("profile.invoiceLabel")}:</b> {pedido.numero_factura ?? t("profile.noNumber")}</p>
+                                <p><b>{t("profile.totalLabel")}:</b> {Number(pedido.total ?? 0).toFixed(2)} EUR</p>
                                 <button type="button" className="btn-config" onClick={() => handleDescargarFactura(pedido.id)}>
-                                    Descargar factura
+                                    {t("profile.downloadInvoice")}
                                 </button>
                             </div>
                         ))
                     )}
                 </div>
                 <div className="subtitulos">
-                    <h2>Mis Opiniones de Productos</h2>
-                 <Link to="/mis-opiniones"><button className="btn-config">Mis Opiniones</button></Link>
+                    <h2>{t("profile.productOpinions")}</h2>
+                 <Link to="/mis-opiniones"><button className="btn-config">{t("profile.myReviews")}</button></Link>
                 </div>
                 <div className="box-opiniones">
                     {ultimasValoraciones.length === 0 ? (
-                        <p>No has realizado valoraciones todavía.</p>
+                        <p>{t("profile.noReviewsYet")}</p>
                     ) : (
                         ultimasValoraciones.slice(0, 3).map((valoracion) => (
                                 <div className="valoracion-item" key={valoracion.id}>
-                                    <p><b>Producto:</b> {valoracion.producto_titulo || "Producto"}</p>
-                                    <p><b>Valoracion:</b> {"⭐".repeat(valoracion.estrellas || 0)}</p>
-                                    <p><b>Comentario:</b> {valoracion.comentario || "Sin comentario"}</p>                   
+                                    <p><b>{t("profile.productLabel")}:</b> {valoracion.producto_titulo || t("profile.productFallback")}</p>
+                                    <p><b>{t("profile.ratingLabel")}:</b> {"⭐".repeat(valoracion.estrellas || 0)}</p>
+                                    <p><b>{t("profile.commentLabel")}:</b> {valoracion.comentario || t("profile.noComment")}</p>                   
                                 </div>
                             ))
                         )}
