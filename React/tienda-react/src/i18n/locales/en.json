@@ -164,10 +164,10 @@
     "title": "VIDEOGAMES",
     "priceAsc": "Price ↑",
     "priceDesc": "Price ↓",
-    "alphaAsc": "Alphabetically ↑",
-    "alphaDesc": "Alphabetically ↓",
-    "categories": "Filter by category",
-    "platforms": "Filter by platform",
+    "alphaAsc": "Title ↑",
+    "alphaDesc": "Title ↓",
+    "categories": "Filter category",
+    "platforms": "Filter platform",
     "page": "Page"
   },
   "outlet": {
