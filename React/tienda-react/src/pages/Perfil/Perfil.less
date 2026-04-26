@@ -7,6 +7,289 @@
 @tipo-letra-gaming: 'Orbitron', sans-serif;
 @tipo-letra-p: 'Inter', sans-serif;
 
+.Perfil-page {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 32px;
+
+    // ── Cabecera ──
+    .Cabezera {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 20px;
+
+        h2 {
+            font-family: @tipo-letra-gaming;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .Cabezera-acciones {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .btn-nav {
+                display: inline-block;
+                background-color: transparent;
+                border: 1px solid black;
+                color: black;
+                padding: 10px 20px;
+                font-family: @tipo-letra-btn;
+                font-size: 14px;
+                font-weight: 500;
+                border-radius: 8px;
+                text-decoration: none;
+                cursor: pointer;
+                transition: background-color 0.2s ease, color 0.2s ease;
+
+                &:hover {
+                    background-color: black;
+                    color: #fff;
+                }
+            }
+        }
+
+        .btn-cerrar {
+            background-color: transparent;
+            border: 1px solid black;
+            color: black;
+            padding: 10px 20px;
+            font-family: @tipo-letra-btn;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+
+            &:hover {
+                background-color: black;
+                color: #fff;
+            }
+        }
+    }
+
+    // ── Subtítulos de sección ──
+    .subtitulos {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 10px;
+
+        h2 {
+            font-family: @tipo-letra-gaming;
+            font-size: 22px;
+            margin: 0;
+        }
+    }
+
+    .link-ver-todos {
+        font-family: @tipo-letra-p;
+        font-size: 14px;
+        color: #555;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: #000;
+        }
+    }
+
+    // ── Tarjetas de pedidos ──
+    .box-pedidos {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+
+        .pedido-item {
+            border-radius: 10px;
+            border: 1px solid #e5e5e5;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background-color: #fafafa;
+
+            .pedido-info {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .pedido-tag {
+                font-family: @tipo-letra-p;
+                font-size: 13px;
+                font-weight: 600;
+                color: #222;
+            }
+
+            .pedido-total {
+                font-family: @tipo-letra-p;
+                font-size: 14px;
+                font-weight: 700;
+                color: #111;
+            }
+
+            .pedido-factura {
+                font-family: @tipo-letra-p;
+                font-size: 13px;
+                color: #777;
+                margin: 0;
+            }
+
+            .btn-descargar {
+                margin-top: 8px;
+                background-color: transparent;
+                border: 1px solid black;
+                color: black;
+                padding: 8px 14px;
+                font-family: @tipo-letra-btn;
+                font-size: 13px;
+                border-radius: 8px;
+                cursor: pointer;
+                align-self: flex-start;
+                transition: background-color 0.2s ease, color 0.2s ease;
+
+                &:hover {
+                    background-color: black;
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    // ── Tarjetas de valoraciones ──
+    .box-opiniones {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+
+        .valoracion-item {
+            border-radius: 10px;
+            border: 1px solid #e5e5e5;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background-color: #fafafa;
+
+            .valoracion-producto {
+                font-family: @tipo-letra-p;
+                font-size: 14px;
+                font-weight: 600;
+                color: #222;
+                margin: 0;
+            }
+
+            .valoracion-estrellas {
+                font-size: 16px;
+                margin: 0;
+            }
+
+            .valoracion-comentario {
+                font-family: @tipo-letra-p;
+                font-size: 13px;
+                color: #555;
+                margin: 0;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
+    }
+}
+
+/* ========================= */
+/* 📱 TABLET (≤1024px)       */
+/* ========================= */
+@media (max-width: 1024px) {
+    .Perfil-page {
+        .box-pedidos {
+            grid-template-columns: 1fr 1fr;
+        }
+        .box-opiniones {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+
+/* ========================= */
+/* 📱 MÓVIL (≤768px)         */
+/* ========================= */
+@media (max-width: 768px) {
+    .Perfil-page {
+        gap: 15px;
+
+        .Cabezera {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .Cabezera-acciones {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+
+                .btn-nav {
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+
+            .btn-cerrar {
+                text-align: center;
+                width: 100%;
+            }
+        }
+
+        .box-pedidos {
+            grid-template-columns: 1fr;
+        }
+
+        .box-opiniones {
+            grid-template-columns: 1fr;
+        }
+
+        .subtitulos {
+            flex-direction: column;
+            gap: 5px;
+        }
+    }
+}
+
+/* ========================= */
+/* 📱 MÓVIL PEQUEÑO (≤480px) */
+/* ========================= */
+@media (max-width: 480px) {
+    .Perfil-page {
+        .Cabezera h2 {
+            font-size: 18px;
+        }
+
+        .btn-cerrar {
+            padding: 8px 15px;
+        }
+
+        .pedido-item,
+        .valoracion-item {
+            padding: 10px;
+        }
+    }
+}
+
+
 .Perfil-page
 {
     display: flex;
