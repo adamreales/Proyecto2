@@ -1,7 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 export function useHeaderCart() {
   const [cartItems, setCartItems] = useState([]);
+  const pendingQuantityUpdatesRef = useRef(new Set());
 
   const parseJsonSafe = async (res) => {
     const raw = await res.text();
@@ -200,6 +201,9 @@ export function useHeaderCart() {
     const cantidadClampeada = Math.max(1, Math.min(Number(nuevaCantidad) || 1, stockMaximo));
 
     if (cantidadClampeada === item.cantidad) return;
+    if (pendingQuantityUpdatesRef.current.has(item.id)) return;
+
+    pendingQuantityUpdatesRef.current.add(item.id);
 
     // Actualización optimista para UI fluida
     setCartItems(prev => prev.map(i => i.id === item.id ? { ...i, cantidad: cantidadClampeada } : i));
@@ -259,6 +263,8 @@ export function useHeaderCart() {
     } catch (error) {
       console.error("Error al actualizar cantidad:", error);
       await loadCart(); // Revertir recargando desde el backend
+    } finally {
+      pendingQuantityUpdatesRef.current.delete(item.id);
     }
   }, [cartItems, loadCart]);
 

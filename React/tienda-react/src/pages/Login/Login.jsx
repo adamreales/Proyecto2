@@ -31,7 +31,7 @@ function Login() {
           <input className="caixa"  type="email"value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email : " />
           <div className="password-wrapper">
             <div className="password-row">
-              <input className="caixa" type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} onKeyUp={(e) => setCapsLock(e.getModifierState("CapsLock"))} onFocus={(e) => setCapsLock(e.getModifierState("CapsLock"))} onBlur={() => setCapsLock(false)}placeholder="Contraseña : "/>
+              <input className="caixa" type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} onKeyUp={(e) => setCapsLock(e.getModifierState("CapsLock"))} onFocus={() => setCapsLock(false)} placeholder="Contraseña : "/>
 
               <button type="button" className="btn-ojo" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}>
                 <span className="material-symbols-outlined">{showPassword ? "visibility_off" : "visibility"}</span>
@@ -42,10 +42,12 @@ function Login() {
             )}
             <span id="aviso" className="aviso"></span>
           </div>
-          <Link to="/forgot-password"><a href="#" style={{textDecoration: "none"}}>¿Olvidaste tu contraseña?</a></Link>
+          <Link to="/forgot-password" style={{ textDecoration: "none" }}>
+            ¿Olvidaste tu contraseña?
+          </Link>
           <div className="Botones">
             <button type="submit" className="btn-login"> Iniciar sesión </button>
-             <Link to="/register"> <button type="submit" className="btn-registro">Registrate</button></Link>
+             <Link to="/register"> <button type="button" className="btn-registro">Registrate</button></Link>
           </div>
         </form>
       </div>
