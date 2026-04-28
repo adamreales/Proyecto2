@@ -2,9 +2,12 @@ import "./Videojuegos.css";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SeccionProductosVideojuegos from "../../components/SeccionProductosVideojuegos/SeccionProductosVideojuegos";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
 function Videojuegos() {
   const { t } = useTranslation();
+
+  const LIMIT = 12;
 
   const [productos, setProductos] = useState([]);
   const [pagina, setPagina] = useState(1);
@@ -13,6 +16,7 @@ function Videojuegos() {
   const [orden, setOrden] = useState("");
   const [categorias, setCategorias] = useState([]);
   const [plataformas, setPlataformas] = useState([]);
+  const [hayMas, setHayMas] = useState(true); // 👈 nuevo
 
   const ordenEspecial =
     orden === "productos_mas_baratos" ||
@@ -21,7 +25,7 @@ function Videojuegos() {
     orden === "productos_mas_caros";
 
   const next = () => {
-    if (productos.length === 20) {
+    if (hayMas) {
       setPagina((prevPagina) => prevPagina + 1);
     }
   };
@@ -33,14 +37,14 @@ function Videojuegos() {
   };
 
   useEffect(() => {
-    let url = `http://127.0.0.1:8000/api/productos?page=${pagina}&limit=20`;
+    let url = `http://127.0.0.1:8000/api/productos?page=${pagina}&limit=${LIMIT}`;
 
     if (categoria) {
-      url = `http://127.0.0.1:8000/api/productos_categoria/${categoria}`;
+      url = `http://127.0.0.1:8000/api/productos_categoria/${categoria}?page=${pagina}&limit=${LIMIT}`;
     } else if (plataforma) {
-      url = `http://127.0.0.1:8000/api/productos_plataforma/${plataforma}`;
+      url = `http://127.0.0.1:8000/api/productos_plataforma/${plataforma}?page=${pagina}&limit=${LIMIT}`;
     } else if (ordenEspecial) {
-      url = `http://127.0.0.1:8000/api/${orden}`;
+      url = `http://127.0.0.1:8000/api/${orden}?page=${pagina}&limit=${LIMIT}`;
     }
 
     if (orden && !ordenEspecial) {
@@ -49,7 +53,14 @@ function Videojuegos() {
 
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setProductos(data.productos || data.producto || []))
+      .then((data) => {
+        console.log(data);
+        const lista = data.productos || data.producto || [];
+        setProductos(lista);
+
+        // 👇 clave para que funcione bien el botón next
+        setHayMas(data.hasMore);
+      })
       .catch((err) => console.error(err));
   }, [pagina, categoria, plataforma, orden]);
 
@@ -69,90 +80,90 @@ function Videojuegos() {
 
   return (
     <>
-      <div className="VideoJuegos">
+      <ScrollToTop trigger={pagina} />
 
+      <div className="VideoJuegos">
         <h2>{t("videogames.title")}</h2>
 
         <div className="Filtros">
-            <div className="Filtros_boton">
-                <button
-                className={`btn-filtros ${orden === "productos_mas_caros" ? "activo" : ""}`}
-                onClick={() => { setOrden("productos_mas_caros"); setPagina(1); }}
-                >
-                {t("videogames.priceAsc")}
-                </button>
+          <div className="Filtros_boton">
+            <button
+              className={`btn-filtros ${orden === "productos_mas_caros" ? "activo" : ""}`}
+              onClick={() => { setOrden("productos_mas_caros"); setPagina(1); }}
+            >
+              {t("videogames.priceAsc")}
+            </button>
 
-                <button
-                className={`btn-filtros ${orden === "productos_mas_baratos" ? "activo" : ""}`}
-                onClick={() => { setOrden("productos_mas_baratos"); setPagina(1); }}
-                >
-                {t("videogames.priceDesc")}
-                </button>
+            <button
+              className={`btn-filtros ${orden === "productos_mas_baratos" ? "activo" : ""}`}
+              onClick={() => { setOrden("productos_mas_baratos"); setPagina(1); }}
+            >
+              {t("videogames.priceDesc")}
+            </button>
 
-                <button
-                className={`btn-filtros ${orden === "productos_mas_alfabeticamente" ? "activo" : ""}`}
-                onClick={() => { setOrden("productos_mas_alfabeticamente"); setPagina(1); }}
-                >
-                {t("videogames.alphaAsc")}
-                </button>
+            <button
+              className={`btn-filtros ${orden === "productos_mas_alfabeticamente" ? "activo" : ""}`}
+              onClick={() => { setOrden("productos_mas_alfabeticamente"); setPagina(1); }}
+            >
+              {t("videogames.alphaAsc")}
+            </button>
 
-                <button
-                className={`btn-filtros ${orden === "productos_menos_alfabeticamente" ? "activo" : ""}`}
-                onClick={() => { setOrden("productos_menos_alfabeticamente"); setPagina(1); }}
-                >
-                {t("videogames.alphaDesc")}
-                </button>
-            </div>
+            <button
+              className={`btn-filtros ${orden === "productos_menos_alfabeticamente" ? "activo" : ""}`}
+              onClick={() => { setOrden("productos_menos_alfabeticamente"); setPagina(1); }}
+            >
+              {t("videogames.alphaDesc")}
+            </button>
+          </div>
 
-            <div className="Filtros_select">
-                <select
-                    className="select"
-                    value={categoria}
-                    onChange={(e) => {
-                    setCategoria(e.target.value);
-                    setPlataforma("");
-                    setPagina(1);
-                    }}
-                >
-                    <option value="">{t("videogames.categories")}</option>
-                    {categorias.map((cat) => (
-                    <option key={cat.id} value={cat.id}>
-                        {cat.nombre}
-                    </option>
-                    ))}
-                </select>
+          <div className="Filtros_select">
+            <select
+              className="select"
+              value={categoria}
+              onChange={(e) => {
+                setCategoria(e.target.value);
+                setPlataforma("");
+                setPagina(1);
+              }}
+            >
+              <option value="">{t("videogames.categories")}</option>
+              {categorias.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.nombre}
+                </option>
+              ))}
+            </select>
 
-                <select
-                    className="select"
-                    value={plataforma}
-                    onChange={(e) => {
-                    setPlataforma(e.target.value);
-                    setCategoria("");
-                    setPagina(1);
-                    }}
-                >
-                    <option value="">{t("videogames.platforms")}</option>
-                    {plataformas.map((plataforma) => (
-                    <option key={plataforma.id} value={plataforma.id}>
-                        {plataforma.nombre}
-                    </option>
-                    ))}
-                </select>
+            <select
+              className="select"
+              value={plataforma}
+              onChange={(e) => {
+                setPlataforma(e.target.value);
+                setCategoria("");
+                setPagina(1);
+              }}
+            >
+              <option value="">{t("videogames.platforms")}</option>
+              {plataformas.map((plataforma) => (
+                <option key={plataforma.id} value={plataforma.id}>
+                  {plataforma.nombre}
+                </option>
+              ))}
+            </select>
 
-                <button
-                    className="btn-filtros"
-                    onClick={() => {
-                    setCategoria("");
-                    setPlataforma("");
-                    setOrden("");
-                    setPagina(1);
-                    }}
-                >
-                    Quitar Filtro
-                </button>
-
-                </div>
-            </div>
+            <button
+              className="btn-filtros"
+              onClick={() => {
+                setCategoria("");
+                setPlataforma("");
+                setOrden("");
+                setPagina(1);
+              }}
+            >
+              Quitar Filtro
+            </button>
+          </div>
+        </div>
 
         <div className="Productos">
           <SeccionProductosVideojuegos productos={productos} />
@@ -170,7 +181,7 @@ function Videojuegos() {
               disabled={pagina === 1 || ordenEspecial}
             >
               <img
-                src="http://zent.es/imagenes_producto/correrizq.png"
+                src="http://zent.es/imagenes_producto/flecha_izquierda.png"
                 className="mario"
                 alt={t("common.previous")}
               />
@@ -179,17 +190,16 @@ function Videojuegos() {
             <button
               className="btn-next"
               onClick={next}
-              disabled={productos.length < 20 || ordenEspecial}
+              disabled={!hayMas}
             >
               <img
-                src="http://zent.es/imagenes_producto/correr.png"
+                src="http://zent.es/imagenes_producto/flecha_derecha.png"
                 className="mario mario-right"
                 alt={t("common.next")}
               />
             </button>
           </div>
         </div>
-
       </div>
     </>
   );

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\RecuperarContraseñaMail;
+use Illuminate\Validation\Rule;
 
 class ControllerLogin extends Controller
 {
@@ -238,6 +239,50 @@ class ControllerLogin extends Controller
         return response()->json([
             'msg' => 'Contraseña actualizada correctamente. Ya puedes iniciar sesión'
         ], 200);
+    }
+
+    public function actualizar_perfil(Request $request){
+        $user = $request->user();
+
+        if (!$user) {
+            return response()->json([
+                'error' => 'Usuario no autenticado'
+            ], 401);
+        }
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'password' => [
+                'nullable',
+                'confirmed',
+                'min:8',
+                'regex:/[A-Z]/',   // mayúscula
+                'regex:/[0-9]/',   // número
+                'regex:/[\W_]/',   // símbolo
+            ],
+        ], [
+            'password.min' => 'La contraseña debe tener mínimo 8 caracteres',
+            'password.regex' => 'La contraseña debe tener mayúscula, número y símbolo',
+        ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if (!empty($request->password)) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return response()->json([
+            'msg' => 'Datos actualizados correctamente',
+            'user' => $user
+        ]);
     }
 
 }

@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PedidoResource\Pages;
 use App\Filament\Resources\PedidoResource\RelationManagers;
 use App\Models\Pedido;
-use Dom\Text;
+// use Dom\Text;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
@@ -13,8 +13,9 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Builder;
+// use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PedidoResource extends Resource
 {
@@ -26,10 +27,11 @@ class PedidoResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('session_id')->disabled(),
                 TextInput::make('id_carrito')->disabled(),
                 TextInput::make('total')->disabled(),
-                TextInput::make('estado')->disabled()
+                TextInput::make('estado')->disabled(),
+                TextInput::make('stripe_session_id')->disabled(),
+                TextInput::make('stripe_payment_intent')->disabled(),
             ]);
     }
 
@@ -38,8 +40,7 @@ class PedidoResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->searchable(),
-                TextColumn::make('session_id')->sortable()->searchable(),
-                TextColumn::make('doUsuario.name')->sortable()->searchable(),
+                TextColumn::make('doUsuario.name')->label('Usuario')->sortable()->searchable(),
                 TextColumn::make('id_carrito')->sortable()->searchable(),
                 TextColumn::make('total')->sortable()->searchable(),
                 TextColumn::make('estado')->sortable()->searchable(),
@@ -51,7 +52,6 @@ class PedidoResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
     
@@ -59,6 +59,7 @@ class PedidoResource extends Resource
     {
         return [
             RelationManagers\DetallesRelationManager::class,
+            RelationManagers\FacturaRelationManager::class,
         ];
     }
     
@@ -72,6 +73,11 @@ class PedidoResource extends Resource
     }
 
     public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canDelete(Model $record): bool
     {
         return false;
     }

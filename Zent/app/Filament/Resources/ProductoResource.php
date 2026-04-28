@@ -3,17 +3,17 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductoResource\Pages;
-use App\Filament\Resources\ProductoResource\RelationManagers\DoCategoriasRelationManager;
-use App\Models\DescripcionPegi;
+// use App\Filament\Resources\ProductoResource\RelationManagers\DoCategoriasRelationManager;
+// use App\Models\DescripcionPegi;
 use App\Models\Producto;
-use App\Models\EdadPegi;
+// use App\Models\EdadPegi;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\ViewField;
+// use Filament\Forms\Components\Placeholder;
+// use Filament\Forms\Components\ViewField;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -57,12 +57,6 @@ class ProductoResource extends Resource
                 ->numeric()
                 ->default(0)
                 ->disabled(),
-
-            TextInput::make('stock')
-                ->numeric()
-                ->minValue(1)
-                ->default(1)
-                ->required(),
 
             TextInput::make('ventas')
                 ->numeric()
