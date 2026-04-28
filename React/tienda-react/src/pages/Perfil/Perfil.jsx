@@ -28,15 +28,26 @@ function Perfil()
         }
         })
         .then(res => {
-            if (!res.ok) throw new Error();
+                        if (!res.ok) {
+                            if (res.status === 401 || res.status === 403) {
+                                const authError = new Error("AUTH_ERROR");
+                                authError.isAuthError = true;
+                                throw authError;
+                            }
+                            throw new Error("PROFILE_LOAD_ERROR");
+                        }
             return res.json();
         })
         .then(data => {
             setUser(data.user);
         })
-        .catch(() => {
-            localStorage.removeItem("token");
-            navigate("/login");
+                .catch((error) => {
+                        if (error?.isAuthError) {
+                            localStorage.removeItem("token");
+                            navigate("/login");
+                            return;
+                        }
+                        setUser(null);
         });
 
         getFacturas()

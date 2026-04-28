@@ -1,17 +1,18 @@
 import "./ResetPassword.less";
 import { useState, useEffect } from "react";
 import { resetear_contraseña } from "../../services/auth";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function ResetPassword() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  
+  const { t } = useTranslation();
+
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
-  const [password_confirmation, setPasswordConfirmation] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
@@ -25,7 +26,7 @@ function ResetPassword() {
   const [strength, setStrength] = useState(0);
   const [passwordErrors, setPasswordErrors] = useState([]);
 
-  const strengthText = ["", "Muy débil", "Débil", "Media", "Fuerte"];
+  const strengthText = ["", "Muy debil", "Debil", "Media", "Fuerte"];
 
   useEffect(() => {
     const emailParam = searchParams.get("email");
@@ -39,7 +40,41 @@ function ResetPassword() {
 
     setEmail(emailParam);
     setToken(tokenParam);
-  }, [searchParams]);
+  }, [searchParams, t]);
+
+  const handlePasswordChange = (value) => {
+    setPassword(value);
+
+    const errors = [];
+    let score = 0;
+
+    if (value.length >= 8) {
+      score += 1;
+    } else {
+      errors.push("Minimo 8 caracteres");
+    }
+
+    if (/[A-Z]/.test(value)) {
+      score += 1;
+    } else {
+      errors.push("Incluye una mayuscula");
+    }
+
+    if (/[0-9]/.test(value)) {
+      score += 1;
+    } else {
+      errors.push("Incluye un numero");
+    }
+
+    if (/[^A-Za-z0-9]/.test(value)) {
+      score += 1;
+    } else {
+      errors.push("Incluye un simbolo");
+    }
+
+    setStrength(score);
+    setPasswordErrors(errors);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,38 +83,32 @@ function ResetPassword() {
     setLoading(true);
 
     try {
-      // Validaciones
       if (password.length < 8) {
-        setError("La contraseña debe tener al menos 8 caracteres");
-        setLoading(false);
+        setError(t("resetPassword.passwordTooShort"));
         return;
       }
 
-      if (password !== password_confirmation) {
-        setError("Las contraseñas no coinciden");
-        setLoading(false);
+      if (password !== passwordConfirmation) {
+        setError(t("resetPassword.passwordsMismatch"));
         return;
       }
 
-    try {
-      await resetear_contraseña(email, token, password, password_confirmation);
+      await resetear_contraseña(email, token, password, passwordConfirmation);
 
       setMensaje(t("resetPassword.success"));
       setPassword("");
       setPasswordConfirmation("");
       setStrength(0);
+      setPasswordErrors([]);
 
-      setTimeout(() => navigate("/login"), 2000);
-
-      // Redirigir a login después de 2 segundos
       setTimeout(() => {
         navigate("/login");
       }, 2000);
-    } catch (error) {
-      if (error.response?.data?.error) {
-        setError(error.response.data.error);
+    } catch (err) {
+      if (err.response?.data?.error) {
+        setError(err.response.data.error);
       } else {
-        setError("Error al resetear la contraseña. Intenta de nuevo.");
+        setError(t("resetPassword.updateError"));
       }
     } finally {
       setLoading(false);
@@ -90,11 +119,13 @@ function ResetPassword() {
     return (
       <div className="reset-password-page">
         <div className="reset-password-container">
-          <h1 className="titulo">Recuperar Contraseña</h1>
+          <h1 className="titulo">{t("resetPassword.title")}</h1>
           <div className="error-container">
             <span className="error-icon">error_outline</span>
             <p className="error-message">{error}</p>
-            <Link to="/forgot-password"> <button className="btn">Solicitar Nuevo Enlace</button>  </Link>
+            <Link to="/forgot-password">
+              <button className="btn">{t("resetPassword.requestNewLink")}</button>
+            </Link>
           </div>
         </div>
       </div>
@@ -104,25 +135,25 @@ function ResetPassword() {
   return (
     <div className="reset-password-page">
       <div className="reset-password-container">
-        <h1 className="titulo-reset-password">Establecer Nueva Contraseña</h1>
+        <h1 className="titulo-reset-password">{t("resetPassword.titleNew")}</h1>
 
         <form className="formulario-reset-password" onSubmit={handleSubmit}>
           <p className="email-info">
-            <strong>Email:</strong> {email}
+            <strong>{t("resetPassword.emailLabel")}:</strong> {email}
           </p>
 
-          {/* Contraseña Nueva */}
           <div className="password-wrapper">
-            <label htmlFor="password-nueva">Nueva Contraseña</label>
+            <label htmlFor="password-nueva">{t("resetPassword.newPasswordLabel")}</label>
             <div className="password-row">
               <input
+                id="password-nueva"
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => handlePasswordChange(e.target.value)}
                 onKeyUp={(e) => setCapsLock(e.getModifierState("CapsLock"))}
                 onFocus={(e) => setCapsLock(e.getModifierState("CapsLock"))}
                 onBlur={() => setCapsLock(false)}
-                placeholder="Mínimo 8 caracteres"
+                placeholder={t("resetPassword.newPasswordPlaceholder")}
                 required
                 disabled={loading}
               />
@@ -130,7 +161,7 @@ function ResetPassword() {
                 type="button"
                 className="btn-ojo"
                 onClick={() => setShowPassword(!showPassword)}
-                aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                aria-label={showPassword ? t("resetPassword.hidePassword") : t("resetPassword.showPassword")}
                 disabled={loading}
               >
                 <span className="material-symbols-outlined">
@@ -139,7 +170,6 @@ function ResetPassword() {
               </button>
             </div>
 
-            {/* 🔥 BARRA SEGURIDAD */}
             {password && (
               <div className="estado_contra">
                 <p>{strengthText[strength]}</p>
@@ -150,11 +180,15 @@ function ResetPassword() {
                     style={{
                       width: `${(strength / 4) * 100}%`,
                       background:
-                        strength === 1 ? "red" :
-                        strength === 2 ? "orange" :
-                        strength === 3 ? "yellowgreen" :
-                        strength === 4 ? "green" :
-                        "transparent"
+                        strength === 1
+                          ? "red"
+                          : strength === 2
+                            ? "orange"
+                            : strength === 3
+                              ? "yellowgreen"
+                              : strength === 4
+                                ? "green"
+                                : "transparent",
                     }}
                   />
                 </div>
@@ -168,18 +202,18 @@ function ResetPassword() {
             )}
           </div>
 
-          {/* Confirmar Contraseña */}
           <div className="password-wrapper">
-            <label htmlFor="password-confirmacion">Confirmar Contraseña</label>
+            <label htmlFor="password-confirmacion">{t("resetPassword.confirmPasswordLabel")}</label>
             <div className="password-row">
               <input
+                id="password-confirmacion"
                 type={showPassword2 ? "text" : "password"}
-                value={password_confirmation}
+                value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
                 onKeyUp={(e) => setCapsLock(e.getModifierState("CapsLock"))}
                 onFocus={(e) => setCapsLock(e.getModifierState("CapsLock"))}
                 onBlur={() => setCapsLock(false)}
-                placeholder="Repite tu nueva contraseña"
+                placeholder={t("resetPassword.confirmPasswordPlaceholder")}
                 required
                 disabled={loading}
               />
@@ -187,7 +221,7 @@ function ResetPassword() {
                 type="button"
                 className="btn-ojo"
                 onClick={() => setShowPassword2(!showPassword2)}
-                aria-label={showPassword2 ? "Ocultar contraseña" : "Mostrar contraseña"}
+                aria-label={showPassword2 ? t("resetPassword.hidePassword") : t("resetPassword.showPassword")}
                 disabled={loading}
               >
                 <span className="material-symbols-outlined">
@@ -197,24 +231,25 @@ function ResetPassword() {
             </div>
           </div>
 
-          {/* Alerta de Mayúsculas */}
           {capsLock && (
             <p className="aviso-capslock">
               <span className="material-symbols-outlined aviso-icon">keyboard_capslock</span>
-              Mayúsculas activadas
+              {t("resetPassword.capsLock")}
             </p>
           )}
 
-          {/* Mensajes */}
           {error && <div className="mensaje-error">{error}</div>}
           {mensaje && <div className="mensaje-exito">{mensaje}</div>}
 
-          {/* Botones */}
           <div className="botones-reset">
             <button type="submit" className="btn-actualizar" disabled={loading}>
-              {loading ? "Actualizando..." : "Actualizar Contraseña"}
+              {loading ? t("resetPassword.updating") : t("resetPassword.update")}
             </button>
-            <Link to="/login"><button type="button" className="btn-cancelar" disabled={loading}> Cancelar </button>   </Link>
+            <Link to="/login">
+              <button type="button" className="btn-cancelar" disabled={loading}>
+                {t("resetPassword.cancel")}
+              </button>
+            </Link>
           </div>
         </form>
       </div>
