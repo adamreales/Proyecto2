@@ -34,6 +34,8 @@ class DetallesRelationManager extends RelationManager
                 TextColumn::make('doproducto.titulo')
                     ->label('Producto')
                     ->searchable(),
+                
+                TextColumn::make('doClave.doPlataformaProducto.doPlataforma.nombre')->label('Plataforma'),
 
                 TextColumn::make('precio_unitario')
                     ->label('Precio')

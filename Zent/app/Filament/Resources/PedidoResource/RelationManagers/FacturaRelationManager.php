@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Filament\Resources\PedidoResource\RelationManagers;
+
+use Filament\Forms;
+use Filament\Resources\Form;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Resources\Table;
+use Filament\Tables;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+class FacturaRelationManager extends RelationManager
+{
+    protected static string $relationship = 'doFactura';
+
+    protected static ?string $recordTitleAttribute = 'id';
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\TextInput::make('id')
+                    ->required()
+                    ->maxLength(255),
+            ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                Tables\Columns\TextColumn::make('fecha_emision'),
+                Tables\Columns\TextColumn::make('id'),
+                Tables\Columns\TextColumn::make('numero_factura'),
+                Tables\Columns\TextColumn::make('pdf_path'),
+            ])
+            ->filters([
+                //
+            ])
+            ->headerActions([
+            ])
+            ->actions([
+            ])
+            ->bulkActions([
+            ]);
+    }    
+}
