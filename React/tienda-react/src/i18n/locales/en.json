@@ -260,7 +260,19 @@
     "loading": "Loading your data...",
     "saveError": "Could not save.",
     "genericSaveError": "Error saving data.",
-    "success": "Data updated successfully."
+    "success": "Data updated successfully.",
+    "loadError": "Could not load data.",
+    "profileError": "Error loading profile",
+    "mismatchError": "Passwords do not match",
+    "weakPasswordError": "Password does not meet the requirements",
+    "strengthVeryWeak": "Very weak",
+    "strengthWeak": "Weak",
+    "strengthMedium": "Medium",
+    "strengthStrong": "Strong",
+    "pwMin8": "Minimum 8 characters",
+    "pwUppercase": "Must have an uppercase letter",
+    "pwNumber": "Must have a number",
+    "pwSymbol": "Must have a symbol"
   },
   "opinions": {
     "title": "My Reviews",

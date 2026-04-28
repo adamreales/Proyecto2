@@ -260,7 +260,19 @@
     "loading": "Cargando tus datos...",
     "saveError": "No se pudo guardar.",
     "genericSaveError": "Error al guardar datos.",
-    "success": "Datos actualizados correctamente."
+    "success": "Datos actualizados correctamente.",
+    "loadError": "No se pudieron cargar los datos.",
+    "profileError": "Error cargando perfil",
+    "mismatchError": "Las contraseñas no coinciden",
+    "weakPasswordError": "La contraseña no cumple los requisitos",
+    "strengthVeryWeak": "Muy débil",
+    "strengthWeak": "Débil",
+    "strengthMedium": "Media",
+    "strengthStrong": "Fuerte",
+    "pwMin8": "Mínimo 8 caracteres",
+    "pwUppercase": "Debe tener una mayúscula",
+    "pwNumber": "Debe tener un número",
+    "pwSymbol": "Debe tener un símbolo"
   },
   "opinions": {
     "title": "Mis Opiniones",

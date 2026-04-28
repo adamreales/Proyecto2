@@ -25,10 +25,10 @@ function MisDatos() {
 
   const strengthText = [
     "",
-    "Muy débil",
-    "Débil",
-    "Media",
-    "Fuerte"
+    t("myData.strengthVeryWeak"),
+    t("myData.strengthWeak"),
+    t("myData.strengthMedium"),
+    t("myData.strengthStrong")
   ];
 
   // 🔹 Cargar perfil
@@ -46,7 +46,7 @@ function MisDatos() {
           },
         });
 
-        if (!res.ok) throw new Error("No se pudieron cargar los datos.");
+        if (!res.ok) throw new Error(t("myData.loadError"));
 
         const data = await res.json();
 
@@ -56,7 +56,7 @@ function MisDatos() {
           email: data.user?.email ?? "",
         }));
       } catch {
-        setError("Error cargando perfil");
+        setError(t("myData.profileError"));
       } finally {
         setLoading(false);
       }
@@ -84,31 +84,31 @@ function MisDatos() {
     let score = 0;
 
     if (value.length >= 8) {
-      errors.push("✔️ Minimo 8 caracteres");
+      errors.push(`✔️ ${t("myData.pwMin8")}`);
       score++;
     } else {
-      errors.push("❌ Mínimo 8 caracteres");
+      errors.push(`❌ ${t("myData.pwMin8")}`);
     }
 
     if (/[A-Z]/.test(value)) {
-      errors.push("✔️ Debe tener una mayúscula");
+      errors.push(`✔️ ${t("myData.pwUppercase")}`);
       score++;
     } else {
-      errors.push("❌ Debe tener una mayúscula");
+      errors.push(`❌ ${t("myData.pwUppercase")}`);
     }
 
     if (/[0-9]/.test(value)) {
-      errors.push("✔️ Debe tener un número");
+      errors.push(`✔️ ${t("myData.pwNumber")}`);
       score++;
     } else {
-      errors.push("❌ Debe tener un número");
+      errors.push(`❌ ${t("myData.pwNumber")}`);
     }
 
     if (/[\W_]/.test(value)) {
-      errors.push("✔️ Debe tener un símbolo");
+      errors.push(`✔️ ${t("myData.pwSymbol")}`);
       score++;
     } else {
-      errors.push("❌ Debe tener un símbolo");
+      errors.push(`❌ ${t("myData.pwSymbol")}`);
     }
 
     setStrength(score);
@@ -133,14 +133,14 @@ function MisDatos() {
 
     // validar confirmación
     if (form.password && form.password !== form.password_confirmation) {
-      setError("Las contraseñas no coinciden");
+      setError(t("myData.mismatchError"));
       setSaving(false);
       return;
     }
 
     // validar fuerza
     if (form.password && strength < 4) {
-      setError("La contraseña no cumple los requisitos");
+      setError(t("myData.weakPasswordError"));
       setSaving(false);
       return;
     }
@@ -185,7 +185,7 @@ function MisDatos() {
         throw new Error(data.error || t("myData.saveError"));
       }
 
-      setMessage(data.msg || "Datos actualizados correctamente.");
+      setMessage(data.msg || t("myData.success"));
       setForm((prev) => ({ ...prev, password: "", password_confirmation: "" }));
     } catch (err) {
       setError(err.message || t("myData.genericSaveError"));
@@ -194,38 +194,38 @@ function MisDatos() {
     }
   };
 
-  if (loading) return <p>Cargando tus datos...</p>;
+  if (loading) return <p>{t("myData.loading")}</p>;
 
   return (
       <section className="MisDatos">
         <div className="MisDatos-card">
           <div className="MisDatos-head">
-            <h1>Mis datos</h1>
-            <p className="MisDatos-subtitle">Actualiza tu información personal y, si quieres, cambia tu contraseña.</p>
+            <h1>{t("myData.title")}</h1>
+            <p className="MisDatos-subtitle">{t("myData.subtitle")}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="MisDatos-form">
             <div className="MisDatos-field">
-              <label htmlFor="name">Usuario</label>
-              <input id="name" type="text" name="name" value={form.name} onChange={onChange} placeholder="Nombre" required />
+              <label htmlFor="name">{t("myData.userLabel")}</label>
+              <input id="name" type="text" name="name" value={form.name} onChange={onChange} placeholder={t("myData.namePlaceholder")} required />
             </div>
 
             <div className="MisDatos-field">
-              <label htmlFor="email">Correo</label>
-              <input id="email" type="email" name="email" value={form.email} onChange={onChange} placeholder="Correo electrónico" required />
+              <label htmlFor="email">{t("myData.emailLabel")}</label>
+              <input id="email" type="email" name="email" value={form.email} onChange={onChange} placeholder={t("myData.emailPlaceholder")} required />
             </div>
 
             <div className="MisDatos-field">
-              <label htmlFor="password">Contraseña</label>
-              <input id="password" type="password" name="password" value={form.password} onChange={onChange} placeholder="Nueva contraseña (opcional)" />
+              <label htmlFor="password">{t("myData.passwordLabel")}</label>
+              <input id="password" type="password" name="password" value={form.password} onChange={onChange} placeholder={t("myData.passwordPlaceholder")} />
             </div>
 
             <div className="MisDatos-field">
-              <label htmlFor="password_confirmation">Confirmar contraseña</label>
-              <input id="password_confirmation" type="password" name="password_confirmation" value={form.password_confirmation} onChange={onChange} placeholder="Confirmar nueva contraseña" />
+              <label htmlFor="password_confirmation">{t("myData.confirmPasswordLabel")}</label>
+              <input id="password_confirmation" type="password" name="password_confirmation" value={form.password_confirmation} onChange={onChange} placeholder={t("myData.confirmPasswordPlaceholder")} />
             </div>
 
-            <button type="submit" className="btn-guardar" disabled={saving}>{saving ? "Guardando..." : "Guardar cambios"}</button>
+            <button type="submit" className="btn-guardar" disabled={saving}>{saving ? t("myData.saving") : t("myData.save")}</button>
           </form>
 
         {message && <p className="ok-msg">{message}</p>}

@@ -260,7 +260,19 @@
     "loading": "Carregant les teves dades...",
     "saveError": "No s'ha pogut desar.",
     "genericSaveError": "Error en desar les dades.",
-    "success": "Dades actualitzades correctament."
+    "success": "Dades actualitzades correctament.",
+    "loadError": "No s'han pogut carregar les dades.",
+    "profileError": "Error en carregar el perfil",
+    "mismatchError": "Les contrasenyes no coincideixen",
+    "weakPasswordError": "La contrasenya no compleix els requisits",
+    "strengthVeryWeak": "Molt dèbil",
+    "strengthWeak": "Dèbil",
+    "strengthMedium": "Mitja",
+    "strengthStrong": "Fort",
+    "pwMin8": "Mínim 8 caràcters",
+    "pwUppercase": "Ha de tenir una majúscula",
+    "pwNumber": "Ha de tenir un número",
+    "pwSymbol": "Ha de tenir un símbol"
   },
   "opinions": {
     "title": "Les meves opinions",
