@@ -30,7 +30,7 @@ function Login() {
       const data = await login(email, password);
       localStorage.setItem("token", data.token);
       console.log("Usuario:", data.user);
-      navigate("/home");
+      window.location.href = "/home";
     } catch (error) {
       setLoginError(t("login.invalid"));
     }

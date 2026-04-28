@@ -82,18 +82,18 @@ function Perfil()
 
     const  cerrarSession = async () => {
         try{
-
             await fetch("http://localhost:8000/api/cerrar_session", {
                 method: "POST",
                 headers: {
                     "Authorization": "Bearer " + token
                 }
             });
+        }catch(error){
+            console.error("Error al cerrar sesion",error);
+        } finally {
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             window.location.href = "/login";
-        }catch(error){
-            console.error("Error al cerrar sesion",error);
         }
     }
 
