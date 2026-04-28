@@ -1,6 +1,7 @@
 import "./ProductoVenta.less";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad }) {
   const { t, i18n } = useTranslation();
@@ -37,14 +38,20 @@ function ProductoVenta({ cartItems = [], eliminarProducto, actualizarCantidad })
               Math.max(1, Number(item.cantidad) || 1),
               stockMaximo
             );
-
+            console.info(item);
             return (
-              <li key={item.id}>
+              <li key={item.id_producto}>
                 <div className="item-info">
 
-                <img className="img-producto" src={item.imagen} alt={item.nombre} />
+                <Link to={`/producto/${item.idProducto}`}>
+                    <img className="img-producto" src={item.imagen} alt={item.nombre} />
+                </Link>
                 <div className="propeties">
-                    <h3>{item.nombre}</h3>
+                    <h3>
+                        <Link to={`/producto/${item.idProducto}`}>
+                            {item.nombre}
+                        </Link>
+                    </h3>
                     <p>{item.plataforma || "PC"}</p>
                 </div>
                      <p>{formatPrice(item.precio)}</p>
