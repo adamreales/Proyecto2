@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('edad_pegi', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger("edad");
-            $table->string("color",20);
             $table->string("descripcion",255)->nullable();
             $table->timestamps();
             $table->softDeletes();

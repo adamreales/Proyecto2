@@ -18,14 +18,15 @@ use function PHPUnit\Framework\isEmpty;
 
 class ControllerProductos extends Controller
 {
-    public function productos(){
+    public function productos(Request $request){
+        $limit = $request->limit ?? 12;
         $productos = Producto::with([
             'doValoraciones',
             'doImagenes',
             'doCategorias',
             'doPlataformas',
             'doPegi'
-        ])->get();
+        ])->paginate($limit);
 
         if($productos === null){
             return response()->json([
@@ -34,18 +35,20 @@ class ControllerProductos extends Controller
         }
 
         return response()->json([
-            'productos' => $productos
+            'productos' => $productos->items(),
+            'hasMore' => $productos->hasMorePages()
         ]);
     }
 
-    public function productos_mas_vendidos(){
+    public function productos_mas_vendidos(Request $request){
+        $limit = $request->limit ?? 12;
         $productos = Producto::with([
             'doValoraciones',
             'doImagenes',
             'doCategorias',
             'doPlataformas',
             'doPegi'
-        ])->orderByDesc('ventas')->get();
+        ])->orderByDesc('ventas')->paginate($limit);
 
         if($productos === null){
             return response()->json([
@@ -55,19 +58,21 @@ class ControllerProductos extends Controller
 
         return response()->json([
             'msg' => 'Productos mas vendidos',
-            'productos' => $productos
+            'productos' => $productos->items(),
+            'hasMore' => $productos->hasMorePages()
         ]);
 
     }
 
-    public function productos_mas_populares(){
+    public function productos_mas_populares(Request $request){
+        $limit = $request->limit ?? 12;
         $productos = Producto::with([
             'doValoraciones',
             'doImagenes',
             'doCategorias',
             'doPlataformas',
             'doPegi'
-        ])->orderByDesc('valoracion')->get();
+        ])->orderByDesc('valoracion')->paginate($limit);
 
         if($productos === null){
             return response()->json([
@@ -77,19 +82,21 @@ class ControllerProductos extends Controller
 
         return response()->json([
             'msg' => 'Productos mas populares',
-            'productos' => $productos
+            'productos' => $productos->items(),
+            'hasMore' => $productos->hasMorePages()
         ]);
 
     }
 
-    public function productos_mas_actuales(){
+    public function productos_mas_actuales(Request $request){
+        $limit = $request->limit ?? 12;
         $productos = Producto::with([
             'doValoraciones',
             'doImagenes',
             'doCategorias',
             'doPlataformas',
             'doPegi'
-        ])->orderByDesc('created_at')->get();
+        ])->orderByDesc('created_at')->paginate($limit);
 
         if($productos === null){
             return response()->json([
@@ -99,19 +106,21 @@ class ControllerProductos extends Controller
 
         return response()->json([
             'msg' => 'Productos mas actuales',
-            'productos' => $productos
+            'productos' => $productos->items(),
+            'hasMore' => $productos->hasMorePages()
         ]);
 
     }
 
-    public function productos_mas_baratos(){
+    public function productos_mas_baratos(Request $request){
+        $limit = $request->limit ?? 12;
         $productos = Producto::with([
             'doValoraciones',
             'doImagenes',
             'doCategorias',
             'doPlataformas',
             'doPegi'
-        ])->orderBy('precio')->get();
+        ])->orderBy('precio')->paginate($limit);
 
         if($productos === null){
             return response()->json([
@@ -121,18 +130,20 @@ class ControllerProductos extends Controller
 
         return response()->json([
             'msg' => 'Productos mas baratos',
-            'productos' => $productos
+            'productos' => $productos->items(),
+            'hasMore' => $productos->hasMorePages()
         ]);
 
     }
-    public function productos_mas_caros(){
+    public function productos_mas_caros(Request $request){
+        $limit = $request->limit ?? 12;
         $productos = Producto::with([
             'doValoraciones',
             'doImagenes',
             'doCategorias',
             'doPlataformas',
             'doPegi'
-        ])->orderByDesc('precio')->get();
+        ])->orderByDesc('precio')->paginate($limit);
 
         if($productos === null){
             return response()->json([
@@ -142,18 +153,21 @@ class ControllerProductos extends Controller
 
         return response()->json([
             'msg' => 'Productos mas caros',
-            'productos' => $productos
+            'productos' => $productos->items(),
+            'hasMore' => $productos->hasMorePages()
         ]);
 
     }
-    public function productos_mas_alfabeticamente(){
+
+    public function productos_mas_alfabeticamente(Request $request){
+        $limit = $request->limit ?? 12;
         $productos = Producto::with([
             'doValoraciones',
             'doImagenes',
             'doCategorias',
             'doPlataformas',
             'doPegi'
-        ])->orderBy('titulo')->get();
+        ])->orderBy('titulo')->paginate($limit);
 
         if($productos === null){
             return response()->json([
@@ -163,18 +177,20 @@ class ControllerProductos extends Controller
 
         return response()->json([
             'msg' => 'Productos ordenados alfabeticamente',
-            'productos' => $productos
+            'productos' => $productos->items(),
+            'hasMore' => $productos->hasMorePages()
         ]);
 
     }
-     public function productos_menos_alfabeticamente(){
+     public function productos_menos_alfabeticamente(Request $request){
+        $limit = $request->limit ?? 12;
         $productos = Producto::with([
             'doValoraciones',
             'doImagenes',
             'doCategorias',
             'doPlataformas',
             'doPegi'
-        ])->orderByDesc('titulo')->get();
+        ])->orderByDesc('titulo')->paginate($limit);
 
         if($productos === null){
             return response()->json([
@@ -184,12 +200,14 @@ class ControllerProductos extends Controller
 
         return response()->json([
             'msg' => 'Productos ordenados alfabeticamente al reves',
-            'productos' => $productos
+            'productos' => $productos->items(),
+            'hasMore' => $productos->hasMorePages()
         ]);
 
     }
-    public function producto_categoria($categoria_id){
-         $categoria = Categoria::find($categoria_id);
+
+    public function producto_categoria(Request $request,$categoria_id){
+        $limit = $request->limit ?? 12;
         $producto = Producto::with([
             'doValoraciones',
             'doValoraciones.doUsuario',
@@ -199,7 +217,7 @@ class ControllerProductos extends Controller
             'doPegi'
         ])->whereHas('doCategorias', function($query) use ($categoria_id) {
             $query->where('id', $categoria_id);
-        })->get();
+        })->paginate($limit);
 
         if($producto === null || $producto->isEmpty()){
             return response()->json([
@@ -209,13 +227,15 @@ class ControllerProductos extends Controller
 
         return response()->json([
             'producto' => $producto,
+            'hasMore' => $producto->hasMorePages()
         ]);
 
     }
-    public function productos_favoritos()
+
+    public function productos_favoritos(Request $request)
     {
         $user_id = auth()->id();
-
+        $limit = $request->limit ?? 12;
         $productos = Favorito::with([
             'doProducto',
             'doProducto.doValoraciones',
@@ -223,7 +243,7 @@ class ControllerProductos extends Controller
             'doProducto.doCategorias',
             'doProducto.doPlataformas',
             'doProducto.doPegi'
-        ])->where('user_id', $user_id)->get();;
+        ])->where('user_id', $user_id)->paginate($limit);
 
         if ($productos->isEmpty()) {
             return response()->json([
@@ -232,12 +252,14 @@ class ControllerProductos extends Controller
         }
 
         return response()->json([
-            'productos' => $productos,
+            'productos' => $productos->items(),
+            'hasMore' => $productos->hasMorePages()
         ]);
     }
 
 
-    public function producto_plataforma($plataforma_id){
+    public function producto_plataforma(Request $request,$plataforma_id){
+        $limit = $request->limit ?? 12;
         $producto = Producto::with([
             'doValoraciones',
             'doValoraciones.doUsuario',
@@ -247,7 +269,7 @@ class ControllerProductos extends Controller
             'doPegi'
         ])->whereHas('doPlataformas', function($query) use ($plataforma_id) {
             $query->where('plataforma.id', $plataforma_id);
-        })->get();
+        })->paginate($limit);
 
         if($producto === null || $producto->isEmpty()){
             return response()->json([
@@ -256,7 +278,8 @@ class ControllerProductos extends Controller
         }
 
         return response()->json([
-            'producto' => $producto,
+            'producto' => $producto->items(),
+            'hasMore' => $producto->hasMorePages()
         ]);
 
     }

@@ -7,8 +7,8 @@ use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+// use Illuminate\Database\Eloquent\Builder;
+// use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
 
 class DetallesRelationManager extends RelationManager
@@ -35,17 +35,15 @@ class DetallesRelationManager extends RelationManager
                     ->label('Producto')
                     ->searchable(),
 
-                TextColumn::make('cantidad')
-                    ->sortable(),
-
                 TextColumn::make('precio_unitario')
                     ->label('Precio')
                     ->money('EUR')
                     ->sortable(),
 
-                TextColumn::make('subtotal')
+                TextColumn::make('doClave.clave')->label('Clave'),
+
+                TextColumn::make('precio_unitario')
                     ->label('Subtotal')
-                    ->getStateUsing(fn ($record) => ($record->cantidad * $record->precio_unitario)*100) 
                     ->money('EUR'),
             ])
             ->actions([]);
