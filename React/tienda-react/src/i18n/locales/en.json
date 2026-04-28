@@ -1,7 +1,13 @@
 {
   "common": {
     "loading": "Loading...",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "search": {
+    "placeholder": "Search products...",
+    "noResults": "No products found"
   },
   "header": {
     "nav": {
@@ -55,6 +61,7 @@
   },
   "login": {
     "title": "Log in",
+    "forgotPassword": "Forgot your password?",
     "email": "Email:",
     "password": "Password:",
     "showPassword": "Show password",
@@ -236,6 +243,93 @@
     "commentLabel": "Comment",
     "noComment": "No comment",
     "emptySection": "No content yet"
+  },
+  "myData": {
+    "title": "My data",
+    "subtitle": "Update your personal information and, if you want, change your password.",
+    "userLabel": "Username",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm password",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email address",
+    "passwordPlaceholder": "New password (optional)",
+    "confirmPasswordPlaceholder": "Confirm new password",
+    "saving": "Saving...",
+    "save": "Save changes",
+    "loading": "Loading your data...",
+    "saveError": "Could not save.",
+    "genericSaveError": "Error saving data.",
+    "success": "Data updated successfully."
+  },
+  "opinions": {
+    "title": "My Reviews",
+    "loading": "Loading reviews...",
+    "loadError": "Could not load your reviews.",
+    "empty": "You have not posted any reviews yet."
+  },
+  "orders": {
+    "title": "My Orders",
+    "loading": "Loading orders...",
+    "loadError": "Could not load your orders.",
+    "empty": "You have no orders yet.",
+    "downloading": "Downloading...",
+    "downloadError": "Could not download the invoice."
+  },
+  "forgotPassword": {
+    "title": "Recover Password",
+    "description": "Enter your email and we will send you a link to recover your password.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@email.com",
+    "emailInvalid": "Please enter a valid email",
+    "sendLink": "Send Link",
+    "sending": "Sending...",
+    "sendError": "Error processing your request. Please try again.",
+    "backToLogin": "Back to Log In",
+    "emailSentTitle": "Email Sent",
+    "instructions": "Check your inbox and click the link to set a new password.",
+    "expiresNote": "The link will expire in 1 hour.",
+    "goToLogin": "Go to Log In"
+  },
+  "resetPassword": {
+    "title": "Recover Password",
+    "titleNew": "Set New Password",
+    "invalidLink": "Invalid recovery link",
+    "requestNewLink": "Request New Link",
+    "emailLabel": "Email",
+    "newPasswordLabel": "New Password",
+    "newPasswordPlaceholder": "Minimum 8 characters",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Repeat your new password",
+    "capsLock": "Caps Lock is on",
+    "updating": "Updating...",
+    "update": "Update Password",
+    "cancel": "Cancel",
+    "success": "Password updated successfully. Redirecting...",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "passwordsMismatch": "Passwords do not match",
+    "updateError": "Error resetting password. Please try again.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
+  },
+  "changePassword": {
+    "title": "Change Password",
+    "currentPasswordLabel": "Current Password",
+    "currentPasswordPlaceholder": "Enter your current password",
+    "newPasswordLabel": "New Password",
+    "newPasswordPlaceholder": "Enter your new password",
+    "confirmPasswordLabel": "Confirm New Password",
+    "confirmPasswordPlaceholder": "Confirm your new password",
+    "capsLock": "Caps Lock is on",
+    "changing": "Changing...",
+    "change": "Change Password",
+    "cancel": "Cancel",
+    "success": "Password updated successfully",
+    "passwordsMismatch": "New passwords do not match",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "changeError": "Error changing password. Please try again.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
   },
   "checkout": {
     "successTitle": "Purchase made successfully.",

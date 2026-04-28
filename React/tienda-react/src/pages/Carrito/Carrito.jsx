@@ -2,14 +2,16 @@ import "./Carrito.css";
 import ProductoVenta from "../../components/ProductoVenta/ProductoVenta";
 import { useHeaderCart } from "../../components/Header/Header";
 import TarjetaPago from "../../components/TarjetaPago/TarjetaPago";
+import { useTranslation } from "react-i18next";
 
 function Carrito(){
     const { cartItems, totalPrecio, eliminarProducto, actualizarCantidad } = useHeaderCart();
+    const { t } = useTranslation();
     
     return(
         <>
             <div className="Titulos"> 
-                 <h2>Carrito</h2>
+                 <h2>{t("cart.title")}</h2>
             </div>
             <div className="Carrito">
                 <div className="targeta-carrito">

@@ -1,10 +1,12 @@
 import "./MisDatos.less";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function MisDatos() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [form, setForm] = useState({
     name: "",
@@ -32,7 +34,7 @@ function MisDatos() {
           },
         });
 
-        if (!res.ok) throw new Error("No se pudieron cargar los datos.");
+        if (!res.ok) throw new Error(t("myData.loadError"));
 
         const data = await res.json();
 
@@ -88,53 +90,53 @@ function MisDatos() {
       if (!res.ok) {
         if (data.errors) {
           const firstError = Object.values(data.errors)[0]?.[0];
-          throw new Error(firstError || "No se pudo guardar.");
+          throw new Error(firstError || t("myData.saveError"));
         }
 
-        throw new Error(data.error || "No se pudo guardar.");
+        throw new Error(data.error || t("myData.saveError"));
       }
 
-      setMessage(data.msg || "Datos actualizados correctamente.");
+      setMessage(data.msg || t("myData.success"));
       setForm((prev) => ({ ...prev, password: "", password_confirmation: "" }));
     } catch (err) {
-      setError(err.message || "Error al guardar datos.");
+      setError(err.message || t("myData.genericSaveError"));
     } finally {
       setSaving(false);
     }
   };
 
-  if (loading) return <p>Cargando tus datos...</p>;
+  if (loading) return <p>{t("myData.loading")}</p>;
 
   return (
       <section className="MisDatos">
         <div className="MisDatos-card">
           <div className="MisDatos-head">
-            <h1>Mis datos</h1>
-            <p className="MisDatos-subtitle">Actualiza tu información personal y, si quieres, cambia tu contraseña.</p>
+            <h1>{t("myData.title")}</h1>
+            <p className="MisDatos-subtitle">{t("myData.subtitle")}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="MisDatos-form">
             <div className="MisDatos-field">
-              <label htmlFor="name">Usuario</label>
-              <input id="name" type="text" name="name" value={form.name} onChange={onChange} placeholder="Nombre" required />
+              <label htmlFor="name">{t("myData.userLabel")}</label>
+              <input id="name" type="text" name="name" value={form.name} onChange={onChange} placeholder={t("myData.namePlaceholder")} required />
             </div>
 
             <div className="MisDatos-field">
-              <label htmlFor="email">Correo</label>
-              <input id="email" type="email" name="email" value={form.email} onChange={onChange} placeholder="Correo electrónico" required />
+              <label htmlFor="email">{t("myData.emailLabel")}</label>
+              <input id="email" type="email" name="email" value={form.email} onChange={onChange} placeholder={t("myData.emailPlaceholder")} required />
             </div>
 
             <div className="MisDatos-field">
-              <label htmlFor="password">Contraseña</label>
-              <input id="password" type="password" name="password" value={form.password} onChange={onChange} placeholder="Nueva contraseña (opcional)" />
+              <label htmlFor="password">{t("myData.passwordLabel")}</label>
+              <input id="password" type="password" name="password" value={form.password} onChange={onChange} placeholder={t("myData.passwordPlaceholder")} />
             </div>
 
             <div className="MisDatos-field">
-              <label htmlFor="password_confirmation">Confirmar contraseña</label>
-              <input id="password_confirmation" type="password" name="password_confirmation" value={form.password_confirmation} onChange={onChange} placeholder="Confirmar nueva contraseña" />
+              <label htmlFor="password_confirmation">{t("myData.confirmPasswordLabel")}</label>
+              <input id="password_confirmation" type="password" name="password_confirmation" value={form.password_confirmation} onChange={onChange} placeholder={t("myData.confirmPasswordPlaceholder")} />
             </div>
 
-            <button type="submit" className="btn-guardar" disabled={saving}>{saving ? "Guardando..." : "Guardar cambios"}</button>
+            <button type="submit" className="btn-guardar" disabled={saving}>{saving ? t("myData.saving") : t("myData.save")}</button>
           </form>
 
           {message && <p className="ok-msg">{message}</p>}

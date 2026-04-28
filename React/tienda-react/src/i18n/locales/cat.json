@@ -1,7 +1,13 @@
 {
   "common": {
     "loading": "Carregant...",
-    "notAvailable": "No disponible"
+    "notAvailable": "No disponible",
+    "previous": "Anterior",
+    "next": "Següent"
+  },
+  "search": {
+    "placeholder": "Cercar productes...",
+    "noResults": "No s'han trobat productes"
   },
   "header": {
     "nav": {
@@ -55,6 +61,7 @@
   },
   "login": {
     "title": "Inicia sessió",
+    "forgotPassword": "Has oblidat la contraseña?",
     "email": "Email:",
     "password": "Contrasenya:",
     "showPassword": "Mostrar contrasenya",
@@ -236,6 +243,93 @@
     "commentLabel": "Comentari",
     "noComment": "Sense comentari",
     "emptySection": "Encara no hi ha contingut"
+  },
+  "myData": {
+    "title": "Les meves dades",
+    "subtitle": "Actualitza la teva informació personal i, si vols, canvia la teva contrasenya.",
+    "userLabel": "Usuari",
+    "emailLabel": "Correu",
+    "passwordLabel": "Contrasenya",
+    "confirmPasswordLabel": "Confirmar contrasenya",
+    "namePlaceholder": "Nom",
+    "emailPlaceholder": "Correu electrònic",
+    "passwordPlaceholder": "Nova contrasenya (opcional)",
+    "confirmPasswordPlaceholder": "Confirmar nova contrasenya",
+    "saving": "Desant...",
+    "save": "Desar canvis",
+    "loading": "Carregant les teves dades...",
+    "saveError": "No s'ha pogut desar.",
+    "genericSaveError": "Error en desar les dades.",
+    "success": "Dades actualitzades correctament."
+  },
+  "opinions": {
+    "title": "Les meves opinions",
+    "loading": "Carregant valoracions...",
+    "loadError": "No s'han pogut carregar les teves valoracions.",
+    "empty": "Encarano has realitzat valoracions."
+  },
+  "orders": {
+    "title": "Les meves comandes",
+    "loading": "Carregant comandes...",
+    "loadError": "No s'han pogut carregar les teves comandes.",
+    "empty": "Encara no tens comandes.",
+    "downloading": "Descarregant...",
+    "downloadError": "No s'ha pogut descarregar la factura."
+  },
+  "forgotPassword": {
+    "title": "Recuperar contrasenya",
+    "description": "Introdueix el teu correu i t'enviarem un enllaç per recuperar la teva contrasenya.",
+    "emailLabel": "Correu",
+    "emailPlaceholder": "tu@correu.com",
+    "emailInvalid": "Si us plau introdueix un correu vàlid",
+    "sendLink": "Enviar Enllaç",
+    "sending": "Enviant...",
+    "sendError": "Error en processar la teva sol\u00b7licitud. Torna-ho a intentar.",
+    "backToLogin": "Tornar a Iniciar Sessió",
+    "emailSentTitle": "Correu enviat",
+    "instructions": "Revisa la teva bústia d'entrada i fes clic a l'enllaç per establir una nova contrasenya.",
+    "expiresNote": "L'enllaç expirarà en 1 hora.",
+    "goToLogin": "Anar a Iniciar Sessió"
+  },
+  "resetPassword": {
+    "title": "Recuperar contrasenya",
+    "titleNew": "Establir nova contrasenya",
+    "invalidLink": "Enllaç de recuperació no vàlid",
+    "requestNewLink": "Sol\u00b7licitar nou enllaç",
+    "emailLabel": "Correu",
+    "newPasswordLabel": "Nova contrasenya",
+    "newPasswordPlaceholder": "Mínim 8 caràcters",
+    "confirmPasswordLabel": "Confirmar contrasenya",
+    "confirmPasswordPlaceholder": "Repeteix la teva nova contrasenya",
+    "capsLock": "Majúscules activades",
+    "updating": "Actualitzant...",
+    "update": "Actualitzar contrasenya",
+    "cancel": "Cancel\u00b7lar",
+    "success": "Contrasenya actualitzada correctament. Redirigint...",
+    "passwordTooShort": "La contrasenya ha de tenir almenys 8 caràcters",
+    "passwordsMismatch": "Les contrasenyes no coincideixen",
+    "updateError": "Error en restablir la contrasenya. Torna-ho a intentar.",
+    "showPassword": "Mostrar contrasenya",
+    "hidePassword": "Amagar contrasenya"
+  },
+  "changePassword": {
+    "title": "Canviar contrasenya",
+    "currentPasswordLabel": "Contrasenya actual",
+    "currentPasswordPlaceholder": "Introdueix la teva contrasenya actual",
+    "newPasswordLabel": "Contrasenya nova",
+    "newPasswordPlaceholder": "Introdueix la teva nova contrasenya",
+    "confirmPasswordLabel": "Confirmar contrasenya nova",
+    "confirmPasswordPlaceholder": "Confirma la teva nova contrasenya",
+    "capsLock": "Majúscules activades",
+    "changing": "Canviant...",
+    "change": "Canviar contrasenya",
+    "cancel": "Cancel\u00b7lar",
+    "success": "Contrasenya actualitzada correctament",
+    "passwordsMismatch": "Les noves contrasenyes no coincideixen",
+    "passwordTooShort": "La contrasenya ha de tenir almenys 8 caràcters",
+    "changeError": "Error en canviar la contrasenya. Torna-ho a intentar.",
+    "showPassword": "Mostrar contrasenya",
+    "hidePassword": "Amagar contrasenya"
   },
   "checkout": {
     "successTitle": "Compra realitzada amb èxit.",

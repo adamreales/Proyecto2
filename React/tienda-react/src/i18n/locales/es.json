@@ -1,7 +1,13 @@
 {
   "common": {
     "loading": "Cargando...",
-    "notAvailable": "No disponible"
+    "notAvailable": "No disponible",
+    "previous": "Anterior",
+    "next": "Siguiente"
+  },
+  "search": {
+    "placeholder": "Buscar productos...",
+    "noResults": "No se encontraron productos"
   },
   "header": {
     "nav": {
@@ -55,6 +61,7 @@
   },
   "login": {
     "title": "Inicia sesión",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
     "email": "Email:",
     "password": "Contraseña:",
     "showPassword": "Mostrar contraseña",
@@ -236,6 +243,93 @@
     "commentLabel": "Comentario",
     "noComment": "Sin comentario",
     "emptySection": "Sin contenido todavía"
+  },
+  "myData": {
+    "title": "Mis datos",
+    "subtitle": "Actualiza tu información personal y, si quieres, cambia tu contraseña.",
+    "userLabel": "Usuario",
+    "emailLabel": "Correo",
+    "passwordLabel": "Contraseña",
+    "confirmPasswordLabel": "Confirmar contraseña",
+    "namePlaceholder": "Nombre",
+    "emailPlaceholder": "Correo electrónico",
+    "passwordPlaceholder": "Nueva contraseña (opcional)",
+    "confirmPasswordPlaceholder": "Confirmar nueva contraseña",
+    "saving": "Guardando...",
+    "save": "Guardar cambios",
+    "loading": "Cargando tus datos...",
+    "saveError": "No se pudo guardar.",
+    "genericSaveError": "Error al guardar datos.",
+    "success": "Datos actualizados correctamente."
+  },
+  "opinions": {
+    "title": "Mis Opiniones",
+    "loading": "Cargando valoraciones...",
+    "loadError": "No se pudieron cargar tus valoraciones.",
+    "empty": "Todavía no has realizado valoraciones."
+  },
+  "orders": {
+    "title": "Mis Pedidos",
+    "loading": "Cargando pedidos...",
+    "loadError": "No se pudieron cargar tus pedidos.",
+    "empty": "Todavía no tienes pedidos.",
+    "downloading": "Descargando...",
+    "downloadError": "No se pudo descargar la factura."
+  },
+  "forgotPassword": {
+    "title": "Recuperar Contraseña",
+    "description": "Ingresa tu email y te enviaremos un enlace para recuperar tu contraseña.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "tu@email.com",
+    "emailInvalid": "Por favor ingresa un email válido",
+    "sendLink": "Enviar Enlace",
+    "sending": "Enviando...",
+    "sendError": "Error al procesar tu solicitud. Intenta de nuevo.",
+    "backToLogin": "Volver a Iniciar Sesión",
+    "emailSentTitle": "Correo Enviado",
+    "instructions": "Revisa tu bandeja de entrada y haz clic en el enlace para establecer una nueva contraseña.",
+    "expiresNote": "El enlace expirará en 1 hora.",
+    "goToLogin": "Ir a Iniciar Sesión"
+  },
+  "resetPassword": {
+    "title": "Recuperar Contraseña",
+    "titleNew": "Establecer Nueva Contraseña",
+    "invalidLink": "Enlace de recuperación no válido",
+    "requestNewLink": "Solicitar Nuevo Enlace",
+    "emailLabel": "Email",
+    "newPasswordLabel": "Nueva Contraseña",
+    "newPasswordPlaceholder": "Mínimo 8 caracteres",
+    "confirmPasswordLabel": "Confirmar Contraseña",
+    "confirmPasswordPlaceholder": "Repite tu nueva contraseña",
+    "capsLock": "Mayúsculas activadas",
+    "updating": "Actualizando...",
+    "update": "Actualizar Contraseña",
+    "cancel": "Cancelar",
+    "success": "Contraseña actualizada correctamente. Redirigiendo...",
+    "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+    "passwordsMismatch": "Las contraseñas no coinciden",
+    "updateError": "Error al resetear la contraseña. Intenta de nuevo.",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña"
+  },
+  "changePassword": {
+    "title": "Cambiar Contraseña",
+    "currentPasswordLabel": "Contraseña Actual",
+    "currentPasswordPlaceholder": "Ingresa tu contraseña actual",
+    "newPasswordLabel": "Contraseña Nueva",
+    "newPasswordPlaceholder": "Ingresa tu nueva contraseña",
+    "confirmPasswordLabel": "Confirmar Contraseña Nueva",
+    "confirmPasswordPlaceholder": "Confirma tu nueva contraseña",
+    "capsLock": "Mayúsculas activadas",
+    "changing": "Cambiando...",
+    "change": "Cambiar Contraseña",
+    "cancel": "Cancelar",
+    "success": "Contraseña actualizada correctamente",
+    "passwordsMismatch": "Las contraseñas nuevas no coinciden",
+    "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+    "changeError": "Error al cambiar la contraseña. Intenta de nuevo.",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña"
   },
   "checkout": {
     "successTitle": "Compra realizada exitosamente.",

@@ -2,6 +2,7 @@ import "./ChangePassword.css";
 import { useState } from "react";
 import { cambiarContraseña } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function ChangePassword() {
   const [passwordActual, setPasswordActual] = useState("");
@@ -15,6 +16,7 @@ function ChangePassword() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,16 +25,14 @@ function ChangePassword() {
     setLoading(true);
 
     try {
-      // Validar que las contraseñas nuevas coincidan
       if (passwordNueva !== passwordConfirmacion) {
-        setError("Las contraseñas nuevas no coinciden");
+        setError(t("changePassword.passwordsMismatch"));
         setLoading(false);
         return;
       }
 
-      // Validar longitud mínima
       if (passwordNueva.length < 8) {
-        setError("La contraseña debe tener al menos 8 caracteres");
+        setError(t("changePassword.passwordTooShort"));
         setLoading(false);
         return;
       }
@@ -43,12 +43,11 @@ function ChangePassword() {
         passwordConfirmacion
       );
 
-      setMensaje("Contraseña actualizada correctamente");
+      setMensaje(t("changePassword.success"));
       setPasswordActual("");
       setPasswordNueva("");
       setPasswordConfirmacion("");
 
-      // Redirigir a home después de 2 segundos
       setTimeout(() => {
         navigate("/home");
       }, 2000);
@@ -57,7 +56,7 @@ function ChangePassword() {
       if (error.response?.data?.error) {
         setError(error.response.data.error);
       } else {
-        setError("Error al cambiar la contraseña. Intenta de nuevo.");
+        setError(t("changePassword.changeError"));
       }
     } finally {
       setLoading(false);
@@ -67,12 +66,11 @@ function ChangePassword() {
   return (
     <div className="change-password-page">
       <div className="change-password-container">
-        <h1 className="titulo-change-password">Cambiar Contraseña</h1>
+        <h1 className="titulo-change-password">{t("changePassword.title")}</h1>
 
         <form className="formulario-change-password" onSubmit={handleSubmit}>
-          {/* Contraseña Actual */}
           <div className="password-wrapper">
-            <label htmlFor="password-actual">Contraseña Actual</label>
+            <label htmlFor="password-actual">{t("changePassword.currentPasswordLabel")}</label>
             <div className="password-row">
               <input
                 id="password-actual"
@@ -82,14 +80,14 @@ function ChangePassword() {
                 onKeyUp={(e) => setCapsLock(e.getModifierState("CapsLock"))}
                 onFocus={(e) => setCapsLock(e.getModifierState("CapsLock"))}
                 onBlur={() => setCapsLock(false)}
-                placeholder="Ingresa tu contraseña actual"
+                placeholder={t("changePassword.currentPasswordPlaceholder")}
                 required
               />
               <button
                 type="button"
                 className="btn-ojo"
                 onClick={() => setShowPasswordActual(!showPasswordActual)}
-                aria-label={showPasswordActual ? "Ocultar contraseña" : "Mostrar contraseña"}
+                aria-label={showPasswordActual ? t("changePassword.hidePassword") : t("changePassword.showPassword")}
               >
                 <span className="material-symbols-outlined">
                   {showPasswordActual ? "visibility_off" : "visibility"}
@@ -98,9 +96,8 @@ function ChangePassword() {
             </div>
           </div>
 
-          {/* Contraseña Nueva */}
           <div className="password-wrapper">
-            <label htmlFor="password-nueva">Contraseña Nueva</label>
+            <label htmlFor="password-nueva">{t("changePassword.newPasswordLabel")}</label>
             <div className="password-row">
               <input
                 id="password-nueva"
@@ -110,14 +107,14 @@ function ChangePassword() {
                 onKeyUp={(e) => setCapsLock(e.getModifierState("CapsLock"))}
                 onFocus={(e) => setCapsLock(e.getModifierState("CapsLock"))}
                 onBlur={() => setCapsLock(false)}
-                placeholder="Ingresa tu nueva contraseña"
+                placeholder={t("changePassword.newPasswordPlaceholder")}
                 required
               />
               <button
                 type="button"
                 className="btn-ojo"
                 onClick={() => setShowPasswordNueva(!showPasswordNueva)}
-                aria-label={showPasswordNueva ? "Ocultar contraseña" : "Mostrar contraseña"}
+                aria-label={showPasswordNueva ? t("changePassword.hidePassword") : t("changePassword.showPassword")}
               >
                 <span className="material-symbols-outlined">
                   {showPasswordNueva ? "visibility_off" : "visibility"}
@@ -126,9 +123,8 @@ function ChangePassword() {
             </div>
           </div>
 
-          {/* Confirmación de Contraseña Nueva */}
           <div className="password-wrapper">
-            <label htmlFor="password-confirmacion">Confirmar Contraseña Nueva</label>
+            <label htmlFor="password-confirmacion">{t("changePassword.confirmPasswordLabel")}</label>
             <div className="password-row">
               <input
                 id="password-confirmacion"
@@ -138,14 +134,14 @@ function ChangePassword() {
                 onKeyUp={(e) => setCapsLock(e.getModifierState("CapsLock"))}
                 onFocus={(e) => setCapsLock(e.getModifierState("CapsLock"))}
                 onBlur={() => setCapsLock(false)}
-                placeholder="Confirma tu nueva contraseña"
+                placeholder={t("changePassword.confirmPasswordPlaceholder")}
                 required
               />
               <button
                 type="button"
                 className="btn-ojo"
                 onClick={() => setShowPasswordConfirmacion(!showPasswordConfirmacion)}
-                aria-label={showPasswordConfirmacion ? "Ocultar contraseña" : "Mostrar contraseña"}
+                aria-label={showPasswordConfirmacion ? t("changePassword.hidePassword") : t("changePassword.showPassword")}
               >
                 <span className="material-symbols-outlined">
                   {showPasswordConfirmacion ? "visibility_off" : "visibility"}
@@ -154,22 +150,19 @@ function ChangePassword() {
             </div>
           </div>
 
-          {/* Alerta de Mayúsculas */}
           {capsLock && (
             <p className="aviso-capslock">
               <span className="material-symbols-outlined aviso-icon">keyboard_capslock</span>
-              Mayúsculas activadas
+              {t("changePassword.capsLock")}
             </p>
           )}
 
-          {/* Mensajes de Error o Éxito */}
           {error && <div className="mensaje-error">{error}</div>}
           {mensaje && <div className="mensaje-exito">{mensaje}</div>}
 
-          {/* Botones */}
           <div className="botones">
             <button type="submit" className="btn-cambiar" disabled={loading}>
-              {loading ? "Cambiando..." : "Cambiar Contraseña"}
+              {loading ? t("changePassword.changing") : t("changePassword.change")}
             </button>
             <button
               type="button"
@@ -177,7 +170,7 @@ function ChangePassword() {
               onClick={() => navigate("/home")}
               disabled={loading}
             >
-              Cancelar
+              {t("changePassword.cancel")}
             </button>
           </div>
         </form>

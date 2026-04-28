@@ -2,6 +2,7 @@ import "./ForgotPassword.less";
 import { useState } from "react";
 import { solicitar_recuperacion } from "../../services/auth";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ function ForgotPassword() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [enviado, setEnviado] = useState(false);
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +20,7 @@ function ForgotPassword() {
 
     try {
       if (!email || !email.includes("@")) {
-        setError("Por favor ingresa un email válido");
+        setError(t("forgotPassword.emailInvalid"));
         setLoading(false);
         return;
       }
@@ -33,7 +35,7 @@ function ForgotPassword() {
       if (error.response?.data?.error) {
         setError(error.response.data.error);
       } else {
-        setError("Error al procesar tu solicitud. Intenta de nuevo.");
+        setError(t("forgotPassword.sendError"));
       }
     } finally {
       setLoading(false);
@@ -43,22 +45,22 @@ function ForgotPassword() {
   return (
     <div className="paginareinicio">
       <div className="forgot-password-container">
-        <h1 className="titulo">Recuperar Contraseña</h1>
+        <h1 className="titulo">{t("forgotPassword.title")}</h1>
 
         {!enviado ? (
           <form className="formulario" onSubmit={handleSubmit}>
-            <p className="descripcion"> Ingresa tu email y te enviaremos un enlace para recuperar tu contraseña.</p>
+            <p className="descripcion">{t("forgotPassword.description")}</p>
 
             <div className="email">
-              <label htmlFor="email">Email</label>
-              <input id="email"   type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tu@email.com" required disabled={loading} />
+              <label htmlFor="email">{t("forgotPassword.emailLabel")}</label>
+              <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t("forgotPassword.emailPlaceholder")} required disabled={loading} />
             </div>
 
             {error && <div className="mensaje-error">{error}</div>}
 
             <div className="botones">
-              <button type="submit" className="btn-enviar" disabled={loading}>{loading ? "Enviando..." : "Enviar Enlace"}</button>
-              <Link to="/login"><button type="button" className="btn-volver"> Volver a Iniciar Sesión</button></Link>
+              <button type="submit" className="btn-enviar" disabled={loading}>{loading ? t("forgotPassword.sending") : t("forgotPassword.sendLink")}</button>
+              <Link to="/login"><button type="button" className="btn-volver">{t("forgotPassword.backToLogin")}</button></Link>
             </div>
           </form>
         ) : (
@@ -66,14 +68,14 @@ function ForgotPassword() {
             <div className="icono-exito">
               <span className="material-symbols-outlined">mail_outline</span>
             </div>
-            <h2>Correo Enviado</h2>
+            <h2>{t("forgotPassword.emailSentTitle")}</h2>
             <p className="mensaje-confirmacion">{mensaje}</p>
             <p className="instrucciones">
-              Revisa tu bandeja de entrada y haz clic en el enlace para establecer una nueva contraseña.
+              {t("forgotPassword.instructions")}
               <br />
-              <strong>El enlace expirará en 1 hora.</strong>
+              <strong>{t("forgotPassword.expiresNote")}</strong>
             </p>
-            <Link to="/login"><button className="btn-ir-login">Ir a Iniciar Sesión</button> </Link>
+            <Link to="/login"><button className="btn-ir-login">{t("forgotPassword.goToLogin")}</button></Link>
           </div>
         )}
       </div>
