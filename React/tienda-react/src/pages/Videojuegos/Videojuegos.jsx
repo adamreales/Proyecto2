@@ -54,14 +54,23 @@ function Videojuegos() {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        const lista = data.productos || data.producto || [];
+        const lista = Array.isArray(data.productos)
+          ? data.productos
+          : Array.isArray(data.producto)
+            ? data.producto
+            : Array.isArray(data.producto?.data)
+              ? data.producto.data
+              : [];
         setProductos(lista);
 
-        // 👇 clave para que funcione bien el botón next
-        setHayMas(data.hasMore);
+        // Algunos endpoints devuelven hasMore y otros el paginador completo.
+        setHayMas(Boolean(data.hasMore ?? data.producto?.next_page_url));
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setProductos([]);
+        setHayMas(false);
+      });
   }, [pagina, categoria, plataforma, orden]);
 
   useEffect(() => {
