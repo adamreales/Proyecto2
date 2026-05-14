@@ -1,0 +1,51 @@
+Presentacion proyecto zent
+
+	Presentacion (Adam)
+		nuestros nombres
+		nombre de la empresa
+		de que es nuestra empresa	
+	Mostrar la pagina principal (Adam)
+		explicar en que nos basamos la pagina parte de frontend (instant gaming, steam)
+	Mostrar la pagina de producto (Adrian)
+	Mostrar la pagina de videojuegos (Adam)
+		Enseñar los filtros y explicar los problemas que tuvimos con los filtros
+		Buscador de videojuegos especificamente minecraft
+		
+	Enseñamos el favorito
+	Iniciamos session
+		Explicamos que para añadir favorito y comprar es necesario comprar
+		Creamos un usuario el que nos digan los profes pero un correo real
+	Enseñamos el perfil
+		Mostramos todos nuestros datos para ver su estado
+	Compramos un videojuego
+		Mostramos el minicarrito y vamos al carrito
+		Despues de hacer la compra vemos la factura
+		Y añadimos una reseña del producto que hemos comprado
+	Mostramos paginas secundarias
+		Blog explicamos (Adrian)
+		Conocenos (Adam)
+		Favoritos solo para cuentas con inicio de session
+		Podemos cambiar el idioma de la pagina	
+	Mostrar filament
+		Categorias
+			crearlas
+			modificarlas
+			eliminar
+		Pedidos
+			Solo puedes visualizar los pedidos creados
+		Plataformas
+			crear
+			modificar
+			eliminar
+		Productos
+			crear
+			modificar
+			eliminar
+		Users	
+			crear
+			modificar
+			eliminar
+		Valoraciones
+			eliminar
+	Conclusion
+	Preguntas de los profes o alumnos
